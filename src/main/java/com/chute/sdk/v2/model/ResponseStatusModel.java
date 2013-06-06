@@ -1,0 +1,160 @@
+// Copyright (c) 2011, Chute Corporation. All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without modification,
+// are permitted provided that the following conditions are met:
+//
+// * Redistributions of source code must retain the above copyright notice, this
+// list of conditions and the following disclaimer.
+// * Redistributions in binary form must reproduce the above copyright notice,
+// this list of conditions and the following disclaimer in the documentation
+// and/or other materials provided with the distribution.
+// * Neither the name of the Chute Corporation nor the names
+// of its contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+// OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+// OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+package com.chute.sdk.v2.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+
+/**
+ * The {@link ResponseStatusModel} class represents the status of the response.
+ * It holds info regarding error messages, error codes, protocol version, href
+ * and API limitations.
+ * 
+ */
+@JsonPropertyOrder({ "error", "version", "code", "href", "api_lmits" })
+public class ResponseStatusModel {
+
+	public static final String TAG = ResponseStatusModel.class.getSimpleName();
+
+	/**
+	 * Error message
+	 */
+	@JsonProperty("error")
+	private String error;
+	/**
+	 * Protocol version
+	 */
+	@JsonProperty("version")
+	private int version;
+	/**
+	 * Error code
+	 */
+	@JsonProperty("code")
+	private int code;
+	/**
+	 * Href info
+	 */
+	@JsonProperty("href")
+	private String href;
+
+	/**
+	 * API calls limits
+	 */
+	@JsonProperty("api_limits")
+	private ApiLimitsModel apiLimits;
+
+	/**
+	 * Getters and setters
+	 */
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
+	public ResponseStatusModel withError(String error) {
+		this.error = error;
+		return this;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public ResponseStatusModel withVerison(int version) {
+		this.version = version;
+		return this;
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public ResponseStatusModel withCode(int code) {
+		this.code = code;
+		return this;
+	}
+
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
+	}
+
+	public ResponseStatusModel withHref(String href) {
+		this.href = href;
+		return this;
+	}
+
+	public ApiLimitsModel getApiLimits() {
+		return apiLimits;
+	}
+
+	public void setApiLimits(ApiLimitsModel apiLimits) {
+		this.apiLimits = apiLimits;
+	}
+
+	public ResponseStatusModel withApiLimits(ApiLimitsModel apiLimits) {
+		this.apiLimits = apiLimits;
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ResponseStatusModel [error=");
+		builder.append(error);
+		builder.append(", version=");
+		builder.append(version);
+		builder.append(", code=");
+		builder.append(code);
+		builder.append(", href=");
+		builder.append(href);
+		builder.append(", apiLimits=");
+		builder.append(apiLimits);
+		builder.append("]");
+		return builder.toString();
+	}
+
+}
