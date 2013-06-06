@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2011, Chute Corporation. All rights reserved.
+// Copyright (c) 2011, Chute Corporation. All rights reserved.
 // 
 //  Redistribution and use in source and binary forms, with or without modification, 
 //  are permitted provided that the following conditions are met:
@@ -25,6 +25,7 @@
 // 
 package com.chute.sdk.v2.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 import android.content.Context;
@@ -49,11 +50,12 @@ public class Utils {
 				Log.e(TAG, parameter);
 				String v[] = parameter.split("=");
 				try {
-					params.putString(URLDecoder.decode(v[0]),
-							URLDecoder.decode(v[1]));
+					params.putString(URLDecoder.decode(v[0], "UTF-8"),
+							URLDecoder.decode(v[1], "UTF-8"));
 				} catch (ArrayIndexOutOfBoundsException e) {
-				}
-			}
+				} catch (UnsupportedEncodingException e) {
+                }
+            }
 		}
 		return params;
 	}

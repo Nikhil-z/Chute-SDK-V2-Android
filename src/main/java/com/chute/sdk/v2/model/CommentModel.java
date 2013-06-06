@@ -25,8 +25,8 @@
 //
 package com.chute.sdk.v2.model;
 
+import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
-import com.dg.libs.android.logger.ALog;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;

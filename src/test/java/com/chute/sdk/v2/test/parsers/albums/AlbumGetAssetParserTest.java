@@ -4,10 +4,10 @@ import org.apache.commons.io.IOUtils;
 
 import junit.framework.TestCase;
 
+import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
-import com.dg.libs.android.logger.ALog;
 
 public class AlbumGetAssetParserTest extends TestCase {
 
