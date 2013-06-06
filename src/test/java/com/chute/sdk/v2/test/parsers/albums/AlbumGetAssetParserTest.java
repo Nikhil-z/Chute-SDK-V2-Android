@@ -20,6 +20,11 @@ public class AlbumGetAssetParserTest extends TestCase {
 		try {
 			ResponseModel<AssetModel> model = parser.parse(IOUtils
 					.toInputStream(jsonResponse));
+
+            assertEquals(model.getData().getId(),"448080848");
+            assertEquals(model.getData().getCaption(),"As");
+
+
 			assertEquals(model.toString(), parserResponse);
 		} catch (Exception e) {
 			ALog.d("Parser error = " + e.getMessage());
