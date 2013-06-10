@@ -10,6 +10,7 @@
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/flags/GCFlags.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/album/AlbumsListRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/PaginationModel.java
+/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/asset/AlbumsGetAssetListRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/ContentURLConnection.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/AssetModel.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/ImageLoaderListener.java
@@ -20,8 +21,8 @@
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/tags/TagsListRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/enums/Filter.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/TestClass.java
-/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/search/SearchTagsRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/AlbumModel.java
+/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/search/SearchTagsRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/geo/GeoLocationGetAssetsRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/queue/QueueStrategy.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/flags/FlagRequest.java
@@ -39,12 +40,13 @@
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/PhotosQueue.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/hearts/HeartRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/StatsModel.java
+/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/ProfileModel.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/authentication/AuthenticationFactory.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/CounterModel.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/parsers/ListResponseParser.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/UserModel.java
-/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/votes/UnvoteRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/BlockingFilterInputStream.java
+/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/votes/UnvoteRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/queue/StackStrategy.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/tags/TagsReplaceRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/utils/JsonUtil.java
@@ -73,8 +75,8 @@
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/MemoryCache.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/flags/FlagGetRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/comment/CommentsListRequest.java
-/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/parcel/ParcelAssetsRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/ResponseStatusModel.java
+/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/parcel/ParcelAssetsRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/FlagModel.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/asset/AssetsUploadRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/ImageLoader.java
@@ -92,8 +94,8 @@
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/FileCache.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/album/AlbumsRemoveAssetsRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/comment/CommentsCreateRequest.java
-/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/requests/ResponseModel.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/asset/AssetsImportRequest.java
+/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/requests/ResponseModel.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/AccountStore.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/ApiLimitsModel.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/queue/DequeStrategy.java
@@ -103,6 +105,7 @@
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/user/GCUsers.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/HeartModel.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/comment/GCComments.java
+/home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/asset/AlbumsGetAssetRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/search/SearchExifRequest.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/geo/GCGeoLocation.java
 /home/darko/Android/workspace/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/GeoLocationModel.java

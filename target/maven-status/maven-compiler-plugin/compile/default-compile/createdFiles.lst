@@ -28,6 +28,7 @@ com/chute/sdk/v2/api/search/SearchLocationRequest.class
 com/chute/sdk/v2/model/FlagModel$1.class
 com/chute/sdk/v2/api/votes/VotesGetRequest.class
 com/chute/sdk/v2/api/flags/FlagRequest.class
+com/chute/sdk/v2/model/ProfileModel$1.class
 com/chute/sdk/v2/api/parcel/ParcelAlbumsRequest.class
 com/chute/sdk/v2/model/ParcelModel.class
 com/chute/sdk/v2/api/hearts/HeartsMap.class
@@ -51,6 +52,8 @@ com/chute/sdk/v2/model/UserModel.class
 com/chute/sdk/v2/model/CommentModel.class
 com/chute/sdk/v2/api/album/AlbumsGetRequest.class
 darko/imagedownloader/PhotosQueue.class
+com/chute/sdk/v2/model/ProfileModel.class
+com/chute/sdk/v2/api/asset/AlbumsGetAssetRequest.class
 com/chute/sdk/v2/api/geo/GeoLocationGetAssetsRequest.class
 com/chute/sdk/v2/api/album/AlbumsGetAssetRequest.class
 com/chute/sdk/v2/api/album/GCAlbums$Assets.class
@@ -112,6 +115,7 @@ darko/imagedownloader/ContentURLConnection$ContentURLConnectionInputStream.class
 com/chute/sdk/v2/api/tags/TagsListRequest.class
 com/chute/sdk/v2/api/comment/GCComments.class
 com/chute/sdk/v2/model/AssetModel.class
+com/chute/sdk/v2/api/asset/AlbumsGetAssetListRequest.class
 darko/imagedownloader/BitmapContentHandler.class
 com/chute/sdk/v2/utils/TextUtil.class
 darko/imagedownloader/ContentURLStreamHandler.class
