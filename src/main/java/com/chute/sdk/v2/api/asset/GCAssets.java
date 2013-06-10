@@ -1,4 +1,4 @@
-// Copyright (c) 2011, Chute Corporation. All rights reserved.
+﻿// Copyright (c) 2011, Chute Corporation. All rights reserved.
 // 
 //  Redistribution and use in source and binary forms, with or without modification, 
 //  are permitted provided that the following conditions are met:
@@ -30,7 +30,9 @@ import java.util.HashMap;
 
 import android.content.Context;
 
+import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
+import com.chute.sdk.v2.model.PaginationModel;
 import com.chute.sdk.v2.model.enums.Filter;
 import com.chute.sdk.v2.model.enums.Sort;
 import com.chute.sdk.v2.model.requests.ListResponseModel;
@@ -96,67 +98,6 @@ public class GCAssets {
 	}
 
 	/**
-	 * Pulls a complete list of all assets accessible to the user. The assets
-	 * can be filtered and ordered base on some parameters.
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param sort
-	 *            - ID: Sorts by asset id, newest comes first - Hearts - Sorts
-	 *            by hearts, the one containing highest number of hearts comes
-	 *            first - Position - Sorts by position - Default sorting: Done
-	 *            by the Album. If manually set by the user assets will be
-	 *            sorted by position, if not, they will be sorted by ID
-	 * 
-	 * @param filter
-	 *            - Filter assets by username and service(Chute, Twitter,
-	 *            Facebook, Instagram, Picasa, Flickr)
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return {@link AssetsListRequest}
-	 */
-	public static HttpRequest list(final Context context, final Sort sort,
-			final Filter filter,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AssetsListRequest(context, sort, filter, callback);
-	}
-
-	/**
-	 * Method that defaults to the generic method {@see #list(Context, Sort,
-	 * Filter, HttpCallback)}
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return {@link #list(Context, Sort, Filter, HttpCallback)} method
-	 */
-	public static HttpRequest list(final Context context,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return list(context, null, null, callback);
-	}
-
-	/**
-	 * Gets an asset by its ID. Returns the full asset info as a response
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param asset
-	 *            - The asset to be retrieved
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return - {@link AssetsGetRequest}
-	 */
-	public static HttpRequest get(final Context context,
-			final AssetModel asset,
-			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AssetsGetRequest(context, asset, callback);
-	}
-
-	/**
 	 * Gets exif info for an asset. Empty if there are no available exif
 	 * parameters.
 	 * 
@@ -209,6 +150,62 @@ public class GCAssets {
 			final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
 		return new AssetsUpdateRequest(context, asset, callback);
+	}
+
+	/**
+	 * Gets a specific asset from a given album
+	 * 
+	 * @param context
+	 *            The application context
+	 * @param album
+	 *            Album whose asset we are demanding
+	 * @param asset
+	 *            The requested asset
+	 * @param callback
+	 *            Instance of {@link HttpCallback} interface. If successful, the
+	 *            callback returns {@link ResponseModel<AssetModel>}
+	 * @return {@link AlbumsGetAssetRequest}
+	 */
+	public static HttpRequest get(final Context context,
+			final AlbumModel album, final AssetModel asset,
+			final HttpCallback<ResponseModel<AssetModel>> callback) {
+		return new AlbumsGetAssetRequest(context, album, asset, callback);
+	}
+
+	/**
+	 * Gets a list of assets from a specific album
+	 * 
+	 * @param context
+	 *            The application context
+	 * @param album
+	 *            The album whose assets are being retrieved
+	 * @param callback
+	 *            Instance of {@link HttpCallback} interface. If successful, the
+	 *            callback returns {@link ListResponseModel<AssetModel>}
+	 * @return {@link AlbumsGetAssetListRequest}
+	 */
+	public static HttpRequest list(final Context context,
+			final AlbumModel album, PaginationModel pagination,
+			final HttpCallback<ListResponseModel<AssetModel>> callback) {
+		return new AlbumsGetAssetListRequest(context, album, pagination,
+				callback);
+	}
+
+	/**
+	 * Overloaded method
+	 * 
+	 * @see #list(Context, AlbumModel, PaginationModel, HttpCallback)
+	 * 
+	 * @param context
+	 * @param album
+	 * @param callback
+	 * @return
+	 */
+	public static HttpRequest list(final Context context,
+			final AlbumModel album,
+			final HttpCallback<ListResponseModel<AssetModel>> callback) {
+		return new AlbumsGetAssetListRequest(context, album,
+				new PaginationModel(), callback);
 	}
 
 }

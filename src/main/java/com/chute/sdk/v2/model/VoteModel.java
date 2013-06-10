@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -38,8 +36,6 @@ import android.os.Parcelable;
  * album ID the vote belongs to.
  * 
  */
-@JsonPropertyOrder({ "id", "links", "created_at", "updated_at", "identifier",
-		"album_id", "asset_id", "count" })
 public class VoteModel implements Parcelable {
 
 	public static final String TAG = VoteModel.class.getSimpleName();
@@ -199,6 +195,7 @@ public class VoteModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#describeContents()
 	 */
 	@Override
@@ -208,6 +205,7 @@ public class VoteModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
 	 */
 	@Override

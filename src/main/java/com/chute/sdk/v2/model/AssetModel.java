@@ -27,8 +27,8 @@ package com.chute.sdk.v2.model;
 
 import java.util.ArrayList;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.dg.libs.android.logger.ALog;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -46,8 +46,6 @@ import android.os.Parcelable;
  * asset belongs to.
  * 
  */
-@JsonPropertyOrder({ "id", "links", "thumbnail", "url", "type", "caption",
-		"dimensions", "source", "user", "votes", "hearts", "tags" })
 public class AssetModel implements Parcelable {
 
 	public static final String TAG = AssetModel.class.getSimpleName();
@@ -105,23 +103,81 @@ public class AssetModel implements Parcelable {
 	@JsonProperty("tags")
 	private ArrayList<String> tags;
 
+	@JsonProperty("created_at")
+	private String createdAt;
+
+	@JsonProperty("updated_at")
+	private String updatedAt;
+	@JsonProperty("shortcut")
+	private String shortcut;
+	@JsonProperty("location")
+	private String location;
+	@JsonProperty("service")
+	private String service;
+	@JsonProperty("chute_asset_id")
+	private String chuteAssetId;
+
 	public AssetModel() {
 	}
 
 	/**
 	 * Getters and setters
 	 */
+
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getCreatedAt() {
+		return createdAt;
 	}
 
-	public AssetModel withId(String id) {
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getShortcut() {
+		return shortcut;
+	}
+
+	public void setShortcut(String shortcut) {
+		this.shortcut = shortcut;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getService() {
+		return service;
+	}
+
+	public void setService(String service) {
+		this.service = service;
+	}
+
+	public String getChuteAssetId() {
+		return chuteAssetId;
+	}
+
+	public void setChuteAssetId(String chuteAssetId) {
+		this.chuteAssetId = chuteAssetId;
+	}
+
+	public void setId(String id) {
 		this.id = id;
-		return this;
 	}
 
 	public LinkModel getLinks() {
@@ -132,22 +188,12 @@ public class AssetModel implements Parcelable {
 		this.links = links;
 	}
 
-	public AssetModel withLinks(LinkModel links) {
-		this.links = links;
-		return this;
-	}
-
 	public String getThumbnail() {
 		return thumbnail;
 	}
 
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
-	}
-
-	public AssetModel withThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-		return this;
 	}
 
 	public String getUrl() {
@@ -158,22 +204,12 @@ public class AssetModel implements Parcelable {
 		this.url = url;
 	}
 
-	public AssetModel withUrl(String url) {
-		this.url = url;
-		return this;
-	}
-
 	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public AssetModel withType(String type) {
-		this.type = type;
-		return this;
 	}
 
 	public String getCaption() {
@@ -184,22 +220,12 @@ public class AssetModel implements Parcelable {
 		this.caption = caption;
 	}
 
-	public AssetModel withCaption(String caption) {
-		this.caption = caption;
-		return this;
-	}
-
 	public DimensionsModel getDimensions() {
 		return dimensions;
 	}
 
 	public void setDimensions(DimensionsModel dimensions) {
 		this.dimensions = dimensions;
-	}
-
-	public AssetModel withDimensions(DimensionsModel dimensions) {
-		this.dimensions = dimensions;
-		return this;
 	}
 
 	public SourceModel getSource() {
@@ -210,22 +236,12 @@ public class AssetModel implements Parcelable {
 		this.source = source;
 	}
 
-	public AssetModel withSource(SourceModel source) {
-		this.source = source;
-		return this;
-	}
-
 	public UserModel getUser() {
 		return user;
 	}
 
 	public void setUser(UserModel user) {
 		this.user = user;
-	}
-
-	public AssetModel withUser(UserModel user) {
-		this.user = user;
-		return this;
 	}
 
 	public int getVotes() {
@@ -236,11 +252,6 @@ public class AssetModel implements Parcelable {
 		this.votes = votes;
 	}
 
-	public AssetModel withVotes(int votes) {
-		this.votes = votes;
-		return this;
-	}
-
 	public int getHearts() {
 		return hearts;
 	}
@@ -249,58 +260,12 @@ public class AssetModel implements Parcelable {
 		this.hearts = hearts;
 	}
 
-	public AssetModel withHearts(int hearts) {
-		this.hearts = hearts;
-		return this;
-	}
-
 	public ArrayList<String> getTags() {
 		return tags;
 	}
 
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
-	}
-
-	public AssetModel withTags(ArrayList<String> tags) {
-		this.tags = tags;
-		return this;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("AssetModel [id=");
-		builder.append(id);
-		builder.append(", links=");
-		builder.append(links);
-		builder.append(", thumbnail=");
-		builder.append(thumbnail);
-		builder.append(", url=");
-		builder.append(url);
-		builder.append(", type=");
-		builder.append(type);
-		builder.append(", caption=");
-		builder.append(caption);
-		builder.append(", dimensions=");
-		builder.append(dimensions);
-		builder.append(", source=");
-		builder.append(source);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", votes=");
-		builder.append(votes);
-		builder.append(", hearts=");
-		builder.append(hearts);
-		builder.append(", tags=");
-		builder.append(tags);
-		builder.append("]");
-		return builder.toString();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -318,6 +283,12 @@ public class AssetModel implements Parcelable {
 		votes = in.readInt();
 		hearts = in.readInt();
 		tags = in.readArrayList(String.class.getClassLoader());
+		createdAt = in.readString();
+		updatedAt = in.readString();
+		shortcut = in.readString();
+		location = in.readString();
+		service = in.readString();
+		chuteAssetId = in.readString();
 	}
 
 	/*
@@ -349,6 +320,12 @@ public class AssetModel implements Parcelable {
 		dest.writeInt(votes);
 		dest.writeInt(hearts);
 		dest.writeStringList(tags);
+		dest.writeString(createdAt);
+		dest.writeString(updatedAt);
+		dest.writeString(shortcut);
+		dest.writeString(location);
+		dest.writeString(service);
+		dest.writeString(chuteAssetId);
 	}
 
 	public static final Parcelable.Creator<AssetModel> CREATOR = new Parcelable.Creator<AssetModel>() {
@@ -368,8 +345,8 @@ public class AssetModel implements Parcelable {
 	public String serializeAsset() {
 		String result = null;
 		FilterProvider filter = new SimpleFilterProvider().addFilter(
-				"assetModelFilter",
-				SimpleBeanPropertyFilter.filterOutAllExcept("caption", "votes", "hearts"));
+				"assetModelFilter", SimpleBeanPropertyFilter
+						.filterOutAllExcept("caption", "votes", "hearts"));
 		try {
 			result = JsonUtil.getMapper().writer(filter)
 					.writeValueAsString(this);
@@ -377,6 +354,18 @@ public class AssetModel implements Parcelable {
 			ALog.d("", e);
 		}
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "AssetModel [id=" + id + ", links=" + links + ", thumbnail="
+				+ thumbnail + ", url=" + url + ", type=" + type + ", caption="
+				+ caption + ", dimensions=" + dimensions + ", source=" + source
+				+ ", user=" + user + ", votes=" + votes + ", hearts=" + hearts
+				+ ", tags=" + tags + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", shortcut=" + shortcut
+				+ ", location=" + location + ", service=" + service
+				+ ", chuteAssetId=" + chuteAssetId + "]";
 	}
 
 }

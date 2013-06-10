@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -37,7 +35,6 @@ import android.os.Parcelable;
  * username and avatar URL.
  * 
  */
-@JsonPropertyOrder({ "id", "links", "name", "username", "avatar" })
 public class UserModel implements Parcelable {
 
 	/**
@@ -66,6 +63,17 @@ public class UserModel implements Parcelable {
 	@JsonProperty("avatar")
 	private String avatar;
 
+	@JsonProperty("created_at")
+	private String created_at;
+	@JsonProperty("updated_at")
+	private String updated_at;
+	@JsonProperty("profile")
+	private ProfileModel profile;
+	@JsonProperty("email")
+	private String email;
+	@JsonProperty("oauth_token")
+	private String oauthToken;
+
 	public UserModel() {
 	}
 
@@ -80,22 +88,12 @@ public class UserModel implements Parcelable {
 		this.id = id;
 	}
 
-	public UserModel withId(String id) {
-		this.id = id;
-		return this;
-	}
-
 	public LinkModel getLinks() {
 		return links;
 	}
 
 	public void setLinks(LinkModel links) {
 		this.links = links;
-	}
-
-	public UserModel withLinks(LinkModel links) {
-		this.links = links;
-		return this;
 	}
 
 	public String getName() {
@@ -106,22 +104,12 @@ public class UserModel implements Parcelable {
 		this.name = name;
 	}
 
-	public UserModel withName(String name) {
-		this.name = name;
-		return this;
-	}
-
 	public String getUsername() {
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public UserModel withUsername(String username) {
-		this.username = username;
-		return this;
 	}
 
 	public String getAvatar() {
@@ -132,31 +120,44 @@ public class UserModel implements Parcelable {
 		this.avatar = avatar;
 	}
 
-	public UserModel withAvatar(String avatar) {
-		this.avatar = avatar;
-		return this;
+	public String getCreated_at() {
+		return created_at;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("UserModel [id=");
-		builder.append(id);
-		builder.append(", links=");
-		builder.append(links);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", username=");
-		builder.append(username);
-		builder.append(", avatar=");
-		builder.append(avatar);
-		builder.append("]");
-		return builder.toString();
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+
+	public String getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(String updated_at) {
+		this.updated_at = updated_at;
+	}
+
+	public ProfileModel getProfile() {
+		return profile;
+	}
+
+	public void setProfile(ProfileModel profile) {
+		this.profile = profile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getOauthToken() {
+		return oauthToken;
+	}
+
+	public void setOauthToken(String oauthToken) {
+		this.oauthToken = oauthToken;
 	}
 
 	public UserModel(Parcel in) {
@@ -166,10 +167,16 @@ public class UserModel implements Parcelable {
 		name = in.readString();
 		username = in.readString();
 		avatar = in.readString();
+		created_at = in.readString();
+		updated_at = in.readString();
+		profile = in.readParcelable(ProfileModel.class.getClassLoader());
+		email = in.readString();
+		oauthToken = in.readString();
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#describeContents()
 	 */
 	@Override
@@ -179,6 +186,7 @@ public class UserModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
 	 */
 	@Override
@@ -188,6 +196,11 @@ public class UserModel implements Parcelable {
 		dest.writeString(name);
 		dest.writeString(username);
 		dest.writeString(avatar);
+		dest.writeString(created_at);
+		dest.writeString(updated_at);
+		dest.writeParcelable(profile, flags);
+		dest.writeString(email);
+		dest.writeString(oauthToken);
 	}
 
 	public static final Parcelable.Creator<UserModel> CREATOR = new Parcelable.Creator<UserModel>() {

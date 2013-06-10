@@ -28,14 +28,11 @@ package com.chute.sdk.v2.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
 /**
  * The {@link ApiLimitsModel} class wraps up information regarding limit for
  * calls to the REST API. The calls are divided into maximum monthly and hourly,
  * as well as available monthly and hourly.
  */
-@JsonPropertyOrder({ "max_monthly_calls", "available_monthly_calls",
-		"max_hourly_calls", "available_hourly_calls" })
 public class ApiLimitsModel {
 
 	/**
@@ -73,22 +70,12 @@ public class ApiLimitsModel {
 		this.maxMonthlyCalls = maxMonthlyCalls;
 	}
 
-	public ApiLimitsModel withMaxMonthlyCalls(long maxMonthlyCalls) {
-		this.maxMonthlyCalls = maxMonthlyCalls;
-		return this;
-	}
-
 	public long getAvailableMonthlyCalls() {
 		return availableMonthlyCalls;
 	}
 
 	public void setAvailableMonthlyCalls(long availableMonthlyCalls) {
 		this.availableMonthlyCalls = availableMonthlyCalls;
-	}
-
-	public ApiLimitsModel withAvailableMonthlyCalls(long availableMonthlyCalls) {
-		this.availableMonthlyCalls = availableMonthlyCalls;
-		return this;
 	}
 
 	public long getMaxHourlyCalls() {
@@ -99,22 +86,12 @@ public class ApiLimitsModel {
 		this.maxHourlyCalls = maxHourlyCalls;
 	}
 
-	public ApiLimitsModel withMaxHourlyCalls(long maxHourlyCalls) {
-		this.maxHourlyCalls = maxHourlyCalls;
-		return this;
-	}
-
 	public long getAvailableHourlyCalls() {
 		return availableHourlyCalls;
 	}
 
 	public void setAvailableHourlyCalls(long availableHourlyCalls) {
 		this.availableHourlyCalls = availableHourlyCalls;
-	}
-
-	public ApiLimitsModel withAvailableHourlyCalls(long availableHourlyCalls) {
-		this.availableHourlyCalls = availableHourlyCalls;
-		return this;
 	}
 
 	/*

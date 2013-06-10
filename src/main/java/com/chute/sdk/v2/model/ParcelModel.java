@@ -27,7 +27,6 @@ package com.chute.sdk.v2.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -40,7 +39,6 @@ import android.os.Parcelable;
  * update and shortcut.
  * 
  */
-@JsonPropertyOrder({ "id", "links", "created_at", "updated_at", "shortcut" })
 public class ParcelModel implements Parcelable {
 
 	public static final String TAG = ParcelModel.class.getSimpleName();

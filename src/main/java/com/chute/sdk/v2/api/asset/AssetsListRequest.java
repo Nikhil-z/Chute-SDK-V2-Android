@@ -37,7 +37,7 @@ import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
-
+@Deprecated
 public class AssetsListRequest extends
 		ParameterHttpRequestImpl<ListResponseModel<AssetModel>> {
 

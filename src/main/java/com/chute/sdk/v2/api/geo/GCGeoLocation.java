@@ -27,6 +27,7 @@ package com.chute.sdk.v2.api.geo;
 
 import android.content.Context;
 
+import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.GeoLocationModel;
 import com.chute.sdk.v2.model.requests.ListResponseModel;
@@ -57,9 +58,9 @@ public class GCGeoLocation {
 	 * @return - {@link GeoLocationGetRequest}
 	 */
 	public static HttpRequest get(final Context context,
-			final AssetModel asset,
+			final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<GeoLocationModel>> callback) {
-		return new GeoLocationGetRequest(context, asset, callback);
+		return new GeoLocationGetRequest(context, album, asset, callback);
 	}
 
 	/**

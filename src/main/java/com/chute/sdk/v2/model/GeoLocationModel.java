@@ -27,7 +27,6 @@ package com.chute.sdk.v2.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -36,7 +35,6 @@ import android.os.Parcelable;
  * This class holds GeoLocation information connected to an asset.
  * 
  */
-@JsonPropertyOrder({ "latitude", "longitude" })
 public class GeoLocationModel implements Parcelable {
 
 	public static final String TAG = GeoLocationModel.class.getSimpleName();

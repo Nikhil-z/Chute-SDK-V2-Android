@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -37,7 +35,6 @@ import android.os.Parcelable;
  * of an asset.
  * 
  */
-@JsonPropertyOrder({ "width", "height" })
 public class DimensionsModel implements Parcelable {
 
 	public static final String TAG = DimensionsModel.class.getSimpleName();
@@ -46,12 +43,12 @@ public class DimensionsModel implements Parcelable {
 	 * Width of the asset
 	 */
 	@JsonProperty("width")
-	private long width;
+	private String width;
 	/**
 	 * Asset height
 	 */
 	@JsonProperty("height")
-	private long height;
+	private String height;
 
 	public DimensionsModel() {
 	}
@@ -59,56 +56,31 @@ public class DimensionsModel implements Parcelable {
 	/**
 	 * Getters and setters
 	 */
-	public long getWidth() {
+	public String getWidth() {
 		return width;
 	}
 
-	public void setWidth(long width) {
+	public void setWidth(String width) {
 		this.width = width;
 	}
 
-	public DimensionsModel withWidth(long width) {
-		this.width = width;
-		return this;
-	}
-
-	public long getHeight() {
+	public String getHeight() {
 		return height;
 	}
 
-	public void setHeight(long height) {
+	public void setHeight(String height) {
 		this.height = height;
 	}
 
-	public DimensionsModel withHeight(long height) {
-		this.height = height;
-		return this;
+	public DimensionsModel(Parcel in) {
+		this();
+		width = in.readString();
+		height = in.readString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DimensionsModel [width=");
-		builder.append(width);
-		builder.append(", height=");
-		builder.append(height);
-		builder.append("]");
-		return builder.toString();
-	}
-
-	public DimensionsModel(Parcel in) {
-		this();
-		width = in.readLong();
-		height = in.readLong();
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see android.os.Parcelable#describeContents()
 	 */
 	@Override
@@ -118,12 +90,13 @@ public class DimensionsModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
 	 */
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeLong(width);
-		dest.writeLong(height);
+		dest.writeString(width);
+		dest.writeString(height);
 	}
 
 	public static final Parcelable.Creator<DimensionsModel> CREATOR = new Parcelable.Creator<DimensionsModel>() {
@@ -139,5 +112,10 @@ public class DimensionsModel implements Parcelable {
 		}
 
 	};
+
+	@Override
+	public String toString() {
+		return "DimensionsModel [width=" + width + ", height=" + height + "]";
+	}
 
 }

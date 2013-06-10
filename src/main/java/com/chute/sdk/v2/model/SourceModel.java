@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -37,8 +35,6 @@ import android.os.Parcelable;
  * URL, service, import URL and original URL.
  * 
  */
-@JsonPropertyOrder({ "source", "source_id", "source_url", "service",
-		"import_id", "import_url", "original_url" })
 public class SourceModel implements Parcelable {
 
 	public static final String TAG = SourceModel.class.getSimpleName();
@@ -52,7 +48,7 @@ public class SourceModel implements Parcelable {
 	 * Source ID
 	 */
 	@JsonProperty("source_id")
-	private long sourceId;
+	private String sourceId;
 	/**
 	 * Source URL
 	 */
@@ -67,7 +63,7 @@ public class SourceModel implements Parcelable {
 	 * Import ID
 	 */
 	@JsonProperty("import_id")
-	private long importId;
+	private String importId;
 	/**
 	 * Import URL
 	 */
@@ -93,22 +89,12 @@ public class SourceModel implements Parcelable {
 		this.source = source;
 	}
 
-	public SourceModel withSource(String source) {
-		this.source = source;
-		return this;
-	}
-
-	public long getSourceId() {
+	public String getSourceId() {
 		return sourceId;
 	}
 
-	public void setSourceId(long sourceId) {
+	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
-	}
-
-	public SourceModel withSourceId(long sourceId) {
-		this.sourceId = sourceId;
-		return this;
 	}
 
 	public String getSourceUrl() {
@@ -119,11 +105,6 @@ public class SourceModel implements Parcelable {
 		this.sourceUrl = sourceUrl;
 	}
 
-	public SourceModel withSourceUrl(String sourceUrl) {
-		this.sourceUrl = sourceUrl;
-		return this;
-	}
-
 	public String getService() {
 		return service;
 	}
@@ -132,22 +113,12 @@ public class SourceModel implements Parcelable {
 		this.service = service;
 	}
 
-	public SourceModel withService(String service) {
-		this.service = service;
-		return this;
-	}
-
-	public long getImportId() {
+	public String getImportId() {
 		return importId;
 	}
 
-	public void setImportId(long importId) {
+	public void setImportId(String importId) {
 		this.importId = importId;
-	}
-
-	public SourceModel withImportId(long importId) {
-		this.importId = importId;
-		return this;
 	}
 
 	public String getImportUrl() {
@@ -158,11 +129,6 @@ public class SourceModel implements Parcelable {
 		this.importUrl = importUrl;
 	}
 
-	public SourceModel withImportUrl(String importUrl) {
-		this.importUrl = importUrl;
-		return this;
-	}
-
 	public String getOriginalUrl() {
 		return originalUrl;
 	}
@@ -171,49 +137,19 @@ public class SourceModel implements Parcelable {
 		this.originalUrl = originalUrl;
 	}
 
-	public SourceModel withOriginalUrl(String originalUrl) {
-		this.originalUrl = originalUrl;
-		return this;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SourceModel [source=");
-		builder.append(source);
-		builder.append(", sourceId=");
-		builder.append(sourceId);
-		builder.append(", sourceUrl=");
-		builder.append(sourceUrl);
-		builder.append(", service=");
-		builder.append(service);
-		builder.append(", importId=");
-		builder.append(importId);
-		builder.append(", importUrl=");
-		builder.append(importUrl);
-		builder.append(", originalUrl=");
-		builder.append(originalUrl);
-		builder.append("]");
-		return builder.toString();
-	}
-
 	public SourceModel(Parcel in) {
 		source = in.readString();
-		sourceId = in.readLong();
+		sourceId = in.readString();
 		sourceUrl = in.readString();
 		service = in.readString();
-		importId = in.readLong();
+		importId = in.readString();
 		importUrl = in.readString();
 		originalUrl = in.readString();
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#describeContents()
 	 */
 	@Override
@@ -223,15 +159,16 @@ public class SourceModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
 	 */
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(source);
-		dest.writeLong(sourceId);
+		dest.writeString(sourceId);
 		dest.writeString(sourceUrl);
 		dest.writeString(service);
-		dest.writeLong(importId);
+		dest.writeString(importId);
 		dest.writeString(importUrl);
 		dest.writeString(originalUrl);
 	}
@@ -249,5 +186,13 @@ public class SourceModel implements Parcelable {
 		}
 
 	};
+
+	@Override
+	public String toString() {
+		return "SourceModel [source=" + source + ", sourceId=" + sourceId
+				+ ", sourceUrl=" + sourceUrl + ", service=" + service
+				+ ", importId=" + importId + ", importUrl=" + importUrl
+				+ ", originalUrl=" + originalUrl + "]";
+	}
 
 }

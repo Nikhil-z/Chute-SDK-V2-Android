@@ -29,6 +29,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.chute.sdk.v2.api.parsers.ResponseParser;
+import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.GeoLocationModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
@@ -43,8 +44,10 @@ public class GeoLocationGetRequest extends
 	public static final String TAG = GeoLocationGetRequest.class
 			.getSimpleName();
 	public AssetModel asset;
+	public AlbumModel album;
 
-	public GeoLocationGetRequest(Context context, AssetModel asset,
+	public GeoLocationGetRequest(Context context, AlbumModel album,
+			AssetModel asset,
 			HttpCallback<ResponseModel<GeoLocationModel>> callback) {
 		super(context, RequestMethod.GET, new ResponseParser<GeoLocationModel>(
 				GeoLocationModel.class), callback);
@@ -52,11 +55,15 @@ public class GeoLocationGetRequest extends
 			throw new IllegalArgumentException("Need to provide asset ID");
 		}
 		this.asset = asset;
+		if (asset == null || TextUtils.isEmpty(album.getId())) {
+			throw new IllegalArgumentException("Need to provide album ID");
+		}
+		this.album = album;
 	}
 
 	@Override
 	protected String getUrl() {
 		return String.format(RestConstants.URL_ASSETS_GEO_LOCATION,
-				asset.getId());
+				album.getId(), asset.getId());
 	}
 }

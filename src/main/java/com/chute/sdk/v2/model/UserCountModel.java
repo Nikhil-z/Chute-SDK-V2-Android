@@ -26,15 +26,12 @@
 package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 
 /**
  * The {@link UserCountModel} wraps information concerning number of uploaded or
  * imported assets by a specific user.
  * 
  */
-@JsonPropertyOrder({ "via_upload", "via_import" })
 public class UserCountModel {
 
 	public static final String TAG = UserCountModel.class.getSimpleName();

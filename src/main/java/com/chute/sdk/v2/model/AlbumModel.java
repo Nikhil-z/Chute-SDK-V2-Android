@@ -25,12 +25,10 @@
 //
 package com.chute.sdk.v2.model;
 
-
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.dg.libs.android.logger.ALog;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -45,9 +43,6 @@ import android.os.Parcelable;
  * counters, shortcut, name, which user it belongs to, media and comments
  * moderators and time and date of creation.
  */
-@JsonPropertyOrder({ "id", "links", "counters", "shortcut", "name", "user",
-		"moderate_media", "moderate_comments", "created_at", "updated_at",
-		"description" })
 @JsonFilter("albumModelFilter")
 public class AlbumModel implements Parcelable {
 
@@ -128,22 +123,12 @@ public class AlbumModel implements Parcelable {
 		this.id = id;
 	}
 
-	public AlbumModel withId(String id) {
-		this.id = id;
-		return this;
-	}
-
 	public LinkModel getLinks() {
 		return links;
 	}
 
 	public void setLinks(LinkModel links) {
 		this.links = links;
-	}
-
-	public AlbumModel withLinks(LinkModel links) {
-		this.links = links;
-		return this;
 	}
 
 	public CounterModel getCounters() {
@@ -154,22 +139,12 @@ public class AlbumModel implements Parcelable {
 		this.counters = counters;
 	}
 
-	public AlbumModel withCounters(CounterModel counters) {
-		this.counters = counters;
-		return this;
-	}
-
 	public String getShortcut() {
 		return shortcut;
 	}
 
 	public void setShortcut(String shortcut) {
 		this.shortcut = shortcut;
-	}
-
-	public AlbumModel withShortcut(String shortcut) {
-		this.shortcut = shortcut;
-		return this;
 	}
 
 	public String getName() {
@@ -180,22 +155,12 @@ public class AlbumModel implements Parcelable {
 		this.name = name;
 	}
 
-	public AlbumModel withName(String name) {
-		this.name = name;
-		return this;
-	}
-
 	public UserModel getUser() {
 		return user;
 	}
 
 	public void setUser(UserModel user) {
 		this.user = user;
-	}
-
-	public AlbumModel withUser(UserModel user) {
-		this.user = user;
-		return this;
 	}
 
 	public boolean isModerateMedia() {
@@ -206,22 +171,12 @@ public class AlbumModel implements Parcelable {
 		this.moderateMedia = moderateMedia;
 	}
 
-	public AlbumModel withModerateMedia(boolean moderateMedia) {
-		this.moderateMedia = moderateMedia;
-		return this;
-	}
-
 	public boolean isModerateComments() {
 		return moderateComments;
 	}
 
 	public void setModerateComments(boolean moderateComments) {
 		this.moderateComments = moderateComments;
-	}
-
-	public AlbumModel withModerateComments(boolean moderateComments) {
-		this.moderateComments = moderateComments;
-		return this;
 	}
 
 	public String getCreatedAt() {
@@ -232,22 +187,12 @@ public class AlbumModel implements Parcelable {
 		this.createdAt = createdAt;
 	}
 
-	public AlbumModel withCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-		return this;
-	}
-
 	public String getUpdatedAt() {
 		return updatedAt;
 	}
 
 	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public AlbumModel withUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
-		return this;
 	}
 
 	public String getDescription() {
@@ -258,23 +203,21 @@ public class AlbumModel implements Parcelable {
 		this.description = description;
 	}
 
-	public AlbumModel withDescription(String description) {
-		this.description = description;
-		return this;
-	}
-	
 	public String serializeAlbum() {
-		FilterProvider filters = new SimpleFilterProvider().addFilter("albumModelFilter",
-			    SimpleBeanPropertyFilter.filterOutAllExcept("name","moderate_comments","moderate_media"));
+		FilterProvider filters = new SimpleFilterProvider().addFilter(
+				"albumModelFilter", SimpleBeanPropertyFilter
+						.filterOutAllExcept("name", "moderate_comments",
+								"moderate_media"));
 		String result = null;
 		try {
-			result = JsonUtil.getMapper().writer(filters).writeValueAsString(this);
+			result = JsonUtil.getMapper().writer(filters)
+					.writeValueAsString(this);
 		} catch (JsonProcessingException e) {
 			ALog.d("", e);
 		}
 		return result;
 	}
-	
+
 	public AlbumModel(Parcel in) {
 		this();
 		id = in.readString();

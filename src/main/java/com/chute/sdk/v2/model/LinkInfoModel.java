@@ -27,7 +27,6 @@ package com.chute.sdk.v2.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -36,7 +35,6 @@ import android.os.Parcelable;
  * This class holds information regarding the links contained in the
  * {@link LinkModel}.
  */
-@JsonPropertyOrder({ "href", "title" })
 public class LinkInfoModel implements Parcelable {
 
 	/**
@@ -53,6 +51,7 @@ public class LinkInfoModel implements Parcelable {
 
 	public LinkInfoModel() {
 	}
+	
 
 	/**
 	 * Getters and setters
@@ -65,10 +64,6 @@ public class LinkInfoModel implements Parcelable {
 		this.href = href;
 	}
 
-	public LinkInfoModel withHref(String href) {
-		this.href = href;
-		return this;
-	}
 
 	public String getTitle() {
 		return title;
@@ -78,10 +73,6 @@ public class LinkInfoModel implements Parcelable {
 		this.title = title;
 	}
 
-	public LinkInfoModel withTitle(String title) {
-		this.title = title;
-		return this;
-	}
 
 	/*
 	 * (non-Javadoc)

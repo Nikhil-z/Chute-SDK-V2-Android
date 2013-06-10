@@ -13,7 +13,7 @@ public class CommentCreateRequestTest extends TestCase {
 		CommentModel comment = FactoryManager.getModelFactory().createModel(CommentModel.class);
 		String result = comment.serializeComment();
 		assertEquals(
-				"{\"comment_text\":\"This is my comment\",\"name\":\"Comment Name\",\"email\":\"olga@getchute.com\"}",
+				"{\"name\":\"Comment Name\",\"email\":\"olga@getchute.com\",\"comment_text\":\"This is my comment\"}",
 				result);
 	}
 }

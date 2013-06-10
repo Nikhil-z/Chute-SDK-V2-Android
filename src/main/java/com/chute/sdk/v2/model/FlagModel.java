@@ -27,7 +27,6 @@ package com.chute.sdk.v2.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -38,8 +37,6 @@ import android.os.Parcelable;
  * album ID the flag belongs to.
  * 
  */
-@JsonPropertyOrder({ "id", "links", "created_at", "updated_at", "identifier",
-		"album_id", "asset_id", "count" })
 public class FlagModel implements Parcelable {
 
 	public static final String TAG = FlagModel.class.getSimpleName();

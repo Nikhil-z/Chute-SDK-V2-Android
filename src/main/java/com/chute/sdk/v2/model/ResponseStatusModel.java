@@ -26,8 +26,6 @@
 package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 
 /**
  * The {@link ResponseStatusModel} class represents the status of the response.
@@ -35,7 +33,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * and API limitations.
  * 
  */
-@JsonPropertyOrder({ "error", "version", "code", "href", "api_lmits" })
 public class ResponseStatusModel {
 
 	public static final String TAG = ResponseStatusModel.class.getSimpleName();
@@ -78,22 +75,12 @@ public class ResponseStatusModel {
 		this.error = error;
 	}
 
-	public ResponseStatusModel withError(String error) {
-		this.error = error;
-		return this;
-	}
-
 	public int getVersion() {
 		return version;
 	}
 
 	public void setVersion(int version) {
 		this.version = version;
-	}
-
-	public ResponseStatusModel withVerison(int version) {
-		this.version = version;
-		return this;
 	}
 
 	public int getCode() {
@@ -104,11 +91,6 @@ public class ResponseStatusModel {
 		this.code = code;
 	}
 
-	public ResponseStatusModel withCode(int code) {
-		this.code = code;
-		return this;
-	}
-
 	public String getHref() {
 		return href;
 	}
@@ -117,22 +99,12 @@ public class ResponseStatusModel {
 		this.href = href;
 	}
 
-	public ResponseStatusModel withHref(String href) {
-		this.href = href;
-		return this;
-	}
-
 	public ApiLimitsModel getApiLimits() {
 		return apiLimits;
 	}
 
 	public void setApiLimits(ApiLimitsModel apiLimits) {
 		this.apiLimits = apiLimits;
-	}
-
-	public ResponseStatusModel withApiLimits(ApiLimitsModel apiLimits) {
-		this.apiLimits = apiLimits;
-		return this;
 	}
 
 	/*

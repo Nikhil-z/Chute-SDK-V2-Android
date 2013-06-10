@@ -36,6 +36,7 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
+@Deprecated
 public class AssetsGetRequest extends
 		ParameterHttpRequestImpl<ResponseModel<AssetModel>> {
 

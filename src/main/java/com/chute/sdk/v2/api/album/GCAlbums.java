@@ -1,4 +1,4 @@
-// Copyright (c) 2011, Chute Corporation. All rights reserved.
+﻿// Copyright (c) 2011, Chute Corporation. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
@@ -32,7 +32,6 @@ import android.content.Context;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.PaginationModel;
-import com.chute.sdk.v2.model.StatsModel;
 import com.chute.sdk.v2.model.requests.ListResponseModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
@@ -165,55 +164,7 @@ public class GCAlbums {
 	 */
 	public static class Assets {
 
-		/**
-		 * Gets a specific asset from a given album
-		 * 
-		 * @param context
-		 *           The application context
-		 * @param album
-		 *           Album whose asset we are demanding
-		 * @param asset
-		 *           The requested asset
-		 * @param callback
-		 *           Instance of {@link HttpCallback} interface. If successful,
-		 *           the callback returns {@link ResponseModel<AssetModel>}
-		 * @return {@link AlbumsGetAssetRequest}
-		 */
-		public static HttpRequest get(final Context context, final AlbumModel album, final AssetModel asset,
-				final HttpCallback<ResponseModel<AssetModel>> callback) {
-			return new AlbumsGetAssetRequest(context, album, asset, callback);
-		}
-
-		/**
-		 * Gets a list of assets from a specific album
-		 * 
-		 * @param context
-		 *           The application context
-		 * @param album
-		 *           The album whose assets are being retrieved
-		 * @param callback
-		 *           Instance of {@link HttpCallback} interface. If successful,
-		 *           the callback returns {@link ListResponseModel<AssetModel>}
-		 * @return {@link AlbumsGetAssetListRequest}
-		 */
-		public static HttpRequest list(final Context context, final AlbumModel album, PaginationModel pagination,
-				final HttpCallback<ListResponseModel<AssetModel>> callback) {
-			return new AlbumsGetAssetListRequest(context, album,  pagination, callback);
-		}
 		
-		/**
-		 * Overloaded method
-		 * @see #list(Context, AlbumModel, PaginationModel, HttpCallback) 
-		 * 
-		 * @param context
-		 * @param album
-		 * @param callback
-		 * @return
-		 */
-		public static HttpRequest list(final Context context, final AlbumModel album,
-				final HttpCallback<ListResponseModel<AssetModel>> callback) {
-			return new AlbumsGetAssetListRequest(context, album,  new PaginationModel(), callback);
-		}
 		/**
 		 * Adds existing assets to an album. The assets must be already created by
 		 * upload or import.

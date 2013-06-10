@@ -26,8 +26,6 @@
 package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 
 /**
  * The {@link PaginationModel} class wraps up information about pagination of
@@ -35,8 +33,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * first page, last page and number of responses per page.
  * 
  */
-@JsonPropertyOrder({ "total_pages", "current_page", "next_page",
-		"previous_page", "first_page", "last_page", "per_page" })
 public class PaginationModel {
 
 	/**
@@ -86,22 +82,12 @@ public class PaginationModel {
 		this.totalPages = totalPages;
 	}
 
-	public PaginationModel withTotalPages(long totalPages) {
-		this.totalPages = totalPages;
-		return this;
-	}
-
 	public long getCurrentPage() {
 		return currentPage;
 	}
 
 	public void setCurrentPage(long currentPage) {
 		this.currentPage = currentPage;
-	}
-
-	public PaginationModel withCurrentPage(long currentPage) {
-		this.currentPage = currentPage;
-		return this;
 	}
 
 	public Object getNextPage() {
@@ -112,22 +98,12 @@ public class PaginationModel {
 		this.nextPage = nextPage;
 	}
 
-	public PaginationModel withNextPage(Object nextPage) {
-		this.nextPage = nextPage;
-		return this;
-	}
-
 	public Object getPreviousPage() {
 		return previousPage;
 	}
 
 	public void setPreviousPage(Object previousPage) {
 		this.previousPage = previousPage;
-	}
-
-	public PaginationModel withPreviousPage(Object previousPage) {
-		this.previousPage = previousPage;
-		return this;
 	}
 
 	public String getFirstPage() {
@@ -138,11 +114,6 @@ public class PaginationModel {
 		this.firstPage = firstPage;
 	}
 
-	public PaginationModel withFirstPage(String firstPage) {
-		this.firstPage = firstPage;
-		return this;
-	}
-
 	public String getLastPage() {
 		return lastPage;
 	}
@@ -151,25 +122,16 @@ public class PaginationModel {
 		this.lastPage = lastPage;
 	}
 
-	public PaginationModel withLastPage(String lastPage) {
-		this.lastPage = lastPage;
-		return this;
-	}
-
 	public int getPerPage() {
 		return perPage;
 	}
+
 	public String getPerPageAsString() {
 		return String.valueOf(perPage);
 	}
 
 	public void setPerPage(int perPage) {
 		this.perPage = perPage;
-	}
-
-	public PaginationModel withPerPage(int perPage) {
-		this.perPage = perPage;
-		return this;
 	}
 
 	/*

@@ -25,10 +25,9 @@
 //
 package com.chute.sdk.v2.model;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.dg.libs.android.logger.ALog;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -43,8 +42,6 @@ import android.os.Parcelable;
  * comment text, user name and user e-mail.
  * 
  */
-@JsonPropertyOrder({ "id", "links", "created_at", "updated_at", "comment_text",
-		"name", "email" })
 public class CommentModel implements Parcelable {
 
 	public static final String TAG = CommentModel.class.getSimpleName();
@@ -59,6 +56,9 @@ public class CommentModel implements Parcelable {
 	 */
 	@JsonProperty("links")
 	private LinkModel links;
+
+	@JsonProperty("user")
+	private UserModel user;
 	/**
 	 * Date and time of creation
 	 */
@@ -96,8 +96,17 @@ public class CommentModel implements Parcelable {
 	/**
 	 * Getters and setters
 	 */
+
 	public String getId() {
 		return id;
+	}
+
+	public UserModel getUser() {
+		return user;
+	}
+
+	public void setUser(UserModel user) {
+		this.user = user;
 	}
 
 	public void setId(String id) {
@@ -152,32 +161,6 @@ public class CommentModel implements Parcelable {
 		this.email = email;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CommentModel [id=");
-		builder.append(id);
-		builder.append(", links=");
-		builder.append(links);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", updatedAt=");
-		builder.append(updatedAt);
-		builder.append(", commentText=");
-		builder.append(commentText);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append("]");
-		return builder.toString();
-	}
-
 	public CommentModel(Parcel in) {
 		this();
 		id = in.readString();
@@ -187,6 +170,7 @@ public class CommentModel implements Parcelable {
 		commentText = in.readString();
 		name = in.readString();
 		email = in.readString();
+		user = in.readParcelable(UserModel.class.getClassLoader());
 	}
 
 	/*
@@ -213,6 +197,7 @@ public class CommentModel implements Parcelable {
 		dest.writeString(commentText);
 		dest.writeString(name);
 		dest.writeString(email);
+		dest.writeParcelable(user, flags);
 	}
 
 	public static final Parcelable.Creator<CommentModel> CREATOR = new Parcelable.Creator<CommentModel>() {
@@ -241,6 +226,14 @@ public class CommentModel implements Parcelable {
 			ALog.d("", e);
 		}
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "CommentModel [id=" + id + ", links=" + links + ", user=" + user
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", commentText=" + commentText + ", name=" + name
+				+ ", email=" + email + "]";
 	}
 
 }

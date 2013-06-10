@@ -1,4 +1,4 @@
-// Copyright (c) 2011, Chute Corporation. All rights reserved.
+﻿// Copyright (c) 2011, Chute Corporation. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
@@ -77,7 +77,7 @@ public class RestConstants {
 	public static final String URL_ASSETS_CAPTION_SET = BASE_UPLOAD_URL
 			+ "/albums/%s/assets/%s";
 	public static final String URL_ASSETS_GEO_LOCATION = BASE_URL
-			+ "/assets/%s/geo";
+			+ "albums/%s/assets/%s/geo";
 	public static final String URL_ASSETS_GET_GEO_LOCATION = BASE_URL
 			+ "/assets/geo/%s,%s/%s";
 	public static final String URL_ASSETS_TAGS = BASE_URL

@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -37,7 +35,6 @@ import android.os.Parcelable;
  * video and inbox items for an asset or album.
  * 
  */
-@JsonPropertyOrder({ "photos", "videos", "inbox" })
 public class CounterModel implements Parcelable {
 
 	/**
@@ -70,11 +67,6 @@ public class CounterModel implements Parcelable {
 		this.photos = photos;
 	}
 
-	public CounterModel withPhotos(long photos) {
-		this.photos = photos;
-		return this;
-	}
-
 	public long getVideos() {
 		return videos;
 	}
@@ -83,22 +75,12 @@ public class CounterModel implements Parcelable {
 		this.videos = videos;
 	}
 
-	public CounterModel withVideos(long videos) {
-		this.videos = videos;
-		return this;
-	}
-
 	public long getInbox() {
 		return inbox;
 	}
 
 	public void setInbox(long inbox) {
 		this.inbox = inbox;
-	}
-
-	public CounterModel withInbox(long inbox) {
-		this.inbox = inbox;
-		return this;
 	}
 
 	/*
@@ -128,6 +110,7 @@ public class CounterModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#describeContents()
 	 */
 	@Override
@@ -137,6 +120,7 @@ public class CounterModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
 	 */
 	@Override

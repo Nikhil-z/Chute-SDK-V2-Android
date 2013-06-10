@@ -26,7 +26,6 @@
 package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
@@ -34,7 +33,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * uploaded assets to a source destination. Assets can be imported from any
  * service and uploaded to Chute.
  */
-@JsonPropertyOrder({ "uploads", "imports" })
 public class SourceCountModel {
 
 	public static final String TAG = SourceCountModel.class.getSimpleName();

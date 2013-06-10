@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -36,7 +34,6 @@ import android.os.Parcelable;
  * The {@link LinkModel} class holds self, asset and exif links.
  * 
  */
-@JsonPropertyOrder({ "self", "assets", "exif" })
 public class LinkModel implements Parcelable {
 
 	/**
@@ -54,6 +51,12 @@ public class LinkModel implements Parcelable {
 	 */
 	@JsonProperty("exif")
 	private LinkInfoModel exif;
+	@JsonProperty("geo")
+	private LinkInfoModel geo;
+	@JsonProperty("heart")
+	private LinkInfoModel heart;
+	@JsonProperty("vote")
+	private LinkInfoModel vote;
 
 	public LinkModel() {
 	}
@@ -69,22 +72,12 @@ public class LinkModel implements Parcelable {
 		this.self = self;
 	}
 
-	public LinkModel withSelf(LinkInfoModel self) {
-		this.self = self;
-		return this;
-	}
-
 	public LinkInfoModel getAssets() {
 		return assets;
 	}
 
 	public void setAssets(LinkInfoModel assets) {
 		this.assets = assets;
-	}
-
-	public LinkModel withAssets(LinkInfoModel assets) {
-		this.assets = assets;
-		return this;
 	}
 
 	public LinkInfoModel getExif() {
@@ -95,37 +88,42 @@ public class LinkModel implements Parcelable {
 		this.exif = exif;
 	}
 
-	public LinkModel withExif(LinkInfoModel exif) {
-		this.exif = exif;
-		return this;
+	public LinkInfoModel getGeo() {
+		return geo;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("LinkModel [self=");
-		builder.append(self);
-		builder.append(", assets=");
-		builder.append(assets);
-		builder.append(", exif=");
-		builder.append(exif);
-		builder.append("]");
-		return builder.toString();
+	public void setGeo(LinkInfoModel geo) {
+		this.geo = geo;
+	}
+
+	public LinkInfoModel getHeart() {
+		return heart;
+	}
+
+	public void setHeart(LinkInfoModel heart) {
+		this.heart = heart;
+	}
+
+	public LinkInfoModel getVote() {
+		return vote;
+	}
+
+	public void setVote(LinkInfoModel vote) {
+		this.vote = vote;
 	}
 
 	public LinkModel(Parcel in) {
 		self = in.readParcelable(LinkInfoModel.class.getClassLoader());
 		assets = in.readParcelable(LinkInfoModel.class.getClassLoader());
 		exif = in.readParcelable(LinkInfoModel.class.getClassLoader());
+		geo = in.readParcelable(LinkInfoModel.class.getClassLoader());
+		heart = in.readParcelable(LinkInfoModel.class.getClassLoader());
+		vote = in.readParcelable(LinkInfoModel.class.getClassLoader());
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#describeContents()
 	 */
 	@Override
@@ -135,6 +133,7 @@ public class LinkModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
 	 */
 	@Override
@@ -142,6 +141,9 @@ public class LinkModel implements Parcelable {
 		dest.writeParcelable(self, flags);
 		dest.writeParcelable(assets, flags);
 		dest.writeParcelable(exif, flags);
+		dest.writeParcelable(geo, flags);
+		dest.writeParcelable(heart, flags);
+		dest.writeParcelable(vote, flags);
 	}
 
 	public static final Parcelable.Creator<LinkModel> CREATOR = new Parcelable.Creator<LinkModel>() {
@@ -157,5 +159,12 @@ public class LinkModel implements Parcelable {
 		}
 
 	};
+
+	@Override
+	public String toString() {
+		return "LinkModel [self=" + self + ", assets=" + assets + ", exif="
+				+ exif + ", geo=" + geo + ", heart=" + heart + ", vote=" + vote
+				+ "]";
+	}
 
 }
