@@ -73,7 +73,7 @@ public class RestConstants {
 	public static final String URL_ASSETS_GET = BASE_URL + "/assets/%s";
 	public static final String URL_ASSETS_EXIF = BASE_URL + "/assets/%s/exif";
 	public static final String URL_ASSETS_UPDATE = BASE_URL + "/assets/%s";
-	public static final String URL_ASSETS_DELETE = BASE_URL + "/assets/%s";
+	public static final String URL_ASSETS_DELETE = BASE_URL + "/albums/%s/assets/%s";
 	public static final String URL_ASSETS_CAPTION_SET = BASE_UPLOAD_URL
 			+ "/albums/%s/assets/%s";
 	public static final String URL_ASSETS_GEO_LOCATION = BASE_URL

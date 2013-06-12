@@ -29,6 +29,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.chute.sdk.v2.api.parsers.ResponseParser;
+import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
@@ -41,15 +42,20 @@ public class AssetsUpdateRequest extends
 
 	public static final String TAG = AssetsUpdateRequest.class.getSimpleName();
 	private AssetModel asset;
+	private AlbumModel album;
 
-	public AssetsUpdateRequest(Context context, AssetModel asset,
-			HttpCallback<ResponseModel<AssetModel>> callback) {
+	public AssetsUpdateRequest(Context context, AlbumModel album,
+			AssetModel asset, HttpCallback<ResponseModel<AssetModel>> callback) {
 		super(context, RequestMethod.PUT, new ResponseParser<AssetModel>(
 				AssetModel.class), callback);
+		this.asset = asset;
+		this.album = album;
 		if (asset == null || TextUtils.isEmpty(asset.getId())) {
 			throw new IllegalArgumentException("Need to provide asset ID");
 		}
-		this.asset = asset;
+		if (album == null || TextUtils.isEmpty(album.getId())) {
+			throw new IllegalArgumentException("Need to provide album ID");
+		}
 	}
 
 	@Override
@@ -59,7 +65,8 @@ public class AssetsUpdateRequest extends
 
 	@Override
 	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_UPDATE, asset.getId());
+		return String.format(RestConstants.URL_ASSETS_UPDATE, album.getId(),
+				asset.getId());
 	}
 
 }

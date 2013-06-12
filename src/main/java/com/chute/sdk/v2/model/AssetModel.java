@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.dg.libs.android.logger.ALog;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -96,24 +95,50 @@ public class AssetModel implements Parcelable {
 	@JsonProperty("user")
 	private UserModel user;
 
+	/**
+	 * Number of asset votes
+	 */
 	@JsonProperty("votes")
 	private int votes;
+	/**
+	 * Number of asset hearts
+	 */
 	@JsonProperty("hearts")
 	private int hearts;
+	/**
+	 * Asset tags
+	 */
 	@JsonProperty("tags")
 	private ArrayList<String> tags;
-
+	/**
+	 * Time and date of creating the asset
+	 */
 	@JsonProperty("created_at")
 	private String createdAt;
 
+	/**
+	 * Time and date of updating the asset
+	 */
 	@JsonProperty("updated_at")
 	private String updatedAt;
+	/**
+	 * Asset shortcut
+	 */
 	@JsonProperty("shortcut")
 	private String shortcut;
+	/**
+	 * Asset location
+	 */
 	@JsonProperty("location")
 	private String location;
+	/**
+	 * Asset origins
+	 */
 	@JsonProperty("service")
 	private String service;
+	/**
+	 * Chute asset ID
+	 */
 	@JsonProperty("chute_asset_id")
 	private String chuteAssetId;
 
@@ -282,13 +307,13 @@ public class AssetModel implements Parcelable {
 		user = in.readParcelable(UserModel.class.getClassLoader());
 		votes = in.readInt();
 		hearts = in.readInt();
-		tags = in.readArrayList(String.class.getClassLoader());
 		createdAt = in.readString();
 		updatedAt = in.readString();
 		shortcut = in.readString();
 		location = in.readString();
 		service = in.readString();
 		chuteAssetId = in.readString();
+		tags = in.readArrayList(String.class.getClassLoader());
 	}
 
 	/*
@@ -319,13 +344,13 @@ public class AssetModel implements Parcelable {
 		dest.writeParcelable(user, flags);
 		dest.writeInt(votes);
 		dest.writeInt(hearts);
-		dest.writeStringList(tags);
 		dest.writeString(createdAt);
 		dest.writeString(updatedAt);
 		dest.writeString(shortcut);
 		dest.writeString(location);
 		dest.writeString(service);
 		dest.writeString(chuteAssetId);
+		dest.writeStringList(tags);
 	}
 
 	public static final Parcelable.Creator<AssetModel> CREATOR = new Parcelable.Creator<AssetModel>() {
@@ -356,6 +381,11 @@ public class AssetModel implements Parcelable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "AssetModel [id=" + id + ", links=" + links + ", thumbnail="

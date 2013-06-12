@@ -63,14 +63,29 @@ public class UserModel implements Parcelable {
 	@JsonProperty("avatar")
 	private String avatar;
 
+	/**
+	 * Time and date of creation
+	 */
 	@JsonProperty("created_at")
 	private String created_at;
+	/**
+	 * Time and date of update
+	 */
 	@JsonProperty("updated_at")
 	private String updated_at;
+	/**
+	 * User profile
+	 */
 	@JsonProperty("profile")
 	private ProfileModel profile;
+	/**
+	 * User e-mail
+	 */
 	@JsonProperty("email")
 	private String email;
+	/**
+	 * OAuth token
+	 */
 	@JsonProperty("oauth_token")
 	private String oauthToken;
 

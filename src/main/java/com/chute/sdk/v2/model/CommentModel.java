@@ -57,6 +57,9 @@ public class CommentModel implements Parcelable {
 	@JsonProperty("links")
 	private LinkModel links;
 
+	/**
+	 * The user the comment belongs to
+	 */
 	@JsonProperty("user")
 	private UserModel user;
 	/**
@@ -228,6 +231,11 @@ public class CommentModel implements Parcelable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "CommentModel [id=" + id + ", links=" + links + ", user=" + user

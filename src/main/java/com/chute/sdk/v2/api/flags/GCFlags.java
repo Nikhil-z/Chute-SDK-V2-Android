@@ -91,7 +91,6 @@ public class GCFlags {
 		return new FlagGetRequest(context, album, asset, callback);
 	}
 
-
 	/**
 	 * Unflags a specific asset inside an album
 	 * 

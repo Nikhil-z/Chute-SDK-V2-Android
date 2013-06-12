@@ -25,17 +25,17 @@
 //
 package darko.imagedownloader;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
-import android.net.Uri;
-
-import com.araneaapps.android.libs.logger.ALog;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import com.dg.libs.android.logger.ALog;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+import android.net.Uri;
 
 
 /**

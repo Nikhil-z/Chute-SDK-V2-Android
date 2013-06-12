@@ -106,8 +106,17 @@ public class AlbumModel implements Parcelable {
 	@JsonProperty("updated_at")
 	private String updatedAt;
 
+	/**
+	 * Album description
+	 */
 	@JsonProperty("description")
 	private String description;
+
+	/**
+	 * Parent ID of the album
+	 */
+	@JsonProperty("parent_id")
+	private String parentId;
 
 	public AlbumModel() {
 	}
@@ -203,6 +212,14 @@ public class AlbumModel implements Parcelable {
 		this.description = description;
 	}
 
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
 	public String serializeAlbum() {
 		FilterProvider filters = new SimpleFilterProvider().addFilter(
 				"albumModelFilter", SimpleBeanPropertyFilter
@@ -231,6 +248,7 @@ public class AlbumModel implements Parcelable {
 		createdAt = in.readString();
 		updatedAt = in.readString();
 		description = in.readString();
+		parentId = in.readString();
 	}
 
 	/*
@@ -261,6 +279,7 @@ public class AlbumModel implements Parcelable {
 		dest.writeString(createdAt);
 		dest.writeString(updatedAt);
 		dest.writeString(description);
+		dest.writeString(parentId);
 	}
 
 	public static final Parcelable.Creator<AlbumModel> CREATOR = new Parcelable.Creator<AlbumModel>() {
@@ -277,33 +296,19 @@ public class AlbumModel implements Parcelable {
 
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("AlbumModel [id=");
-		builder.append(id);
-		builder.append(", links=");
-		builder.append(links);
-		builder.append(", counters=");
-		builder.append(counters);
-		builder.append(", shortcut=");
-		builder.append(shortcut);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", moderateMedia=");
-		builder.append(moderateMedia);
-		builder.append(", moderateComments=");
-		builder.append(moderateComments);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", updatedAt=");
-		builder.append(updatedAt);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append("]");
-		return builder.toString();
+		return "AlbumModel [id=" + id + ", links=" + links + ", counters="
+				+ counters + ", shortcut=" + shortcut + ", name=" + name
+				+ ", user=" + user + ", moderateMedia=" + moderateMedia
+				+ ", moderateComments=" + moderateComments + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + ", description="
+				+ description + ", parentId=" + parentId + "]";
 	}
 
 }

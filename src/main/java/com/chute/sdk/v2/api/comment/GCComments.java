@@ -88,7 +88,7 @@ public class GCComments {
 	 *            the callback returns {@link ResponseModel<CommentModel>}
 	 * @return - {@link CommentsCreateRequest}
 	 */
-	public static HttpRequest add(final Context context,
+	public static HttpRequest create(final Context context,
 			final AlbumModel album, final AssetModel asset,
 			final CommentModel comment,
 			final HttpCallback<ResponseModel<CommentModel>> callback) {

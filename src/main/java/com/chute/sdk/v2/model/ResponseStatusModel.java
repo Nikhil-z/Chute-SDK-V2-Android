@@ -37,6 +37,9 @@ public class ResponseStatusModel {
 
 	public static final String TAG = ResponseStatusModel.class.getSimpleName();
 
+	@JsonProperty("title")
+	private String title;
+
 	/**
 	 * Error message
 	 */
@@ -69,6 +72,14 @@ public class ResponseStatusModel {
 	 */
 	public String getError() {
 		return error;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public void setError(String error) {
@@ -114,19 +125,9 @@ public class ResponseStatusModel {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ResponseStatusModel [error=");
-		builder.append(error);
-		builder.append(", version=");
-		builder.append(version);
-		builder.append(", code=");
-		builder.append(code);
-		builder.append(", href=");
-		builder.append(href);
-		builder.append(", apiLimits=");
-		builder.append(apiLimits);
-		builder.append("]");
-		return builder.toString();
+		return "ResponseStatusModel [title=" + title + ", error=" + error
+				+ ", version=" + version + ", code=" + code + ", href=" + href
+				+ ", apiLimits=" + apiLimits + "]";
 	}
 
 }

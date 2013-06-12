@@ -25,7 +25,6 @@
 // 
 package com.chute.sdk.v2.api.asset;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
@@ -33,8 +32,6 @@ import android.content.Context;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.PaginationModel;
-import com.chute.sdk.v2.model.enums.Filter;
-import com.chute.sdk.v2.model.enums.Sort;
 import com.chute.sdk.v2.model.requests.ListResponseModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
@@ -43,9 +40,8 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 /**
  * The {@link GCAssets} class is a helper class for managing {@link AssetModel}.
  * The API enables users and developers to access the following methods:
- * getting, uploading, importing, updating and deleting assets, retrieving
- * asset's exif and geo-location data, getting and updating asset's caption, as
- * well as getting and updating all tags associated within an asset.
+ * getting, uploading, updating and deleting assets, retrieving asset's exif
+ * data and updating asset's caption.
  * 
  */
 public class GCAssets {
@@ -73,28 +69,6 @@ public class GCAssets {
 	public static HttpRequest upload(final Context context,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
 		return new AssetsUploadRequest(context, callback);
-	}
-
-/**
-	 * Imports asset(s) by providing an existing URL targeting the specific
-	 * media item. Imported assets this way won’t belong to an album. You can
-	 * use {@see #GCAlbums.Assets.add(Context, AlbumModel, ArrayList<String>, HttpCallback<ResponseModel<AlbumModel>>) to add assets to one or multiple albums
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album containing assets for import
-	 * @param urls
-	 *            - List of asset URLs to be imported
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return - {@link AssetsImportRequest}
-	 */
-	public static HttpRequest imports(final Context context,
-			final ArrayList<String> urls,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AssetsImportRequest(context, urls, callback);
 	}
 
 	/**
@@ -129,9 +103,9 @@ public class GCAssets {
 	 * @return - {@link AssetsDeleteRequest}
 	 */
 	public static HttpRequest delete(final Context context,
-			final AssetModel asset,
+			final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AssetsDeleteRequest(context, asset, callback);
+		return new AssetsDeleteRequest(context, album, asset, callback);
 	}
 
 	/**
@@ -147,9 +121,9 @@ public class GCAssets {
 	 * @return - {@link AssetsUpdateRequest}
 	 */
 	public static HttpRequest update(final Context context,
-			final AssetModel asset,
+			final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AssetsUpdateRequest(context, asset, callback);
+		return new AssetsUpdateRequest(context, album, asset, callback);
 	}
 
 	/**
