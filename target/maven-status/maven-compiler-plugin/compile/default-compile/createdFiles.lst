@@ -2,12 +2,15 @@ com/chute/sdk/v2/api/hearts/HeartGetRequest.class
 com/chute/sdk/v2/api/asset/AssetsExifRequest.class
 com/chute/sdk/v2/api/votes/VoteRequest.class
 com/chute/sdk/v2/api/album/AlbumsUpdateRequest.class
+com/chute/sdk/v2/api/asset/AssetsUploadCompleteRequest.class
 com/chute/sdk/v2/model/CommentModel$1.class
 com/chute/sdk/v2/model/CounterModel.class
 darko/imagedownloader/PhotosQueue$PhotoToLoad.class
 com/chute/sdk/v2/model/UserModel$1.class
 com/chute/sdk/v2/api/authentication/AuthenticationActivity.class
+com/chute/sdk/v2/utils/rest/GCS3Uploader.class
 com/chute/sdk/v2/api/authentication/AuthenticationToken.class
+com/chute/sdk/v2/api/asset/AssetsUploadRequest$1.class
 com/chute/sdk/v2/api/tags/TagsReplaceRequest.class
 darko/imagedownloader/queue/StackStrategy.class
 com/chute/sdk/v2/api/asset/AssetsDeleteRequest.class
@@ -18,6 +21,7 @@ com/chute/sdk/v2/api/comment/CommentsListRequest.class
 com/chute/sdk/v2/api/album/AlbumsRemoveAssetsRequest.class
 com/chute/sdk/v2/model/ResponseStatusModel.class
 com/chute/sdk/v2/model/VoteModel$1.class
+com/chute/sdk/v2/model/UploadTokenResponse.class
 com/chute/sdk/v2/model/AccountStore$AuthConstants.class
 com/chute/sdk/v2/api/flags/FlagGetRequest.class
 darko/imagedownloader/MemoryCache$LinkedHashMapExtension.class
@@ -35,12 +39,15 @@ com/chute/sdk/v2/utils/RestConstants.class
 com/chute/sdk/v2/api/album/AlbumsCreateRequest.class
 com/chute/sdk/v2/model/DimensionsModel$1.class
 com/chute/sdk/v2/api/hearts/UnheartRequest.class
+com/chute/sdk/v2/model/UploadToken.class
+com/chute/sdk/v2/api/asset/AssetsUploadRequest$UploadCompleteListener.class
 com/chute/sdk/v2/api/authentication/AuthenticationFactory$1.class
 com/chute/sdk/v2/api/tags/TagsDeleteRequest.class
 darko/imagedownloader/PhotosQueue$QueueMethod.class
 com/chute/sdk/v2/api/album/AlbumsImportRequest.class
 com/chute/sdk/v2/api/user/UsersCurrentRequest.class
 com/chute/sdk/v2/api/album/GCAlbums.class
+com/chute/sdk/v2/api/asset/AssetsUploadRequest$TokenListener.class
 com/chute/sdk/v2/api/user/UsersGetRequest.class
 com/chute/sdk/v2/api/votes/UnvoteRequest.class
 com/chute/sdk/v2/model/requests/ResponseModel.class
@@ -63,6 +70,7 @@ com/chute/sdk/v2/api/album/AlbumsListRequest.class
 com/chute/sdk/v2/model/AssetModel$1.class
 com/chute/sdk/v2/api/comment/CommentsDeleteRequest.class
 darko/imagedownloader/MD5.class
+com/chute/sdk/v2/api/asset/AssetsTokenRequest.class
 darko/imagedownloader/FileCache.class
 com/chute/sdk/v2/api/geo/GCGeoLocation.class
 com/chute/sdk/v2/api/tags/TagsAddRequest.class
@@ -92,10 +100,12 @@ darko/imagedownloader/ImageLoaderListener.class
 com/chute/sdk/v2/model/UserCountModel.class
 com/chute/sdk/v2/api/user/GCUsers.class
 com/chute/sdk/v2/utils/Constants.class
+com/chute/sdk/v2/api/asset/UploadProgressListener.class
 darko/imagedownloader/Utils.class
 com/chute/sdk/v2/model/LinkModel.class
 com/chute/sdk/v2/model/GeoLocationModel$1.class
 com/chute/sdk/v2/api/asset/AssetsGetRequest.class
+com/chute/sdk/v2/model/UploadInfo.class
 com/chute/sdk/v2/utils/PreferenceUtil.class
 com/chute/sdk/v2/api/parsers/ResponseParser.class
 com/chute/sdk/v2/api/authentication/AuthenticationActivity$AuthenticationResponseParser.class
@@ -130,6 +140,7 @@ com/chute/sdk/v2/api/comment/CommentsCreateRequest.class
 darko/imagedownloader/queue/QueueStrategy.class
 com/chute/sdk/v2/model/CounterModel$1.class
 darko/imagedownloader/MemoryCache$1.class
+com/chute/sdk/v2/utils/rest/GCS3Uploader$1.class
 com/chute/sdk/v2/utils/MD5.class
 com/chute/sdk/v2/model/SourceModel.class
 com/chute/sdk/v2/api/flags/GCFlags.class
@@ -138,4 +149,5 @@ com/chute/sdk/v2/model/LinkModel$1.class
 com/chute/sdk/v2/api/album/AlbumsDeleteRequest.class
 darko/imagedownloader/FetchBitmapTask.class
 com/chute/sdk/v2/api/tags/GCTags.class
+com/chute/sdk/v2/api/asset/AssetsUploadRequest$2.class
 com/chute/sdk/v2/api/album/AlbumsAddAssetsRequest.class
