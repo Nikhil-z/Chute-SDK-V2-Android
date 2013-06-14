@@ -57,21 +57,6 @@ public class GCAssets {
 	}
 
 	/**
-	 * Uploads new assets from the local storage
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return - {@link AssetsUploadRequest}
-	 */
-	public static HttpRequest upload(final Context context,
-			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AssetsUploadRequest(context, callback);
-	}
-
-	/**
 	 * Gets exif info for an asset. Empty if there are no available exif
 	 * parameters.
 	 * 
