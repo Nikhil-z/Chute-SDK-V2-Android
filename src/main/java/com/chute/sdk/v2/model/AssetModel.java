@@ -25,18 +25,18 @@
 //
 package com.chute.sdk.v2.model;
 
-import java.util.ArrayList;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
-import com.dg.libs.android.logger.ALog;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.ArrayList;
 
 /**
  * An asset represents a single media item and all information connected to it,

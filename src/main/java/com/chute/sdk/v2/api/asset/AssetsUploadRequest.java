@@ -25,9 +25,13 @@
 // 
 package com.chute.sdk.v2.api.asset;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 
+import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.UploadToken;
@@ -35,19 +39,15 @@ import com.chute.sdk.v2.model.UploadTokenResponse;
 import com.chute.sdk.v2.model.requests.ListResponseModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
 import com.chute.sdk.v2.utils.rest.GCS3Uploader;
-import com.dg.libs.android.logger.ALog;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.HttpRequestStore;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.domain.ResponseStatus;
 
-import darko.imagedownloader.Utils;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
+import darko.imagedownloader.Utils;
 
 public class AssetsUploadRequest implements HttpRequest {
 
