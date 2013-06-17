@@ -23,26 +23,48 @@
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-package com.chute.sdk.v2.api.parsers;
+package com.chute.sdk.v2.api.upload;
 
-import java.io.InputStream;
+import com.chute.sdk.v2.model.AssetModel;
 
-import com.chute.sdk.v2.model.requests.ResponseModel;
-import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
+import android.graphics.Bitmap;
 
-public class ResponseParser<T> extends
-		BaseJacksonMapperResponseParser<ResponseModel<T>> {
+/**
+ * <b> IMPORTANT!! runs the updates in the thread that executed the request</b>
+ * 
+ * @author DArkO
+ * 
+ */
+public interface UploadProgressListener {
+	/**
+	 * This is triggered when the
+	 * 
+	 * @param id
+	 *            the id of the asset you are currently uploading
+	 * @param filepath
+	 *            the filepath of the asset
+	 * @param thumbnail
+	 *            a small thumbnail that will be created from the asset before
+	 *            the upload starts
+	 */
+	public void onUploadStarted(AssetModel asset, final Bitmap thumbnail);
 
-	public static final String TAG = ResponseParser.class.getSimpleName();
-	private final Class<?> cls;
+	/**
+	 * @param total
+	 *            the total size of the asset
+	 * @param current
+	 *            the ammount of data uploaded
+	 */
+	public void onProgress(long total, long current);
 
-	public ResponseParser(Class<?> cls) {
-		this.cls = cls;
-	}
-
-	@Override
-	public ResponseModel<T> parse(InputStream responseBody) throws Exception {
-		return mapper.readValue(responseBody, mapper.getTypeFactory()
-				.constructParametricType(ResponseModel.class, cls));
-	}
+	/**
+	 * This triggers when the upload has finished, it doesnt carry the
+	 * information about the status of the upload request
+	 * 
+	 * @param id
+	 *            the id of the asset
+	 * @param filepath
+	 *            the filepath of the asset
+	 */
+	public void onUploadFinished(AssetModel assetModel);
 }

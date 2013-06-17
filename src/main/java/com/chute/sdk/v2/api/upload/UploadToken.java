@@ -1,4 +1,4 @@
-// Copyright (c) 2011, Chute Corporation. All rights reserved.
+﻿// Copyright (c) 2011, Chute Corporation. All rights reserved.
 // 
 //  Redistribution and use in source and binary forms, with or without modification, 
 //  are permitted provided that the following conditions are met:
@@ -23,26 +23,80 @@
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-package com.chute.sdk.v2.api.parsers;
+package com.chute.sdk.v2.api.upload;
 
-import java.io.InputStream;
 
-import com.chute.sdk.v2.model.requests.ResponseModel;
-import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
+public class UploadToken {
+	@SuppressWarnings("unused")
+	private static final String TAG = UploadToken.class.getSimpleName();
 
-public class ResponseParser<T> extends
-		BaseJacksonMapperResponseParser<ResponseModel<T>> {
+	private Meta meta = new Meta();
+	private UploadInfo uploadInfo;
 
-	public static final String TAG = ResponseParser.class.getSimpleName();
-	private final Class<?> cls;
+	private String id;
+	private String sourceUrl;
+	private String url;
 
-	public ResponseParser(Class<?> cls) {
-		this.cls = cls;
+	public UploadToken() {
+	}
+
+	public Meta getMeta() {
+		return meta;
+	}
+
+	public void setMeta(Meta meta) {
+		this.meta = meta;
+	}
+
+	public UploadInfo getUploadInfo() {
+		return uploadInfo;
+	}
+
+	public void setUploadInfo(UploadInfo uploadInfo) {
+		this.uploadInfo = uploadInfo;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getSourceUrl() {
+		return sourceUrl;
+	}
+
+	public void setSourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override
-	public ResponseModel<T> parse(InputStream responseBody) throws Exception {
-		return mapper.readValue(responseBody, mapper.getTypeFactory()
-				.constructParametricType(ResponseModel.class, cls));
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("GCUploadToken [meta=");
+		builder.append(meta);
+		builder.append(", uploadInfo=");
+		builder.append(uploadInfo);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append(", sourceUrl=");
+		builder.append(sourceUrl);
+		builder.append(", url=");
+		builder.append(url);
+		builder.append("]");
+		return builder.toString();
 	}
+
+	
+	
 }
