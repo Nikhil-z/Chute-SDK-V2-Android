@@ -25,49 +25,46 @@
 // 
 package com.chute.sdk.v2.api.asset;
 
-import java.util.ArrayList;
-
-import android.content.Context;
-import android.util.Log;
-
-import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AssetModel;
-import com.chute.sdk.v2.model.requests.ListResponseModel;
-import com.chute.sdk.v2.utils.JsonUtil;
-import com.chute.sdk.v2.utils.RestConstants;
-import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
-public class AssetsImportRequest extends
-		StringBodyHttpRequestImpl<ListResponseModel<AssetModel>> {
+import android.graphics.Bitmap;
 
-	public static final String TAG = AssetsImportRequest.class.getSimpleName();
-	private ArrayList<String> urls;
+/**
+ * <b> IMPORTANT!! runs the updates in the thread that executed the request</b>
+ * 
+ * @author DArkO
+ * 
+ */
+public interface UploadProgressListener {
+	/**
+	 * This is triggered when the
+	 * 
+	 * @param id
+	 *            the id of the asset you are currently uploading
+	 * @param filepath
+	 *            the filepath of the asset
+	 * @param thumbnail
+	 *            a small thumbnail that will be created from the asset before
+	 *            the upload starts
+	 */
+	public void onUploadStarted(AssetModel asset, final Bitmap thumbnail);
 
-	public AssetsImportRequest(Context context, ArrayList<String> urls,
-			HttpCallback<ListResponseModel<AssetModel>> callback) {
-		super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(
-				AssetModel.class), callback);
-		this.urls = urls;
-	}
+	/**
+	 * @param total
+	 *            the total size of the asset
+	 * @param current
+	 *            the ammount of data uploaded
+	 */
+	public void onProgress(long total, long current);
 
-	@Override
-	public String bodyContents() {
-
-		try {
-			return JsonUtil.getMapper().writer().withRootName("urls")
-					.writeValueAsString(urls);
-		} catch (JsonProcessingException e) {
-			Log.e(TAG, "", e);
-		}
-		return null;
-	}
-
-	@Override
-	protected String getUrl() {
-		return RestConstants.URL_ASSETS_IMPORT;
-	}
-
+	/**
+	 * This triggers when the upload has finished, it doesnt carry the
+	 * information about the status of the upload request
+	 * 
+	 * @param id
+	 *            the id of the asset
+	 * @param filepath
+	 *            the filepath of the asset
+	 */
+	public void onUploadFinished(AssetModel assetModel);
 }

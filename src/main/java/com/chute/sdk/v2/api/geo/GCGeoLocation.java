@@ -50,6 +50,8 @@ public class GCGeoLocation {
 	 * 
 	 * @param context
 	 *            - The application context
+	 * @param album
+	 *            - Album holding the asset with geo-location info
 	 * @param asset
 	 *            - Asset containing geo-location info
 	 * @param callback

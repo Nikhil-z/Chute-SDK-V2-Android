@@ -51,12 +51,26 @@ public class LinkModel implements Parcelable {
 	 */
 	@JsonProperty("exif")
 	private LinkInfoModel exif;
+	/**
+	 * Geo location links
+	 */
 	@JsonProperty("geo")
 	private LinkInfoModel geo;
+	/**
+	 * Hearting info links
+	 */
 	@JsonProperty("heart")
 	private LinkInfoModel heart;
+	/**
+	 * Vote info links
+	 */
 	@JsonProperty("vote")
 	private LinkInfoModel vote;
+	/**
+	 * Parcel links
+	 */
+	@JsonProperty("parcels")
+	private LinkInfoModel parcels;
 
 	public LinkModel() {
 	}
@@ -112,6 +126,14 @@ public class LinkModel implements Parcelable {
 		this.vote = vote;
 	}
 
+	public LinkInfoModel getParcels() {
+		return parcels;
+	}
+
+	public void setParcels(LinkInfoModel parcels) {
+		this.parcels = parcels;
+	}
+
 	public LinkModel(Parcel in) {
 		self = in.readParcelable(LinkInfoModel.class.getClassLoader());
 		assets = in.readParcelable(LinkInfoModel.class.getClassLoader());
@@ -119,6 +141,7 @@ public class LinkModel implements Parcelable {
 		geo = in.readParcelable(LinkInfoModel.class.getClassLoader());
 		heart = in.readParcelable(LinkInfoModel.class.getClassLoader());
 		vote = in.readParcelable(LinkInfoModel.class.getClassLoader());
+		parcels = in.readParcelable(LinkInfoModel.class.getClassLoader());
 	}
 
 	/*
@@ -144,6 +167,7 @@ public class LinkModel implements Parcelable {
 		dest.writeParcelable(geo, flags);
 		dest.writeParcelable(heart, flags);
 		dest.writeParcelable(vote, flags);
+		dest.writeParcelable(parcels, flags);
 	}
 
 	public static final Parcelable.Creator<LinkModel> CREATOR = new Parcelable.Creator<LinkModel>() {
@@ -160,11 +184,16 @@ public class LinkModel implements Parcelable {
 
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "LinkModel [self=" + self + ", assets=" + assets + ", exif="
 				+ exif + ", geo=" + geo + ", heart=" + heart + ", vote=" + vote
-				+ "]";
+				+ ", parcels=" + parcels + "]";
 	}
 
 }

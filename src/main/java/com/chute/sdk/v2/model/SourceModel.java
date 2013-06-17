@@ -187,6 +187,11 @@ public class SourceModel implements Parcelable {
 
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "SourceModel [source=" + source + ", sourceId=" + sourceId

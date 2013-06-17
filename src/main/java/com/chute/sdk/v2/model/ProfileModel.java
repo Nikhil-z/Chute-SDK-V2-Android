@@ -5,19 +5,41 @@ import android.os.Parcelable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 
+ * The {@link ProfileModel} class holds information regarding the user profile.
+ */
 public class ProfileModel implements Parcelable {
 
+	/**
+	 * First name of the user
+	 */
 	@JsonProperty("first_name")
 	private String firstName;
+	/**
+	 * Last name of the user
+	 */
 	@JsonProperty("last_name")
 	private String lastName;
+	/**
+	 * User e-mail
+	 */
 	@JsonProperty("email")
 	private String email;
+	/**
+	 * User phone number
+	 */
 	@JsonProperty("phone_number")
 	private String phoneNumber;
+	/**
+	 * User birth year
+	 */
 	@JsonProperty("birth_year")
 	private String birthYear;
 
+	/**
+	 * Getter and setter methods
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
@@ -61,6 +83,11 @@ public class ProfileModel implements Parcelable {
 	public ProfileModel() {
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "ProfileModel [firstName=" + firstName + ", lastName="

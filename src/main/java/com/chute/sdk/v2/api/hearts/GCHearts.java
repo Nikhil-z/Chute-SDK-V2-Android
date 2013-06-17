@@ -35,19 +35,19 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * The {@link Hearts} class is a helper class which contains the following
+ * The {@link GCHearts} class is a helper class which contains the following
  * methods for manipulating with asset hearts: getting, deleting and creating
  * hearts.
  * 
  */
-public class Hearts {
+public class GCHearts {
 
-	public static final String TAG = Hearts.class.getSimpleName();
+	public static final String TAG = GCHearts.class.getSimpleName();
 
 	/**
 	 * Default non-args constructor
 	 */
-	public Hearts() {
+	public GCHearts() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

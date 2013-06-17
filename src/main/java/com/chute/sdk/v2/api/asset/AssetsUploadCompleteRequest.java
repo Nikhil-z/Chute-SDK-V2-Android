@@ -28,40 +28,29 @@ package com.chute.sdk.v2.api.asset;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.chute.sdk.v2.api.parsers.ResponseParser;
-import com.chute.sdk.v2.model.AlbumModel;
-import com.chute.sdk.v2.model.AssetModel;
-import com.chute.sdk.v2.model.requests.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.parsers.NoResponseParser;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
-class AssetsDeleteRequest extends
-		ParameterHttpRequestImpl<ResponseModel<AssetModel>> {
-
+public class AssetsUploadCompleteRequest extends ParameterHttpRequestImpl<Void> {
 	@SuppressWarnings("unused")
-	private static final String TAG = AssetsDeleteRequest.class.getSimpleName();
-	private final AssetModel asset;
-	private final AlbumModel album;
+	private static final String TAG = AssetsUploadCompleteRequest.class
+			.getSimpleName();
+	private final String uploadId;
 
-	public AssetsDeleteRequest(Context context, AlbumModel album,
-			AssetModel asset, HttpCallback<ResponseModel<AssetModel>> callback) {
-		super(context, RequestMethod.DELETE, new ResponseParser<AssetModel>(
-				AssetModel.class), callback);
-		this.album = album;
-		this.asset = asset;
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
+	public AssetsUploadCompleteRequest(Context context, String uploadId,
+			HttpCallback<Void> callback) {
+		super(context, RequestMethod.POST, new NoResponseParser(), callback);
+		if (TextUtils.isEmpty(uploadId)) {
+			throw new NullPointerException("Need to provide an ID");
 		}
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
+		this.uploadId = uploadId;
 	}
 
 	@Override
 	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_DELETE, album.getId(),
-				asset.getId());
+		return String.format(RestConstants.URL_UPLOAD_COMPLETE, uploadId);
 	}
 }

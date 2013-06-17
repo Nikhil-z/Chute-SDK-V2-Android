@@ -26,7 +26,6 @@
 package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * The {@link ApiLimitsModel} class wraps up information regarding limit for

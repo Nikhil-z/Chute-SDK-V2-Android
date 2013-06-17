@@ -33,7 +33,6 @@ import android.content.Context;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.GeoLocationModel;
-import com.chute.sdk.v2.model.UserModel;
 import com.chute.sdk.v2.model.requests.ListResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
@@ -118,26 +117,6 @@ public class GCSearch {
 			final AlbumModel album, final ArrayList<String> tags,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
 		return new SearchTagsRequest(context, album, tags, callback);
-	}
-
-	/**
-	 * Lists all assets belonging to a specific user
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The search will include assets belonging to this album only
-	 * @param user
-	 *            - The username needed to perform the query
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<AssetModel>}
-	 * @return - {@link SearchUserRequest}
-	 */
-	public static HttpRequest user(final Context context,
-			final AlbumModel album, final UserModel user,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new SearchUserRequest(context, album, user, callback);
 	}
 
 }

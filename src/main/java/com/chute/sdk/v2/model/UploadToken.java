@@ -23,45 +23,57 @@
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-package com.chute.sdk.v2.api.asset;
+package com.chute.sdk.v2.model;
 
-import android.content.Context;
-import android.text.TextUtils;
-
-import com.chute.sdk.v2.api.parsers.ResponseParser;
-import com.chute.sdk.v2.model.AlbumModel;
-import com.chute.sdk.v2.model.AssetModel;
-import com.chute.sdk.v2.model.requests.ResponseModel;
-import com.chute.sdk.v2.utils.RestConstants;
-import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
-
-class AssetsDeleteRequest extends
-		ParameterHttpRequestImpl<ResponseModel<AssetModel>> {
-
+public class UploadToken {
 	@SuppressWarnings("unused")
-	private static final String TAG = AssetsDeleteRequest.class.getSimpleName();
-	private final AssetModel asset;
-	private final AlbumModel album;
+	private static final String TAG = UploadToken.class.getSimpleName();
 
-	public AssetsDeleteRequest(Context context, AlbumModel album,
-			AssetModel asset, HttpCallback<ResponseModel<AssetModel>> callback) {
-		super(context, RequestMethod.DELETE, new ResponseParser<AssetModel>(
-				AssetModel.class), callback);
-		this.album = album;
-		this.asset = asset;
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
+	private UploadInfo uploadInfo;
+
+	private String id;
+	private String sourceUrl;
+	private String url;
+
+	public UploadToken() {
+	}
+
+	public UploadInfo getUploadInfo() {
+		return uploadInfo;
+	}
+
+	public void setUploadInfo(UploadInfo uploadInfo) {
+		this.uploadInfo = uploadInfo;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getSourceUrl() {
+		return sourceUrl;
+	}
+
+	public void setSourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_DELETE, album.getId(),
-				asset.getId());
+	public String toString() {
+		return "UploadToken [uploadInfo=" + uploadInfo + ", id=" + id
+				+ ", sourceUrl=" + sourceUrl + ", url=" + url + "]";
 	}
+
 }
