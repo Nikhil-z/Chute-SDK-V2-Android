@@ -23,34 +23,39 @@
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-package com.chute.sdk.v2.api.asset;
+package com.chute.sdk.v2.api.upload;
 
-import android.content.Context;
-import android.text.TextUtils;
+import org.apache.http.HttpStatus;
 
-import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.parsers.NoResponseParser;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.domain.ResponseStatus;
 
-public class AssetsUploadCompleteRequest extends ParameterHttpRequestImpl<Void> {
-	@SuppressWarnings("unused")
-	private static final String TAG = AssetsUploadCompleteRequest.class
-			.getSimpleName();
-	private final String uploadId;
+public abstract class HttpCallbackImpl<T> implements HttpCallback<T> {
 
-	public AssetsUploadCompleteRequest(Context context, String uploadId,
-			HttpCallback<Void> callback) {
-		super(context, RequestMethod.POST, new NoResponseParser(), callback);
-		if (TextUtils.isEmpty(uploadId)) {
-			throw new NullPointerException("Need to provide an ID");
-		}
-		this.uploadId = uploadId;
+	public static final String TAG = HttpCallbackImpl.class.getSimpleName();
+
+	@Override
+	public abstract void onSuccess(T responseData);
+
+	/**
+	 * This is always triggered when an error occurs, For connection problems
+	 * the status code is {@link HttpStatus#SC_REQUEST_TIMEOUT}, other codes are
+	 * standard HTTPStatus messages
+	 * 
+	 * @param responseCode
+	 *            the {@link HttpStatus} code for the error
+	 * @param message
+	 *            a message containing the reason
+	 */
+	public void onGeneralError(int responseCode, String message) {
+
 	}
 
 	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_UPLOAD_COMPLETE, uploadId);
+	public void onHttpError(ResponseStatus responseStatus) {
+		onGeneralError(
+				HttpStatus.SC_REQUEST_TIMEOUT,
+				"Request Timeout, Connection problem: "
+						+ responseStatus.getStatusMessage());
 	}
 }

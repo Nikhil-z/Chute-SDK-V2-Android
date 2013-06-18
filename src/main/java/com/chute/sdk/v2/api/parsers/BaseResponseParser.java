@@ -23,34 +23,26 @@
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-package com.chute.sdk.v2.api.asset;
+package com.chute.sdk.v2.api.parsers;
 
-import android.content.Context;
-import android.text.TextUtils;
+import java.io.InputStream;
 
-import com.chute.sdk.v2.utils.RestConstants;
-import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.parsers.NoResponseParser;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.chute.sdk.v2.model.requests.ResponseModel;
+import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
 
-public class AssetsUploadCompleteRequest extends ParameterHttpRequestImpl<Void> {
-	@SuppressWarnings("unused")
-	private static final String TAG = AssetsUploadCompleteRequest.class
-			.getSimpleName();
-	private final String uploadId;
+public class BaseResponseParser<T> extends
+		BaseJacksonMapperResponseParser<T> {
 
-	public AssetsUploadCompleteRequest(Context context, String uploadId,
-			HttpCallback<Void> callback) {
-		super(context, RequestMethod.POST, new NoResponseParser(), callback);
-		if (TextUtils.isEmpty(uploadId)) {
-			throw new NullPointerException("Need to provide an ID");
-		}
-		this.uploadId = uploadId;
+	public static final String TAG = BaseResponseParser.class.getSimpleName();
+	private final Class<?> cls;
+
+	public BaseResponseParser(Class<?> cls) {
+		this.cls = cls;
 	}
 
 	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_UPLOAD_COMPLETE, uploadId);
+	public T parse(InputStream responseBody) throws Exception {
+		return mapper.readValue(responseBody, mapper.getTypeFactory()
+				.constructParametricType(getClass(), cls));
 	}
 }

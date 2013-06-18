@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2011, Chute Corporation. All rights reserved.
+// Copyright (c) 2011, Chute Corporation. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
@@ -60,7 +60,6 @@ public class GCS3Uploader extends BaseRestClient {
 		HttpPut request = new HttpPut(getUrl());
 		File file = new File(token.getUploadInfo().getFilepath());
 		FileInputStream fileInputStream = new FileInputStream(file);
-		// setSocketTimeout(UPLOAD_SOCKET_TIMEOUT);
 		// request.addHeader("Content-Length", String.valueOf(file.length()));
 		addHeader("Date", token.getUploadInfo().getDate());
 		addHeader("Authorization", token.getUploadInfo().getSignature());

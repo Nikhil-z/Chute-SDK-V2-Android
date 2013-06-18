@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.chute.sdk.v2.model.AssetModel;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UploadTokenResponse {
 
+	@JsonProperty("asset_collection")
 	private List<AssetModel> assetCollection = new ArrayList<AssetModel>();
 
+	@JsonProperty("upload_token")
 	private List<UploadToken> token = new ArrayList<UploadToken>();
 
+	@JsonProperty("upload_id")
 	private String uploadId;
 
 	public UploadTokenResponse() {

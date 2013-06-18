@@ -140,8 +140,8 @@ public class RestConstants {
 	public static final String URL_BATCH_GET = BASE_URL + "/batch";
 
 	// UPLOAD
-	public static final String URL_UPLOAD_TOKEN = BASE_URL + "/v2/uploads";
+	public static final String URL_UPLOAD_TOKEN = BASE_URL + "/uploads";
 	public static final String URL_UPLOAD_COMPLETE = BASE_URL
-			+ "/v2/uploads/%s/complete";
+			+ "/uploads/%s/complete";
 
 }

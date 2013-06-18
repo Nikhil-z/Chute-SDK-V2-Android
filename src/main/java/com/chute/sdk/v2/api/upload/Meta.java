@@ -1,8 +1,12 @@
 package com.chute.sdk.v2.api.upload;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Meta {
 
+	@JsonProperty("version")
 	private int version;
+	@JsonProperty("code")
 	private int code;
 
 	public Meta() {

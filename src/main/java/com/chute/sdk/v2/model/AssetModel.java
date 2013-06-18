@@ -30,6 +30,7 @@ import android.os.Parcelable;
 
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -45,6 +46,7 @@ import java.util.ArrayList;
  * asset belongs to.
  * 
  */
+@JsonFilter("assetModelFilter")
 public class AssetModel implements Parcelable {
 
 	public static final String TAG = AssetModel.class.getSimpleName();

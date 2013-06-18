@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2011, Chute Corporation. All rights reserved.
+// Copyright (c) 2011, Chute Corporation. All rights reserved.
 // 
 //  Redistribution and use in source and binary forms, with or without modification, 
 //  are permitted provided that the following conditions are met:
@@ -25,16 +25,22 @@
 // 
 package com.chute.sdk.v2.api.upload;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UploadToken {
 	@SuppressWarnings("unused")
 	private static final String TAG = UploadToken.class.getSimpleName();
 
+	@JsonProperty("meta")
 	private Meta meta = new Meta();
+	@JsonProperty("upload_info")
 	private UploadInfo uploadInfo;
 
+	@JsonProperty("id")
 	private String id;
+	@JsonProperty("source_url")
 	private String sourceUrl;
+	@JsonProperty("url")
 	private String url;
 
 	public UploadToken() {
@@ -97,6 +103,4 @@ public class UploadToken {
 		return builder.toString();
 	}
 
-	
-	
 }

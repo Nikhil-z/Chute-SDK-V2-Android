@@ -1,4 +1,4 @@
-﻿package com.chute.sdk.v2.model;
+package com.chute.sdk.v2.model;
 
 import java.io.File;
 
@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import com.chute.sdk.v2.utils.MD5;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * local asset contains status, file, priority.
  * 
  */
+@JsonFilter("localAssetModelFilter")
 public class LocalAssetModel implements Parcelable {
 
 	private static final String TAG = LocalAssetModel.class.getSimpleName();
@@ -60,7 +62,7 @@ public class LocalAssetModel implements Parcelable {
 	/**
 	 * The File type of the local asset.
 	 */
-	@JsonProperty("type")
+    
 	private File file;
 	/**
 	 * The priority of the local asset.
@@ -77,6 +79,7 @@ public class LocalAssetModel implements Parcelable {
 	@JsonProperty("md5")
 	private String fileMD5;
 
+	@JsonProperty("type")
 	private String identifier;
 
 	/**

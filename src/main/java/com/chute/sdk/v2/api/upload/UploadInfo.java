@@ -1,16 +1,24 @@
 package com.chute.sdk.v2.api.upload;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UploadInfo {
 
+	@JsonProperty("signature")
 	private String signature;
 
+	@JsonProperty("date")
 	private String date;
 
+	@JsonProperty("upload_url")
 	private String uploadUrl;
 
+	@JsonProperty("file_path")
 	private String filepath;
+	@JsonProperty("content_type")
 	private String contentType;
 
+	@JsonProperty("type")
 	private String type;
 
 	public UploadInfo() {

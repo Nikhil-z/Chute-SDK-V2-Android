@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2011, Chute Corporation. All rights reserved.
+// Copyright (c) 2011, Chute Corporation. All rights reserved.
 // 
 //  Redistribution and use in source and binary forms, with or without modification, 
 //  are permitted provided that the following conditions are met:
@@ -24,6 +24,7 @@
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
 package com.chute.sdk.v2.api.asset;
+
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -34,21 +35,26 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.araneaapps.android.libs.logger.ALog;
+import com.chute.sdk.v2.api.parsers.BaseResponseParser;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.api.upload.UploadTokenResponse;
-import com.chute.sdk.v2.model.AssetModel;
+import com.chute.sdk.v2.model.LocalAssetModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
+import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
-public class AssetsTokenRequest extends StringBodyHttpRequestImpl<ResponseModel<UploadTokenResponse>> {
-	private final ArrayList<AssetModel> assets;
+public class AssetsTokenRequest extends
+		StringBodyHttpRequestImpl<ResponseModel<UploadTokenResponse>> {
+	private final ArrayList<LocalAssetModel> assets;
 	private final ArrayList<String> albumIds;
 
 	public AssetsTokenRequest(final Context context,
-			final ArrayList<AssetModel> assets,
+			final ArrayList<LocalAssetModel> assets,
 			final ArrayList<String> albumIds,
 			final HttpCallback<ResponseModel<UploadTokenResponse>> callback) {
 		super(context, RequestMethod.POST,
@@ -60,35 +66,38 @@ public class AssetsTokenRequest extends StringBodyHttpRequestImpl<ResponseModel<
 
 	public static final String TAG = AssetsTokenRequest.class.getSimpleName();
 
-
-
 	@Override
 	public String bodyContents() {
-//		final JSONObject root = new JSONObject();
-//		final JSONObject dataObject = new JSONObject();
-//		final JSONArray filesArray = new JSONArray();
-//		try {
-//			final JSONObject obj = new JSONObject();
-//			for (final GCLocalAssetModel asset : ac) {
-//				obj.put("filename", asset.getFile().getPath());
-//				obj.put("md5", asset.calculateFileMD5());
-//				obj.put("size", asset.getSize());
-//				if (TextUtils.isEmpty(asset.getIdentifier()) == false) {
-//					obj.put("type", asset.getIdentifier());
-//				}
-//				Log.d(TAG, ac.toString());
-//				filesArray.put(obj);
-//			}
-//			dataObject.put("files", filesArray);
-//			// Add Chutes
-//			final JSONArray chutesArray = new JSONArray(chuteIds);
-//			dataObject.put("chutes", chutesArray);
-//			root.put("data", dataObject);
-//			setBody(root.toString());
-//		} catch (final JSONException e) {
-//			Logger.d(TAG, "", e);
-//		}
-		return null;
+		String result = "";
+		final JSONObject root = new JSONObject();
+		final JSONObject dataObject = new JSONObject();
+		final JSONArray filesArray = new JSONArray();
+		try {
+			final JSONObject obj = new JSONObject();
+			for (final LocalAssetModel asset : assets) {
+				obj.put("filename", asset.getFile().getPath());
+				obj.put("md5", asset.calculateFileMD5());
+				obj.put("size", asset.getSize());
+				if (TextUtils.isEmpty(asset.getIdentifier()) == false) {
+					obj.put("type", asset.getIdentifier());
+				}
+				Log.d(TAG, asset.toString());
+				filesArray.put(obj);
+			}
+			dataObject.put("files", filesArray);
+			// Add Chutes
+			final JSONArray chutesArray = new JSONArray(albumIds);
+			dataObject.put("chutes", chutesArray);
+			root.put("data", dataObject);
+			return JsonUtil.getMapper().writer().withRootName("data")
+					.writeValueAsString(root.toString());
+		} catch (final JSONException e) {
+			ALog.d(TAG, "", e);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
