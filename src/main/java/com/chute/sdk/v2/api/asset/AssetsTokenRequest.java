@@ -29,15 +29,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.api.upload.FileBean;
 import com.chute.sdk.v2.api.upload.FileData;
+import com.chute.sdk.v2.api.upload.FileObject;
 import com.chute.sdk.v2.api.upload.UploadTokenResponse;
 import com.chute.sdk.v2.model.LocalAssetModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.RestConstants;
+import com.chute.sdk.v2.utils.TextUtil;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
@@ -64,67 +68,37 @@ public class AssetsTokenRequest extends
 	@Override
 	public String bodyContents() {
 		String result = "";
-		// final JSONObject root = new JSONObject();
-		// final JSONObject dataObject = new JSONObject();
-		// final JSONArray filesArray = new JSONArray();
-		// try {
-		// final JSONObject obj = new JSONObject();
-		// for (final LocalAssetModel asset : assets) {
-		// obj.put("filename", asset.getFile().getPath());
-		// obj.put("md5", asset.calculateFileMD5());
-		// obj.put("size", asset.getSize());
-		// if (TextUtils.isEmpty(asset.getIdentifier()) == false) {
-		// obj.put("type", asset.getIdentifier());
-		// }
-		// Log.d(TAG, asset.toString());
-		// filesArray.put(obj);
-		// }
-		// dataObject.put("files", filesArray);
-		// // Add Chutes
-		// final JSONArray chutesArray = new JSONArray(albumIds);
-		// dataObject.put("chutes", chutesArray);
-		// root.put("data", dataObject);
-		// return JsonUtil.getMapper().writer().withRootName("data")
-		// .writeValueAsString(root.toString());
-		// } catch (final JSONException e) {
-		// ALog.d(TAG, "", e);
-		// } catch (JsonProcessingException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 
 		List<FileBean> fileArrayList = new ArrayList<FileBean>();
 		for (final LocalAssetModel asset : assets) {
 			FileBean fileBean = new FileBean();
-			fileBean.setFileName(asset.getFile().getPath());
+			String fileName = asset.getFile().getPath();
+			String escapedString = TextUtil.escapeForJSON(fileName);
 			fileBean.setMd5(asset.calculateFileMD5());
+			fileBean.setFileName(escapedString);
 			fileBean.setSize(asset.getSize());
 			fileArrayList.add(fileBean);
 		}
-//		
-//		FilesArray files = new FilesArray();
-//		files.setChutes(albumIds);
-//		files.setFiles(fileArrayList);
-		
-//		DataObject data = new DataObject();
-//		data.setData(files);
-		
+
 		FileData data = new FileData();
-		data.setChutes(albumIds);
 		data.setFiles(fileArrayList);
+		data.setChutes(albumIds);
+
+		FileObject obj = new FileObject();
+		obj.setData(data);
+		
+		//Json result 
+		String jsonResult = "";
 
 		try {
-//			FileData object = JsonUtil.getMapper().readValue(new FileReader("input.json"), FileData.class);
-			result = JsonUtil.getMapper().writer().writeValueAsString(data.toString());
+			result = JsonUtil.getMapper().writer().writeValueAsString(obj);
+			result = TextUtil.escapeBackslash(result);
+			Log.d("debug", "json result = " + result);
+
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
+			ALog.d("Json Processing Exception: " + e.getMessage());
+			Log.d("debug", "jsonprocessingexc = " + e.getMessage());
 		}
 		return result;
 	}

@@ -48,7 +48,6 @@
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/votes/VotesGetRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/flags/FlagGetRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/geo/GeoLocationGetAssetsRequest.java
-/home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/upload/FilesArray.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/utils/TextUtil.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/upload/HttpCallbackImpl.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/tags/GCTags.java
@@ -92,7 +91,6 @@
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/votes/VoteRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/utils/MD5.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/upload/UploadToken.java
-/home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/upload/DataObject.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/comment/CommentsDeleteRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/parcel/ParcelAssetsRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/album/AlbumsUpdateRequest.java
@@ -111,8 +109,8 @@
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/UserModel.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/album/AlbumsListRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/queue/StackStrategy.java
-/home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/AlbumModel.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/album/AlbumsAddAssetsRequest.java
+/home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/AlbumModel.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/BlockingFilterInputStream.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/queue/QueueStrategy.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/votes/VotesMap.java

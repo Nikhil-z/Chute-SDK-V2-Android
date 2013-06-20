@@ -33,7 +33,6 @@ com/chute/sdk/v2/api/upload/FileData.class
 com/chute/sdk/v2/api/votes/VotesGetRequest.class
 com/chute/sdk/v2/api/upload/UploadProgressListener.class
 com/chute/sdk/v2/api/flags/FlagRequest.class
-com/chute/sdk/v2/api/upload/DataObject.class
 com/chute/sdk/v2/api/parcel/ParcelAlbumsRequest.class
 com/chute/sdk/v2/model/ProfileModel$1.class
 com/chute/sdk/v2/api/upload/UploadTokenResponse.class
@@ -132,7 +131,6 @@ com/chute/sdk/v2/model/AssetModel.class
 com/chute/sdk/v2/api/upload/UploadInfo.class
 darko/imagedownloader/BitmapContentHandler.class
 com/chute/sdk/v2/api/asset/AlbumsGetAssetListRequest.class
-com/chute/sdk/v2/api/upload/FilesArray.class
 com/chute/sdk/v2/utils/TextUtil.class
 darko/imagedownloader/ContentURLStreamHandler.class
 com/chute/sdk/v2/model/SourceCountModel.class

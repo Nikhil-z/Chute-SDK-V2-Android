@@ -1,29 +1,17 @@
 package com.chute.sdk.v2.api.upload;
 
-import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class FileBean implements Serializable {
+@JsonPropertyOrder({ "md5", "filename", "size" })
+public class FileBean {
 
-	@JsonProperty("filename")
-	private String fileName;
 	@JsonProperty("md5")
 	private String md5;
+	@JsonProperty("filename")
+	private String fileName;
 	@JsonProperty("size")
 	private String size;
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
 
 	public String getMd5() {
 		return md5;
@@ -31,6 +19,14 @@ public class FileBean implements Serializable {
 
 	public void setMd5(String md5) {
 		this.md5 = md5;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public String getSize() {
@@ -43,8 +39,9 @@ public class FileBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "FileBean [fileName=" + fileName + ", md5=" + md5 + ", size="
+		return "FileBean [md5=" + md5 + ", fileName=" + fileName + ", size="
 				+ size + "]";
 	}
 
+	
 }

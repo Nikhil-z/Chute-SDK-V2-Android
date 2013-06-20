@@ -1,33 +1,23 @@
 package com.chute.sdk.v2.api.upload;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class FileObject {
 
-	private String fileName;
-	private String md5;
-	private String size;
+	@JsonProperty("data")
+	private FileData data;
 
-	public String getFileName() {
-		return fileName;
+	public FileData getData() {
+		return data;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setData(FileData data) {
+		this.data = data;
 	}
 
-	public String getMd5() {
-		return md5;
-	}
-
-	public void setMd5(String md5) {
-		this.md5 = md5;
-	}
-
-	public String getSize() {
-		return size;
-	}
-
-	public void setSize(String size) {
-		this.size = size;
+	@Override
+	public String toString() {
+		return "FileObject [data=" + data + "]";
 	}
 
 }

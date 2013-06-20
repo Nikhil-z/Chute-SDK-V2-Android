@@ -27,6 +27,7 @@ package com.chute.sdk.v2.api.album;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
@@ -53,6 +54,7 @@ class AlbumsCreateRequest extends StringBodyHttpRequestImpl<ResponseModel<AlbumM
 
 	@Override
 	public String bodyContents() {
+		Log.d("debug", "json album = " + this.album.serializeAlbum());
 		return this.album.serializeAlbum();
 	}
 

@@ -29,6 +29,7 @@ import static java.net.URLDecoder.decode;
 import static java.net.URLEncoder.encode;
 
 import java.io.UnsupportedEncodingException;
+import java.text.StringCharacterIterator;
 
 public class TextUtil {
 	@SuppressWarnings("unused")
@@ -45,51 +46,102 @@ public class TextUtil {
 		}
 		return value;
 	}
-	
+
 	public static String urlEncode(String string) {
-	    if (string == null)
-	      return null;
-	    try {
-	      return encode(string, ENCODING_CHARSET);
-	    } catch (UnsupportedEncodingException e) {
-	      throw new IllegalStateException("Platform doesn't support " + ENCODING_CHARSET, e);
-	    }
-	  }
-	
-	 public static String urlDecode(String string) {
-		    if (string == null)
-		      return null;
-		    try {
-		      return decode(string, ENCODING_CHARSET);
-		    } catch (UnsupportedEncodingException e) {
-		      throw new IllegalStateException("Platform doesn't support " + ENCODING_CHARSET, e);
-		    }
-		  }
-	 
-	 /**
-	   * Is {@code string} blank (null or only whitespace)?
-	   * 
-	   * @param string
-	   *          The string to check.
-	   * @return {@code true} if {@code string} is blank, {@code false} otherwise.
-	   */
-	 public static boolean isBlank(String string) {
-		    return string == null || "".equals(string.trim());
-		  }
-	 
-	 /**
-	   * Returns a trimmed version of {@code string}, or an empty string if
-	   * {@code string} is {@code null} or the trimmed version is a blank string.
-	   * 
-	   * @param string
-	   *          The string to trim.
-	   * @return A trimmed version of {@code string}, or an empty string if
-	   *         {@code string} is {@code null} or the trimmed version is a blank
-	   *         string.
-	   */
-	  public static String trimToEmpty(String string) {
-	    if (isBlank(string))
-	      return "";
-	    return string.trim();
-	  }
+		if (string == null)
+			return null;
+		try {
+			return encode(string, ENCODING_CHARSET);
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException("Platform doesn't support "
+					+ ENCODING_CHARSET, e);
+		}
+	}
+
+	public static String urlDecode(String string) {
+		if (string == null)
+			return null;
+		try {
+			return decode(string, ENCODING_CHARSET);
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException("Platform doesn't support "
+					+ ENCODING_CHARSET, e);
+		}
+	}
+
+	/**
+	 * Is {@code string} blank (null or only whitespace)?
+	 * 
+	 * @param string
+	 *            The string to check.
+	 * @return {@code true} if {@code string} is blank, {@code false} otherwise.
+	 */
+	public static boolean isBlank(String string) {
+		return string == null || "".equals(string.trim());
+	}
+
+	/**
+	 * Returns a trimmed version of {@code string}, or an empty string if
+	 * {@code string} is {@code null} or the trimmed version is a blank string.
+	 * 
+	 * @param string
+	 *            The string to trim.
+	 * @return A trimmed version of {@code string}, or an empty string if
+	 *         {@code string} is {@code null} or the trimmed version is a blank
+	 *         string.
+	 */
+	public static String trimToEmpty(String string) {
+		if (isBlank(string))
+			return "";
+		return string.trim();
+	}
+
+	public static String escapeForJSON(String aText) {
+		final StringBuilder result = new StringBuilder();
+		StringCharacterIterator iterator = new StringCharacterIterator(aText);
+		char character = iterator.current();
+		while (character != StringCharacterIterator.DONE) {
+			if (character == '\"') {
+				result.append("\\\"");
+			} else if (character == '\\') {
+				result.append("\\\\");
+			} else if (character == '/') {
+				result.append("\\");
+			} else if (character == '\b') {
+				result.append("\\b");
+			} else if (character == '\f') {
+				result.append("\\f");
+			} else if (character == '\n') {
+				result.append("\\n");
+			} else if (character == '\r') {
+				result.append("\\r");
+			} else if (character == '\t') {
+				result.append("\\t");
+			} else {
+				// the char is not a special one
+				// add it to the result as is
+				result.append(character);
+			}
+			character = iterator.next();
+		}
+		return result.toString();
+	}
+
+	public static String escapeBackslash(String aText) {
+		final StringBuilder result = new StringBuilder();
+		StringCharacterIterator iterator = new StringCharacterIterator(aText);
+		char character = iterator.current();
+		while (character != StringCharacterIterator.DONE) {
+			if (character == '/') {
+				result.append("\\");
+			} else {
+				// the char is not a special one
+				// add it to the result as is
+				result.append(character);
+			}
+			character = iterator.next();
+		}
+		return result.toString();
+	}
+
 }
