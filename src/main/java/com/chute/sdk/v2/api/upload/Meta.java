@@ -6,6 +6,7 @@ public class Meta {
 
 	@JsonProperty("version")
 	private int version;
+	
 	@JsonProperty("code")
 	private int code;
 

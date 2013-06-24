@@ -16,9 +16,6 @@ public class UploadTokenResponse {
 	@JsonProperty("id")
 	private String uploadId;
 
-	@JsonProperty("meta")
-	private Meta meta;
-
 	public UploadTokenResponse() {
 		super();
 	}
@@ -47,19 +44,11 @@ public class UploadTokenResponse {
 		this.uploadId = uploadId;
 	}
 
-	public Meta getMeta() {
-		return meta;
-	}
-
-	public void setMeta(Meta meta) {
-		this.meta = meta;
-	}
-
 	@Override
 	public String toString() {
 		return "UploadTokenResponse [newAssets=" + newAssets
 				+ ", existingAssets=" + existingAssets + ", uploadId="
-				+ uploadId + ", meta=" + meta + "]";
+				+ uploadId + "]";
 	}
 
 }

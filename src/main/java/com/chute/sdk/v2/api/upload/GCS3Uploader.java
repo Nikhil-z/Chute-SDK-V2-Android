@@ -31,10 +31,6 @@ import java.io.IOException;
 
 import org.apache.http.client.methods.HttpPut;
 
-import android.content.Context;
-import android.util.Log;
-
-import com.dg.libs.rest.authentication.TokenAuthenticationProvider;
 import com.dg.libs.rest.client.BaseRestClient;
 import com.dg.libs.rest.entities.CountingInputStreamEntity;
 import com.dg.libs.rest.entities.CountingInputStreamEntity.UploadListener;
@@ -49,10 +45,8 @@ public class GCS3Uploader extends BaseRestClient {
 
 	private final UploadProgressListener onProgressUpdate;
 	private UploadToken token;
-	private final String authToken;
 
-	public GCS3Uploader(String authToken, UploadProgressListener onProgressUpdate) {
-		this.authToken = authToken;
+	public GCS3Uploader(UploadProgressListener onProgressUpdate) {
 		this.onProgressUpdate = onProgressUpdate;
 	}
 
@@ -63,12 +57,6 @@ public class GCS3Uploader extends BaseRestClient {
 	}
 
 	private void startUpload() throws IOException {
-		Log.d("debug", "gcs3 token = " + authToken);
-//		TokenAuthenticationProvider tokenProvider = TokenAuthenticationProvider.getInstance();
-//		tokenProvider.setToken(authToken);
-//		addHeader("Authorization", "OAuth " + authToken);
-//		tokenProvider.authenticateRequest(this);
-//		setAuthentication(tokenProvider);
 		HttpPut request = new HttpPut(getUrl());
 		File file = new File(token.getUploadInfo().getFilepath());
 		FileInputStream fileInputStream = new FileInputStream(file);

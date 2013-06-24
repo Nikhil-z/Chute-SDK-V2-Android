@@ -34,12 +34,14 @@ import android.util.Log;
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.BaseResponseParser;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
+import com.chute.sdk.v2.api.parsers.UploadResponseParser;
 import com.chute.sdk.v2.api.upload.FileBean;
 import com.chute.sdk.v2.api.upload.FileData;
 import com.chute.sdk.v2.api.upload.FileObject;
 import com.chute.sdk.v2.api.upload.UploadTokenResponse;
 import com.chute.sdk.v2.model.LocalAssetModel;
 import com.chute.sdk.v2.model.requests.ResponseModel;
+import com.chute.sdk.v2.model.requests.UploadResponseModel;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.chute.sdk.v2.utils.TextUtil;
@@ -49,16 +51,16 @@ import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class AssetsTokenRequest extends
-		StringBodyHttpRequestImpl<UploadTokenResponse> {
+		StringBodyHttpRequestImpl<UploadResponseModel<UploadTokenResponse>> {
 	private final ArrayList<LocalAssetModel> assets;
 	private final ArrayList<String> albumIds;
 
 	public AssetsTokenRequest(final Context context,
 			final ArrayList<LocalAssetModel> assets,
 			final ArrayList<String> albumIds,
-			final HttpCallback<UploadTokenResponse> callback) {
+			final HttpCallback<UploadResponseModel<UploadTokenResponse>> callback) {
 		super(context, RequestMethod.POST,
-				new BaseResponseParser<UploadTokenResponse>(UploadTokenResponse.class), callback);
+				new UploadResponseParser<UploadTokenResponse>(UploadTokenResponse.class), callback);
 		this.assets = assets;
 		this.albumIds = albumIds;
 	}

@@ -43,6 +43,7 @@ import com.chute.sdk.v2.api.upload.UploadTokenResponse;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.LocalAssetModel;
+import com.chute.sdk.v2.model.requests.UploadResponseModel;
 
 import darko.imagedownloader.Utils;
 import com.dg.libs.rest.HttpRequest;
@@ -61,7 +62,6 @@ public class AssetsUploadRequest implements HttpRequest {
 	private UploadTokenResponse uploadTokenResponseList;
 
 	private final Context context;
-	private final String authToken;
 	final ArrayList<String> albumIds = new ArrayList<String>();
 
 	public void resumeThread() {
@@ -77,7 +77,6 @@ public class AssetsUploadRequest implements HttpRequest {
 			final ArrayList<LocalAssetModel> assetCollection,
 			final ArrayList<AlbumModel> albumCollection) {
 		this.context = context;
-		this.authToken = authToken;
 		this.callback = callback;
 
 		if (assetCollection == null || assetCollection.size() == 0) {
@@ -93,7 +92,7 @@ public class AssetsUploadRequest implements HttpRequest {
 
 	@Override
 	public void execute() {
-		final GCS3Uploader uploader = new GCS3Uploader(authToken, onProgressUpdate);
+		final GCS3Uploader uploader = new GCS3Uploader(onProgressUpdate);
 		try {
 			final HttpRequest token = getToken(context, localAssetCollection,
 					albumIds, new TokenListener());
@@ -102,8 +101,7 @@ public class AssetsUploadRequest implements HttpRequest {
 				token.execute();
 				this.wait(4000);
 			}
-			for (int i = 0; i < uploadTokenResponseList.getNewAssets()
-					.size(); i++) {
+			for (int i = 0; i < uploadTokenResponseList.getNewAssets().size(); i++) {
 				final UploadToken uploadToken = uploadTokenResponseList
 						.getNewAssets().get(i);
 				final AssetModel asset = new AssetModel();
@@ -136,8 +134,7 @@ public class AssetsUploadRequest implements HttpRequest {
 
 				@Override
 				public void run() {
-					callback.onSuccess(uploadTokenResponseList
-							.getNewAssets());
+					callback.onSuccess(uploadTokenResponseList.getNewAssets());
 					Log.d("debug", "callback onsusscess");
 				}
 			});
@@ -179,20 +176,23 @@ public class AssetsUploadRequest implements HttpRequest {
 	}
 
 	private final class TokenListener extends
-			HttpCallbackImpl<UploadTokenResponse> {
+			HttpCallbackImpl<UploadResponseModel<UploadTokenResponse>> {
 
 		@Override
-		public void onSuccess(final UploadTokenResponse list) {
+		public void onSuccess(
+				final UploadResponseModel<UploadTokenResponse> list) {
 			ALog.d("Success " + list.toString());
-			Log.d("debug", "token listener success = " + list.toString());
-			AssetsUploadRequest.this.uploadTokenResponseList = list;
+			Log.d("debug", "token listener success = "
+					+ list.getData().toString());
+			AssetsUploadRequest.this.uploadTokenResponseList = list.getData();
 			resumeThread();
 		}
 
 		@Override
 		public void onGeneralError(final int responseCode, final String message) {
 			ALog.d("Error " + responseCode + " " + message);
-			Log.d("debug", "token listener error = " + message + " " + responseCode);
+			Log.d("debug", "token listener error = " + message + " "
+					+ responseCode);
 			super.onGeneralError(responseCode, message);
 			resumeThread();
 		}
@@ -211,10 +211,11 @@ public class AssetsUploadRequest implements HttpRequest {
 		}
 	}
 
-	public static HttpRequest getToken(final Context context,
+	public static HttpRequest getToken(
+			final Context context,
 			final ArrayList<LocalAssetModel> localAssetCollection,
 			final ArrayList<String> albumIds,
-			final HttpCallback<UploadTokenResponse> callback) {
+			final HttpCallback<UploadResponseModel<UploadTokenResponse>> callback) {
 		return new AssetsTokenRequest(context, localAssetCollection, albumIds,
 				callback);
 	}

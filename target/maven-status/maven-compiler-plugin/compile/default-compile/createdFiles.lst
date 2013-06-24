@@ -46,6 +46,7 @@ com/chute/sdk/v2/api/hearts/UnheartRequest.class
 com/chute/sdk/v2/api/asset/AssetsUploadRequest$UploadCompleteListener.class
 com/chute/sdk/v2/api/authentication/AuthenticationFactory$1.class
 com/chute/sdk/v2/api/tags/TagsDeleteRequest.class
+com/chute/sdk/v2/model/requests/UploadResponseModel.class
 darko/imagedownloader/PhotosQueue$QueueMethod.class
 com/chute/sdk/v2/api/album/AlbumsImportRequest.class
 com/chute/sdk/v2/api/user/UsersCurrentRequest.class
@@ -160,3 +161,4 @@ darko/imagedownloader/FetchBitmapTask.class
 com/chute/sdk/v2/api/tags/GCTags.class
 com/chute/sdk/v2/api/asset/AssetsUploadRequest$2.class
 com/chute/sdk/v2/api/album/AlbumsAddAssetsRequest.class
+com/chute/sdk/v2/api/parsers/UploadResponseParser.class
