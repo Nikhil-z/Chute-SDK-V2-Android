@@ -3,38 +3,40 @@ package com.chute.sdk.v2.api.upload;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chute.sdk.v2.model.AssetModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UploadTokenResponse {
 
-	@JsonProperty("asset_collection")
-	private List<AssetModel> assetCollection = new ArrayList<AssetModel>();
+	@JsonProperty("new_assets")
+	private List<UploadToken> newAssets = new ArrayList<UploadToken>();
 
-	@JsonProperty("upload_token")
-	private List<UploadToken> token = new ArrayList<UploadToken>();
+	@JsonProperty("existing_assets")
+	private List<UploadToken> existingAssets = new ArrayList<UploadToken>();
 
-	@JsonProperty("upload_id")
+	@JsonProperty("id")
 	private String uploadId;
+
+	@JsonProperty("meta")
+	private Meta meta;
 
 	public UploadTokenResponse() {
 		super();
 	}
 
-	public List<AssetModel> getAssetCollection() {
-		return assetCollection;
+	public List<UploadToken> getNewAssets() {
+		return newAssets;
 	}
 
-	public void setAssetCollection(List<AssetModel> assetCollection) {
-		this.assetCollection = assetCollection;
+	public void setNewAssets(List<UploadToken> newAssets) {
+		this.newAssets = newAssets;
 	}
 
-	public List<UploadToken> getToken() {
-		return token;
+	public List<UploadToken> getExistingAssets() {
+		return existingAssets;
 	}
 
-	public void setToken(List<UploadToken> token) {
-		this.token = token;
+	public void setExistingAssets(List<UploadToken> existingAssets) {
+		this.existingAssets = existingAssets;
 	}
 
 	public String getUploadId() {
@@ -45,15 +47,19 @@ public class UploadTokenResponse {
 		this.uploadId = uploadId;
 	}
 
+	public Meta getMeta() {
+		return meta;
+	}
+
+	public void setMeta(Meta meta) {
+		this.meta = meta;
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("GCUploadTokenResponse [assetCollection=");
-		builder.append(assetCollection);
-		builder.append(", token=");
-		builder.append(token);
-		builder.append("]");
-		return builder.toString();
+		return "UploadTokenResponse [newAssets=" + newAssets
+				+ ", existingAssets=" + existingAssets + ", uploadId="
+				+ uploadId + ", meta=" + meta + "]";
 	}
 
 }

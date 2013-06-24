@@ -32,6 +32,7 @@ import java.util.List;
 import android.content.Context;
 
 import com.chute.sdk.v2.api.upload.UploadProgressListener;
+import com.chute.sdk.v2.api.upload.UploadToken;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.LocalAssetModel;
@@ -171,12 +172,12 @@ public class GCAssets {
 				new PaginationModel(), callback);
 	}
 
-	public static HttpRequest upload(final Context context,
+	public static HttpRequest upload(final Context context, final String authToken,
 			UploadProgressListener onProgressUpdate,
-			final HttpCallback<List<AssetModel>> callback,
+			final HttpCallback<List<UploadToken>> callback,
 			final ArrayList<LocalAssetModel> assets,
 			final ArrayList<AlbumModel> albums) {
-		return new AssetsUploadRequest(context, onProgressUpdate, callback,
+		return new AssetsUploadRequest(context, authToken, onProgressUpdate, callback,
 				assets, albums);
 	}
 

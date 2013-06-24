@@ -144,6 +144,9 @@ public class AssetModel implements Parcelable {
 	@JsonProperty("chute_asset_id")
 	private String chuteAssetId;
 
+	@JsonProperty("is_portrait")
+	private boolean isPortrait;
+
 	public AssetModel() {
 	}
 
@@ -295,6 +298,14 @@ public class AssetModel implements Parcelable {
 		this.tags = tags;
 	}
 
+	public boolean isPortrait() {
+		return isPortrait;
+	}
+
+	public void setPortrait(boolean isPortrait) {
+		this.isPortrait = isPortrait;
+	}
+
 	@SuppressWarnings("unchecked")
 	public AssetModel(Parcel in) {
 		this();
@@ -316,6 +327,7 @@ public class AssetModel implements Parcelable {
 		service = in.readString();
 		chuteAssetId = in.readString();
 		tags = in.readArrayList(String.class.getClassLoader());
+		isPortrait = in.readInt() == 1;
 	}
 
 	/*
@@ -353,6 +365,7 @@ public class AssetModel implements Parcelable {
 		dest.writeString(service);
 		dest.writeString(chuteAssetId);
 		dest.writeStringList(tags);
+		dest.writeInt(isPortrait ? 1 : 0);
 	}
 
 	public static final Parcelable.Creator<AssetModel> CREATOR = new Parcelable.Creator<AssetModel>() {
@@ -383,11 +396,6 @@ public class AssetModel implements Parcelable {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "AssetModel [id=" + id + ", links=" + links + ", thumbnail="
@@ -397,7 +405,8 @@ public class AssetModel implements Parcelable {
 				+ ", tags=" + tags + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + ", shortcut=" + shortcut
 				+ ", location=" + location + ", service=" + service
-				+ ", chuteAssetId=" + chuteAssetId + "]";
+				+ ", chuteAssetId=" + chuteAssetId + ", isPortrait="
+				+ isPortrait + "]";
 	}
 
 }

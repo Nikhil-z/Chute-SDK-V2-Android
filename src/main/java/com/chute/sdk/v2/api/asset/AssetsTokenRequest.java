@@ -32,6 +32,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.araneaapps.android.libs.logger.ALog;
+import com.chute.sdk.v2.api.parsers.BaseResponseParser;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.api.upload.FileBean;
 import com.chute.sdk.v2.api.upload.FileData;
@@ -48,17 +49,16 @@ import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class AssetsTokenRequest extends
-		StringBodyHttpRequestImpl<ResponseModel<UploadTokenResponse>> {
+		StringBodyHttpRequestImpl<UploadTokenResponse> {
 	private final ArrayList<LocalAssetModel> assets;
 	private final ArrayList<String> albumIds;
 
 	public AssetsTokenRequest(final Context context,
 			final ArrayList<LocalAssetModel> assets,
 			final ArrayList<String> albumIds,
-			final HttpCallback<ResponseModel<UploadTokenResponse>> callback) {
+			final HttpCallback<UploadTokenResponse> callback) {
 		super(context, RequestMethod.POST,
-				new ResponseParser<UploadTokenResponse>(
-						UploadTokenResponse.class), callback);
+				new BaseResponseParser<UploadTokenResponse>(UploadTokenResponse.class), callback);
 		this.assets = assets;
 		this.albumIds = albumIds;
 	}
@@ -86,19 +86,18 @@ public class AssetsTokenRequest extends
 
 		FileObject obj = new FileObject();
 		obj.setData(data);
-		
-		//Json result 
+
+		// Json result
 		String jsonResult = "";
 
 		try {
 			result = JsonUtil.getMapper().writer().writeValueAsString(obj);
-			result = TextUtil.escapeBackslash(result);
-			Log.d("debug", "json result = " + result);
-
+			Log.d("debug", "mapped result = " + result);
+			result = result.replace("\\\\", "\\/");
+			Log.d("debug", "result replaced chars = " + result);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			ALog.d("Json Processing Exception: " + e.getMessage());
-			Log.d("debug", "jsonprocessingexc = " + e.getMessage());
 		}
 		return result;
 	}

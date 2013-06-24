@@ -15,6 +15,7 @@ public class UploadInfo {
 
 	@JsonProperty("file_path")
 	private String filepath;
+	
 	@JsonProperty("content_type")
 	private String contentType;
 

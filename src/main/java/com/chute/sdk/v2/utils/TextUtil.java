@@ -31,6 +31,8 @@ import static java.net.URLEncoder.encode;
 import java.io.UnsupportedEncodingException;
 import java.text.StringCharacterIterator;
 
+import android.util.Log;
+
 public class TextUtil {
 	@SuppressWarnings("unused")
 	private static final String TAG = TextUtil.class.getSimpleName();
@@ -127,13 +129,26 @@ public class TextUtil {
 		return result.toString();
 	}
 
-	public static String escapeBackslash(String aText) {
+	
+	public static String escapeForJSONquotesOmitted(String aText) {
 		final StringBuilder result = new StringBuilder();
 		StringCharacterIterator iterator = new StringCharacterIterator(aText);
 		char character = iterator.current();
 		while (character != StringCharacterIterator.DONE) {
-			if (character == '/') {
+			if (character == '\\') {
+				result.append("\\\\");
+			} else if (character == '/') {
 				result.append("\\");
+			} else if (character == '\b') {
+				result.append("\\b");
+			} else if (character == '\f') {
+				result.append("\\f");
+			} else if (character == '\n') {
+				result.append("\\n");
+			} else if (character == '\r') {
+				result.append("\\r");
+			} else if (character == '\t') {
+				result.append("\\t");
 			} else {
 				// the char is not a special one
 				// add it to the result as is
@@ -144,4 +159,91 @@ public class TextUtil {
 		return result.toString();
 	}
 
+	
+	public static String escapeForJSONbackslash(String aText) {
+		final StringBuilder result = new StringBuilder();
+		StringCharacterIterator iterator = new StringCharacterIterator(aText);
+		char character = iterator.current();
+		while (character != StringCharacterIterator.DONE) {
+			if (character == '\\') {
+				result.append("\\/");
+			} else if (character == '/') {
+				result.append("\\/");
+			} else {
+				// the char is not a special one
+				// add it to the result as is
+				result.append(character);
+			}
+			character = iterator.next();
+		}
+		return result.toString();
+	}
+
+	public static String escapeForJSONdash(String aText) {
+		final StringBuilder result = new StringBuilder();
+		StringCharacterIterator iterator = new StringCharacterIterator(aText);
+		char character = iterator.current();
+		while (character != StringCharacterIterator.DONE) {
+			if (character == '\\') {
+				int index = iterator.getIndex() + 1;
+				result.deleteCharAt(index);
+				result.append("\\/");
+			} else {
+				// the char is not a special one
+				// add it to the result as is
+				result.append(character);
+			}
+			character = iterator.next();
+		}
+		return result.toString();
+	}
+	
+	
+	public static String escapeForJSON3(String aText) {
+		final StringBuilder result = new StringBuilder();
+		StringCharacterIterator iterator = new StringCharacterIterator(aText);
+		char character = iterator.current();
+		while (character != StringCharacterIterator.DONE) {
+			if (character == '\\') {
+				result.append("\\/");
+				Log.d("debug", "appending char = " + result);
+			} else {
+				// the char is not a special one
+				// add it to the result as is
+				result.append(character);
+			}
+			character = iterator.next();
+		}
+		return result.toString();
+	}
+	
+	
+	public static String escapeForJSON2(String aText) {
+		final StringBuilder result = new StringBuilder();
+		StringCharacterIterator iterator = new StringCharacterIterator(aText);
+		char character = iterator.current();
+		while (character != StringCharacterIterator.DONE) {
+			if (character == '\\') {
+				result.append("\\\\");
+			} else if (character == '/') {
+				result.append("\\");
+			} else if (character == '\b') {
+				result.append("\\b");
+			} else if (character == '\f') {
+				result.append("\\f");
+			} else if (character == '\n') {
+				result.append("\\n");
+			} else if (character == '\r') {
+				result.append("\\r");
+			} else if (character == '\t') {
+				result.append("\\t");
+			} else {
+				// the char is not a special one
+				// add it to the result as is
+				result.append(character);
+			}
+			character = iterator.next();
+		}
+		return result.toString();
+	}
 }

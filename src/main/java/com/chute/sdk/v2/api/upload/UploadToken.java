@@ -25,33 +25,29 @@
 // 
 package com.chute.sdk.v2.api.upload;
 
+import com.chute.sdk.v2.model.UserModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UploadToken {
 	@SuppressWarnings("unused")
 	private static final String TAG = UploadToken.class.getSimpleName();
 
-	@JsonProperty("meta")
-	private Meta meta = new Meta();
 	@JsonProperty("upload_info")
 	private UploadInfo uploadInfo;
 
+	@JsonProperty("user")
+	private UserModel user;
+
 	@JsonProperty("id")
 	private String id;
-	@JsonProperty("source_url")
-	private String sourceUrl;
+	@JsonProperty("is_portrait")
+	private boolean isPortrait;
+	@JsonProperty("shortcut")
+	private String shortcut;
 	@JsonProperty("url")
 	private String url;
 
 	public UploadToken() {
-	}
-
-	public Meta getMeta() {
-		return meta;
-	}
-
-	public void setMeta(Meta meta) {
-		this.meta = meta;
 	}
 
 	public UploadInfo getUploadInfo() {
@@ -62,6 +58,14 @@ public class UploadToken {
 		this.uploadInfo = uploadInfo;
 	}
 
+	public UserModel getUser() {
+		return user;
+	}
+
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -70,12 +74,20 @@ public class UploadToken {
 		this.id = id;
 	}
 
-	public String getSourceUrl() {
-		return sourceUrl;
+	public boolean isPortrait() {
+		return isPortrait;
 	}
 
-	public void setSourceUrl(String sourceUrl) {
-		this.sourceUrl = sourceUrl;
+	public void setPortrait(boolean isPortrait) {
+		this.isPortrait = isPortrait;
+	}
+
+	public String getShortcut() {
+		return shortcut;
+	}
+
+	public void setShortcut(String shortcut) {
+		this.shortcut = shortcut;
 	}
 
 	public String getUrl() {
@@ -88,19 +100,9 @@ public class UploadToken {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("GCUploadToken [meta=");
-		builder.append(meta);
-		builder.append(", uploadInfo=");
-		builder.append(uploadInfo);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append(", sourceUrl=");
-		builder.append(sourceUrl);
-		builder.append(", url=");
-		builder.append(url);
-		builder.append("]");
-		return builder.toString();
+		return "UploadToken [uploadInfo=" + uploadInfo + ", user=" + user
+				+ ", id=" + id + ", isPortrait=" + isPortrait + ", shortcut="
+				+ shortcut + ", url=" + url + "]";
 	}
 
 }
