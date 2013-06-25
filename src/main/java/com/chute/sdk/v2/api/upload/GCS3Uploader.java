@@ -31,6 +31,8 @@ import java.io.IOException;
 
 import org.apache.http.client.methods.HttpPut;
 
+import android.util.Log;
+
 import com.dg.libs.rest.client.BaseRestClient;
 import com.dg.libs.rest.entities.CountingInputStreamEntity;
 import com.dg.libs.rest.entities.CountingInputStreamEntity.UploadListener;
@@ -60,7 +62,7 @@ public class GCS3Uploader extends BaseRestClient {
 		HttpPut request = new HttpPut(getUrl());
 		File file = new File(token.getUploadInfo().getFilepath());
 		FileInputStream fileInputStream = new FileInputStream(file);
-		// request.addHeader("Content-Length", String.valueOf(file.length()));
+		addHeader("Content-Length", String.valueOf(file.length()));
 		addHeader("Date", token.getUploadInfo().getDate());
 		addHeader("Authorization", token.getUploadInfo().getSignature());
 		addHeader("Content-Type", "image/jpg");
@@ -68,6 +70,7 @@ public class GCS3Uploader extends BaseRestClient {
 		CountingInputStreamEntity countingInputStreamEntity = new CountingInputStreamEntity(
 				fileInputStream, file.length());
 		final long total = file.length();
+		Log.d("debug", "total = " + total);
 		countingInputStreamEntity.setUploadListener(new UploadListener() {
 
 			@Override
