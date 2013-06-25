@@ -70,7 +70,7 @@ public class GCS3Uploader extends BaseRestClient {
 		CountingInputStreamEntity countingInputStreamEntity = new CountingInputStreamEntity(
 				fileInputStream, file.length());
 		final long total = file.length();
-		Log.d("debug", "total = " + total);
+		Log.d("debug", "file length = " + total);
 		countingInputStreamEntity.setUploadListener(new UploadListener() {
 
 			@Override

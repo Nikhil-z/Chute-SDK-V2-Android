@@ -111,20 +111,20 @@ public class AssetsUploadRequest implements HttpRequest {
 				asset.setPortrait(uploadToken.isPortrait());
 				asset.setUser(uploadToken.getUser());
 				if (onProgressUpdate != null) {
-					Log.d("debug", "progressUpdate != null upload started");
+					ALog.d("debug", "Upload started");
 					onProgressUpdate.onUploadStarted(asset,
 							getThumbnailIfPossible(uploadToken));
 				}
 				ALog.d(TAG, "Reading Token");
 				if (uploadToken != null && uploadToken.getUploadInfo() != null) {
-					Log.d("debug", "upload token != null gcs3uploader started");
+					ALog.d("debug", "GCS3Uploader started");
 					uploader.startUpload(uploadToken);
 					ALog.d(TAG, "Calling upload complete");
 					ALog.d(TAG, "Need to upload");
 
 				}
 				if (onProgressUpdate != null) {
-					Log.d("debug", "progressUpdate != null upload finished");
+					ALog.d("debug", "Upload finished");
 					onProgressUpdate.onUploadFinished(asset);
 				}
 			}
@@ -135,7 +135,6 @@ public class AssetsUploadRequest implements HttpRequest {
 				@Override
 				public void run() {
 					callback.onSuccess(uploadTokenResponseList.getNewAssets());
-					Log.d("debug", "callback onsusscess");
 				}
 			});
 		} catch (final Exception e) {
@@ -144,7 +143,6 @@ public class AssetsUploadRequest implements HttpRequest {
 
 				@Override
 				public void run() {
-					Log.d("debug", "callback error ");
 					callback.onHttpError(ResponseStatus
 							.getConnectionErrorStatus());
 				}
@@ -182,8 +180,7 @@ public class AssetsUploadRequest implements HttpRequest {
 		public void onSuccess(
 				final UploadResponseModel<UploadTokenResponse> list) {
 			ALog.d("Success " + list.toString());
-			Log.d("debug", "token listener success = "
-					+ list.getData().toString());
+			ALog.d("debug", "Token response = " + list.getData().toString());
 			AssetsUploadRequest.this.uploadTokenResponseList = list.getData();
 			resumeThread();
 		}
@@ -191,8 +188,6 @@ public class AssetsUploadRequest implements HttpRequest {
 		@Override
 		public void onGeneralError(final int responseCode, final String message) {
 			ALog.d("Error " + responseCode + " " + message);
-			Log.d("debug", "token listener error = " + message + " "
-					+ responseCode);
 			super.onGeneralError(responseCode, message);
 			resumeThread();
 		}

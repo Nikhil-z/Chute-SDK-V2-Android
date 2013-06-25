@@ -8,8 +8,10 @@ public class FileBean {
 
 	@JsonProperty("md5")
 	private String md5;
+
 	@JsonProperty("filename")
 	private String fileName;
+
 	@JsonProperty("size")
 	private String size;
 
@@ -43,5 +45,4 @@ public class FileBean {
 				+ size + "]";
 	}
 
-	
 }

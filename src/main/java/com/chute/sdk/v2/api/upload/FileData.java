@@ -4,11 +4,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-@JsonPropertyOrder({"files", "chutes"})
+
+@JsonPropertyOrder({ "files", "chutes" })
 public class FileData {
 
 	@JsonProperty("files")
 	private List<FileBean> files;
+
 	@JsonProperty("chutes")
 	private List<String> chutes;
 
