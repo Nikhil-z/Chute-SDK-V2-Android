@@ -220,6 +220,9 @@ public class AlbumModel implements Parcelable {
 		this.parentId = parentId;
 	}
 
+	/**
+	 * Method used for serializing Album object as a String
+	 */
 	public String serializeAlbum() {
 		FilterProvider filters = new SimpleFilterProvider().addFilter(
 				"albumModelFilter", SimpleBeanPropertyFilter

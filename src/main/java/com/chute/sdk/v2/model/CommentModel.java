@@ -215,6 +215,9 @@ public class CommentModel implements Parcelable {
 
 	};
 
+	/**
+	 * Method used for serializing Comment object as a String
+	 */
 	public String serializeComment() {
 		FilterProvider filters = new SimpleFilterProvider().addFilter(
 				"commentModelFilter", SimpleBeanPropertyFilter

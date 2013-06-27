@@ -23,31 +23,30 @@
 // OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-package com.chute.sdk.v2.model.requests;
-
-import java.util.List;
+package com.chute.sdk.v2.model.response;
 
 import com.chute.sdk.v2.model.PaginationModel;
 import com.chute.sdk.v2.model.ResponseStatusModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The {@link ListResponseModel} class represents a concept of the JSON list
- * response received from the server. It consists of {@link PaginationModel},
+ * 
+ * The {@link ResponseModel} class represents a concept of the JSON response
+ * received from the server. It consists of {@link PaginationModel},
  * {@link ResponseStatusModel} and data object.
  * 
  * @param <T>
  *            - The response received can be of any kind.
  */
-public class ListResponseModel<T> {
+public class ResponseModel<T> {
 
-	public static final String TAG = ListResponseModel.class.getSimpleName();
+	public static final String TAG = ResponseModel.class.getSimpleName();
 
 	/**
 	 * Data object
 	 */
 	@JsonProperty("data")
-	private List<T> data;
+	private T data;
 
 	/**
 	 * Pagination
@@ -80,11 +79,11 @@ public class ListResponseModel<T> {
 		this.response = response;
 	}
 
-	public List<T> getData() {
+	public T getData() {
 		return data;
 	}
 
-	public void setData(List<T> data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 
@@ -96,7 +95,7 @@ public class ListResponseModel<T> {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ListResponseModel [data=");
+		builder.append("ResponseModel [data=");
 		builder.append(data);
 		builder.append(", pagination=");
 		builder.append(pagination);

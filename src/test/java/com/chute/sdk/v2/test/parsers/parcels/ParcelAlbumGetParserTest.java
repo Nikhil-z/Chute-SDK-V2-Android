@@ -8,7 +8,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.ParcelModel;
-import com.chute.sdk.v2.model.requests.ListResponseModel;
+import com.chute.sdk.v2.model.response.ListResponseModel;
 
 public class ParcelAlbumGetParserTest extends TestCase {
 

@@ -1,4 +1,4 @@
-package com.chute.sdk.v2.api.upload;
+package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

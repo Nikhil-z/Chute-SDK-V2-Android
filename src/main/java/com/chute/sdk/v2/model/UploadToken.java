@@ -23,9 +23,8 @@
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-package com.chute.sdk.v2.api.upload;
+package com.chute.sdk.v2.model;
 
-import com.chute.sdk.v2.model.UserModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UploadToken {

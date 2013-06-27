@@ -37,6 +37,9 @@ public class ResponseStatusModel {
 
 	public static final String TAG = ResponseStatusModel.class.getSimpleName();
 
+	/**
+	 * Response title
+	 */
 	@JsonProperty("title")
 	private String title;
 

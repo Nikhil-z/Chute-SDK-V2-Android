@@ -1,4 +1,4 @@
-package com.chute.sdk.v2.api.upload;
+package com.chute.sdk.v2.model;
 
 import java.util.ArrayList;
 import java.util.List;

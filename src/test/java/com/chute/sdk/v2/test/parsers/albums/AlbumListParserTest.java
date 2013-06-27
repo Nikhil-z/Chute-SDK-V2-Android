@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
-import com.chute.sdk.v2.model.requests.ListResponseModel;
+import com.chute.sdk.v2.model.response.ListResponseModel;
 
 public class AlbumListParserTest extends TestCase {
 

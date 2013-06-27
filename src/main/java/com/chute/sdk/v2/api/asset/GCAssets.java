@@ -32,13 +32,13 @@ import java.util.List;
 import android.content.Context;
 
 import com.chute.sdk.v2.api.upload.UploadProgressListener;
-import com.chute.sdk.v2.api.upload.UploadToken;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.LocalAssetModel;
 import com.chute.sdk.v2.model.PaginationModel;
-import com.chute.sdk.v2.model.requests.ListResponseModel;
-import com.chute.sdk.v2.model.requests.ResponseModel;
+import com.chute.sdk.v2.model.UploadToken;
+import com.chute.sdk.v2.model.response.ListResponseModel;
+import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 

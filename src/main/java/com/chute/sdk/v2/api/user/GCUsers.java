@@ -28,7 +28,7 @@ package com.chute.sdk.v2.api.user;
 import android.content.Context;
 
 import com.chute.sdk.v2.model.UserModel;
-import com.chute.sdk.v2.model.requests.ResponseModel;
+import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 
  * The {@link ProfileModel} class holds information regarding the user profile.
  */
 public class ProfileModel implements Parcelable {

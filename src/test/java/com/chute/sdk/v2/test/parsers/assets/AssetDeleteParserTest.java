@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AssetModel;
-import com.chute.sdk.v2.model.requests.ResponseModel;
+import com.chute.sdk.v2.model.response.ResponseModel;
 
 public class AssetDeleteParserTest extends TestCase {
 

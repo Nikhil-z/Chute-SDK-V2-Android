@@ -27,7 +27,7 @@ package com.chute.sdk.v2.api.parsers;
 
 import java.io.InputStream;
 
-import com.chute.sdk.v2.model.requests.UploadResponseModel;
+import com.chute.sdk.v2.model.response.UploadResponseModel;
 import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
 
 public class UploadResponseParser<T> extends

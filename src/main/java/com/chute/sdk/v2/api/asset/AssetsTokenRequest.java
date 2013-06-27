@@ -33,12 +33,12 @@ import android.util.Log;
 
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.UploadResponseParser;
-import com.chute.sdk.v2.api.upload.FileBean;
-import com.chute.sdk.v2.api.upload.FileData;
-import com.chute.sdk.v2.api.upload.FileObject;
-import com.chute.sdk.v2.api.upload.UploadTokenResponse;
+import com.chute.sdk.v2.model.FileBean;
+import com.chute.sdk.v2.model.FileData;
+import com.chute.sdk.v2.model.FileObject;
 import com.chute.sdk.v2.model.LocalAssetModel;
-import com.chute.sdk.v2.model.requests.UploadResponseModel;
+import com.chute.sdk.v2.model.UploadTokenResponse;
+import com.chute.sdk.v2.model.response.UploadResponseModel;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.chute.sdk.v2.utils.TextUtil;

@@ -6,7 +6,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.ParcelModel;
-import com.chute.sdk.v2.model.requests.ResponseModel;
+import com.chute.sdk.v2.model.response.ResponseModel;
 
 public class ParcelGetParserTest extends TestCase {
 

@@ -23,41 +23,68 @@
 // OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-package com.chute.sdk.v2.model.requests;
+package com.chute.sdk.v2.model.response;
 
-import com.chute.sdk.v2.api.upload.Meta;
+import java.util.List;
+
+import com.chute.sdk.v2.model.PaginationModel;
+import com.chute.sdk.v2.model.ResponseStatusModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UploadResponseModel<T> {
+/**
+ * The {@link ListResponseModel} class represents a concept of the JSON list
+ * response received from the server. It consists of {@link PaginationModel},
+ * {@link ResponseStatusModel} and data object.
+ * 
+ * @param <T>
+ *            - The response received can be of any kind.
+ */
+public class ListResponseModel<T> {
 
-	public static final String TAG = UploadResponseModel.class.getSimpleName();
+	public static final String TAG = ListResponseModel.class.getSimpleName();
 
 	/**
 	 * Data object
 	 */
 	@JsonProperty("data")
-	private T data;
+	private List<T> data;
 
-	@JsonProperty("meta")
-	private Meta meta;
+	/**
+	 * Pagination
+	 */
+	@JsonProperty("paginations")
+	private PaginationModel pagination;
+
+	/**
+	 * Response status
+	 */
+	@JsonProperty("response")
+	private ResponseStatusModel response;
 
 	/**
 	 * Getters and setters
 	 */
+	public PaginationModel getPagination() {
+		return pagination;
+	}
 
-	public T getData() {
+	public void setPagination(PaginationModel pagination) {
+		this.pagination = pagination;
+	}
+
+	public ResponseStatusModel getResponse() {
+		return response;
+	}
+
+	public void setResponse(ResponseStatusModel response) {
+		this.response = response;
+	}
+
+	public List<T> getData() {
 		return data;
 	}
 
-	public Meta getMeta() {
-		return meta;
-	}
-
-	public void setMeta(Meta meta) {
-		this.meta = meta;
-	}
-
-	public void setData(T data) {
+	public void setData(List<T> data) {
 		this.data = data;
 	}
 
@@ -68,7 +95,15 @@ public class UploadResponseModel<T> {
 	 */
 	@Override
 	public String toString() {
-		return "UploadResponseModel [data=" + data + ", meta=" + meta + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ListResponseModel [data=");
+		builder.append(data);
+		builder.append(", pagination=");
+		builder.append(pagination);
+		builder.append(", response=");
+		builder.append(response);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

@@ -9,7 +9,7 @@ import android.util.Log;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
-import com.chute.sdk.v2.model.requests.ListResponseModel;
+import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;

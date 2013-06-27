@@ -33,6 +33,7 @@ import org.apache.http.client.methods.HttpPut;
 
 import android.util.Log;
 
+import com.chute.sdk.v2.model.UploadToken;
 import com.dg.libs.rest.client.BaseRestClient;
 import com.dg.libs.rest.entities.CountingInputStreamEntity;
 import com.dg.libs.rest.entities.CountingInputStreamEntity.UploadListener;

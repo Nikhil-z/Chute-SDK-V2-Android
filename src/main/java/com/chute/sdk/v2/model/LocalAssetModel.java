@@ -59,26 +59,32 @@ public class LocalAssetModel implements Parcelable {
 	 */
 	@JsonProperty("id")
 	private String assetId;
+
 	/**
 	 * The File type of the local asset.
 	 */
-
 	private File file;
+
 	/**
 	 * The priority of the local asset.
 	 */
 	private int priority;
+
 	/**
 	 * Status of the local asset.
 	 */
 	@JsonProperty("status")
 	private AssetStatus assetStatus;
+
 	/**
 	 * The md5 of the file.
 	 */
 	@JsonProperty("md5")
 	private String fileMD5;
 
+	/**
+	 * File type
+	 */
 	@JsonProperty("type")
 	private String identifier;
 
@@ -153,7 +159,6 @@ public class LocalAssetModel implements Parcelable {
 	/**
 	 * Method used for getting MD5 checksum
 	 * 
-	 * @return
 	 */
 	public String calculateFileMD5() {
 		try {

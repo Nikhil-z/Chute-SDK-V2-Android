@@ -382,6 +382,9 @@ public class AssetModel implements Parcelable {
 
 	};
 
+	/**
+	 * Method used for serializing Asset object as a String
+	 */
 	public String serializeAsset() {
 		String result = null;
 		FilterProvider filter = new SimpleFilterProvider().addFilter(

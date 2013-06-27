@@ -38,12 +38,12 @@ import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.upload.GCS3Uploader;
 import com.chute.sdk.v2.api.upload.HttpCallbackImpl;
 import com.chute.sdk.v2.api.upload.UploadProgressListener;
-import com.chute.sdk.v2.api.upload.UploadToken;
-import com.chute.sdk.v2.api.upload.UploadTokenResponse;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.LocalAssetModel;
-import com.chute.sdk.v2.model.requests.UploadResponseModel;
+import com.chute.sdk.v2.model.UploadToken;
+import com.chute.sdk.v2.model.UploadTokenResponse;
+import com.chute.sdk.v2.model.response.UploadResponseModel;
 
 import darko.imagedownloader.Utils;
 import com.dg.libs.rest.HttpRequest;
