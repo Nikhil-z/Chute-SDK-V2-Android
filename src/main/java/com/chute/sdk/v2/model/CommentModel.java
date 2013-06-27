@@ -92,8 +92,6 @@ public class CommentModel implements Parcelable {
 	 * Default non-args constructor
 	 */
 	public CommentModel() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

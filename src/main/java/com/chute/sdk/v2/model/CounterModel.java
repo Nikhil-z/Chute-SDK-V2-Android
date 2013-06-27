@@ -83,24 +83,6 @@ public class CounterModel implements Parcelable {
 		this.inbox = inbox;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CounterModel [photos=");
-		builder.append(photos);
-		builder.append(", videos=");
-		builder.append(videos);
-		builder.append(", inbox=");
-		builder.append(inbox);
-		builder.append("]");
-		return builder.toString();
-	}
-
 	public CounterModel(Parcel in) {
 		this();
 		photos = in.readLong();
@@ -143,5 +125,23 @@ public class CounterModel implements Parcelable {
 		}
 
 	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CounterModel [photos=");
+		builder.append(photos);
+		builder.append(", videos=");
+		builder.append(videos);
+		builder.append(", inbox=");
+		builder.append(inbox);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

@@ -39,14 +39,14 @@ public class UploadToken {
 	private UserModel user;
 
 	@JsonProperty("id")
-	private String id; 
-	
+	private String id;
+
 	@JsonProperty("is_portrait")
 	private boolean isPortrait;
-	
+
 	@JsonProperty("shortcut")
 	private String shortcut;
-	
+
 	@JsonProperty("url")
 	private String url;
 
@@ -106,9 +106,6 @@ public class UploadToken {
 
 	@JsonProperty("width")
 	private String width;
-
-	public UploadToken() {
-	}
 
 	public String getCreatedAt() {
 		return createdAt;

@@ -27,7 +27,6 @@ package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 /**
  * The {@link SourceCountModel} class contains information for imported and
  * uploaded assets to a source destination. Assets can be imported from any
@@ -47,12 +46,6 @@ public class SourceCountModel {
 	 */
 	@JsonProperty("imports")
 	private int imports;
-
-	/**
-	 * Default non-args constructor
-	 */
-	public SourceCountModel() {
-	}
 
 	/**
 	 * Getters and setters

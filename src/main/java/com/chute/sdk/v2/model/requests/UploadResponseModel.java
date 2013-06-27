@@ -27,9 +27,7 @@ package com.chute.sdk.v2.model.requests;
 
 import com.chute.sdk.v2.api.upload.Meta;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "data", "meta" })
 public class UploadResponseModel<T> {
 
 	public static final String TAG = UploadResponseModel.class.getSimpleName();
@@ -63,6 +61,11 @@ public class UploadResponseModel<T> {
 		this.data = data;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "UploadResponseModel [data=" + data + ", meta=" + meta + "]";

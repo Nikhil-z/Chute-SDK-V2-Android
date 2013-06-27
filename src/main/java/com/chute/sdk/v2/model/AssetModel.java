@@ -396,6 +396,11 @@ public class AssetModel implements Parcelable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "AssetModel [id=" + id + ", links=" + links + ", thumbnail="

@@ -6,14 +6,9 @@ public class Meta {
 
 	@JsonProperty("version")
 	private int version;
-	
+
 	@JsonProperty("code")
 	private int code;
-
-	public Meta() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getVersion() {
 		return version;

@@ -25,7 +25,6 @@
 //
 package com.chute.sdk.v2.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import android.os.Parcel;
@@ -155,34 +154,6 @@ public class FlagModel implements Parcelable {
 		this.count = count;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("FlagModel [id=");
-		builder.append(id);
-		builder.append(", links=");
-		builder.append(links);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", updatedAt=");
-		builder.append(updatedAt);
-		builder.append(", identifier=");
-		builder.append(identifier);
-		builder.append(", albumId=");
-		builder.append(albumId);
-		builder.append(", assetId=");
-		builder.append(assetId);
-		builder.append(", count=");
-		builder.append(count);
-		builder.append("]");
-		return builder.toString();
-	}
-
 	public FlagModel(Parcel in) {
 		id = in.readString();
 		links = in.readParcelable(LinkModel.class.getClassLoader());
@@ -235,5 +206,33 @@ public class FlagModel implements Parcelable {
 		}
 
 	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("FlagModel [id=");
+		builder.append(id);
+		builder.append(", links=");
+		builder.append(links);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", updatedAt=");
+		builder.append(updatedAt);
+		builder.append(", identifier=");
+		builder.append(identifier);
+		builder.append(", albumId=");
+		builder.append(albumId);
+		builder.append(", assetId=");
+		builder.append(assetId);
+		builder.append(", count=");
+		builder.append(count);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

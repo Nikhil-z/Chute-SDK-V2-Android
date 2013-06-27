@@ -28,7 +28,6 @@ package com.chute.sdk.v2.model.requests;
 import com.chute.sdk.v2.model.PaginationModel;
 import com.chute.sdk.v2.model.ResponseStatusModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * 
@@ -39,7 +38,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @param <T>
  *            - The response received can be of any kind.
  */
-@JsonPropertyOrder({ "data", "pagination", "response" })
 public class ResponseModel<T> {
 
 	public static final String TAG = ResponseModel.class.getSimpleName();

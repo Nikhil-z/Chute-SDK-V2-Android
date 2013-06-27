@@ -83,18 +83,6 @@ public class ProfileModel implements Parcelable {
 	public ProfileModel() {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ProfileModel [firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", birthYear=" + birthYear + "]";
-	}
-
 	public ProfileModel(Parcel in) {
 		this();
 		firstName = in.readString();
@@ -141,5 +129,17 @@ public class ProfileModel implements Parcelable {
 		}
 
 	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ProfileModel [firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", phoneNumber="
+				+ phoneNumber + ", birthYear=" + birthYear + "]";
+	}
 
 }

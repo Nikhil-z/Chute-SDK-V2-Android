@@ -16,10 +16,6 @@ public class UploadTokenResponse {
 	@JsonProperty("id")
 	private String uploadId;
 
-	public UploadTokenResponse() {
-		super();
-	}
-
 	public List<UploadToken> getNewAssets() {
 		return newAssets;
 	}

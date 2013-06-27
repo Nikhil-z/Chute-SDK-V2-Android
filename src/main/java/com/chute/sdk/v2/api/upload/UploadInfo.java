@@ -15,16 +15,12 @@ public class UploadInfo {
 
 	@JsonProperty("file_path")
 	private String filepath;
-	
+
 	@JsonProperty("content_type")
 	private String contentType;
 
 	@JsonProperty("type")
 	private String type;
-
-	public UploadInfo() {
-		super();
-	}
 
 	public String getSignature() {
 		return signature;

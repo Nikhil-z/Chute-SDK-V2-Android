@@ -231,4 +231,14 @@ public class UserModel implements Parcelable {
 		}
 
 	};
+
+	@Override
+	public String toString() {
+		return "UserModel [id=" + id + ", links=" + links + ", name=" + name
+				+ ", username=" + username + ", avatar=" + avatar
+				+ ", created_at=" + created_at + ", updated_at=" + updated_at
+				+ ", profile=" + profile + ", email=" + email + ", oauthToken="
+				+ oauthToken + "]";
+	}
+
 }

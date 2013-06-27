@@ -48,12 +48,6 @@ public class UserCountModel {
 	private int viaImport;
 
 	/**
-	 * Default non-args constructor
-	 */
-	public UserCountModel() {
-	}
-
-	/**
 	 * Getters and setters
 	 */
 	public int getViaUpload() {

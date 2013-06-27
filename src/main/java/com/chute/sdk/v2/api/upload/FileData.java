@@ -3,9 +3,7 @@ package com.chute.sdk.v2.api.upload;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "files", "chutes" })
 public class FileData {
 
 	@JsonProperty("files")

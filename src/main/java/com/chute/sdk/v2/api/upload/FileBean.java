@@ -1,9 +1,7 @@
 package com.chute.sdk.v2.api.upload;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "md5", "filename", "size" })
 public class FileBean {
 
 	@JsonProperty("md5")

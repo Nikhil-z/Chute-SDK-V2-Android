@@ -27,11 +27,9 @@ package com.chute.sdk.v2.model.requests;
 
 import java.util.List;
 
-
 import com.chute.sdk.v2.model.PaginationModel;
 import com.chute.sdk.v2.model.ResponseStatusModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * The {@link ListResponseModel} class represents a concept of the JSON list
@@ -41,7 +39,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @param <T>
  *            - The response received can be of any kind.
  */
-@JsonPropertyOrder({ "data", "pagination", "response" })
 public class ListResponseModel<T> {
 
 	public static final String TAG = ListResponseModel.class.getSimpleName();

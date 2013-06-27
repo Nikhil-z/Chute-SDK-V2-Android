@@ -25,7 +25,6 @@
 //
 package com.chute.sdk.v2.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import android.os.Parcel;
@@ -51,7 +50,6 @@ public class LinkInfoModel implements Parcelable {
 
 	public LinkInfoModel() {
 	}
-	
 
 	/**
 	 * Getters and setters
@@ -64,30 +62,12 @@ public class LinkInfoModel implements Parcelable {
 		this.href = href;
 	}
 
-
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("LinkInfoModel [href=");
-		builder.append(href);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append("]");
-		return builder.toString();
 	}
 
 	public LinkInfoModel(Parcel in) {
@@ -99,6 +79,7 @@ public class LinkInfoModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#describeContents()
 	 */
 	@Override
@@ -108,6 +89,7 @@ public class LinkInfoModel implements Parcelable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
 	 */
 	@Override
@@ -129,5 +111,21 @@ public class LinkInfoModel implements Parcelable {
 		}
 
 	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("LinkInfoModel [href=");
+		builder.append(href);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

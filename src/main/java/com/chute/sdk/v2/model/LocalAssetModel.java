@@ -62,7 +62,7 @@ public class LocalAssetModel implements Parcelable {
 	/**
 	 * The File type of the local asset.
 	 */
-    
+
 	private File file;
 	/**
 	 * The priority of the local asset.
@@ -235,6 +235,11 @@ public class LocalAssetModel implements Parcelable {
 
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
