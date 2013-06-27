@@ -54,6 +54,7 @@ import com.dg.libs.rest.domain.ResponseStatus;
 public class AssetsUploadRequest implements HttpRequest {
 
 	public static final String TAG = AssetsUploadRequest.class.getSimpleName();
+	public static final int MAX_UPLOAD_ATTEMPTS = 5;
 	private final ArrayList<LocalAssetModel> localAssetCollection;
 	private final UploadProgressListener onProgressUpdate;
 	private final HttpCallback<List<UploadToken>> callback;
@@ -72,16 +73,13 @@ public class AssetsUploadRequest implements HttpRequest {
 	}
 
 	public AssetsUploadRequest(final Context context, final String authToken,
-			final UploadProgressListener onProgressUpdate,
-			final HttpCallback<List<UploadToken>> callback,
-			final ArrayList<LocalAssetModel> assetCollection,
-			final ArrayList<AlbumModel> albumCollection) {
+			final UploadProgressListener onProgressUpdate, final HttpCallback<List<UploadToken>> callback,
+			final ArrayList<LocalAssetModel> assetCollection, final ArrayList<AlbumModel> albumCollection) {
 		this.context = context;
 		this.callback = callback;
 
 		if (assetCollection == null || assetCollection.size() == 0) {
-			throw new NullPointerException(
-					"Need to provide an array with at least 1 item (Not NULL)");
+			throw new NullPointerException("Need to provide an array with at least 1 item (Not NULL)");
 		}
 		for (final AlbumModel albumModel : albumCollection) {
 			albumIds.add(albumModel.getId());
@@ -94,16 +92,14 @@ public class AssetsUploadRequest implements HttpRequest {
 	public void execute() {
 		final GCS3Uploader uploader = new GCS3Uploader(onProgressUpdate);
 		try {
-			final HttpRequest token = getToken(context, localAssetCollection,
-					albumIds, new TokenListener());
+			final HttpRequest token = getToken(context, localAssetCollection, albumIds, new TokenListener());
 			synchronized (this) {
 				Log.w(TAG, "Wait thread");
 				token.execute();
 				this.wait(4000);
 			}
 			for (int i = 0; i < uploadTokenResponseList.getNewAssets().size(); i++) {
-				final UploadToken uploadToken = uploadTokenResponseList
-						.getNewAssets().get(i);
+				final UploadToken uploadToken = uploadTokenResponseList.getNewAssets().get(i);
 				final AssetModel asset = new AssetModel();
 				asset.setId(uploadToken.getId());
 				asset.setUrl(uploadToken.getUrl());
@@ -112,13 +108,29 @@ public class AssetsUploadRequest implements HttpRequest {
 				asset.setUser(uploadToken.getUser());
 				if (onProgressUpdate != null) {
 					ALog.d("debug", "Upload started");
-					onProgressUpdate.onUploadStarted(asset,
-							getThumbnailIfPossible(uploadToken));
+					onProgressUpdate.onUploadStarted(asset, getThumbnailIfPossible(uploadToken));
 				}
 				ALog.d(TAG, "Reading Token");
 				if (uploadToken != null && uploadToken.getUploadInfo() != null) {
 					ALog.d("debug", "GCS3Uploader started");
-					uploader.startUpload(uploadToken);
+					// uploader.startUpload(uploadToken);
+					int numUploads = 0;
+					Exception failReason = null;
+					do {
+						try {
+							uploader.startUpload(uploadToken);
+							numUploads = MAX_UPLOAD_ATTEMPTS;
+							failReason = null;
+							Log.d("debug", "success!");
+						} catch (Exception e) {
+							Log.e("debug", "Failed attempt " + numUploads + " retrying ...");
+							numUploads++;
+							failReason = e;
+						}
+
+					} while (numUploads < MAX_UPLOAD_ATTEMPTS);
+					if (failReason != null)
+						throw failReason;
 					ALog.d(TAG, "Calling upload complete");
 					ALog.d(TAG, "Need to upload");
 
@@ -128,8 +140,7 @@ public class AssetsUploadRequest implements HttpRequest {
 					onProgressUpdate.onUploadFinished(asset);
 				}
 			}
-			uploadComplete(context, uploadTokenResponseList.getUploadId(),
-					new UploadCompleteListener()).execute();
+			uploadComplete(context, uploadTokenResponseList.getUploadId(), new UploadCompleteListener()).execute();
 			handler.post(new Runnable() {
 
 				@Override
@@ -143,8 +154,7 @@ public class AssetsUploadRequest implements HttpRequest {
 
 				@Override
 				public void run() {
-					callback.onHttpError(ResponseStatus
-							.getConnectionErrorStatus());
+					callback.onHttpError(ResponseStatus.getConnectionErrorStatus());
 				}
 			});
 		}
@@ -165,20 +175,17 @@ public class AssetsUploadRequest implements HttpRequest {
 			if (uploadToken.getUploadInfo() == null) {
 				return null;
 			}
-			return Utils.getThumbnailFromFilename(uploadToken.getUploadInfo()
-					.getFilepath());
+			return Utils.getThumbnailFromFilename(uploadToken.getUploadInfo().getFilepath());
 		} catch (Exception e) {
 			Log.d(TAG, "", e);
 		}
 		return null;
 	}
 
-	private final class TokenListener extends
-			HttpCallbackImpl<UploadResponseModel<UploadTokenResponse>> {
+	private final class TokenListener extends HttpCallbackImpl<UploadResponseModel<UploadTokenResponse>> {
 
 		@Override
-		public void onSuccess(
-				final UploadResponseModel<UploadTokenResponse> list) {
+		public void onSuccess(final UploadResponseModel<UploadTokenResponse> list) {
 			ALog.d("Success " + list.toString());
 			ALog.d("debug", "Token response = " + list.getData().toString());
 			AssetsUploadRequest.this.uploadTokenResponseList = list.getData();
@@ -206,17 +213,12 @@ public class AssetsUploadRequest implements HttpRequest {
 		}
 	}
 
-	public static HttpRequest getToken(
-			final Context context,
-			final ArrayList<LocalAssetModel> localAssetCollection,
-			final ArrayList<String> albumIds,
-			final HttpCallback<UploadResponseModel<UploadTokenResponse>> callback) {
-		return new AssetsTokenRequest(context, localAssetCollection, albumIds,
-				callback);
+	public static HttpRequest getToken(final Context context, final ArrayList<LocalAssetModel> localAssetCollection,
+			final ArrayList<String> albumIds, final HttpCallback<UploadResponseModel<UploadTokenResponse>> callback) {
+		return new AssetsTokenRequest(context, localAssetCollection, albumIds, callback);
 	}
 
-	public static HttpRequest uploadComplete(final Context context,
-			final String id, final HttpCallback<Void> callback) {
+	public static HttpRequest uploadComplete(final Context context, final String id, final HttpCallback<Void> callback) {
 		return new AssetsUploadCompleteRequest(context, id, callback);
 	}
 
