@@ -27,14 +27,13 @@ public class FileObject {
 		this.data = data;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "FileObject [data=" + data + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("FileObject [data=");
+		builder.append(data);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

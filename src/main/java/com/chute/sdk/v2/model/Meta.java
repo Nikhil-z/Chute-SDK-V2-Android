@@ -40,14 +40,15 @@ public class Meta {
 		this.code = code;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Meta [version=" + version + ", code=" + code + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Meta [version=");
+		builder.append(version);
+		builder.append(", code=");
+		builder.append(code);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

@@ -129,16 +129,21 @@ public class ProfileModel implements Parcelable {
 
 	};
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "ProfileModel [firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", birthYear=" + birthYear + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ProfileModel [firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", phoneNumber=");
+		builder.append(phoneNumber);
+		builder.append(", birthYear=");
+		builder.append(birthYear);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

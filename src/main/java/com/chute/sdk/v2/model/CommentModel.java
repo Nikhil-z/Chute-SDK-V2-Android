@@ -219,30 +219,38 @@ public class CommentModel implements Parcelable {
 	 * Method used for serializing Comment object as a String
 	 */
 	public String serializeComment() {
-		FilterProvider filters = new SimpleFilterProvider().addFilter(
-				"commentModelFilter", SimpleBeanPropertyFilter
-						.filterOutAllExcept("comment_text", "name", "email"));
+		FilterProvider filters = new SimpleFilterProvider().addFilter("commentModelFilter",
+				SimpleBeanPropertyFilter.filterOutAllExcept("comment_text", "name", "email"));
 		String result = null;
 		try {
-			result = JsonUtil.getMapper().writer(filters)
-					.writeValueAsString(this);
+			result = JsonUtil.getMapper().writer(filters).writeValueAsString(this);
 		} catch (JsonProcessingException e) {
 			ALog.d("", e);
 		}
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "CommentModel [id=" + id + ", links=" + links + ", user=" + user
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
-				+ ", commentText=" + commentText + ", name=" + name
-				+ ", email=" + email + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("CommentModel [id=");
+		builder.append(id);
+		builder.append(", links=");
+		builder.append(links);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", updatedAt=");
+		builder.append(updatedAt);
+		builder.append(", commentText=");
+		builder.append(commentText);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

@@ -224,14 +224,11 @@ public class AlbumModel implements Parcelable {
 	 * Method used for serializing Album object as a String
 	 */
 	public String serializeAlbum() {
-		FilterProvider filters = new SimpleFilterProvider().addFilter(
-				"albumModelFilter", SimpleBeanPropertyFilter
-						.filterOutAllExcept("name", "moderate_comments",
-								"moderate_media"));
+		FilterProvider filters = new SimpleFilterProvider().addFilter("albumModelFilter",
+				SimpleBeanPropertyFilter.filterOutAllExcept("name", "moderate_comments", "moderate_media"));
 		String result = null;
 		try {
-			result = JsonUtil.getMapper().writer(filters)
-					.writeValueAsString(this);
+			result = JsonUtil.getMapper().writer(filters).writeValueAsString(this);
 		} catch (JsonProcessingException e) {
 			ALog.d("", e);
 		}
@@ -299,19 +296,35 @@ public class AlbumModel implements Parcelable {
 
 	};
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "AlbumModel [id=" + id + ", links=" + links + ", counters="
-				+ counters + ", shortcut=" + shortcut + ", name=" + name
-				+ ", user=" + user + ", moderateMedia=" + moderateMedia
-				+ ", moderateComments=" + moderateComments + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt + ", description="
-				+ description + ", parentId=" + parentId + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("AlbumModel [id=");
+		builder.append(id);
+		builder.append(", links=");
+		builder.append(links);
+		builder.append(", counters=");
+		builder.append(counters);
+		builder.append(", shortcut=");
+		builder.append(shortcut);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", moderateMedia=");
+		builder.append(moderateMedia);
+		builder.append(", moderateComments=");
+		builder.append(moderateComments);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", updatedAt=");
+		builder.append(updatedAt);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", parentId=");
+		builder.append(parentId);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

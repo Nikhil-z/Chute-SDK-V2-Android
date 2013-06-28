@@ -387,34 +387,59 @@ public class AssetModel implements Parcelable {
 	 */
 	public String serializeAsset() {
 		String result = null;
-		FilterProvider filter = new SimpleFilterProvider().addFilter(
-				"assetModelFilter", SimpleBeanPropertyFilter
-						.filterOutAllExcept("caption", "votes", "hearts"));
+		FilterProvider filter = new SimpleFilterProvider().addFilter("assetModelFilter",
+				SimpleBeanPropertyFilter.filterOutAllExcept("caption", "votes", "hearts"));
 		try {
-			result = JsonUtil.getMapper().writer(filter)
-					.writeValueAsString(this);
+			result = JsonUtil.getMapper().writer(filter).writeValueAsString(this);
 		} catch (JsonProcessingException e) {
 			ALog.d("", e);
 		}
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "AssetModel [id=" + id + ", links=" + links + ", thumbnail="
-				+ thumbnail + ", url=" + url + ", type=" + type + ", caption="
-				+ caption + ", dimensions=" + dimensions + ", source=" + source
-				+ ", user=" + user + ", votes=" + votes + ", hearts=" + hearts
-				+ ", tags=" + tags + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", shortcut=" + shortcut
-				+ ", location=" + location + ", service=" + service
-				+ ", chuteAssetId=" + chuteAssetId + ", isPortrait="
-				+ isPortrait + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("AssetModel [id=");
+		builder.append(id);
+		builder.append(", links=");
+		builder.append(links);
+		builder.append(", thumbnail=");
+		builder.append(thumbnail);
+		builder.append(", url=");
+		builder.append(url);
+		builder.append(", type=");
+		builder.append(type);
+		builder.append(", caption=");
+		builder.append(caption);
+		builder.append(", dimensions=");
+		builder.append(dimensions);
+		builder.append(", source=");
+		builder.append(source);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", votes=");
+		builder.append(votes);
+		builder.append(", hearts=");
+		builder.append(hearts);
+		builder.append(", tags=");
+		builder.append(tags);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", updatedAt=");
+		builder.append(updatedAt);
+		builder.append(", shortcut=");
+		builder.append(shortcut);
+		builder.append(", location=");
+		builder.append(location);
+		builder.append(", service=");
+		builder.append(service);
+		builder.append(", chuteAssetId=");
+		builder.append(chuteAssetId);
+		builder.append(", isPortrait=");
+		builder.append(isPortrait);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

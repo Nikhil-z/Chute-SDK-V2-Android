@@ -27,85 +27,168 @@ package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Class containing {@link AssetModel} and {@link UploadInfo} properties.
+ * 
+ */
 public class UploadToken {
 	@SuppressWarnings("unused")
 	private static final String TAG = UploadToken.class.getSimpleName();
 
+	/**
+	 * Upload information
+	 */
 	@JsonProperty("upload_info")
 	private UploadInfo uploadInfo;
 
+	/**
+	 * User uploading the asset
+	 */
 	@JsonProperty("user")
 	private UserModel user;
 
+	/**
+	 * Asset ID
+	 */
 	@JsonProperty("id")
 	private String id;
 
+	/**
+	 * Flag indicating whether the file is in portrait
+	 */
 	@JsonProperty("is_portrait")
 	private boolean isPortrait;
 
+	/**
+	 * Asset shortcut
+	 */
 	@JsonProperty("shortcut")
 	private String shortcut;
 
+	/**
+	 * Asset URL
+	 */
 	@JsonProperty("url")
 	private String url;
 
+	/**
+	 * Time and date of creation
+	 */
 	@JsonProperty("created_at")
 	private String createdAt;
 
+	/**
+	 * Height of the asset
+	 */
 	@JsonProperty("height")
 	private String height;
 
+	/**
+	 * Import ID
+	 */
 	@JsonProperty("import_id")
 	private String importId;
 
+	/**
+	 * Import URL
+	 */
 	@JsonProperty("import_url")
 	private String importUrl;
 
+	/**
+	 * Flag indicating whether the asset is published
+	 */
 	@JsonProperty("is_published")
-	private String isPublished;
+	private boolean isPublished;
 
+	/**
+	 * Asset location
+	 */
 	@JsonProperty("location")
 	private String location;
 
+	/**
+	 * Asset MD5 checksum
+	 */
 	@JsonProperty("md5")
 	private String md5;
 
+	/**
+	 * Asset name
+	 */
 	@JsonProperty("name")
 	private String name;
 
+	/**
+	 * URL the asset originated from
+	 */
 	@JsonProperty("original_url")
 	private String originalUrl;
 
+	/**
+	 * Asset service
+	 */
 	@JsonProperty("service")
 	private String service;
 
+	/**
+	 * The source the asset is uploaded to
+	 */
 	@JsonProperty("source")
 	private String source;
 
+	/**
+	 * Source ID
+	 */
 	@JsonProperty("source_id")
 	private String sourceId;
 
+	/**
+	 * Source URL
+	 */
 	@JsonProperty("source_url")
 	private String sourceUrl;
 
+	/**
+	 * Asset status. It can be one of the following types: unverified, new,
+	 * initialized, complete or skip.
+	 */
 	@JsonProperty("status")
 	private String status;
 
+	/**
+	 * Thumbnail URL
+	 */
 	@JsonProperty("thumb_url")
 	private String thumbUrl;
 
+	/**
+	 * Type of the uploaded file: image or video
+	 */
 	@JsonProperty("type")
 	private String type;
 
+	/**
+	 * Time and date of updating the asset
+	 */
 	@JsonProperty("updated_at")
 	private String updatedAt;
 
+	/**
+	 * Username of the user who uploaded the asset
+	 */
 	@JsonProperty("username")
 	private String username;
 
+	/**
+	 * Asset width
+	 */
 	@JsonProperty("width")
 	private String width;
 
+	/**
+	 * Getters and setters
+	 */
 	public String getCreatedAt() {
 		return createdAt;
 	}
@@ -138,11 +221,11 @@ public class UploadToken {
 		this.importUrl = importUrl;
 	}
 
-	public String getIsPublished() {
+	public boolean getIsPublished() {
 		return isPublished;
 	}
 
-	public void setIsPublished(String isPublished) {
+	public void setIsPublished(boolean isPublished) {
 		this.isPublished = isPublished;
 	}
 
@@ -306,20 +389,62 @@ public class UploadToken {
 		this.url = url;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "UploadToken [uploadInfo=" + uploadInfo + ", user=" + user
-				+ ", id=" + id + ", isPortrait=" + isPortrait + ", shortcut="
-				+ shortcut + ", url=" + url + ", createdAt=" + createdAt
-				+ ", height=" + height + ", importId=" + importId
-				+ ", importUrl=" + importUrl + ", isPublished=" + isPublished
-				+ ", location=" + location + ", md5=" + md5 + ", name=" + name
-				+ ", originalUrl=" + originalUrl + ", service=" + service
-				+ ", source=" + source + ", sourceId=" + sourceId
-				+ ", sourceUrl=" + sourceUrl + ", status=" + status
-				+ ", thumbUrl=" + thumbUrl + ", type=" + type + ", updatedAt="
-				+ updatedAt + ", username=" + username + ", width=" + width
-				+ "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("UploadToken [uploadInfo=");
+		builder.append(uploadInfo);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append(", isPortrait=");
+		builder.append(isPortrait);
+		builder.append(", shortcut=");
+		builder.append(shortcut);
+		builder.append(", url=");
+		builder.append(url);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", height=");
+		builder.append(height);
+		builder.append(", importId=");
+		builder.append(importId);
+		builder.append(", importUrl=");
+		builder.append(importUrl);
+		builder.append(", isPublished=");
+		builder.append(isPublished);
+		builder.append(", location=");
+		builder.append(location);
+		builder.append(", md5=");
+		builder.append(md5);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", originalUrl=");
+		builder.append(originalUrl);
+		builder.append(", service=");
+		builder.append(service);
+		builder.append(", source=");
+		builder.append(source);
+		builder.append(", sourceId=");
+		builder.append(sourceId);
+		builder.append(", sourceUrl=");
+		builder.append(sourceUrl);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(", thumbUrl=");
+		builder.append(thumbUrl);
+		builder.append(", type=");
+		builder.append(type);
+		builder.append(", updatedAt=");
+		builder.append(updatedAt);
+		builder.append(", username=");
+		builder.append(username);
+		builder.append(", width=");
+		builder.append(width);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

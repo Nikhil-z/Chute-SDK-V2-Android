@@ -187,17 +187,25 @@ public class SourceModel implements Parcelable {
 
 	};
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "SourceModel [source=" + source + ", sourceId=" + sourceId
-				+ ", sourceUrl=" + sourceUrl + ", service=" + service
-				+ ", importId=" + importId + ", importUrl=" + importUrl
-				+ ", originalUrl=" + originalUrl + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("SourceModel [source=");
+		builder.append(source);
+		builder.append(", sourceId=");
+		builder.append(sourceId);
+		builder.append(", sourceUrl=");
+		builder.append(sourceUrl);
+		builder.append(", service=");
+		builder.append(service);
+		builder.append(", importId=");
+		builder.append(importId);
+		builder.append(", importUrl=");
+		builder.append(importUrl);
+		builder.append(", originalUrl=");
+		builder.append(originalUrl);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

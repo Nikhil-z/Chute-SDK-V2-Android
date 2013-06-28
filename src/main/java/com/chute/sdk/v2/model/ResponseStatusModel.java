@@ -121,16 +121,23 @@ public class ResponseStatusModel {
 		this.apiLimits = apiLimits;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "ResponseStatusModel [title=" + title + ", error=" + error
-				+ ", version=" + version + ", code=" + code + ", href=" + href
-				+ ", apiLimits=" + apiLimits + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ResponseStatusModel [title=");
+		builder.append(title);
+		builder.append(", error=");
+		builder.append(error);
+		builder.append(", version=");
+		builder.append(version);
+		builder.append(", code=");
+		builder.append(code);
+		builder.append(", href=");
+		builder.append(href);
+		builder.append(", apiLimits=");
+		builder.append(apiLimits);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

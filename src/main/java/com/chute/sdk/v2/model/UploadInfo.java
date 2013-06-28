@@ -2,26 +2,52 @@ package com.chute.sdk.v2.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The {@link UploadInfo} class contains upload information: signature, date of
+ * upload, uploaded photo URL, the path and type of the uploaded file.
+ * 
+ */
 public class UploadInfo {
 
+	/**
+	 * Uploaded file signature
+	 */
 	@JsonProperty("signature")
 	private String signature;
 
+	/**
+	 * Time and date when the photo has been uploaded
+	 */
 	@JsonProperty("date")
 	private String date;
 
+	/**
+	 * Uploaded photo URL
+	 */
 	@JsonProperty("upload_url")
 	private String uploadUrl;
 
+	/**
+	 * Path pointing to the photo on the device
+	 */
 	@JsonProperty("file_path")
 	private String filepath;
 
+	/**
+	 * File type: image or video
+	 */
 	@JsonProperty("content_type")
 	private String contentType;
 
+	/**
+	 * Cloud service type
+	 */
 	@JsonProperty("type")
 	private String type;
 
+	/**
+	 * Getters and setters
+	 */
 	public String getSignature() {
 		return signature;
 	}
@@ -72,9 +98,21 @@ public class UploadInfo {
 
 	@Override
 	public String toString() {
-		return "UploadInfo [signature=" + signature + ", date=" + date
-				+ ", uploadUrl=" + uploadUrl + ", filepath=" + filepath
-				+ ", contentType=" + contentType + ", type=" + type + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("UploadInfo [signature=");
+		builder.append(signature);
+		builder.append(", date=");
+		builder.append(date);
+		builder.append(", uploadUrl=");
+		builder.append(uploadUrl);
+		builder.append(", filepath=");
+		builder.append(filepath);
+		builder.append(", contentType=");
+		builder.append(contentType);
+		builder.append(", type=");
+		builder.append(type);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

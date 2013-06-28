@@ -41,14 +41,15 @@ public class FileData {
 		this.chutes = chutes;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "FileData [files=" + files + ", chutes=" + chutes + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("FileData [files=");
+		builder.append(files);
+		builder.append(", chutes=");
+		builder.append(chutes);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

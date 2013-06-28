@@ -51,15 +51,17 @@ public class FileBean {
 		this.size = size;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "FileBean [md5=" + md5 + ", fileName=" + fileName + ", size="
-				+ size + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("FileBean [md5=");
+		builder.append(md5);
+		builder.append(", fileName=");
+		builder.append(fileName);
+		builder.append(", size=");
+		builder.append(size);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

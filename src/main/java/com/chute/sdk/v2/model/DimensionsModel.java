@@ -115,7 +115,13 @@ public class DimensionsModel implements Parcelable {
 
 	@Override
 	public String toString() {
-		return "DimensionsModel [width=" + width + ", height=" + height + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("DimensionsModel [width=");
+		builder.append(width);
+		builder.append(", height=");
+		builder.append(height);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

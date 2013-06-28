@@ -184,16 +184,25 @@ public class LinkModel implements Parcelable {
 
 	};
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "LinkModel [self=" + self + ", assets=" + assets + ", exif="
-				+ exif + ", geo=" + geo + ", heart=" + heart + ", vote=" + vote
-				+ ", parcels=" + parcels + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("LinkModel [self=");
+		builder.append(self);
+		builder.append(", assets=");
+		builder.append(assets);
+		builder.append(", exif=");
+		builder.append(exif);
+		builder.append(", geo=");
+		builder.append(geo);
+		builder.append(", heart=");
+		builder.append(heart);
+		builder.append(", vote=");
+		builder.append(vote);
+		builder.append(", parcels=");
+		builder.append(parcels);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

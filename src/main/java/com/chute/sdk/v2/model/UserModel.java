@@ -234,11 +234,29 @@ public class UserModel implements Parcelable {
 
 	@Override
 	public String toString() {
-		return "UserModel [id=" + id + ", links=" + links + ", name=" + name
-				+ ", username=" + username + ", avatar=" + avatar
-				+ ", created_at=" + created_at + ", updated_at=" + updated_at
-				+ ", profile=" + profile + ", email=" + email + ", oauthToken="
-				+ oauthToken + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("UserModel [id=");
+		builder.append(id);
+		builder.append(", links=");
+		builder.append(links);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", username=");
+		builder.append(username);
+		builder.append(", avatar=");
+		builder.append(avatar);
+		builder.append(", created_at=");
+		builder.append(created_at);
+		builder.append(", updated_at=");
+		builder.append(updated_at);
+		builder.append(", profile=");
+		builder.append(profile);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", oauthToken=");
+		builder.append(oauthToken);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
