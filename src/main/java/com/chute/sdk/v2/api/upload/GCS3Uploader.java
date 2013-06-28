@@ -35,6 +35,7 @@ import android.util.Log;
 
 import com.chute.sdk.v2.model.UploadToken;
 import com.dg.libs.rest.client.BaseRestClient;
+import com.dg.libs.rest.client.ExtendedOkApacheClient;
 import com.dg.libs.rest.entities.CountingInputStreamEntity;
 import com.dg.libs.rest.entities.CountingInputStreamEntity.UploadListener;
 import com.dg.libs.rest.exceptions.HttpException;
@@ -80,6 +81,8 @@ public class GCS3Uploader extends BaseRestClient {
 			}
 		});
 		request.setEntity(countingInputStreamEntity);
+//		((ExtendedOkApacheClient)getClient()).setSocketTimeout(120000);
+//		((ExtendedOkApacheClient)getClient()).setConnectionTimeout(120000);
 		executeRequest(request);
 	}
 
