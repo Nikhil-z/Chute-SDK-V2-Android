@@ -74,8 +74,7 @@ public class GCAssets {
 	 *            the callback returns {@link ResponseModel<AssetModel>}
 	 * @return - {@link AssetsExifRequest}
 	 */
-	public static HttpRequest exif(final Context context,
-			final AssetModel asset,
+	public static HttpRequest exif(final Context context, final AssetModel asset,
 			final HttpCallback<ResponseModel<HashMap<String, String>>> callback) {
 		return new AssetsExifRequest(context, asset, callback);
 	}
@@ -92,8 +91,7 @@ public class GCAssets {
 	 *            the callback returns {@link ResponseModel<AssetModel>}
 	 * @return - {@link AssetsDeleteRequest}
 	 */
-	public static HttpRequest delete(final Context context,
-			final AlbumModel album, final AssetModel asset,
+	public static HttpRequest delete(final Context context, final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
 		return new AssetsDeleteRequest(context, album, asset, callback);
 	}
@@ -110,8 +108,7 @@ public class GCAssets {
 	 *            the callback returns {@link ResponseModel<AssetModel>}
 	 * @return - {@link AssetsUpdateRequest}
 	 */
-	public static HttpRequest update(final Context context,
-			final AlbumModel album, final AssetModel asset,
+	public static HttpRequest update(final Context context, final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
 		return new AssetsUpdateRequest(context, album, asset, callback);
 	}
@@ -130,8 +127,7 @@ public class GCAssets {
 	 *            callback returns {@link ResponseModel<AssetModel>}
 	 * @return {@link AlbumsGetAssetRequest}
 	 */
-	public static HttpRequest get(final Context context,
-			final AlbumModel album, final AssetModel asset,
+	public static HttpRequest get(final Context context, final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
 		return new AlbumsGetAssetRequest(context, album, asset, callback);
 	}
@@ -148,11 +144,9 @@ public class GCAssets {
 	 *            callback returns {@link ListResponseModel<AssetModel>}
 	 * @return {@link AlbumsGetAssetListRequest}
 	 */
-	public static HttpRequest list(final Context context,
-			final AlbumModel album, PaginationModel pagination,
+	public static HttpRequest list(final Context context, final AlbumModel album, PaginationModel pagination,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AlbumsGetAssetListRequest(context, album, pagination,
-				callback);
+		return new AlbumsGetAssetListRequest(context, album, pagination, callback);
 	}
 
 	/**
@@ -165,20 +159,20 @@ public class GCAssets {
 	 * @param callback
 	 * @return
 	 */
-	public static HttpRequest list(final Context context,
-			final AlbumModel album,
+	public static HttpRequest list(final Context context, final AlbumModel album,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AlbumsGetAssetListRequest(context, album,
-				new PaginationModel(), callback);
+		return new AlbumsGetAssetListRequest(context, album, new PaginationModel(), callback);
 	}
 
 	public static HttpRequest upload(final Context context, final String authToken,
-			UploadProgressListener onProgressUpdate,
-			final HttpCallback<List<UploadToken>> callback,
-			final ArrayList<LocalAssetModel> assets,
-			final ArrayList<AlbumModel> albums) {
-		return new AssetsUploadRequest(context, authToken, onProgressUpdate, callback,
-				assets, albums);
+			UploadProgressListener onProgressUpdate, final HttpCallback<List<UploadToken>> callback,
+			final ArrayList<LocalAssetModel> assets, final ArrayList<AlbumModel> albums) {
+		return new AssetsUploadRequest(context, authToken, onProgressUpdate, callback, assets, albums);
+	}
+
+	public static HttpRequest uploadOneStep(final Context context, final AlbumModel album, final String filePath,
+			final String token, final HttpCallback<ResponseModel<String>> callback) {
+		return new AssetsFileRequest(context, album, filePath, token, callback);
 	}
 
 }

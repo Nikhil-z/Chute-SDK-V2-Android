@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.021" errors="0" skipped="0" tests="1" name="com.chute.sdk.v2.test.parsers.parcels.ParcelAssetGetParserTest">
+<testsuite failures="0" time="0.012" errors="0" skipped="0" tests="1" name="com.chute.sdk.v2.test.parsers.parcels.ParcelAssetGetParserTest">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386"/>
@@ -24,7 +24,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/olja/workspace/.metadata/.plugins/org.eclipse.m2e.core/launches/m2conf1160260368485116445.tmp"/>
+    <property name="classworlds.conf" value="/home/olja/workspace/.metadata/.plugins/org.eclipse.m2e.core/launches/m2conf7413235837469177371.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386/server:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386:/usr/lib/jvm/java-6-openjdk-i386/jre/../lib/i386:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386/client:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386::/usr/java/packages/lib/i386:/usr/lib/i386-linux-gnu/jni:/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -58,5 +58,5 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.021" classname="com.chute.sdk.v2.test.parsers.parcels.ParcelAssetGetParserTest" name="testParcelAssetGetParser"/>
+  <testcase time="0.012" classname="com.chute.sdk.v2.test.parsers.parcels.ParcelAssetGetParserTest" name="testParcelAssetGetParser"/>
 </testsuite>

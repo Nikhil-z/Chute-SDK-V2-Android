@@ -149,6 +149,7 @@ com/chute/sdk/v2/api/comment/CommentsCreateRequest.class
 darko/imagedownloader/queue/QueueStrategy.class
 com/chute/sdk/v2/model/CounterModel$1.class
 darko/imagedownloader/MemoryCache$1.class
+com/chute/sdk/v2/api/asset/AssetsFileRequest.class
 com/chute/sdk/v2/utils/MD5.class
 com/chute/sdk/v2/model/SourceModel.class
 com/chute/sdk/v2/api/flags/GCFlags.class

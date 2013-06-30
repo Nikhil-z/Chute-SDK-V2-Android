@@ -25,6 +25,7 @@
 // 
 package com.chute.sdk.v2.api.asset;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,7 @@ import com.chute.sdk.v2.utils.RestConstants;
 import com.chute.sdk.v2.utils.TextUtil;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.requests.FileBodyHttpRequestImpl;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -105,4 +107,5 @@ public class AssetsTokenRequest extends
 	protected String getUrl() {
 		return RestConstants.URL_UPLOAD_TOKEN;
 	}
+
 }
