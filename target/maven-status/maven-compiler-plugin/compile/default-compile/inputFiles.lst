@@ -23,6 +23,7 @@
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/hearts/HeartRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/parsers/UploadResponseParser.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/asset/AssetsUpdateRequest.java
+/home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/authentication/TokenAuthenticationProvider.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/enums/Filter.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/album/AlbumsGetRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/user/GCUsers.java

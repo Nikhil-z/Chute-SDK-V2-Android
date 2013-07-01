@@ -152,6 +152,7 @@ darko/imagedownloader/MemoryCache$1.class
 com/chute/sdk/v2/api/asset/AssetsFileRequest.class
 com/chute/sdk/v2/utils/MD5.class
 com/chute/sdk/v2/model/SourceModel.class
+com/chute/sdk/v2/api/authentication/TokenAuthenticationProvider.class
 com/chute/sdk/v2/api/flags/GCFlags.class
 com/chute/sdk/v2/api/authentication/AuthenticationActivity$AuthWebViewClient.class
 com/chute/sdk/v2/model/LinkModel$1.class

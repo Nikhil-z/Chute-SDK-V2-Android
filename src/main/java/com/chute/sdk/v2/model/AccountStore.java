@@ -266,12 +266,13 @@ public class AccountStore implements AuthenticationProvider {
 
 	@Override
 	public void authenticateRequest(BaseRestClient client) {
-//		client.addHeader("Authorization", "Bearer " + getPassword());
-		client.addHeader("Authorization", "OAuth " + getPassword());
+		client.addHeader("Authorization", "Bearer " + getPassword());
+//		client.addHeader("Authorization", "OAuth " + getPassword());
 		ArrayList<NameValuePair> list = getHeaders();
 		for (NameValuePair nameValuePair : list) {
 			client.addHeader(nameValuePair.getName(), nameValuePair.getValue());
 		}
+		Log.d("debug", "account store baserestclient headers = " + client.getHeaders());
 	}
 
 	/**
