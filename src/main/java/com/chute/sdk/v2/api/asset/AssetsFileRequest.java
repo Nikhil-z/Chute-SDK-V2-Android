@@ -5,23 +5,26 @@ import java.io.File;
 import android.content.Context;
 import android.util.Log;
 
+import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
+import com.chute.sdk.v2.model.AssetModel;
+import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.FileBodyHttpRequestImpl;
 
-public class AssetsFileRequest extends FileBodyHttpRequestImpl<ResponseModel<String>> {
+public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel<AssetModel>> {
 
 	private String filePath;
 	private AlbumModel album;
 	private String token;
 
 	public AssetsFileRequest(Context context, AlbumModel album, String filePath, String token,
-			HttpCallback<ResponseModel<String>> callback) {
-		super(context, RequestMethod.POST, new ResponseParser<String>(String.class), callback);
+			HttpCallback<ListResponseModel<AssetModel>> callback) {
+		super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(AssetModel.class), callback);
 		this.filePath = filePath;
 		this.album = album;
 		this.token = token;
@@ -33,7 +36,6 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ResponseModel<Str
 		}
 		Log.d("debug", "request album id = " + album.getId());
 		Log.d("debug", "request token = " + token);
-		client.addHeader("Authorization", "Bearer " + token);
 		Log.d("debug", "client headers = " + getClient().getHeaders().toString());
 	}
 
@@ -47,15 +49,6 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ResponseModel<Str
 	protected String getUrl() {
 		return String.format(RestConstants.URL_UPLOAD_ONE_STEP, album.getId());
 	}
-	
-	
-	
-//	@Override
-//	protected void doBeforeRunRequestInBackgroundThread() {
-//		super.doBeforeRunRequestInBackgroundThread();
-//		addHeader("Authorization", "Bearer " + token);
-//		
-//	}
 
 
 }
