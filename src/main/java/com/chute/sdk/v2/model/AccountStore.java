@@ -104,7 +104,8 @@ public class AccountStore implements AuthenticationProvider {
 			String android_name = android.os.Build.MODEL;
 			addHeader("x-device-name", android_name + "");
 			addHeader("x-device-identifier", android_id);
-			addHeader("Content-Type", "application/json");
+//			addHeader("Content-Type", "application/json");
+			addHeader("Content-Type", "image/jpg");
 			saveDeviceId(android_id, context);
 			addHeader("x-device-os", "Android");
 			addHeader("x-device-version", android.os.Build.VERSION.RELEASE);

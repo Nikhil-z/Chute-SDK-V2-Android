@@ -34,10 +34,7 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
 		}
-//		client.addHeader("Authorization", "Bearer " + token);
-		Log.d("debug", "request album id = " + album.getId());
-		Log.d("debug", "request token = " + token);
-		Log.d("debug", "client headers = " + getClient().getHeaders().toString());
+//		addHeader("Content-Type", "image/jpg");
 	}
 
 	@Override
