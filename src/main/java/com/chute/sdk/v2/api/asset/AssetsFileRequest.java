@@ -2,6 +2,9 @@ package com.chute.sdk.v2.api.asset;
 
 import java.io.File;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.mime.MultipartEntity;
+
 import android.content.Context;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
@@ -27,6 +30,12 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel
 			throw new NullPointerException("Album cannot be null");
 		}
 	}
+	
+	@Override
+	public HttpEntity getEntity() {
+		return new MultipartEntity();
+	}
+	
 
 	@Override
 	public File fileToSend() {

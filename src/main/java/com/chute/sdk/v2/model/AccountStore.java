@@ -118,6 +118,7 @@ public class AccountStore implements AuthenticationProvider {
 				}
 				APP_ID = restoredAppId;
 			}
+			
 			addHeader("x-client_id", APP_ID);
 		} catch (Exception e) {
 			Log.w(TAG, "", e);
