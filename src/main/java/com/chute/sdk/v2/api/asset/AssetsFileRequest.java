@@ -2,15 +2,11 @@ package com.chute.sdk.v2.api.asset;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
-import java.nio.charset.Charset;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.http.HttpEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
 
 import android.content.Context;
 import android.util.Log;
@@ -39,31 +35,26 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public HttpEntity getEntity() {
 		MultipartEntity multipartEntity = null;
 		try {
-			multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-			// multipartEntity.addPart("filedata", new FileBody(fileToSend()));
-			multipartEntity.addPart("filedata", new FileBody(((File) fileToSend()), "application/zip"));
-
-			multipartEntity.addPart("filedata",
-					new StringBody(fileToSend().toString(), "text/plain", Charset.forName("UTF-8")));
+			multipartEntity = new MultipartEntity();//HttpMultipartMode.BROWSER_COMPATIBLE, null, Charset.forName("UTF-8"));
+			multipartEntity.addPart("filedata", new FileBody(fileToSend()));
 		} catch (Exception e) {
-			Log.d("debug", "get entitiy = " + e.getLocalizedMessage(), e);
+			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
 		}
 		return multipartEntity;
 	}
 
 	@Override
-	protected void doAfterRunRequestInBackgroundThread() {
+	protected void doBeforeRunRequestInBackgroundThread() {
 		super.doAfterRunRequestInBackgroundThread();
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		try {
 			getEntity().writeTo(bytes);
 			String content = bytes.toString();
-			Log.d("debug", "entity = " + content);
+			Log.d("debug", "entity content = " + content);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Log.d("debug", "io excepton = " + e.getLocalizedMessage(), e);
