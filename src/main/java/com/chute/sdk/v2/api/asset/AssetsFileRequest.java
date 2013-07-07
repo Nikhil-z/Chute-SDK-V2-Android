@@ -4,8 +4,10 @@ import java.io.File;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
@@ -33,8 +35,18 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel
 	
 	@Override
 	public HttpEntity getEntity() {
-		return new MultipartEntity();
+		MultipartEntity multipartEntity = new MultipartEntity();
+		Log.d("debug", "file path = " + fileToSend().getPath());
+		multipartEntity.addPart("filedata", new FileBody(fileToSend()));
+		return multipartEntity;
 	}
+	
+	@Override
+	protected void doAfterRunRequestInBackgroundThread() {
+		super.doAfterRunRequestInBackgroundThread();
+		Log.d("debug", "entity body = " + getEntity().getContentType().toString());
+	}
+	
 	
 
 	@Override
