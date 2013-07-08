@@ -20,9 +20,10 @@ import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.requests.EntityHttpRequestImpl;
 import com.dg.libs.rest.requests.FileBodyHttpRequestImpl;
 
-public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel<AssetModel>> {
+public class AssetsFileRequest extends EntityHttpRequestImpl<ListResponseModel<AssetModel>> {
 
 	private String filePath;
 	private AlbumModel album;
@@ -38,17 +39,24 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel
 	}
 
 	@Override
+	protected String getUrl() {
+		return String.format(RestConstants.URL_UPLOAD_ONE_STEP, album.getId());
+	}
+
+	@Override
 	public HttpEntity getEntity() {
+		File file = new File(filePath);
 		MultipartEntity multipartEntity = null;
 		try {
 			multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT, null, Charset.forName("UTF-8"));
-			multipartEntity.addPart("filedata", new FileBody(fileToSend()));
+			multipartEntity.addPart("filedata", new FileBody(file));
 		} catch (Exception e) {
 			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
 		}
 		return multipartEntity;
 	}
-
+	
+	
 	@Override
 	protected void doBeforeRunRequestInBackgroundThread() {
 		super.doAfterRunRequestInBackgroundThread();
@@ -61,17 +69,6 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel
 			// TODO Auto-generated catch block
 			Log.d("debug", "io excepton = " + e.getLocalizedMessage(), e);
 		}
-	}
-
-	@Override
-	public File fileToSend() {
-		File file = new File(filePath);
-		return file;
-	}
-
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_UPLOAD_ONE_STEP, album.getId());
 	}
 
 }
