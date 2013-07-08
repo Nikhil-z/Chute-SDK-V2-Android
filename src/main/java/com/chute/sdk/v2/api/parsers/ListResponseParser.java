@@ -44,13 +44,7 @@ public class ListResponseParser<T> extends
 	@Override
 	public ListResponseModel<T> parse(InputStream responseBody)
 			throws Exception {
-//		BOMInputStream bomIn = new BOMInputStream(responseBody);
-//		int firstNonBOMByte = bomIn.read(); // Skips BOM
-//		if (bomIn.hasBOM()) {
-//		    // has a UTF-8 BOM
-//		}
-	    InputStream inputStreamWithoutBOM = Utils.checkForUtf8BOMAndDiscardIfAny(responseBody);
-		return mapper.readValue(inputStreamWithoutBOM, mapper.getTypeFactory()
+		return mapper.readValue(responseBody, mapper.getTypeFactory()
 				.constructParametricType(ListResponseModel.class, cls));
 	}
 }
