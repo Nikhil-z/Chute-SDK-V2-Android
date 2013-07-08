@@ -2,9 +2,11 @@ package com.chute.sdk.v2.api.asset;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.http.HttpEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 
@@ -39,7 +41,7 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel
 	public HttpEntity getEntity() {
 		MultipartEntity multipartEntity = null;
 		try {
-			multipartEntity = new MultipartEntity();//HttpMultipartMode.BROWSER_COMPATIBLE, null, Charset.forName("UTF-8"));
+			multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, Charset.forName("UTF-8"));
 			multipartEntity.addPart("filedata", new FileBody(fileToSend()));
 		} catch (Exception e) {
 			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
