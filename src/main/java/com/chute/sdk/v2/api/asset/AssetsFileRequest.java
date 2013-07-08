@@ -41,7 +41,7 @@ public class AssetsFileRequest extends FileBodyHttpRequestImpl<ListResponseModel
 	public HttpEntity getEntity() {
 		MultipartEntity multipartEntity = null;
 		try {
-			multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, Charset.forName("UTF-8"));
+			multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT, null, null);
 			multipartEntity.addPart("filedata", new FileBody(fileToSend()));
 		} catch (Exception e) {
 			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);

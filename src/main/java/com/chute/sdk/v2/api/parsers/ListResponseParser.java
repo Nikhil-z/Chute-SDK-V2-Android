@@ -28,6 +28,7 @@ package com.chute.sdk.v2.api.parsers;
 import java.io.InputStream;
 
 import com.chute.sdk.v2.model.response.ListResponseModel;
+import com.chute.sdk.v2.utils.Utils;
 import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
 
 public class ListResponseParser<T> extends
@@ -43,7 +44,13 @@ public class ListResponseParser<T> extends
 	@Override
 	public ListResponseModel<T> parse(InputStream responseBody)
 			throws Exception {
-		return mapper.readValue(responseBody, mapper.getTypeFactory()
+//		BOMInputStream bomIn = new BOMInputStream(responseBody);
+//		int firstNonBOMByte = bomIn.read(); // Skips BOM
+//		if (bomIn.hasBOM()) {
+//		    // has a UTF-8 BOM
+//		}
+	    InputStream inputStreamWithoutBOM = Utils.checkForUtf8BOMAndDiscardIfAny(responseBody);
+		return mapper.readValue(inputStreamWithoutBOM, mapper.getTypeFactory()
 				.constructParametricType(ListResponseModel.class, cls));
 	}
 }

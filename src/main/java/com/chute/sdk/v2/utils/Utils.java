@@ -25,6 +25,10 @@
 // 
 package com.chute.sdk.v2.utils;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PushbackInputStream;
 import java.net.URLDecoder;
 
 import android.content.Context;
@@ -49,8 +53,7 @@ public class Utils {
 				Log.e(TAG, parameter);
 				String v[] = parameter.split("=");
 				try {
-					params.putString(URLDecoder.decode(v[0]),
-							URLDecoder.decode(v[1]));
+					params.putString(URLDecoder.decode(v[0]), URLDecoder.decode(v[1]));
 				} catch (ArrayIndexOutOfBoundsException e) {
 				}
 			}
@@ -78,7 +81,25 @@ public class Utils {
 	}
 
 	public static int pixelsFromDp(Context context, int value) {
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-				value, context.getResources().getDisplayMetrics());
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources()
+				.getDisplayMetrics());
+	}
+
+	/**
+	 * Removes BOM from InputStream
+	 * 
+	 * @param inputStream
+	 * @return
+	 * @throws IOException
+	 */
+	public static InputStream checkForUtf8BOMAndDiscardIfAny(InputStream inputStream) throws IOException {
+		PushbackInputStream pushbackInputStream = new PushbackInputStream(new BufferedInputStream(inputStream), 3);
+		byte[] bom = new byte[3];
+		if (pushbackInputStream.read(bom) != -1) {
+			if (!(bom[0] == (byte) 0xEF && bom[1] == (byte) 0xBB && bom[2] == (byte) 0xBF)) {
+				pushbackInputStream.unread(bom);
+			}
+		}
+		return pushbackInputStream;
 	}
 }
