@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MIME;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 
@@ -26,6 +27,18 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 
 	private String filePath;
 	private AlbumModel album;
+	
+	/**
+	 * 
+	 * Charset
+     *  Description
+     *  US-ASCII	Seven-bit ASCII, a.k.a. ISO646-US, a.k.a. the Basic Latin block of the Unicode character set
+     *  ISO-8859-1  	ISO Latin Alphabet No. 1, a.k.a. ISO-LATIN-1
+     *  UTF-8	   Eight-bit UCS Transformation Format
+     *  UTF-16BE	Sixteen-bit UCS Transformation Format, big-endian byte order
+     *  UTF-16LE	Sixteen-bit UCS Transformation Format, little-endian byte order
+     *  UTF-16	Sixteen-bit UCS Transformation Format, byte order identified by an optional byte-order mark
+	 */
 
 	public AssetsFileUploadRequest(Context context, AlbumModel album, String filePath,
 			HttpCallback<ListResponseModel<AssetModel>> callback) {
@@ -42,7 +55,7 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		File file = new File(filePath);
 		MultipartEntity multipartEntity = null;
 		try {
-			multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT, null, Charset.forName("UTF-8"));
+			multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT, null, Charset.forName("UTF-16"));
 			multipartEntity.addPart("filedata", new FileBody(file));
 		} catch (Exception e) {
 			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
