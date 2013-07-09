@@ -93,32 +93,27 @@ public class AccountStore implements AuthenticationProvider {
 		AuthConstants.ACCOUNT_TYPE = context.getPackageName();
 		getAccountInfo(context);
 		try {
-			String android_id = Secure.getString(context.getContentResolver(),
-					Secure.ANDROID_ID);
+			String android_id = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
 			if (android_id == null || android_id.contentEquals("")) {
-				WifiManager wm = (WifiManager) context
-						.getSystemService(Context.WIFI_SERVICE);
-				android_id = "DEVICE_MAC:"
-						+ wm.getConnectionInfo().getMacAddress();
+				WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+				android_id = "DEVICE_MAC:" + wm.getConnectionInfo().getMacAddress();
 			}
 			String android_name = android.os.Build.MODEL;
 			addHeader("x-device-name", android_name + "");
 			addHeader("x-device-identifier", android_id);
 			addHeader("Content-Type", "application/json");
-//			addHeader("Content-Type", "multipart/form-data");
 			saveDeviceId(android_id, context);
 			addHeader("x-device-os", "Android");
 			addHeader("x-device-version", android.os.Build.VERSION.RELEASE);
 			if (TextUtils.isEmpty(APP_ID)) {
 				String restoredAppId = restoreAppId(context);
 				if (restoredAppId == null) {
-					throw new RuntimeException(
-							"You Need to set your APP_ID In " + TAG
-									+ "Inside the SDK", new Throwable());
+					throw new RuntimeException("You Need to set your APP_ID In " + TAG + "Inside the SDK",
+							new Throwable());
 				}
 				APP_ID = restoredAppId;
 			}
-			
+
 			addHeader("x-client_id", APP_ID);
 		} catch (Exception e) {
 			Log.w(TAG, "", e);
@@ -162,15 +157,13 @@ public class AccountStore implements AuthenticationProvider {
 
 	private AuthConstants authConstants;
 
-	private Bundle buildAccount(final Context context, String username,
-			String password) {
+	private Bundle buildAccount(final Context context, String username, String password) {
 		Bundle result = null;
 		AccountManager am = AccountManager.get(context);
 		if (Constants.DEBUG) {
 			Log.e(TAG, AuthConstants.ACCOUNT_TYPE);
 		}
-		Account[] chuteAccounts = am
-				.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
+		Account[] chuteAccounts = am.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
 		if (chuteAccounts.length > 0) {
 			if (Constants.DEBUG) {
 				Log.e("ACCOUNTS", String.valueOf(chuteAccounts.length));
@@ -178,14 +171,11 @@ public class AccountStore implements AuthenticationProvider {
 			for (Account ac : chuteAccounts) {
 				if (!username.contentEquals(ac.name)) {
 					am.removeAccount(ac, null, null);
-					Account account = new Account(username,
-							AuthConstants.ACCOUNT_TYPE);
+					Account account = new Account(username, AuthConstants.ACCOUNT_TYPE);
 					if (am.addAccountExplicitly(account, password, null)) {
 						result = new Bundle();
-						result.putString(AccountManager.KEY_ACCOUNT_NAME,
-								account.name);
-						result.putString(AccountManager.KEY_ACCOUNT_TYPE,
-								account.type);
+						result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
+						result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);
 						return result;
 					} else {
 						return null;
@@ -247,8 +237,7 @@ public class AccountStore implements AuthenticationProvider {
 	private void getAccountInfo(Context context) {
 
 		AccountManager am = AccountManager.get(context);
-		Account[] chuteAccounts = am
-				.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
+		Account[] chuteAccounts = am.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
 		if (chuteAccounts.length > 0) {
 			this.setUsername(chuteAccounts[0].name);
 			this.setPassword(am.getPassword(chuteAccounts[0]));
@@ -269,7 +258,7 @@ public class AccountStore implements AuthenticationProvider {
 	@Override
 	public void authenticateRequest(BaseRestClient client) {
 		client.addHeader("Authorization", "Bearer " + getPassword());
-//		client.addHeader("Authorization", "OAuth " + getPassword());
+		// client.addHeader("Authorization", "OAuth " + getPassword());
 		ArrayList<NameValuePair> list = getHeaders();
 		for (NameValuePair nameValuePair : list) {
 			client.addHeader(nameValuePair.getName(), nameValuePair.getValue());
@@ -287,8 +276,7 @@ public class AccountStore implements AuthenticationProvider {
 	 * @return if the save was successful
 	 */
 	public boolean saveApiKey(String apiKey, Context context) {
-		Editor editor = PreferenceManager.getDefaultSharedPreferences(context)
-				.edit();
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
 		editor.putString(API_KEY, apiKey);
 		boolean commit = editor.commit();
 		getAccountInfo(context);
@@ -300,13 +288,11 @@ public class AccountStore implements AuthenticationProvider {
 	}
 
 	public boolean clearAuth() {
-		Editor editor = PreferenceManager.getDefaultSharedPreferences(context)
-				.edit();
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
 		editor.remove(API_KEY);
 		boolean commit = editor.commit();
 		AccountManager am = AccountManager.get(context);
-		Account[] chuteAccounts = am
-				.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
+		Account[] chuteAccounts = am.getAccountsByType(AuthConstants.ACCOUNT_TYPE);
 		for (Account ac : chuteAccounts) {
 			am.removeAccount(ac, null, null);
 		}
@@ -314,47 +300,40 @@ public class AccountStore implements AuthenticationProvider {
 	}
 
 	public String restoreApiKey(Context context) {
-		SharedPreferences savedSession = PreferenceManager
-				.getDefaultSharedPreferences(context);
+		SharedPreferences savedSession = PreferenceManager.getDefaultSharedPreferences(context);
 		return savedSession.getString(API_KEY, "");
 	}
 
 	public boolean saveDeviceId(String deviceId, Context context) {
-		Editor editor = PreferenceManager.getDefaultSharedPreferences(context)
-				.edit();
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
 		editor.putString(DEVICE_ID, deviceId);
 		return editor.commit();
 	}
 
 	public String restoreDeviceId(Context context) {
-		SharedPreferences savedSession = PreferenceManager
-				.getDefaultSharedPreferences(context);
+		SharedPreferences savedSession = PreferenceManager.getDefaultSharedPreferences(context);
 		return savedSession.getString(DEVICE_ID, "");
 	}
 
 	public boolean saveUserId(String userId, Context context) {
-		Editor editor = PreferenceManager.getDefaultSharedPreferences(context)
-				.edit();
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
 		editor.putString(USER_ID, userId);
 		return editor.commit();
 	}
 
 	public String restoreUserId(Context context) {
-		SharedPreferences savedSession = PreferenceManager
-				.getDefaultSharedPreferences(context);
+		SharedPreferences savedSession = PreferenceManager.getDefaultSharedPreferences(context);
 		return savedSession.getString(USER_ID, "");
 	}
 
 	private static boolean saveAppId(Context context, String appId) {
-		Editor editor = PreferenceManager.getDefaultSharedPreferences(context)
-				.edit();
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
 		editor.putString(KEY_APP_ID, appId);
 		return editor.commit();
 	}
 
 	private static String restoreAppId(Context context) {
-		SharedPreferences savedSession = PreferenceManager
-				.getDefaultSharedPreferences(context);
+		SharedPreferences savedSession = PreferenceManager.getDefaultSharedPreferences(context);
 		return savedSession.getString(KEY_APP_ID, null);
 	}
 
@@ -380,12 +359,10 @@ public class AccountStore implements AuthenticationProvider {
 	 * @param clientId
 	 * @param clientSecret
 	 */
-	public void startAuthenticationActivity(Activity activity,
-			AccountType accountType, String scope, String redirectUri,
-			String clientId, String clientSecret) {
+	public void startAuthenticationActivity(Activity activity, AccountType accountType, String scope,
+			String redirectUri, String clientId, String clientSecret) {
 		Intent intent = new Intent(activity, AuthenticationActivity.class);
-		authConstants = new AuthConstants(accountType, scope, redirectUri,
-				clientId, clientSecret);
+		authConstants = new AuthConstants(accountType, scope, redirectUri, clientId, clientSecret);
 		activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
 	}
 
@@ -409,8 +386,8 @@ public class AccountStore implements AuthenticationProvider {
 		public String clientId;
 		public String clientSecret;
 
-		public AuthConstants(AccountType accountType, String scope,
-				String redirectUri, String clientId, String clientSecret) {
+		public AuthConstants(AccountType accountType, String scope, String redirectUri, String clientId,
+				String clientSecret) {
 			super();
 			this.accountType = accountType;
 			this.scope = scope;

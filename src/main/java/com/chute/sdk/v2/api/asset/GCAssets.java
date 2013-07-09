@@ -172,7 +172,7 @@ public class GCAssets {
 
 	public static HttpRequest uploadOneStep(final Context context, final AlbumModel album, final String filePath,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AssetsFileRequest(context, album, filePath, callback);
+		return new AssetsFileUploadRequest(context, album, filePath, callback);
 	}
 
 }

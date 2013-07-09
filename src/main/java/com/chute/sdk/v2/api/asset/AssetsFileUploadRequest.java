@@ -21,14 +21,13 @@ import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.EntityHttpRequestImpl;
-import com.dg.libs.rest.requests.FileBodyHttpRequestImpl;
 
-public class AssetsFileRequest extends EntityHttpRequestImpl<ListResponseModel<AssetModel>> {
+public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseModel<AssetModel>> {
 
 	private String filePath;
 	private AlbumModel album;
 
-	public AssetsFileRequest(Context context, AlbumModel album, String filePath,
+	public AssetsFileUploadRequest(Context context, AlbumModel album, String filePath,
 			HttpCallback<ListResponseModel<AssetModel>> callback) {
 		super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(AssetModel.class), callback);
 		this.filePath = filePath;
@@ -36,11 +35,6 @@ public class AssetsFileRequest extends EntityHttpRequestImpl<ListResponseModel<A
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
 		}
-	}
-
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_UPLOAD_ONE_STEP, album.getId());
 	}
 
 	@Override
@@ -55,8 +49,8 @@ public class AssetsFileRequest extends EntityHttpRequestImpl<ListResponseModel<A
 		}
 		return multipartEntity;
 	}
-	
-	
+
+	// Log entity content
 	@Override
 	protected void doBeforeRunRequestInBackgroundThread() {
 		super.doAfterRunRequestInBackgroundThread();
@@ -69,6 +63,11 @@ public class AssetsFileRequest extends EntityHttpRequestImpl<ListResponseModel<A
 			// TODO Auto-generated catch block
 			Log.d("debug", "io excepton = " + e.getLocalizedMessage(), e);
 		}
+	}
+
+	@Override
+	protected String getUrl() {
+		return String.format(RestConstants.URL_UPLOAD_ONE_STEP, album.getId());
 	}
 
 }
