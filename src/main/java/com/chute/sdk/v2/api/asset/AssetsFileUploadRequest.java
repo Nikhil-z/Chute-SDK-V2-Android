@@ -8,6 +8,7 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 
 import android.content.Context;
 import android.util.Log;
@@ -55,10 +56,11 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		File file = new File(filePath);
 		MultipartEntity multipartEntity = null;
 		try {
-			multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+			multipartEntity = new MultipartEntity();
 			byte[] imageByteArray = Utils.getBytesFromFile(file);
+			multipartEntity.addPart("filedata", new FileBody(file));
 			multipartEntity.addPart("filedata", new InputStreamKnownSizeBody(new ByteArrayInputStream(imageByteArray),
-					imageByteArray.length, "image/jpg", "droid4.jpg"));
+					imageByteArray.length, "image/jpg", file.getName()));
 		} catch (Exception e) {
 			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
 		}
