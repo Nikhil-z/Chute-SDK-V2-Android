@@ -54,7 +54,8 @@ import com.dg.libs.rest.parsers.StringHttpResponseParser;
 
 public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
-	private static final String TAG = AuthenticationActivity.class.getSimpleName();
+	private static final String TAG = AuthenticationActivity.class
+			.getSimpleName();
 	public static final int CODE_HTTP_EXCEPTION = 4;
 	public static final int CODE_HTTP_ERROR = 5;
 	public static final int CODE_PARSER_EXCEPTION = 6;
@@ -73,30 +74,37 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		webViewAuthentication = new WebView(this);
-		webViewAuthentication.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		webViewAuthentication.setLayoutParams(new LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		webViewAuthentication.setWebViewClient(new AuthWebViewClient());
 		webViewAuthentication.getSettings().setJavaScriptEnabled(true);
-		webViewAuthentication.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+		webViewAuthentication
+				.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
 		webViewAuthentication.clearCache(true);
 		final WebSettings mWebSettings = webViewAuthentication.getSettings();
 		mWebSettings.setSavePassword(false);
 		mWebSettings.setSaveFormData(false);
 		final FrameLayout frameLayout = new FrameLayout(this);
-		frameLayout.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		frameLayout.setLayoutParams(new FrameLayout.LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		pb = new ProgressBar(this);
-		final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(100, 100);
+		final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+				100, 100);
 		layoutParams.gravity = Gravity.CENTER;
 		pb.setLayoutParams(layoutParams);
 		frameLayout.addView(webViewAuthentication);
 		frameLayout.addView(pb);
 		setContentView(frameLayout);
-		authConstants = AccountStore.getInstance(getApplicationContext()).getAuthConstants();
+		authConstants = AccountStore.getInstance(getApplicationContext())
+				.getAuthConstants();
 		authenticationFactory = new AuthenticationFactory(authConstants);
-		webViewAuthentication.loadUrl(authenticationFactory.getAuthenticationURL());
+		webViewAuthentication.loadUrl(authenticationFactory
+				.getAuthenticationURL());
 	}
 
-	private final class AuthenticationCodeCallback implements HttpCallback<String> {
+	private final class AuthenticationCodeCallback implements
+			HttpCallback<String> {
 
 		@Override
 		public void onSuccess(final String responseData) {
@@ -115,18 +123,13 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 	}
 
 	/** @author darko.grozdanovski */
-	private final class AuthenticationResponseParser extends StringHttpResponseParser<String> {
+	private final class AuthenticationResponseParser extends
+			StringHttpResponseParser<String> {
 		@Override
 		public String parse(final String responseBody) throws JSONException {
 			final JSONObject obj = new JSONObject(responseBody);
-			if (authConstants.tokenType.equals(Constants.TOKEN_BEARER)) {
-				AccountStore.getInstance(getApplicationContext()).saveApiKey(obj.getString("bearer_token"),
-						getApplicationContext());
-			}
-			if (authConstants.tokenType.equals(Constants.TOKEN_ACCESS)) {
-				AccountStore.getInstance(getApplicationContext()).saveApiKey(obj.getString("access_token"),
-						getApplicationContext());
-			}
+			AccountStore.getInstance(getApplicationContext()).saveApiKey(
+					obj.getString("access_token"), getApplicationContext());
 			return responseBody;
 		}
 
@@ -136,13 +139,15 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		/** @author darko.grozdanovski */
 
 		@Override
-		public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
+		public boolean shouldOverrideUrlLoading(final WebView view,
+				final String url) {
 			Log.e(TAG, "Override " + url);
 			return super.shouldOverrideUrlLoading(view, url);
 		}
 
 		@Override
-		public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
+		public void onPageStarted(final WebView view, final String url,
+				final Bitmap favicon) {
 			if (Constants.DEBUG) {
 				Log.d(TAG, "Page started " + url);
 			}
@@ -156,8 +161,10 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 						finish();
 					}
 					view.stopLoading();
-					new AuthenticationToken<String>(getApplicationContext(), authConstants, code,
-							new AuthenticationResponseParser(), new AuthenticationCodeCallback()).executeAsync();
+					new AuthenticationToken<String>(getApplicationContext(),
+							authConstants, code,
+							new AuthenticationResponseParser(),
+							new AuthenticationCodeCallback()).executeAsync();
 				}
 			} catch (final Exception e) {
 				if (Constants.DEBUG) {
@@ -181,8 +188,8 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		}
 
 		@Override
-		public void onReceivedError(final WebView view, final int errorCode, final String description,
-				final String failingUrl) {
+		public void onReceivedError(final WebView view, final int errorCode,
+				final String description, final String failingUrl) {
 			if (Constants.DEBUG) {
 				Log.e(TAG, "Error " + failingUrl);
 			}

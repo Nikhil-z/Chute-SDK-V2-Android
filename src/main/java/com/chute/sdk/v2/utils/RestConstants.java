@@ -30,7 +30,6 @@ public class RestConstants {
 
 	public static final String BASE_URL = "https://api.getchute.com/v2";
 	public static final String BASE_UPLOAD_URL = "http://upload.getchute.com";
-//	public static final String BASE_UPLOAD_URL = "http://192.168.42.250";
 	public static final String BASE_AUTH_URL = "https://getchute.com";
 
 	// Accounts
