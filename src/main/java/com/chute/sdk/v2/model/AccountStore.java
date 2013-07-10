@@ -257,8 +257,12 @@ public class AccountStore implements AuthenticationProvider {
 
 	@Override
 	public void authenticateRequest(BaseRestClient client) {
-		client.addHeader("Authorization", "Bearer " + getPassword());
-		// client.addHeader("Authorization", "OAuth " + getPassword());
+		if (authConstants.tokenType.equals(Constants.TOKEN_BEARER)) {
+			client.addHeader("Authorization", "Bearer " + getPassword());
+		} 
+		if (authConstants.tokenType.equals(Constants.TOKEN_ACCESS)) {
+			client.addHeader("Authorization", "OAuth " + getPassword());
+		}
 		ArrayList<NameValuePair> list = getHeaders();
 		for (NameValuePair nameValuePair : list) {
 			client.addHeader(nameValuePair.getName(), nameValuePair.getValue());
@@ -360,9 +364,9 @@ public class AccountStore implements AuthenticationProvider {
 	 * @param clientSecret
 	 */
 	public void startAuthenticationActivity(Activity activity, AccountType accountType, String scope,
-			String redirectUri, String clientId, String clientSecret) {
+			String redirectUri, String clientId, String clientSecret, String tokenType) {
 		Intent intent = new Intent(activity, AuthenticationActivity.class);
-		authConstants = new AuthConstants(accountType, scope, redirectUri, clientId, clientSecret);
+		authConstants = new AuthConstants(accountType, scope, redirectUri, clientId, clientSecret, tokenType);
 		activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
 	}
 
@@ -385,15 +389,17 @@ public class AccountStore implements AuthenticationProvider {
 		public String redirectUri;
 		public String clientId;
 		public String clientSecret;
+		public String tokenType;
 
 		public AuthConstants(AccountType accountType, String scope, String redirectUri, String clientId,
-				String clientSecret) {
+				String clientSecret, String tokenType) {
 			super();
 			this.accountType = accountType;
 			this.scope = scope;
 			this.redirectUri = redirectUri;
 			this.clientId = clientId;
 			this.clientSecret = clientSecret;
+			this.tokenType = tokenType;
 		}
 
 	}

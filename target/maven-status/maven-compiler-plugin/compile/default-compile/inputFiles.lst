@@ -47,6 +47,7 @@
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/authentication/AuthenticationFactory.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/authentication/AuthenticationActivity.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/geo/GeoLocationGetRequest.java
+/home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/enums/TokenType.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/votes/VotesGetRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/flags/FlagGetRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/geo/GeoLocationGetAssetsRequest.java

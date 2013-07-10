@@ -93,6 +93,7 @@ com/chute/sdk/v2/api/votes/VotesMap.class
 com/chute/sdk/v2/model/SourceModel$1.class
 com/chute/sdk/v2/api/authentication/AuthenticationFactory$AccountType.class
 com/chute/sdk/v2/api/parsers/ListResponseParser.class
+com/chute/sdk/v2/model/enums/TokenType.class
 com/chute/sdk/v2/model/LocalAssetModel.class
 com/chute/sdk/v2/model/FileData.class
 darko/imagedownloader/ImageLoader.class
