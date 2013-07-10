@@ -73,6 +73,7 @@ com/chute/sdk/v2/api/album/AlbumsListRequest.class
 com/chute/sdk/v2/model/AssetModel$1.class
 com/chute/sdk/v2/api/comment/CommentsDeleteRequest.class
 darko/imagedownloader/MD5.class
+com/chute/sdk/v2/api/upload/InputStreamKnownSizeBody.class
 com/chute/sdk/v2/api/asset/AssetsTokenRequest.class
 darko/imagedownloader/FileCache.class
 com/chute/sdk/v2/model/response/ListResponseModel.class

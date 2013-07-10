@@ -3,25 +3,17 @@ package com.chute.sdk.v2.api.asset;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.http.HttpEntity;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.entity.mime.FormBodyPart;
 import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MIME;
 import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.ByteArrayBody;
-import org.apache.http.entity.mime.content.ContentBody;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.InputStreamBody;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
+import com.chute.sdk.v2.api.upload.InputStreamKnownSizeBody;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
@@ -35,17 +27,16 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 
 	private String filePath;
 	private AlbumModel album;
-	
+
 	/**
 	 * 
-	 * Charset
-     *  Description
-     *  US-ASCII	Seven-bit ASCII, a.k.a. ISO646-US, a.k.a. the Basic Latin block of the Unicode character set
-     *  ISO-8859-1  	ISO Latin Alphabet No. 1, a.k.a. ISO-LATIN-1
-     *  UTF-8	   Eight-bit UCS Transformation Format
-     *  UTF-16BE	Sixteen-bit UCS Transformation Format, big-endian byte order
-     *  UTF-16LE	Sixteen-bit UCS Transformation Format, little-endian byte order
-     *  UTF-16	Sixteen-bit UCS Transformation Format, byte order identified by an optional byte-order mark
+	 * Charset Description: US-ASCII Seven-bit ASCII, a.k.a. ISO646-US, a.k.a.
+	 * the Basic Latin block of the Unicode character set, ISO-8859-1 ISO Latin
+	 * Alphabet No. 1, a.k.a. ISO-LATIN-1 UTF-8 Eight-bit UCS Transformation
+	 * Format, UTF-16BE Sixteen-bit UCS Transformation Format, big-endian byte
+	 * order, UTF-16LE Sixteen-bit UCS Transformation Format, little-endian byte
+	 * order, UTF-16 Sixteen-bit UCS Transformation Format, byte order
+	 * identified by an optional byte-order mark;
 	 */
 
 	public AssetsFileUploadRequest(Context context, AlbumModel album, String filePath,
@@ -56,7 +47,7 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
 		}
-		
+
 	}
 
 	@Override
@@ -64,11 +55,10 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		File file = new File(filePath);
 		MultipartEntity multipartEntity = null;
 		try {
-			multipartEntity = new MultipartEntity();
+			multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 			byte[] imageByteArray = Utils.getBytesFromFile(file);
-			InputStream is = new ByteArrayInputStream(imageByteArray);
-			InputStreamBody part = new InputStreamBody(is, "droid4.jpg");
-			multipartEntity.addPart("filedata", part);
+			multipartEntity.addPart("filedata", new InputStreamKnownSizeBody(new ByteArrayInputStream(imageByteArray),
+					imageByteArray.length, "image/jpg", "droid4.jpg"));
 		} catch (Exception e) {
 			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
 		}
