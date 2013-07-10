@@ -102,6 +102,7 @@ com/chute/sdk/v2/model/VoteModel.class
 com/chute/sdk/v2/model/FileObject.class
 com/chute/sdk/v2/model/LinkInfoModel.class
 com/chute/sdk/v2/api/parsers/BaseResponseParser.class
+com/chute/sdk/v2/api/upload/SimpleMultipartEntity.class
 com/chute/sdk/v2/utils/JsonUtil.class
 darko/imagedownloader/ContentURLStreamHandlerFactory.class
 darko/imagedownloader/MemoryCache.class

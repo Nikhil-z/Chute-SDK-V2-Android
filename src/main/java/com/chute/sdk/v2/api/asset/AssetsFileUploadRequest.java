@@ -15,6 +15,7 @@ import android.util.Log;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.api.upload.InputStreamKnownSizeBody;
+import com.chute.sdk.v2.api.upload.SimpleMultipartEntity;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
@@ -48,23 +49,26 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
 		}
+		
 
 	}
 
 	@Override
 	public HttpEntity getEntity() {
 		File file = new File(filePath);
-		MultipartEntity multipartEntity = null;
-		try {
-			multipartEntity = new MultipartEntity();
-			byte[] imageByteArray = Utils.getBytesFromFile(file);
-			multipartEntity.addPart("filedata", new FileBody(file));
-			multipartEntity.addPart("filedata", new InputStreamKnownSizeBody(new ByteArrayInputStream(imageByteArray),
-					imageByteArray.length, "image/jpg", file.getName()));
-		} catch (Exception e) {
-			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
-		}
-		return multipartEntity;
+//		MultipartEntity multipartEntity = null;
+//		try {
+//			multipartEntity = new MultipartEntity();
+//			byte[] imageByteArray = Utils.getBytesFromFile(file);
+//			multipartEntity.addPart("filedata", new FileBody(file));
+//			multipartEntity.addPart("filedata", new InputStreamKnownSizeBody(new ByteArrayInputStream(imageByteArray),
+//					imageByteArray.length, "image/jpg", file.getName()));
+//		} catch (Exception e) {
+//			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
+//		}
+		SimpleMultipartEntity entity = new SimpleMultipartEntity();
+		entity.addPart("filedata", file);
+		return entity;
 	}
 
 	// Log entity content

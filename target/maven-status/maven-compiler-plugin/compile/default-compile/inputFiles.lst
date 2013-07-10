@@ -34,6 +34,7 @@
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/HeartModel.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/model/FileObject.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/votes/GCVotes.java
+/home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/upload/SimpleMultipartEntity.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/darko/imagedownloader/Utils.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/flags/UnflagRequest.java
 /home/olja/Development/workspace/CHUTE/Chute-SDK-V2-Android/src/main/java/com/chute/sdk/v2/api/asset/AssetsUploadRequest.java
