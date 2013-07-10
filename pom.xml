@@ -47,12 +47,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.james</groupId>
-			<artifactId>apache-mime4j</artifactId>
-			<version>0.7.2</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
 			<version>4.3-beta2</version>

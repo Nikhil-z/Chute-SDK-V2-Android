@@ -1,15 +1,22 @@
 package com.chute.sdk.v2.api.asset;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.http.HttpEntity;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.entity.mime.FormBodyPart;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MIME;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
 
 import android.content.Context;
 import android.util.Log;
@@ -19,6 +26,7 @@ import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
+import com.chute.sdk.v2.utils.Utils;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.EntityHttpRequestImpl;
@@ -48,6 +56,7 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
 		}
+		
 	}
 
 	@Override
@@ -55,8 +64,11 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		File file = new File(filePath);
 		MultipartEntity multipartEntity = null;
 		try {
-			multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT, null, Charset.forName("UTF-16"));
-			multipartEntity.addPart("filedata", new FileBody(file));
+			multipartEntity = new MultipartEntity();
+			byte[] imageByteArray = Utils.getBytesFromFile(file);
+			InputStream is = new ByteArrayInputStream(imageByteArray);
+			InputStreamBody part = new InputStreamBody(is, "droid4.jpg");
+			multipartEntity.addPart("filedata", part);
 		} catch (Exception e) {
 			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
 		}
