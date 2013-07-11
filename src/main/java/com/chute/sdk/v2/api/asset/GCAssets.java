@@ -28,7 +28,9 @@ package com.chute.sdk.v2.api.asset;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.widget.ProgressBar;
 
+import com.chute.sdk.v2.api.upload.CountingMultipartRequestEntity.ProgressListener;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.PaginationModel;
@@ -159,10 +161,9 @@ public class GCAssets {
 		return new AlbumsGetAssetListRequest(context, album, new PaginationModel(), callback);
 	}
 
-
 	public static HttpRequest uploadOneStep(final Context context, final AlbumModel album, final String filePath,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AssetsFileUploadRequest(context, album, filePath, callback);
+		final ProgressBar progressBar, final HttpCallback<ListResponseModel<AssetModel>> callback) {
+		return new AssetsFileUploadRequest(context, album, filePath, progressBar, callback);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.apache.http.entity.mime.content.FileBody;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
@@ -21,18 +22,23 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.EntityHttpRequestImpl;
 
-public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseModel<AssetModel>> implements ProgressListener {
+public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseModel<AssetModel>> implements ProgressListener{
 
 	private String filePath;
 	private AlbumModel album;
+	private ProgressBar progressBar;
 
-	public AssetsFileUploadRequest(Context context, AlbumModel album, String filePath,
+	public AssetsFileUploadRequest(Context context, AlbumModel album, String filePath, ProgressBar progressBar,
 			HttpCallback<ListResponseModel<AssetModel>> callback) {
 		super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(AssetModel.class), callback);
 		this.filePath = filePath;
+		this.progressBar = progressBar;
 		this.album = album;
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
+		}
+		if (filePath == null) {
+			throw new NullPointerException("File path cannot be null");
 		}
 	}
 
@@ -42,7 +48,7 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		MultipartEntity multipartEntity = null;
 		try {
 			multipartEntity = new MultipartEntity();
-			multipartEntity.addPart("filedata",new FileBody(file));
+			multipartEntity.addPart("filedata", new FileBody(file));
 			return new CountingMultipartRequestEntity(multipartEntity, this);
 		} catch (Exception e) {
 			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
@@ -50,7 +56,6 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 		throw new IllegalArgumentException("Unable to create entity");
 	}
 
-	
 	@Override
 	protected String getUrl() {
 		return String.format(RestConstants.URL_UPLOAD_ONE_STEP, album.getId());
@@ -58,7 +63,9 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 
 	@Override
 	public void transferred(long num) {
-		ALog.d("Transfered: " + num);
+		progressBar.setProgress((int) num);
+		
 	}
+
 
 }
