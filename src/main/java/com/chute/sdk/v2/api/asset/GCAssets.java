@@ -25,18 +25,13 @@
 // 
 package com.chute.sdk.v2.api.asset;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import android.content.Context;
 
-import com.chute.sdk.v2.api.upload.UploadProgressListener;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
-import com.chute.sdk.v2.model.LocalAssetModel;
 import com.chute.sdk.v2.model.PaginationModel;
-import com.chute.sdk.v2.model.UploadToken;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
@@ -164,11 +159,6 @@ public class GCAssets {
 		return new AlbumsGetAssetListRequest(context, album, new PaginationModel(), callback);
 	}
 
-	public static HttpRequest upload(final Context context, final String authToken,
-			UploadProgressListener onProgressUpdate, final HttpCallback<List<UploadToken>> callback,
-			final ArrayList<LocalAssetModel> assets, final ArrayList<AlbumModel> albums) {
-		return new AssetsUploadRequest(context, authToken, onProgressUpdate, callback, assets, albums);
-	}
 
 	public static HttpRequest uploadOneStep(final Context context, final AlbumModel album, final String filePath,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {

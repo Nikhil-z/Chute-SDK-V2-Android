@@ -58,7 +58,7 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 
 	@Override
 	public void transferred(long num) {
-		ALog.d("Transfered: " + num );
+		ALog.d("Transfered: " + num);
 	}
 
 }
