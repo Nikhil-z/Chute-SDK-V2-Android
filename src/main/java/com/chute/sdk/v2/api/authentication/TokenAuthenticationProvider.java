@@ -6,101 +6,114 @@ import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
+import com.chute.sdk.v2.model.enums.TokenType;
 import com.dg.libs.rest.authentication.AuthenticationProvider;
 import com.dg.libs.rest.client.BaseRestClient;
 
 public class TokenAuthenticationProvider implements AuthenticationProvider {
 
-    private static final String TOKEN_KEY = "api_key";
+	private static final String TOKEN_KEY = "api_key";
 
-    private static TokenAuthenticationProvider account;
-    private final Context context;
-    private String token;
+	private static TokenAuthenticationProvider account;
+	private final Context context;
+	private String token;
+	private TokenType tokenType;
 
-    /**
-     * <b> this object will be using a Reference to the application context via
-     * getApplicationContext() NOT the Activity context</b> Recomended to be initialized at the
-     * application startup or by initializing in your own class extending application
-     * <p>
-     * <b> Dont forget to set the password on first init </b>
-     * 
-     * @param context it is only used into the first time init of the singleton, its reference is
-     *        stored so the singleton is alive during the application lifecycle.
-     * @return
-     */
-    public static synchronized TokenAuthenticationProvider getInstance() {
-        if (account == null) {
-            throw new RuntimeException("Initialize the Provider first");
-        }
-        return account;
-    }
+	/**
+	 * <b> this object will be using a Reference to the application context via
+	 * getApplicationContext() NOT the Activity context</b> Recomended to be
+	 * initialized at the application startup or by initializing in your own
+	 * class extending application
+	 * <p>
+	 * <b> Dont forget to set the password on first init </b>
+	 * 
+	 * @param context
+	 *            it is only used into the first time init of the singleton, its
+	 *            reference is stored so the singleton is alive during the
+	 *            application lifecycle.
+	 * @return
+	 */
+	public static synchronized TokenAuthenticationProvider getInstance() {
+		if (account == null) {
+			throw new RuntimeException("Initialize the Provider first");
+		}
+		return account;
+	}
 
-    public static synchronized void init(Context context) {
-        if (account == null) {
-            account = new TokenAuthenticationProvider(context);
-        }
-    }
+	public static synchronized void init(Context context, TokenType tokenType) {
+		if (account == null) {
+			account = new TokenAuthenticationProvider(context, tokenType);
+		}
+	}
 
-    private TokenAuthenticationProvider(final Context context) {
-        this.context = context.getApplicationContext();
-        initializeToken();
-    }
+	private TokenAuthenticationProvider(final Context context, final TokenType tokenType) {
+		this.context = context.getApplicationContext();
+		this.tokenType = tokenType;
+		initializeToken();
+	}
 
-    @Override
-    public void authenticateRequest(BaseRestClient client) {
-        if (TextUtils.isEmpty(token)) {
-            return;
-        }
-        client.addHeader("Authorization", "Bearer " + token);
-    }
+	public String getToken() {
+		return token;
+	}
 
-    public String getToken() {
-        return token;
-    }
+	public void setToken(String token) {
+		this.token = token;
+		saveApiKey(token);
+	}
 
-    public void setToken(String token) {
-        this.token = token;
-        saveApiKey(token);
-    }
+	public boolean isTokenValid() {
+		return !TextUtils.isEmpty(token);
+	}
 
-    public boolean isTokenValid() {
-        return !TextUtils.isEmpty(token);
-    }
+	public boolean clearAuth() {
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+		editor.remove(TOKEN_KEY);
+		boolean commit = editor.commit();
+		return commit;
+	}
 
-    public boolean clearAuth() {
-        Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        editor.remove(TOKEN_KEY);
-        boolean commit = editor.commit();
-        return commit;
-    }
+	/**
+	 * Use as an alternative for saving the token to accounts (Note that using
+	 * the account manager is a preferred and safer method)
+	 * 
+	 * @param apiKey
+	 *            the token aqured from chute auth
+	 * @param context
+	 * @return if the save was successful
+	 */
+	private boolean saveApiKey(final String apiKey) {
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+		editor.putString(TOKEN_KEY, apiKey);
+		boolean commit = editor.commit();
+		return commit;
+	}
 
-    /**
-     * Use as an alternative for saving the token to accounts (Note that using the account manager
-     * is a preferred and safer method)
-     * 
-     * @param apiKey the token aqured from chute auth
-     * @param context
-     * @return if the save was successful
-     */
-    private boolean saveApiKey(final String apiKey) {
-        Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        editor.putString(TOKEN_KEY, apiKey);
-        boolean commit = editor.commit();
-        return commit;
-    }
+	private String restoreApiKey() {
+		SharedPreferences savedSession = PreferenceManager.getDefaultSharedPreferences(context);
+		return savedSession.getString(TOKEN_KEY, "");
+	}
 
-    private String restoreApiKey() {
-        SharedPreferences savedSession = PreferenceManager.getDefaultSharedPreferences(context);
-        return savedSession.getString(TOKEN_KEY, "");
-    }
+	private void initializeToken() {
+		String apiKey = restoreApiKey();
+		if (!TextUtils.isEmpty(apiKey)) {
+			this.setToken(apiKey);
+			return;
+		}
+		// Set a manual token for testing
+		// this.setPassword("46e580a90085912ed11c565084f1f2465f28630bd58fa80cc98432f3078fc5ac");
+	}
 
-    private void initializeToken() {
-        String apiKey = restoreApiKey();
-        if (!TextUtils.isEmpty(apiKey)) {
-            this.setToken(apiKey);
-            return;
-        }
-        // Set a manual token for testing
-        // this.setPassword("46e580a90085912ed11c565084f1f2465f28630bd58fa80cc98432f3078fc5ac");
-    }
+	@Override
+	public void authenticateRequest(BaseRestClient client) {
+		if (TextUtils.isEmpty(token)) {
+			return;
+		}
+		if (tokenType == TokenType.BEARER_TOKEN) {
+			client.addHeader("Authorization", "Bearer " + token);
+		} else if (tokenType == TokenType.ACCESS_TOKEN) {
+			client.addHeader("Authorization", "OAuth " + token);
+		}
+
+	}
+
 }

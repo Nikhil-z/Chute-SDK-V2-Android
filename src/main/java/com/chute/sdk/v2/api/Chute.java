@@ -36,8 +36,7 @@ public class Chute {
 	public static final String TAG = Chute.class.getSimpleName();
 
 	public static void init(Context context) {
-		BaseRestClient.setDefaultAuthenticationProvider(AccountStore
-				.getInstance(context));
+		BaseRestClient.setDefaultAuthenticationProvider(AccountStore.getInstance(context));
 		PreferenceUtil.init(context);
 	}
 }
