@@ -6,7 +6,6 @@ import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
-import com.chute.sdk.v2.model.enums.TokenType;
 import com.dg.libs.rest.authentication.AuthenticationProvider;
 import com.dg.libs.rest.client.BaseRestClient;
 
@@ -17,7 +16,6 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 	private static TokenAuthenticationProvider account;
 	private final Context context;
 	private String token;
-	private TokenType tokenType;
 
 	/**
 	 * <b> this object will be using a Reference to the application context via
@@ -40,15 +38,14 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 		return account;
 	}
 
-	public static synchronized void init(Context context, TokenType tokenType) {
+	public static synchronized void init(Context context) {
 		if (account == null) {
-			account = new TokenAuthenticationProvider(context, tokenType);
+			account = new TokenAuthenticationProvider(context);
 		}
 	}
 
-	private TokenAuthenticationProvider(final Context context, final TokenType tokenType) {
+	private TokenAuthenticationProvider(final Context context) {
 		this.context = context.getApplicationContext();
-		this.tokenType = tokenType;
 		initializeToken();
 	}
 
@@ -108,11 +105,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 		if (TextUtils.isEmpty(token)) {
 			return;
 		}
-		if (tokenType == TokenType.BEARER_TOKEN) {
-			client.addHeader("Authorization", "Bearer " + token);
-		} else if (tokenType == TokenType.ACCESS_TOKEN) {
-			client.addHeader("Authorization", "OAuth " + token);
-		}
+		client.addHeader("Authorization", "Bearer " + token);
 
 	}
 

@@ -162,8 +162,8 @@ public class GCAssets {
 	}
 
 	public static HttpRequest uploadOneStep(final Context context, final AlbumModel album, final String filePath,
-		final ProgressBar progressBar, final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AssetsFileUploadRequest(context, album, filePath, progressBar, callback);
+			final HttpCallback<ListResponseModel<AssetModel>> callback) {
+		return new AssetsFileUploadRequest(context, album, filePath, callback);
 	}
 
 }

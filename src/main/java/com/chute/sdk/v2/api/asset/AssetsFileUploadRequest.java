@@ -26,13 +26,11 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 
 	private String filePath;
 	private AlbumModel album;
-	private ProgressBar progressBar;
 
-	public AssetsFileUploadRequest(Context context, AlbumModel album, String filePath, ProgressBar progressBar,
+	public AssetsFileUploadRequest(Context context, AlbumModel album, String filePath,
 			HttpCallback<ListResponseModel<AssetModel>> callback) {
 		super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(AssetModel.class), callback);
 		this.filePath = filePath;
-		this.progressBar = progressBar;
 		this.album = album;
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
@@ -63,8 +61,7 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 
 	@Override
 	public void transferred(long num) {
-		progressBar.setProgress((int) num);
-		
+     ALog.d("Transferred = " + num);		
 	}
 
 

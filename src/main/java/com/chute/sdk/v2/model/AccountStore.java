@@ -46,7 +46,6 @@ import android.util.Log;
 
 import com.chute.sdk.v2.api.authentication.AuthenticationActivity;
 import com.chute.sdk.v2.api.authentication.AuthenticationFactory.AccountType;
-import com.chute.sdk.v2.model.enums.TokenType;
 import com.chute.sdk.v2.utils.Constants;
 import com.dg.libs.rest.authentication.AuthenticationProvider;
 import com.dg.libs.rest.client.BaseRestClient;
@@ -66,8 +65,6 @@ public class AccountStore implements AuthenticationProvider {
 
 	private final ArrayList<NameValuePair> headers;
 	private final Context context;
-
-	private TokenType tokenType;
 
 	/**
 	 * <b> This object will be using a Reference to the application context via
@@ -137,14 +134,6 @@ public class AccountStore implements AuthenticationProvider {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public TokenType getTokenType() {
-		return tokenType;
-	}
-
-	public void setTokenType(TokenType tokenType) {
-		this.tokenType = tokenType;
 	}
 
 	public static void setAppId(Context context, String appId) {
@@ -359,9 +348,9 @@ public class AccountStore implements AuthenticationProvider {
 	 * @param clientSecret
 	 */
 	public void startAuthenticationActivity(Activity activity, AccountType accountType, String scope,
-			String redirectUri, String clientId, String clientSecret, TokenType tokenType) {
+			String redirectUri, String clientId, String clientSecret) {
 		Intent intent = new Intent(activity, AuthenticationActivity.class);
-		authConstants = new AuthConstants(accountType, scope, redirectUri, clientId, clientSecret, tokenType);
+		authConstants = new AuthConstants(accountType, scope, redirectUri, clientId, clientSecret);
 		activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
 	}
 
@@ -384,28 +373,22 @@ public class AccountStore implements AuthenticationProvider {
 		public String redirectUri;
 		public String clientId;
 		public String clientSecret;
-		public TokenType tokenType;
 
 		public AuthConstants(AccountType accountType, String scope, String redirectUri, String clientId,
-				String clientSecret, TokenType tokenType) {
+				String clientSecret) {
 			super();
 			this.accountType = accountType;
 			this.scope = scope;
 			this.redirectUri = redirectUri;
 			this.clientId = clientId;
 			this.clientSecret = clientSecret;
-			this.tokenType = tokenType;
 		}
 
 	}
 
 	@Override
 	public void authenticateRequest(BaseRestClient client) {
-		if (getTokenType() == TokenType.BEARER_TOKEN) {
-			client.addHeader("Authorization", "Bearer " + getPassword());
-		} else if (getTokenType() == TokenType.ACCESS_TOKEN) {
-			client.addHeader("Authorization", "OAuth " + getPassword());
-		}
+		client.addHeader("Authorization", "Bearer " + getPassword());
 
 	}
 
