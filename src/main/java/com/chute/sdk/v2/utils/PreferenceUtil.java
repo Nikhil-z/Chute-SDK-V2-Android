@@ -35,6 +35,7 @@ public class PreferenceUtil {
 
 	public static final String TAG = PreferenceUtil.class.getSimpleName();
 	private static final String BITMAP_PATH = "bitmap_path";
+	private static final String ACCOUNT_TOKEN = "account_token";
 	private final Context context;
 
 	private PreferenceUtil(Context context) {
@@ -70,8 +71,7 @@ public class PreferenceUtil {
 		} else if (value.getClass().equals(Float.class)) {
 			edit.putFloat(key, (Float) value);
 		} else {
-			throw new UnsupportedOperationException(
-					"Need to add a primitive type to shared prefs");
+			throw new UnsupportedOperationException("Need to add a primitive type to shared prefs");
 		}
 		edit.commit();
 	}
@@ -99,8 +99,7 @@ public class PreferenceUtil {
 	}
 
 	public String getAccountName(AccountType accountType) {
-		return getPreferences()
-				.getString(accountType.getName() + "_name", null);
+		return getPreferences().getString(accountType.getName() + "_name", null);
 	}
 
 	// Account UID
@@ -113,8 +112,7 @@ public class PreferenceUtil {
 	}
 
 	public String getUidForAccount(AccountType accountType) {
-		return getPreferences().getString(accountType.getName() + "__name",
-				null);
+		return getPreferences().getString(accountType.getName() + "__name", null);
 	}
 
 	// Bitmap path
@@ -124,6 +122,15 @@ public class PreferenceUtil {
 
 	public void setBitmapPath(String path) {
 		setPreference(BITMAP_PATH, path);
+	}
+
+	// Account token
+	public String getAccountToken() {
+		return getPreferences().getString(ACCOUNT_TOKEN, null);
+	}
+
+	public void setAccountToken(String token) {
+		setPreference(ACCOUNT_TOKEN, token);
 	}
 
 }

@@ -145,4 +145,11 @@ public class RestConstants {
 			+ "/uploads/%s/complete";
 	public static final String URL_UPLOAD_ONE_STEP = BASE_UPLOAD_URL + "/v2/albums/%s/assets/upload";
 
+	//ACCOUNTS
+	public static final String BASE_ACCOUNT_URL = "http://accounts.getchute.com";
+//	public static final String URL_ACCOUNTS = BASE_URL + "/v1/accounts";
+	public static final String URL_ACCOUNTS = BASE_URL + "/me/accounts";
+	public static final String URL_ACCOUNT_OBJECT = BASE_ACCOUNT_URL + "/v1/accounts/%s/objects";
+	public static final String URL_ACCOUNT_OBJECT_MEDIA = BASE_ACCOUNT_URL + "/v1/accounts/%s/objects/%s/media";
+
 }
