@@ -100,7 +100,6 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public void authenticateRequest(BaseRestClient client) {
-		client.addHeader("Content-Type", "application/json");
 		if (TextUtils.isEmpty(token)) {
 			ALog.e("you still don't have a token, you can only use the calls that don't need auth like this.");
 			return;

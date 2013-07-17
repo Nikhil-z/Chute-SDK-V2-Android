@@ -38,12 +38,18 @@ public class Chute {
 	public static final String TAG = Chute.class.getSimpleName();
 
 	public static void init(Context context, AuthConstants constants) {
+		init(context, constants, null);
+	}	
+	
+	public static void init(Context context, AuthConstants constants, String token) {
 		PreferenceUtil.init(context);
 		TokenAuthenticationProvider.init(context);
+		if( token != null){
+			TokenAuthenticationProvider.getInstance().setToken(token);
+		}
 		AuthenticationFactory.getInstance().setAuthConstants(constants);
 		BaseRestClient
 				.setDefaultAuthenticationProvider(TokenAuthenticationProvider
 						.getInstance());
-
 	}
 }

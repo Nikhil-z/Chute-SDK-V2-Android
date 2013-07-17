@@ -38,6 +38,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -82,8 +84,15 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		final WebSettings mWebSettings = webViewAuthentication.getSettings();
 		mWebSettings.setSavePassword(false);
 		mWebSettings.setSaveFormData(false);
+	    this.getBaseContext().deleteDatabase("webview.db");
+	    this.getBaseContext().deleteDatabase("webviewCache.db");
+		CookieSyncManager.createInstance(this);
+		CookieManager cookieManager = CookieManager.getInstance();
+		cookieManager.removeAllCookie();
+		
 		final FrameLayout frameLayout = new FrameLayout(this);
 		frameLayout.setLayoutParams(new FrameLayout.LayoutParams(
+				
 				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		pb = new ProgressBar(this);
 		final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
@@ -152,6 +161,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 						setResult(CODE_HTTP_ERROR);
 						finish();
 					}
+					ALog.d(code);
 					view.stopLoading();
 					new AuthenticationToken<String>(getApplicationContext(),
 							AuthenticationFactory.getInstance()
