@@ -27,7 +27,9 @@ package com.chute.sdk.v2.api;
 
 import android.content.Context;
 
-import com.chute.sdk.v2.model.AccountStore;
+import com.chute.sdk.v2.api.authentication.AuthConstants;
+import com.chute.sdk.v2.api.authentication.AuthenticationFactory;
+import com.chute.sdk.v2.api.authentication.TokenAuthenticationProvider;
 import com.chute.sdk.v2.utils.PreferenceUtil;
 import com.dg.libs.rest.client.BaseRestClient;
 
@@ -35,8 +37,13 @@ public class Chute {
 
 	public static final String TAG = Chute.class.getSimpleName();
 
-	public static void init(Context context) {
-		BaseRestClient.setDefaultAuthenticationProvider(AccountStore.getInstance(context));
+	public static void init(Context context, AuthConstants constants) {
 		PreferenceUtil.init(context);
+		TokenAuthenticationProvider.init(context);
+		AuthenticationFactory.getInstance().setAuthConstants(constants);
+		BaseRestClient
+				.setDefaultAuthenticationProvider(TokenAuthenticationProvider
+						.getInstance());
+
 	}
 }

@@ -25,80 +25,48 @@
 // 
 package com.chute.sdk.v2.api.authentication;
 
-import com.chute.sdk.v2.model.AccountStore.AuthConstants;
+import android.app.Activity;
+import android.content.Intent;
+
+import com.chute.sdk.v2.model.enums.AccountType;
 import com.chute.sdk.v2.utils.RestConstants;
 
 public class AuthenticationFactory {
+	
+	public static final String EXTRA_ACCOUNT_TYPE = "account_type";
+
+	public static final int AUTHENTICATION_REQUEST_CODE = 123;
+	
 	@SuppressWarnings("unused")
 	private static final String TAG = AuthenticationFactory.class
 			.getSimpleName();
-	private final AuthConstants authConstants;
+	private AuthConstants authConstants;
 
-	public enum AccountType {
-		FACEBOOK("facebook"), EVERNOTE("evernote"), CHUTE("chute"), TWITTER(
-				"twitter"), FOURSQUARE("foursquare"), PICASA("google"), FLICKR(
-				"flickr"), INSTAGRAM("instagram");
-
-		private final String name;
-
-		private AccountType(String name) {
-			this.name = name;
+	private static AuthenticationFactory instance;
+	
+	public static AuthenticationFactory getInstance(){
+		if(instance==null){
+			instance = new AuthenticationFactory();
 		}
-
-		@Override
-		public String toString() {
-			return name;
-		};
-
-		public String getName() {
-			return name;
-		}
+		return instance;
 	}
-
-	public AuthenticationFactory(AuthConstants authConstants) {
+	
+	private AuthenticationFactory() {
+	}
+	
+	public void setAuthConstants(AuthConstants authConstants) {
 		this.authConstants = authConstants;
 	}
 
-	public String getAuthenticationURL() {
-		StringBuilder stringBuilder;
-		switch (authConstants.accountType) {
-		case FACEBOOK:
-			stringBuilder = new StringBuilder(
-					RestConstants.URL_AUTHENTICATION_FACEBOOK);
-			break;
-		case EVERNOTE:
-			stringBuilder = new StringBuilder(
-					RestConstants.URL_AUTHENTICATION_EVERNOTE);
-			break;
-		case CHUTE:
-			stringBuilder = new StringBuilder(
-					RestConstants.URL_AUTHENTICATION_CHUTE);
-			break;
-		case TWITTER:
-			stringBuilder = new StringBuilder(
-					RestConstants.URL_AUTHENTICATION_TWITTER);
-			break;
-		case FOURSQUARE:
-			stringBuilder = new StringBuilder(
-					RestConstants.URL_AUTHENTICATION_FOURSQUARE);
-			break;
-		case PICASA:
-			stringBuilder = new StringBuilder(
-					RestConstants.URL_AUTHENTICATION_PICASA);
-			break;
-		case FLICKR:
-			stringBuilder = new StringBuilder(
-					RestConstants.URL_AUTHENTICATION_FLICKR);
-			break;
-		case INSTAGRAM:
-			stringBuilder = new StringBuilder(
-					RestConstants.URL_AUTHENTICATION_INSTAGRAM);
-			break;
-		default:
-			throw new RuntimeException("Not a valid account type");
+	public String getAuthenticationURL(AccountType accountType) {
+		if(authConstants==null){
+			throw new IllegalArgumentException("If you are using the Authentication activity, you need to pass in the Authentication Constants to start it");
 		}
+		StringBuilder stringBuilder;
+		stringBuilder = new StringBuilder(
+				RestConstants.BASE_AUTH_URL + accountType.getName());
 		stringBuilder.append("?");
-		stringBuilder.append("scope=" + authConstants.scope);
+		stringBuilder.append("scope=" + AuthConstants.PERMISSIONS_SCOPE);
 		stringBuilder.append("&");
 		stringBuilder.append("type=web_server");
 		stringBuilder.append("&");
@@ -106,15 +74,44 @@ public class AuthenticationFactory {
 		stringBuilder.append("&");
 		stringBuilder.append("client_id=" + authConstants.clientId);
 		stringBuilder.append("&");
-		stringBuilder.append("redirect_uri=" + authConstants.redirectUri);
+		stringBuilder.append("redirect_uri=" + AuthConstants.CALLBACK_URL);
 		return stringBuilder.toString();
 	}
 
-	public String getRedirectUri() {
-		return authConstants.redirectUri;
+	/**
+	 * <p>
+	 * Use {@link #AUTHENTICATION_REQUEST_CODE} inside the onActivityResult to
+	 * check the request code
+	 * <p>
+	 * Use {@link Activity#RESULT_OK} for the result code if the auth was
+	 * successful
+	 * 
+	 * <pre>
+	 * <b> For errors use the following constants for the result code </b>
+	 * Use {@link GCAuthenticationActivity#CODE_HTTP_EXCEPTION}} - For connection problems
+	 * Use {@link GCAuthenticationActivity#CODE_HTTP_ERROR}} - For server issues, see logcat for detailed error
+	 * Use {@link GCAuthenticationActivity#CODE_PARSER_EXCEPTION}} - For result parsing errors, see logcat for details
+	 * </pre>
+	 * 
+	 * @param activity
+	 * @param accountType
+	 * @param scope
+	 * @param redirectUri
+	 * @param clientId
+	 * @param clientSecret
+	 */
+	public void startAuthenticationActivity(Activity activity, AccountType accountType) {
+		Intent intent = new Intent(activity, AuthenticationActivity.class);
+		intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType.ordinal());
+		activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
+	}
+
+	public AuthConstants getAuthConstants() {
+		return authConstants;
 	}
 
 	public boolean isRedirectUri(String url) {
-		return url.startsWith(authConstants.redirectUri);
+		return url.startsWith(AuthConstants.CALLBACK_URL);
 	}
+
 }

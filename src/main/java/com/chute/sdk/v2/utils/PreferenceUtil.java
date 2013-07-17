@@ -29,7 +29,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.chute.sdk.v2.api.authentication.AuthenticationFactory.AccountType;
+import com.chute.sdk.v2.model.enums.AccountType;
 
 public class PreferenceUtil {
 

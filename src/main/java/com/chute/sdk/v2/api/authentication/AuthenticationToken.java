@@ -27,7 +27,7 @@ package com.chute.sdk.v2.api.authentication;
 
 import android.content.Context;
 
-import com.chute.sdk.v2.model.AccountStore.AuthConstants;
+import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
@@ -41,12 +41,14 @@ public class AuthenticationToken<T> extends ParameterHttpRequestImpl<T> {
 	public AuthenticationToken(Context context, AuthConstants authConstants,
 			String code, HttpResponseParser<T> parser, HttpCallback<T> callback) {
 		super(context, RequestMethod.POST, parser, callback);
+		ALog.d("code " + code + " client_id " + authConstants.clientId);
+		
 		addParam("code", code);
-		addParam("scope", authConstants.scope);
+		addParam("scope", AuthConstants.PERMISSIONS_SCOPE);
 		addParam("client_id", authConstants.clientId);
 		addParam("client_secret", authConstants.clientSecret);
 		addParam("grant_type", "authorization_code");
-		addParam("redirect_uri", authConstants.redirectUri);
+		addParam("redirect_uri",AuthConstants.CALLBACK_URL);
 	}
 
 	@Override
