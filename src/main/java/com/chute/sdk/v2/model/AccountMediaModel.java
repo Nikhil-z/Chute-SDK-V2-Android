@@ -1,9 +1,9 @@
 package com.chute.sdk.v2.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The {@link AccountMediaModel} class represents the concept of a media item

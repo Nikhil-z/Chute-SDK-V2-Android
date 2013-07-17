@@ -25,10 +25,10 @@
 //
 package com.chute.sdk.v2.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The {@link FlagModel} class represents a concept of asset flag. Each flag

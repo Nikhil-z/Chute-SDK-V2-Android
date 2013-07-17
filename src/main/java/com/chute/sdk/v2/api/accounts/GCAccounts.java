@@ -1,13 +1,13 @@
 package com.chute.sdk.v2.api.accounts;
 
+import android.content.Context;
+
 import com.chute.sdk.v2.model.AccountMediaModel;
 import com.chute.sdk.v2.model.AccountModel;
 import com.chute.sdk.v2.model.AccountObjectModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
-
-import android.content.Context;
 
 /**
  * The {@link GCAccounts} is a helper class which contains methods for getting
@@ -33,11 +33,11 @@ public class GCAccounts {
 	 * @param callback
 	 *            Instance of {@link GCHttpCallback} interface. According to the
 	 *            parser, the callback should have the same return type.
-	 * @return Instance of {@link AccountsGetRequest}, class that implements
+	 * @return Instance of {@link AccountsRequest}, class that implements
 	 *         {@link GCHttpRequest}.
 	 */
-	public static HttpRequest all(final Context context, final HttpCallback<ListResponseModel<AccountModel>> callback) {
-		return new AccountsGetRequest(context, callback);
+	public static HttpRequest allUserAccounts(final Context context, final HttpCallback<ListResponseModel<AccountModel>> callback) {
+		return new AccountsRequest(context, callback);
 	}
 
 	/**
@@ -56,12 +56,12 @@ public class GCAccounts {
 	 * @param callback
 	 *            Instance of {@link GCHttpCallback} interface. According to the
 	 *            parser, the callback should have the same return type.
-	 * @return Instance of {@link AccountsGetObjectsRequest}, class that
+	 * @return Instance of {@link AccountAlbumsRequest}, class that
 	 *         implements {@link GCHttpRequest}.
 	 */
-	public static HttpRequest objects(final Context context, final String accountId,
+	public static HttpRequest albums(final Context context, final String accountId,
 			final HttpCallback<ListResponseModel<AccountObjectModel>> callback) {
-		return new AccountsGetObjectsRequest(context, accountId, callback);
+		return new AccountAlbumsRequest(context, accountId, callback);
 	}
 
 	/**
@@ -83,11 +83,11 @@ public class GCAccounts {
 	 * @param callback
 	 *            Instance of {@link GCHttpCallback} interface. According to the
 	 *            parser, the callback should have the same return type.
-	 * @return Instance of {@link AccountsGetObjectMediaRequest}, class that
+	 * @return Instance of {@link AccountAlbumMediaRequest}, class that
 	 *         implements {@link GCHttpRequest}.
 	 */
-	public static HttpRequest objectMedia(final Context context, final String accountId, final String objectId,
+	public static HttpRequest albumMedia(final Context context, final String accountId, final String objectId,
 			final HttpCallback<ListResponseModel<AccountMediaModel>> callback) {
-		return new AccountsGetObjectMediaRequest(context, accountId, objectId, callback);
+		return new AccountAlbumMediaRequest(context, accountId, objectId, callback);
 	}
 }

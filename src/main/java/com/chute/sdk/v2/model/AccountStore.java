@@ -54,7 +54,7 @@ public class AccountStore implements AuthenticationProvider {
 
 	private static String APP_ID = null;
 
-	public static final int AUTHENTICATION_REQUEST_CODE = 423532;
+	public static final int AUTHENTICATION_REQUEST_CODE = 666;
 
 	private static final String TAG = AccountStore.class.getSimpleName();
 

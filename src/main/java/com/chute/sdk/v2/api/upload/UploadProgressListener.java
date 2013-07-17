@@ -25,9 +25,9 @@
 // 
 package com.chute.sdk.v2.api.upload;
 
-import com.chute.sdk.v2.model.AssetModel;
-
 import android.graphics.Bitmap;
+
+import com.chute.sdk.v2.model.AssetModel;
 
 /**
  * <b> IMPORTANT!! runs the updates in the thread that executed the request</b>

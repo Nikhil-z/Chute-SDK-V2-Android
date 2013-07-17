@@ -1,7 +1,5 @@
 package com.chute.sdk.v2.test.parsers.parcels;
 
-import java.awt.List;
-
 import junit.framework.TestCase;
 
 import org.apache.commons.io.IOUtils;

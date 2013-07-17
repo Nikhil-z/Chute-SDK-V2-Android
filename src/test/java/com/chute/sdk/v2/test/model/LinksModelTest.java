@@ -1,5 +1,7 @@
 package com.chute.sdk.v2.test.model;
 
+import junit.framework.TestCase;
+
 import com.chute.sdk.v2.model.LinkModel;
 import com.chute.sdk.v2.test.factories.FactoryManager;
 import com.chute.sdk.v2.utils.JsonUtil;
@@ -8,8 +10,6 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.tobedevoured.modelcitizen.CreateModelException;
-
-import junit.framework.TestCase;
 
 public class LinksModelTest extends TestCase {
 

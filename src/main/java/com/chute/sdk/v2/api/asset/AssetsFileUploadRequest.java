@@ -8,7 +8,6 @@ import org.apache.http.entity.mime.content.FileBody;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ProgressBar;
 
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;

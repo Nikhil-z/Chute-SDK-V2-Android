@@ -28,9 +28,7 @@ package com.chute.sdk.v2.api.asset;
 import java.util.HashMap;
 
 import android.content.Context;
-import android.widget.ProgressBar;
 
-import com.chute.sdk.v2.api.upload.CountingMultipartRequestEntity.ProgressListener;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.PaginationModel;
