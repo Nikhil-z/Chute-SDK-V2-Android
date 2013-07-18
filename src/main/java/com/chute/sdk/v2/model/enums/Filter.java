@@ -25,7 +25,6 @@
 //
 package com.chute.sdk.v2.model.enums;
 
-import com.chute.sdk.v2.api.authentication.AuthenticationFactory.AccountType;
 
 /**
  * The {@link Filter} class is a wrapper around certain parameters needed for

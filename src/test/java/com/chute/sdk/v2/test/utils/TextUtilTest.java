@@ -1,8 +1,8 @@
 package com.chute.sdk.v2.test.utils;
 
-import com.chute.sdk.v2.utils.TextUtil;
-
 import junit.framework.TestCase;
+
+import com.chute.sdk.v2.utils.TextUtil;
 
 public class TextUtilTest extends TestCase{
 

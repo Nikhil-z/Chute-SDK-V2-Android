@@ -31,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 import android.content.Context;
@@ -55,8 +56,9 @@ public class Utils {
 				Log.e(TAG, parameter);
 				String v[] = parameter.split("=");
 				try {
-					params.putString(URLDecoder.decode(v[0]), URLDecoder.decode(v[1]));
+					params.putString(URLDecoder.decode(v[0], "UTF-8"), URLDecoder.decode(v[1], "UTF-8"));
 				} catch (ArrayIndexOutOfBoundsException e) {
+				} catch (UnsupportedEncodingException e) {
 				}
 			}
 		}

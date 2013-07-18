@@ -1,12 +1,12 @@
 package com.chute.sdk.v2.test.parsers.flags;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.io.IOUtils;
 
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.FlagModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
-
-import junit.framework.TestCase;
 
 public class FlagDeleteParserTest extends TestCase {
 

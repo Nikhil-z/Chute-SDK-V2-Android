@@ -25,10 +25,10 @@
 //
 package com.chute.sdk.v2.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Parcels represent a group of assets. A parcel contains all assets that were

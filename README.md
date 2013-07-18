@@ -14,3 +14,11 @@ You can use it as a Maven dependency by adding the following to your list of dep
 
 
 Or use the jar with dependencies from target in your regular non-maven projects
+
+# Changelog
+
+## 2.1.1
+
+	- Removed Account Store
+	- Initialization should always go through Chute.init(context,authConstants); A recommended way of doing this is by extending the Application class and adding this piece of code inside onCreate();
+	

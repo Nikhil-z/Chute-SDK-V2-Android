@@ -1,11 +1,11 @@
 package com.chute.sdk.v2.test.parsers.tags;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.io.IOUtils;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.response.ListResponseModel;
-
-import junit.framework.TestCase;
 
 public class TagsDeleteParserTest extends TestCase {
 

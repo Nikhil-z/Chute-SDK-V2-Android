@@ -38,15 +38,16 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
-import com.chute.sdk.v2.model.AccountStore;
-import com.chute.sdk.v2.model.AccountStore.AuthConstants;
-import com.chute.sdk.v2.utils.Constants;
+import com.araneaapps.android.libs.logger.ALog;
+import com.chute.sdk.v2.model.enums.AccountType;
 import com.chute.sdk.v2.utils.Utils;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.domain.ResponseStatus;
@@ -63,8 +64,6 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 	private WebView webViewAuthentication;
 
 	private AuthenticationFactory authenticationFactory;
-
-	private AuthConstants authConstants;
 
 	private ProgressBar pb;
 
@@ -85,8 +84,15 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		final WebSettings mWebSettings = webViewAuthentication.getSettings();
 		mWebSettings.setSavePassword(false);
 		mWebSettings.setSaveFormData(false);
+	    this.getBaseContext().deleteDatabase("webview.db");
+	    this.getBaseContext().deleteDatabase("webviewCache.db");
+		CookieSyncManager.createInstance(this);
+		CookieManager cookieManager = CookieManager.getInstance();
+		cookieManager.removeAllCookie();
+		
 		final FrameLayout frameLayout = new FrameLayout(this);
 		frameLayout.setLayoutParams(new FrameLayout.LayoutParams(
+				
 				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		pb = new ProgressBar(this);
 		final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
@@ -96,11 +102,10 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		frameLayout.addView(webViewAuthentication);
 		frameLayout.addView(pb);
 		setContentView(frameLayout);
-		authConstants = AccountStore.getInstance(getApplicationContext())
-				.getAuthConstants();
-		authenticationFactory = new AuthenticationFactory(authConstants);
+		
+		authenticationFactory = AuthenticationFactory.getInstance();
 		webViewAuthentication.loadUrl(authenticationFactory
-				.getAuthenticationURL());
+				.getAuthenticationURL(AccountType.values()[getIntent().getExtras().getInt(AuthenticationFactory.EXTRA_ACCOUNT_TYPE)]));
 	}
 
 	private final class AuthenticationCodeCallback implements
@@ -114,9 +119,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
 		@Override
 		public void onHttpError(ResponseStatus responseCode) {
-			if (Constants.DEBUG) {
-				Log.d(TAG, "Response Not Valid, " + " Code: " + responseCode);
-			}
+			ALog.d(TAG, "Response Not Valid, " + " Code: " + responseCode);
 			setResult(CODE_HTTP_ERROR);
 			finish();
 		}
@@ -128,8 +131,8 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		@Override
 		public String parse(final String responseBody) throws JSONException {
 			final JSONObject obj = new JSONObject(responseBody);
-			AccountStore.getInstance(getApplicationContext()).saveApiKey(
-					obj.getString("access_token"), getApplicationContext());
+			TokenAuthenticationProvider.getInstance().setToken(
+					obj.getString("access_token"));
 			return responseBody;
 		}
 
@@ -148,9 +151,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		@Override
 		public void onPageStarted(final WebView view, final String url,
 				final Bitmap favicon) {
-			if (Constants.DEBUG) {
-				Log.d(TAG, "Page started " + url);
-			}
+			ALog.d(TAG, "Page started " + url);
 
 			try {
 				if (authenticationFactory.isRedirectUri(url)) {
@@ -160,16 +161,16 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 						setResult(CODE_HTTP_ERROR);
 						finish();
 					}
+					ALog.d(code);
 					view.stopLoading();
 					new AuthenticationToken<String>(getApplicationContext(),
-							authConstants, code,
+							AuthenticationFactory.getInstance()
+							.getAuthConstants(), code,
 							new AuthenticationResponseParser(),
 							new AuthenticationCodeCallback()).executeAsync();
 				}
 			} catch (final Exception e) {
-				if (Constants.DEBUG) {
-					Log.d(TAG, "AUTHENTICATION FAILED", e);
-				}
+				ALog.d(TAG, "AUTHENTICATION FAILED", e);
 				setResult(CODE_HTTP_EXCEPTION);
 				finish();
 			} finally {
@@ -180,9 +181,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
 		@Override
 		public void onPageFinished(final WebView view, final String url) {
-			if (Constants.DEBUG) {
-				Log.e(TAG, "Page finished " + url);
-			}
+			ALog.e(TAG, "Page finished " + url);
 			pb.setVisibility(View.GONE);
 			super.onPageFinished(view, url);
 		}
@@ -190,9 +189,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		@Override
 		public void onReceivedError(final WebView view, final int errorCode,
 				final String description, final String failingUrl) {
-			if (Constants.DEBUG) {
-				Log.e(TAG, "Error " + failingUrl);
-			}
+			ALog.e(TAG, "Error " + failingUrl);
 			super.onReceivedError(view, errorCode, description, failingUrl);
 		}
 	}

@@ -29,7 +29,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.chute.sdk.v2.api.authentication.AuthenticationFactory.AccountType;
+import com.chute.sdk.v2.model.enums.AccountType;
 
 public class PreferenceUtil {
 
@@ -104,15 +104,15 @@ public class PreferenceUtil {
 
 	// Account UID
 	public void setUidForAccount(AccountType accountType, String uid) {
-		setPreference(accountType.getName() + "__name", uid);
+		setPreference(accountType.getName() + "_uid", uid);
 	}
 
 	public boolean hasUid(AccountType accountType) {
-		return getPreferences().contains(accountType.getName() + "__name");
+		return getPreferences().contains(accountType.getName() + "_uid");
 	}
 
 	public String getUidForAccount(AccountType accountType) {
-		return getPreferences().getString(accountType.getName() + "__name", null);
+		return getPreferences().getString(accountType.getName() + "_uid", null);
 	}
 
 	// Bitmap path

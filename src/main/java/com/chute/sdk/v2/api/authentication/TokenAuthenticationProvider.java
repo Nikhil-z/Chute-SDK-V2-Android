@@ -6,6 +6,7 @@ import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
+import com.araneaapps.android.libs.logger.ALog;
 import com.dg.libs.rest.authentication.AuthenticationProvider;
 import com.dg.libs.rest.client.BaseRestClient;
 
@@ -92,17 +93,15 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 
 	private void initializeToken() {
 		String apiKey = restoreApiKey();
-		if (!TextUtils.isEmpty(apiKey)) {
+		if (TextUtils.isEmpty(apiKey)==false) {
 			this.setToken(apiKey);
-			return;
 		}
-		// Set a manual token for testing
-		// this.setPassword("46e580a90085912ed11c565084f1f2465f28630bd58fa80cc98432f3078fc5ac");
 	}
 
 	@Override
 	public void authenticateRequest(BaseRestClient client) {
 		if (TextUtils.isEmpty(token)) {
+			ALog.e("you still don't have a token, you can only use the calls that don't need auth like this.");
 			return;
 		}
 		client.addHeader("Authorization", "Bearer " + token);

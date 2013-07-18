@@ -30,27 +30,10 @@ public class RestConstants {
 
 	public static final String BASE_URL = "https://api.getchute.com/v2";
 	public static final String BASE_UPLOAD_URL = "http://upload.getchute.com";
-	public static final String BASE_AUTH_URL = "https://getchute.com";
+	public static final String BASE_AUTH_URL = "https://getchute.com/oauth/";
 
-	// Accounts
-	public static final String URL_AUTHENTICATION_FACEBOOK = BASE_AUTH_URL
-			+ "/oauth/facebook";
-	public static final String URL_AUTHENTICATION_EVERNOTE = BASE_AUTH_URL
-			+ "/oauth/evernote";
-	public static final String URL_AUTHENTICATION_CHUTE = BASE_AUTH_URL
-			+ "/oauth/chute";
-	public static final String URL_AUTHENTICATION_TWITTER = BASE_AUTH_URL
-			+ "/oauth/twitter";
-	public static final String URL_AUTHENTICATION_FOURSQUARE = BASE_AUTH_URL
-			+ "/oauth/foursquare";
-	public static final String URL_AUTHENTICATION_FLICKR = BASE_AUTH_URL
-			+ "/oauth/flickr";
-	public static final String URL_AUTHENTICATION_INSTAGRAM = BASE_AUTH_URL
-			+ "/oauth/instagram";
-	public static final String URL_AUTHENTICATION_PICASA = BASE_AUTH_URL
-			+ "/oauth/google";
 	public static final String URL_AUTHENTICATION_TOKEN = BASE_AUTH_URL
-			+ "/oauth/access_token";
+			+ "access_token";
 
 	// ALBUMS
 	public static final String URL_ALBUMS_ALL = BASE_URL + "/albums";

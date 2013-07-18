@@ -1,12 +1,12 @@
 package com.chute.sdk.v2.test.parsers.comments;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.io.IOUtils;
 
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.CommentModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
-
-import junit.framework.TestCase;
 
 public class CommentCreateParserTest extends TestCase {
 
