@@ -134,5 +134,9 @@ public class RestConstants {
 	public static final String URL_ACCOUNTS = BASE_URL + "/me/accounts";
 	public static final String URL_ACCOUNT_OBJECT = BASE_ACCOUNT_URL + "/v1/accounts/%s/objects";
 	public static final String URL_ACCOUNT_OBJECT_MEDIA = BASE_ACCOUNT_URL + "/v1/accounts/%s/objects/%s/media";
+	
+	public static final String URL_ACCOUNT_ALBUMS = BASE_ACCOUNT_URL + "/v2/accounts/%s/albums";
+	public static final String URL_ACCOUNT_MEDIA = BASE_ACCOUNT_URL + "/v2/accounts/%s/albums/%s/media";
+	
 
 }

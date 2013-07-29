@@ -25,6 +25,8 @@
 // 
 package com.chute.sdk.v2.api.upload;
 
+import java.io.File;
+
 import android.graphics.Bitmap;
 
 import com.chute.sdk.v2.model.AssetModel;
@@ -47,7 +49,8 @@ public interface UploadProgressListener {
 	 *            a small thumbnail that will be created from the asset before
 	 *            the upload starts
 	 */
-	public void onUploadStarted(AssetModel asset, final Bitmap thumbnail);
+//	public void onUploadStarted(AssetModel asset, final Bitmap thumbnail);
+	public void onUploadStarted(File file);
 
 	/**
 	 * @param total
@@ -66,5 +69,6 @@ public interface UploadProgressListener {
 	 * @param filepath
 	 *            the filepath of the asset
 	 */
-	public void onUploadFinished(AssetModel assetModel);
+	public void onUploadFinished(File file);
+//	public void onUploadFinished(AssetModel asset);
 }

@@ -13,6 +13,7 @@ import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.api.upload.CountingMultipartRequestEntity;
 import com.chute.sdk.v2.api.upload.CountingMultipartRequestEntity.ProgressListener;
+import com.chute.sdk.v2.api.upload.UploadProgressListener;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
@@ -21,16 +22,19 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.EntityHttpRequestImpl;
 
-public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseModel<AssetModel>> implements ProgressListener{
+public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseModel<AssetModel>> implements
+		ProgressListener {
 
-	private String filePath;
 	private AlbumModel album;
+	private UploadProgressListener uploadListener;
+	private File file;
 
-	public AssetsFileUploadRequest(Context context, AlbumModel album, String filePath,
-			HttpCallback<ListResponseModel<AssetModel>> callback) {
+	public AssetsFileUploadRequest(Context context, UploadProgressListener uploadListener, AlbumModel album,
+			String filePath, HttpCallback<ListResponseModel<AssetModel>> callback) {
 		super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(AssetModel.class), callback);
-		this.filePath = filePath;
 		this.album = album;
+		this.uploadListener = uploadListener;
+		this.file = new File(filePath);
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
 		}
@@ -41,7 +45,6 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 
 	@Override
 	public HttpEntity getEntity() {
-		File file = new File(filePath);
 		MultipartEntity multipartEntity = null;
 		try {
 			multipartEntity = new MultipartEntity();
@@ -60,8 +63,26 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 
 	@Override
 	public void transferred(long num) {
-     ALog.d("Transferred = " + num);		
+		uploadListener.onProgress(file.length(), num);
+		ALog.d("total = " + file.length());
+		ALog.d("current = " + num);
+		ALog.d("Transferred = " + num);
 	}
 
+	@Override
+	protected void doBeforeRunRequestInBackgroundThread() {
+		super.doBeforeRunRequestInBackgroundThread();
+		if (uploadListener != null) {
+			uploadListener.onUploadStarted(file);
+		}
+	}
+
+	@Override
+	protected void doAfterRunRequestInBackgroundThread() {
+		super.doAfterRunRequestInBackgroundThread();
+		if (uploadListener != null) {
+			uploadListener.onUploadFinished(file);
+		}
+	}
 
 }

@@ -29,6 +29,7 @@ import java.util.HashMap;
 
 import android.content.Context;
 
+import com.chute.sdk.v2.api.upload.UploadProgressListener;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.PaginationModel;
@@ -159,9 +160,9 @@ public class GCAssets {
 		return new AlbumsGetAssetListRequest(context, album, new PaginationModel(), callback);
 	}
 
-	public static HttpRequest uploadOneStep(final Context context, final AlbumModel album, final String filePath,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AssetsFileUploadRequest(context, album, filePath, callback);
+	public static HttpRequest uploadOneStep(final Context context, final UploadProgressListener uploadListener,
+			final AlbumModel album, final String filePath, final HttpCallback<ListResponseModel<AssetModel>> callback) {
+		return new AssetsFileUploadRequest(context, uploadListener, album, filePath, callback);
 	}
 
 }
