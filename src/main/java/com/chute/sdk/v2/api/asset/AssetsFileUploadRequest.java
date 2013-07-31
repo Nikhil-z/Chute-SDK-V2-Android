@@ -7,7 +7,6 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
@@ -51,7 +50,7 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 			multipartEntity.addPart("filedata", new FileBody(file));
 			return new CountingMultipartRequestEntity(multipartEntity, this);
 		} catch (Exception e) {
-			Log.d("debug", "multipart entitiy exception = " + e.getMessage(), e);
+			ALog.d("Multipart Entitiy Exception = " + e.getMessage(), e);
 		}
 		throw new IllegalArgumentException("Unable to create entity");
 	}
@@ -59,14 +58,15 @@ public class AssetsFileUploadRequest extends EntityHttpRequestImpl<ListResponseM
 	@Override
 	protected String getUrl() {
 		return String.format(RestConstants.URL_UPLOAD_ONE_STEP, album.getId());
+
 	}
 
 	@Override
 	public void transferred(long num) {
 		uploadListener.onProgress(file.length(), num);
-		ALog.d("total = " + file.length());
-		ALog.d("current = " + num);
-		ALog.d("Transferred = " + num);
+//		ALog.d("total = " + file.length());
+//		ALog.d("current = " + num);
+//		ALog.d("Transferred = " + num);
 	}
 
 	@Override
