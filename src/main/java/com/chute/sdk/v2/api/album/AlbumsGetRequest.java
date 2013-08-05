@@ -52,6 +52,8 @@ class AlbumsGetRequest extends
 		}
 		this.album = album;
 	}
+	
+	
 
 	@Override
 	protected String getUrl() {

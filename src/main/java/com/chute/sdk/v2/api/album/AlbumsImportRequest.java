@@ -31,6 +31,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -42,34 +43,32 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public class AlbumsImportRequest extends
-		StringBodyHttpRequestImpl<ListResponseModel<AssetModel>> {
+public class AlbumsImportRequest extends StringBodyHttpRequestImpl<ListResponseModel<AssetModel>> {
 
 	public static final String TAG = AlbumsImportRequest.class.getSimpleName();
 	private AlbumModel album;
 	private ArrayList<String> urls;
 
-	public AlbumsImportRequest(Context context, AlbumModel album,
-			ArrayList<String> urls,
+	public AlbumsImportRequest(Context context, AlbumModel album, ArrayList<String> urls,
 			HttpCallback<ListResponseModel<AssetModel>> callback) {
-		super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(
-				AssetModel.class), callback);
+		super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(AssetModel.class), callback);
 		if (album == null || TextUtils.isEmpty(album.getId())) {
 			throw new IllegalArgumentException("Need to provide album ID");
 		}
 		this.album = album;
 		if (urls == null || urls.size() == 0) {
-			throw new IllegalArgumentException(
-					"Need to provide list of URLs for import");
+			throw new IllegalArgumentException("Need to provide list of URLs for import");
 		}
 		this.urls = urls;
+		addHeader("Content-Type", "application/json");
 	}
 
 	@Override
 	public String bodyContents() {
 		try {
-			return JsonUtil.getMapper().writer().withRootName("urls")
-					.writeValueAsString(urls);
+			String bodyContent = JsonUtil.getMapper().writer().withRootName("urls").writeValueAsString(urls);
+			ALog.d("Body contents: " + bodyContent);
+			return bodyContent;
 		} catch (JsonProcessingException e) {
 			Log.e(TAG, "", e);
 		}
