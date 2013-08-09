@@ -29,7 +29,7 @@ class AccountAlbumMediaRequest extends ParameterHttpRequestImpl<ListResponseMode
 
 	@Override
 	protected String getUrl() {
-		return String.format(RestConstants.URL_ACCOUNT_OBJECT_MEDIA, accountShortcut, objectId);
+		return String.format(RestConstants.URL_ACCOUNT_MEDIA, accountShortcut, objectId);
 	}
 
 }

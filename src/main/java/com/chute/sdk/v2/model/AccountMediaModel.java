@@ -24,13 +24,13 @@ public class AccountMediaModel implements Parcelable {
 	/**
 	 * The URL that shows the location of the thumbnail.
 	 */
-	@JsonProperty("thumb_url")
-	private String thumbUrl;
+	@JsonProperty("thumb")
+	private String thumb;
 	/**
 	 * The URL that shows the location of the large image.
 	 */
-	@JsonProperty("large_url")
-	private String largeUrl;
+	@JsonProperty("large")
+	private String large;
 	/**
 	 * The URl that shows the location of the media item.
 	 */
@@ -42,6 +42,7 @@ public class AccountMediaModel implements Parcelable {
 	 */
 	@JsonProperty("dimensions")
 	private String dimensions;
+
 
 	/**
 	 * Default non-args constructor.
@@ -62,19 +63,19 @@ public class AccountMediaModel implements Parcelable {
 	}
 
 	public String getThumbUrl() {
-		return thumbUrl;
+		return thumb;
 	}
 
-	public void setThumbUrl(String thumbUrl) {
-		this.thumbUrl = thumbUrl;
+	public void setThumbUrl(String thumb) {
+		this.thumb = thumb;
 	}
 
 	public String getLargeUrl() {
-		return largeUrl;
+		return large;
 	}
 
-	public void setLargeUrl(String largeUrl) {
-		this.largeUrl = largeUrl;
+	public void setLargeUrl(String large) {
+		this.large = large;
 	}
 
 	public String getUrl() {
@@ -95,8 +96,8 @@ public class AccountMediaModel implements Parcelable {
 
 	public AccountMediaModel(Parcel in) {
 		id = in.readString();
-		thumbUrl = in.readString();
-		largeUrl = in.readString();
+		thumb = in.readString();
+		large = in.readString();
 		url = in.readString();
 		dimensions = in.readString();
 	}
@@ -119,8 +120,8 @@ public class AccountMediaModel implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(id);
-		dest.writeString(thumbUrl);
-		dest.writeString(largeUrl);
+		dest.writeString(thumb);
+		dest.writeString(large);
 		dest.writeString(url);
 		dest.writeString(dimensions);
 	}
@@ -139,12 +140,21 @@ public class AccountMediaModel implements Parcelable {
 
 	};
 
-
 	@Override
 	public String toString() {
-		return "GCAccountMediaModel [id=" + id + ", thumbUrl=" + thumbUrl
-				+ ", largeUrl=" + largeUrl + ", url=" + url + ", dimensions="
-				+ dimensions + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("AccountMediaModel [id=");
+		builder.append(id);
+		builder.append(", thumb=");
+		builder.append(thumb);
+		builder.append(", large=");
+		builder.append(large);
+		builder.append(", url=");
+		builder.append(url);
+		builder.append(", dimensions=");
+		builder.append(dimensions);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

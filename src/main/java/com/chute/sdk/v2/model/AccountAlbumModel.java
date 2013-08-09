@@ -6,14 +6,14 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * {@link AccountObjectModel} class represents the concept of an object for a
+ * {@link AccountAlbumModel} class represents the concept of an object for a
  * specific account. Each object contains ID and name.
  * 
  */
-public class AccountObjectModel implements Parcelable {
+public class AccountAlbumModel implements Parcelable {
 
 	@SuppressWarnings("unused")
-	private static final String TAG = AccountObjectModel.class.getSimpleName();
+	private static final String TAG = AccountAlbumModel.class.getSimpleName();
 
 	/**
 	 * The unique identifier of the object.
@@ -29,20 +29,8 @@ public class AccountObjectModel implements Parcelable {
 	/**
 	 * Default non-args constructor.
 	 */
-	public AccountObjectModel() {
+	public AccountAlbumModel() {
 		super();
-	}
-
-	/**
-	 * Constructor using fields.
-	 * 
-	 * @param id
-	 * @param name
-	 */
-	public AccountObjectModel(String id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
 	}
 
 	/**
@@ -64,7 +52,7 @@ public class AccountObjectModel implements Parcelable {
 		this.name = name;
 	}
 
-	public AccountObjectModel(Parcel in) {
+	public AccountAlbumModel(Parcel in) {
 		id = in.readString();
 		name = in.readString();
 	}
@@ -90,27 +78,28 @@ public class AccountObjectModel implements Parcelable {
 		dest.writeString(name);
 	}
 
-	public static final Parcelable.Creator<AccountObjectModel> CREATOR = new Parcelable.Creator<AccountObjectModel>() {
+	public static final Parcelable.Creator<AccountAlbumModel> CREATOR = new Parcelable.Creator<AccountAlbumModel>() {
 
 		@Override
-		public AccountObjectModel createFromParcel(Parcel in) {
-			return new AccountObjectModel(in);
+		public AccountAlbumModel createFromParcel(Parcel in) {
+			return new AccountAlbumModel(in);
 		}
 
 		@Override
-		public AccountObjectModel[] newArray(int size) {
-			return new AccountObjectModel[size];
+		public AccountAlbumModel[] newArray(int size) {
+			return new AccountAlbumModel[size];
 		}
 	};
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "GCAccountObjectModel [id=" + id + ", name=" + name + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("AccountObjectModel [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

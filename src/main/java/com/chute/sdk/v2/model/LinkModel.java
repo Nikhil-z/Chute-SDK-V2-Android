@@ -72,6 +72,9 @@ public class LinkModel implements Parcelable {
 	@JsonProperty("parcels")
 	private LinkInfoModel parcels;
 
+	@JsonProperty("media")
+	private LinkInfoModel media;
+
 	public LinkModel() {
 	}
 
@@ -134,6 +137,14 @@ public class LinkModel implements Parcelable {
 		this.parcels = parcels;
 	}
 
+	public LinkInfoModel getMedia() {
+		return media;
+	}
+
+	public void setMedia(LinkInfoModel media) {
+		this.media = media;
+	}
+
 	public LinkModel(Parcel in) {
 		self = in.readParcelable(LinkInfoModel.class.getClassLoader());
 		assets = in.readParcelable(LinkInfoModel.class.getClassLoader());
@@ -142,6 +153,7 @@ public class LinkModel implements Parcelable {
 		heart = in.readParcelable(LinkInfoModel.class.getClassLoader());
 		vote = in.readParcelable(LinkInfoModel.class.getClassLoader());
 		parcels = in.readParcelable(LinkInfoModel.class.getClassLoader());
+		media = in.readParcelable(LinkInfoModel.class.getClassLoader());
 	}
 
 	/*
@@ -168,6 +180,7 @@ public class LinkModel implements Parcelable {
 		dest.writeParcelable(heart, flags);
 		dest.writeParcelable(vote, flags);
 		dest.writeParcelable(parcels, flags);
+		dest.writeParcelable(media, flags);
 	}
 
 	public static final Parcelable.Creator<LinkModel> CREATOR = new Parcelable.Creator<LinkModel>() {
@@ -201,6 +214,8 @@ public class LinkModel implements Parcelable {
 		builder.append(vote);
 		builder.append(", parcels=");
 		builder.append(parcels);
+		builder.append(", media=");
+		builder.append(media);
 		builder.append("]");
 		return builder.toString();
 	}

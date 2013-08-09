@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.chute.sdk.v2.model.AccountMediaModel;
 import com.chute.sdk.v2.model.AccountModel;
-import com.chute.sdk.v2.model.AccountObjectModel;
+import com.chute.sdk.v2.model.AccountAlbumModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
@@ -60,7 +60,7 @@ public class GCAccounts {
 	 *         implements {@link GCHttpRequest}.
 	 */
 	public static HttpRequest albums(final Context context, final String accountId,
-			final HttpCallback<ListResponseModel<AccountObjectModel>> callback) {
+			final HttpCallback<ListResponseModel<AccountAlbumModel>> callback) {
 		return new AccountAlbumsRequest(context, accountId, callback);
 	}
 
@@ -74,7 +74,7 @@ public class GCAccounts {
 	 * @param accountId
 	 *            {@link AccountModel} ID, representing the specific account.
 	 * @param objectId
-	 *            {@link AccountObjectModel} ID, representing the specific
+	 *            {@link AccountAlbumModel} ID, representing the specific
 	 *            object from an account.
 	 * @param parser
 	 *            Instance of {@link GCHttpResponseParser} interface. You can
