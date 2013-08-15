@@ -30,7 +30,6 @@ import org.json.JSONObject;
 
 import android.accounts.AccountAuthenticatorActivity;
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
