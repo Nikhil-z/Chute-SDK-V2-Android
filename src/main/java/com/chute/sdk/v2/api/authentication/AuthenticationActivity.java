@@ -37,9 +37,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -78,7 +75,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		webViewAuthentication.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
 		// webViewAuthentication.clearCache(true);
-		final WebSettings mWebSettings = webViewAuthentication.getSettings();
+		//final WebSettings mWebSettings = webViewAuthentication.getSettings();
 //		mWebSettings.setSavePassword(false);
 //		mWebSettings.setSaveFormData(false);
 //		this.getBaseContext().deleteDatabase("webview.db");
@@ -152,7 +149,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 						finish();
 					}
 					view.stopLoading();
-					new AuthenticationToken<String>(getApplicationContext(), AuthenticationFactory.getInstance()
+					new AuthenticationTokenRequest<String>(getApplicationContext(), AuthenticationFactory.getInstance()
 							.getAuthConstants(), code, new AuthenticationResponseParser(),
 							new AuthenticationCodeCallback()).executeAsync();
 				}

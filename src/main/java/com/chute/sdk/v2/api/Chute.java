@@ -37,10 +37,20 @@ public class Chute {
 
 	public static final String TAG = Chute.class.getSimpleName();
 
+	/**
+	 * @param context
+	 * @param constants contains the Client ID and Client Secret listed in your Chute app
+	 */
 	public static void init(Context context, AuthConstants constants) {
 		init(context, constants, null);
 	}	
 	
+	/**
+	 * @param context
+	 * @param constants this needs to contain both the Client ID and Secret of your Chute app
+	 * @param token can be included if the app shouldn't have user specific authentication to chute or any of the
+	 * other services.
+	 */
 	public static void init(Context context, AuthConstants constants, String token) {
 		PreferenceUtil.init(context);
 		TokenAuthenticationProvider.init(context);

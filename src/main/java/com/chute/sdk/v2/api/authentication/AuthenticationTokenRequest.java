@@ -34,11 +34,11 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.parsers.HttpResponseParser;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
-public class AuthenticationToken<T> extends ParameterHttpRequestImpl<T> {
+public class AuthenticationTokenRequest<T> extends ParameterHttpRequestImpl<T> {
 	@SuppressWarnings("unused")
-	private static final String TAG = AuthenticationToken.class.getSimpleName();
+	private static final String TAG = AuthenticationTokenRequest.class.getSimpleName();
 
-	public AuthenticationToken(Context context, AuthConstants authConstants,
+	public AuthenticationTokenRequest(Context context, AuthConstants authConstants,
 			String code, HttpResponseParser<T> parser, HttpCallback<T> callback) {
 		super(context, RequestMethod.POST, parser, callback);
 		ALog.d(code);

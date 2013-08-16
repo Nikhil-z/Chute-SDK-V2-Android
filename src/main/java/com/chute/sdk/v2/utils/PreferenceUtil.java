@@ -34,7 +34,6 @@ import com.chute.sdk.v2.model.enums.AccountType;
 public class PreferenceUtil {
 
 	public static final String TAG = PreferenceUtil.class.getSimpleName();
-	private static final String BITMAP_PATH = "bitmap_path";
 	private static final String ACCOUNT_TOKEN = "account_token";
 	private final Context context;
 
@@ -113,15 +112,6 @@ public class PreferenceUtil {
 
 	public String getUidForAccount(AccountType accountType) {
 		return getPreferences().getString(accountType.getName() + "_uid", null);
-	}
-
-	// Bitmap path
-	public String getBitmapPath() {
-		return getPreferences().getString(BITMAP_PATH, null);
-	}
-
-	public void setBitmapPath(String path) {
-		setPreference(BITMAP_PATH, path);
 	}
 
 	// Account token
