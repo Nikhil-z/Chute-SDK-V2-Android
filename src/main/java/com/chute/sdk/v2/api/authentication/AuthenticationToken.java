@@ -27,6 +27,7 @@ package com.chute.sdk.v2.api.authentication;
 
 import android.content.Context;
 
+import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
@@ -40,6 +41,7 @@ public class AuthenticationToken<T> extends ParameterHttpRequestImpl<T> {
 	public AuthenticationToken(Context context, AuthConstants authConstants,
 			String code, HttpResponseParser<T> parser, HttpCallback<T> callback) {
 		super(context, RequestMethod.POST, parser, callback);
+		ALog.d(code);
 		addParam("code", code);
 		addParam("client_id", authConstants.clientId);
 		addParam("client_secret", authConstants.clientSecret);
