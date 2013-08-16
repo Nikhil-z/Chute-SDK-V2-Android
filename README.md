@@ -9,13 +9,18 @@ You can use it as a Maven dependency by adding the following to your list of dep
     <dependency>
       <groupId>com.getchute.android.sdk.v2</groupId>
       <artifactId>chute-sdk-v2-android</artifactId>
-      <version>2.0.2</version>
+      <version>2.2.0</version>
     </dependency>
 
 
 Or use the jar with dependencies from target in your regular non-maven projects
 
 # Changelog
+
+## 2.2.0
+
+	- Migrated Auth code to V2 of API
+	- Added Chute.init to inititialize Chute inside the APP class
 
 ## 2.1.1
 
