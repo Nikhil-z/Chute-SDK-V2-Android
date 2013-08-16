@@ -64,11 +64,9 @@ public class AuthenticationFactory {
 		}
 		StringBuilder stringBuilder;
 		stringBuilder = new StringBuilder(
-				RestConstants.BASE_AUTH_URL + accountType.getName());
+				String.format(RestConstants.BASE_AUTH_URL, accountType.getName()));
 		stringBuilder.append("?");
 		stringBuilder.append("scope=" + AuthConstants.PERMISSIONS_SCOPE);
-		stringBuilder.append("&");
-		stringBuilder.append("type=web_server");
 		stringBuilder.append("&");
 		stringBuilder.append("response_type=code");
 		stringBuilder.append("&");

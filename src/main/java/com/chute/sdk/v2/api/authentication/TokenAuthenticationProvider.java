@@ -57,6 +57,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 	public void setToken(String token) {
 		this.token = token;
 		saveApiKey(token);
+		ALog.d(token);
 	}
 
 	public boolean isTokenValid() {

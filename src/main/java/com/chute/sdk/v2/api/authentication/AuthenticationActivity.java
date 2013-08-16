@@ -143,7 +143,6 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		@Override
 		public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
 			ALog.d(TAG, "Page started " + url);
-
 			try {
 				if (authenticationFactory.isRedirectUri(url)) {
 					final Bundle params = Utils.decodeUrl(url);
@@ -152,7 +151,6 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 						setResult(CODE_HTTP_ERROR);
 						finish();
 					}
-					ALog.d(code);
 					view.stopLoading();
 					new AuthenticationToken<String>(getApplicationContext(), AuthenticationFactory.getInstance()
 							.getAuthConstants(), code, new AuthenticationResponseParser(),

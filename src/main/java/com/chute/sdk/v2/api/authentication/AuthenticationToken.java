@@ -41,11 +41,10 @@ public class AuthenticationToken<T> extends ParameterHttpRequestImpl<T> {
 			String code, HttpResponseParser<T> parser, HttpCallback<T> callback) {
 		super(context, RequestMethod.POST, parser, callback);
 		addParam("code", code);
-		addParam("scope", AuthConstants.PERMISSIONS_SCOPE);
 		addParam("client_id", authConstants.clientId);
 		addParam("client_secret", authConstants.clientSecret);
 		addParam("grant_type", "authorization_code");
-		addParam("redirect_uri",AuthConstants.CALLBACK_URL);
+		addParam("redirect_uri", AuthConstants.CALLBACK_URL);
 	}
 
 	@Override
