@@ -1,9 +1,8 @@
 package com.chute.sdk.v2.model.enums;
 
 public enum AccountType {
-	FACEBOOK("facebook"), EVERNOTE("evernote"), CHUTE("chute"), TWITTER(
-			"twitter"), FOURSQUARE("foursquare"), PICASA("google"), FLICKR(
-			"flickr"), INSTAGRAM("instagram");
+	FACEBOOK("facebook"), CHUTE("chute"), TWITTER("twitter"), FOURSQUARE("foursquare"), PICASA("google"), FLICKR(
+			"flickr"), INSTAGRAM("instagram"), DROPBOX("dropbox"), GOOGLEDRIVE("googledrive"), SKYDRIVE("skydrive");
 
 	private final String name;
 

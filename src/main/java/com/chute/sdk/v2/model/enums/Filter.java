@@ -67,7 +67,6 @@ public class Filter {
 	 */
 	public void setAccountType(AccountType accountType) {
 		if (accountType.equals(AccountType.CHUTE)
-				|| accountType.equals(AccountType.EVERNOTE)
 				|| accountType.equals(AccountType.FOURSQUARE)) {
 			throw new RuntimeException("Account type not supported!");
 		} else {
