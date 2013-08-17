@@ -2,9 +2,11 @@ package com.chute.sdk.v2.api.accounts;
 
 import android.content.Context;
 
+import com.chute.sdk.v2.model.AccountBaseModel;
 import com.chute.sdk.v2.model.AccountMediaModel;
 import com.chute.sdk.v2.model.AccountModel;
 import com.chute.sdk.v2.model.AccountAlbumModel;
+import com.chute.sdk.v2.model.enums.AccountType;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
@@ -36,7 +38,8 @@ public class GCAccounts {
 	 * @return Instance of {@link AccountsRequest}, class that implements
 	 *         {@link GCHttpRequest}.
 	 */
-	public static HttpRequest allUserAccounts(final Context context, final HttpCallback<ListResponseModel<AccountModel>> callback) {
+	public static HttpRequest allUserAccounts(final Context context,
+			final HttpCallback<ListResponseModel<AccountModel>> callback) {
 		return new AccountsRequest(context, callback);
 	}
 
@@ -56,8 +59,8 @@ public class GCAccounts {
 	 * @param callback
 	 *            Instance of {@link GCHttpCallback} interface. According to the
 	 *            parser, the callback should have the same return type.
-	 * @return Instance of {@link AccountAlbumsRequest}, class that
-	 *         implements {@link GCHttpRequest}.
+	 * @return Instance of {@link AccountAlbumsRequest}, class that implements
+	 *         {@link GCHttpRequest}.
 	 */
 	public static HttpRequest albums(final Context context, final String accountId,
 			final HttpCallback<ListResponseModel<AccountAlbumModel>> callback) {
@@ -74,8 +77,8 @@ public class GCAccounts {
 	 * @param accountId
 	 *            {@link AccountModel} ID, representing the specific account.
 	 * @param objectId
-	 *            {@link AccountAlbumModel} ID, representing the specific
-	 *            object from an account.
+	 *            {@link AccountAlbumModel} ID, representing the specific object
+	 *            from an account.
 	 * @param parser
 	 *            Instance of {@link GCHttpResponseParser} interface. You can
 	 *            add a custom parser or use the parser provided here {@see
@@ -89,5 +92,16 @@ public class GCAccounts {
 	public static HttpRequest albumMedia(final Context context, final String accountId, final String objectId,
 			final HttpCallback<ListResponseModel<AccountMediaModel>> callback) {
 		return new AccountAlbumMediaRequest(context, accountId, objectId, callback);
+	}
+
+	public static HttpRequest accountRoot(final Context context, final AccountType accountType, final String accountId,
+			final HttpCallback<ListResponseModel<AccountBaseModel>> callback) {
+		return new AccountRootRequest(context, accountType, accountId, callback);
+	}
+
+	public static HttpRequest accountSingle(final Context context, final AccountType accountType,
+			final String accountId, final String folderId,
+			final HttpCallback<ListResponseModel<AccountBaseModel>> callback) {
+		return new AccountSingleRequest(context, accountType, accountId, folderId, callback);
 	}
 }

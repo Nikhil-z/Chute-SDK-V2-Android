@@ -128,13 +128,13 @@ public class RestConstants {
 
 	//ACCOUNTS
 	public static final String BASE_ACCOUNT_URL = "http://accounts.getchute.com";
-//	public static final String URL_ACCOUNTS = BASE_URL + "/v1/accounts";
 	public static final String URL_ACCOUNTS = BASE_URL + "/me/accounts";
-	public static final String URL_ACCOUNT_OBJECT = BASE_ACCOUNT_URL + "/v1/accounts/%s/objects";
-	public static final String URL_ACCOUNT_OBJECT_MEDIA = BASE_ACCOUNT_URL + "/v1/accounts/%s/objects/%s/media";
 	
 	public static final String URL_ACCOUNT_ALBUMS = BASE_ACCOUNT_URL + "/v2/accounts/%s/albums";
 	public static final String URL_ACCOUNT_MEDIA = BASE_ACCOUNT_URL + "/v2/accounts/%s/albums/%s/media";
+	
+	public static final String URL_ACCOUNT_ROOT = BASE_ACCOUNT_URL + "/v2/%s/%s/files";
+	public static final String URL_ACCOUNT_SINGLE = BASE_ACCOUNT_URL + "/v2/%s/%s/folders/%s/files";
 	
 
 }
