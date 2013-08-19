@@ -25,22 +25,15 @@
 //
 package com.chute.sdk.v2.utils;
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.model.AccountModel;
-import com.chute.sdk.v2.model.enums.AccountType;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class PreferenceUtil {
 
   public static final String TAG = PreferenceUtil.class.getSimpleName();
-  private static final String ACCOUNT_TOKEN = "account_token";
   private final Context context;
 
   private PreferenceUtil(Context context) {
@@ -52,7 +45,11 @@ public class PreferenceUtil {
   public static PreferenceUtil get() {
     return instance;
   }
-
+  
+  public static boolean isInitialized() {
+    return instance != null;
+  }
+  
   public static void init(Context context) {
     if (instance == null) {
       instance = new PreferenceUtil(context.getApplicationContext());
@@ -94,5 +91,7 @@ public class PreferenceUtil {
   public boolean hasAccount(String accountType) {
     return getPreferences().contains(accountType);
   }
+
+  
 
 }

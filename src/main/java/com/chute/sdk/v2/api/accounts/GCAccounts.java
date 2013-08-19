@@ -33,12 +33,12 @@ public class GCAccounts {
 	 * @param callback
 	 *            Instance of {@link GCHttpCallback} interface. According to the
 	 *            parser, the callback should have the same return type.
-	 * @return Instance of {@link AccountsRequest}, class that implements
+	 * @return Instance of {@link CurrentUserAccountsRequest}, class that implements
 	 *         {@link GCHttpRequest}.
 	 */
 	public static HttpRequest allUserAccounts(final Context context,
 			final HttpCallback<ListResponseModel<AccountModel>> callback) {
-		return new AccountsRequest(context, callback);
+		return new CurrentUserAccountsRequest(context, callback);
 	}
 
 	public static HttpRequest accountRoot(final Context context, final String accountName, final String accountId,
