@@ -77,54 +77,54 @@ public class PreferenceUtil {
 
 	// Account ID
 	public void setIdForAccount(AccountType accountType, String accountId) {
-		setPreference(accountType.getName(), accountId);
+		setPreference(accountType.getLoginMethod(), accountId);
 	}
 
 	public boolean hasAccountId(AccountType accountType) {
-		return getPreferences().contains(accountType.getName());
+		return getPreferences().contains(accountType.getLoginMethod());
 	}
 
 	public String getAccountId(AccountType accountType) {
-		return getPreferences().getString(accountType.getName(), null);
+		return getPreferences().getString(accountType.getLoginMethod(), null);
 	}
 
 	// Account Name
 	public void setNameForAccount(AccountType accountType, String accountName) {
-		setPreference(accountType.getName() + "_name", accountName);
+		setPreference(accountType.getLoginMethod() + "_name", accountName);
 	}
 
 	public boolean hasAccountName(AccountType accountType) {
-		return getPreferences().contains(accountType.getName() + "_name");
+		return getPreferences().contains(accountType.getLoginMethod() + "_name");
 	}
 
 	public String getAccountName(AccountType accountType) {
-		return getPreferences().getString(accountType.getName() + "_name", null);
+		return getPreferences().getString(accountType.getLoginMethod() + "_name", null);
 	}
 
 	// Account UID
 	public void setUidForAccount(AccountType accountType, String uid) {
-		setPreference(accountType.getName() + "_uid", uid);
+		setPreference(accountType.getLoginMethod() + "_uid", uid);
 	}
 
 	public boolean hasUid(AccountType accountType) {
-		return getPreferences().contains(accountType.getName() + "_uid");
+		return getPreferences().contains(accountType.getLoginMethod() + "_uid");
 	}
 
 	public String getUidForAccount(AccountType accountType) {
-		return getPreferences().getString(accountType.getName() + "_uid", null);
+		return getPreferences().getString(accountType.getLoginMethod() + "_uid", null);
 	}
 
 	// Account Shortcut
 	public void setShortcutForAccount(AccountType accountType, String shortcut) {
-		setPreference(accountType.getName() + "_shortcut", shortcut);
+		setPreference(accountType.getLoginMethod() + "_shortcut", shortcut);
 	}
 
 	public boolean hasShortcut(AccountType accountType) {
-		return getPreferences().contains(accountType.getName() + "_shortcut");
+		return getPreferences().contains(accountType.getLoginMethod() + "_shortcut");
 	}
 
 	public String getShortcutForAccount(AccountType accountType) {
-		return getPreferences().getString(accountType.getName() + "_shortcut", null);
+		return getPreferences().getString(accountType.getLoginMethod() + "_shortcut", null);
 	}
 
 	// Account token

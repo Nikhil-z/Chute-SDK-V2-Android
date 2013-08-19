@@ -64,7 +64,7 @@ public class AuthenticationFactory {
 		}
 		StringBuilder stringBuilder;
 		stringBuilder = new StringBuilder(
-				String.format(RestConstants.BASE_AUTH_URL, accountType.getName()));
+				String.format(RestConstants.BASE_AUTH_URL, accountType.getLoginMethod()));
 		stringBuilder.append("?");
 		stringBuilder.append("scope=" + AuthConstants.PERMISSIONS_SCOPE);
 		stringBuilder.append("&");
