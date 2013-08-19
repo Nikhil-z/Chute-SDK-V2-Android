@@ -3,7 +3,10 @@ package com.chute.sdk.v2.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.araneaapps.android.libs.logger.ALog;
+import com.chute.sdk.v2.utils.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * The {@link AccountModel} class represents the concept of an account. Each
@@ -250,4 +253,22 @@ public class AccountModel implements Parcelable {
 		return builder.toString();
 	}
 
+  public String toJSON() {
+    try {
+      return JsonUtil.getMapper().writeValueAsString(this);
+    } catch (JsonProcessingException e) {
+     ALog.e(e);
+    }
+    return "";
+  }
+
+  public static AccountModel fromJSON(String json){
+    try {
+      return JsonUtil.getMapper().readValue(json, AccountModel.class);
+    } catch (Exception e) {
+      ALog.e(e);
+    }
+    return null;
+  }
+  
 }

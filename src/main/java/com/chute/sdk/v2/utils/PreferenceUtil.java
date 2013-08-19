@@ -25,115 +25,74 @@
 //
 package com.chute.sdk.v2.utils;
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.araneaapps.android.libs.logger.ALog;
+import com.chute.sdk.v2.model.AccountModel;
 import com.chute.sdk.v2.model.enums.AccountType;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class PreferenceUtil {
 
-	public static final String TAG = PreferenceUtil.class.getSimpleName();
-	private static final String ACCOUNT_TOKEN = "account_token";
-	private final Context context;
+  public static final String TAG = PreferenceUtil.class.getSimpleName();
+  private static final String ACCOUNT_TOKEN = "account_token";
+  private final Context context;
 
-	private PreferenceUtil(Context context) {
-		this.context = context;
-	}
+  private PreferenceUtil(Context context) {
+    this.context = context;
+  }
 
-	static PreferenceUtil instance;
+  static PreferenceUtil instance;
 
-	public static PreferenceUtil get() {
-		return instance;
-	}
+  public static PreferenceUtil get() {
+    return instance;
+  }
 
-	public static void init(Context context) {
-		if (instance == null) {
-			instance = new PreferenceUtil(context.getApplicationContext());
-		}
-	}
+  public static void init(Context context) {
+    if (instance == null) {
+      instance = new PreferenceUtil(context.getApplicationContext());
+    }
+  }
 
-	public SharedPreferences getPreferences() {
-		return PreferenceManager.getDefaultSharedPreferences(context);
-	}
+  public SharedPreferences getPreferences() {
+    return PreferenceManager.getDefaultSharedPreferences(context);
+  }
 
-	private final <T> void setPreference(final String key, final T value) {
-		SharedPreferences.Editor edit = getPreferences().edit();
-		if (value.getClass().equals(String.class)) {
-			edit.putString(key, (String) value);
-		} else if (value.getClass().equals(Boolean.class)) {
-			edit.putBoolean(key, (Boolean) value);
-		} else if (value.getClass().equals(Integer.class)) {
-			edit.putInt(key, (Integer) value);
-		} else if (value.getClass().equals(Long.class)) {
-			edit.putLong(key, (Long) value);
-		} else if (value.getClass().equals(Float.class)) {
-			edit.putFloat(key, (Float) value);
-		} else {
-			throw new UnsupportedOperationException("Need to add a primitive type to shared prefs");
-		}
-		edit.commit();
-	}
+  private final <T> void setPreference(final String key, final T value) {
+    SharedPreferences.Editor edit = getPreferences().edit();
+    if (value.getClass().equals(String.class)) {
+      edit.putString(key, (String) value);
+    } else if (value.getClass().equals(Boolean.class)) {
+      edit.putBoolean(key, (Boolean) value);
+    } else if (value.getClass().equals(Integer.class)) {
+      edit.putInt(key, (Integer) value);
+    } else if (value.getClass().equals(Long.class)) {
+      edit.putLong(key, (Long) value);
+    } else if (value.getClass().equals(Float.class)) {
+      edit.putFloat(key, (Float) value);
+    } else {
+      throw new UnsupportedOperationException(
+          "Need to add a primitive type to shared prefs");
+    }
+    edit.commit();
+  }
 
-	// Account ID
-	public void setIdForAccount(AccountType accountType, String accountId) {
-		setPreference(accountType.getLoginMethod(), accountId);
-	}
+  public void saveAccount(AccountModel model) {
+    setPreference(model.getType(), model.toJSON());
+  }
 
-	public boolean hasAccountId(AccountType accountType) {
-		return getPreferences().contains(accountType.getLoginMethod());
-	}
+  public AccountModel getAccount(String type) {
+    String accountString = getPreferences().getString(type, null);
+    return AccountModel.fromJSON(accountString);
+  }
 
-	public String getAccountId(AccountType accountType) {
-		return getPreferences().getString(accountType.getLoginMethod(), null);
-	}
-
-	// Account Name
-	public void setNameForAccount(AccountType accountType, String accountName) {
-		setPreference(accountType.getLoginMethod() + "_name", accountName);
-	}
-
-	public boolean hasAccountName(AccountType accountType) {
-		return getPreferences().contains(accountType.getLoginMethod() + "_name");
-	}
-
-	public String getAccountName(AccountType accountType) {
-		return getPreferences().getString(accountType.getLoginMethod() + "_name", null);
-	}
-
-	// Account UID
-	public void setUidForAccount(AccountType accountType, String uid) {
-		setPreference(accountType.getLoginMethod() + "_uid", uid);
-	}
-
-	public boolean hasUid(AccountType accountType) {
-		return getPreferences().contains(accountType.getLoginMethod() + "_uid");
-	}
-
-	public String getUidForAccount(AccountType accountType) {
-		return getPreferences().getString(accountType.getLoginMethod() + "_uid", null);
-	}
-
-	// Account Shortcut
-	public void setShortcutForAccount(AccountType accountType, String shortcut) {
-		setPreference(accountType.getLoginMethod() + "_shortcut", shortcut);
-	}
-
-	public boolean hasShortcut(AccountType accountType) {
-		return getPreferences().contains(accountType.getLoginMethod() + "_shortcut");
-	}
-
-	public String getShortcutForAccount(AccountType accountType) {
-		return getPreferences().getString(accountType.getLoginMethod() + "_shortcut", null);
-	}
-
-	// Account token
-	public String getAccountToken() {
-		return getPreferences().getString(ACCOUNT_TOKEN, null);
-	}
-
-	public void setAccountToken(String token) {
-		setPreference(ACCOUNT_TOKEN, token);
-	}
+  public boolean hasAccount(String accountType) {
+    return getPreferences().contains(accountType);
+  }
 
 }
