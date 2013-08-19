@@ -3,10 +3,7 @@ package com.chute.sdk.v2.api.accounts;
 import android.content.Context;
 
 import com.chute.sdk.v2.model.AccountBaseModel;
-import com.chute.sdk.v2.model.AccountMediaModel;
 import com.chute.sdk.v2.model.AccountModel;
-import com.chute.sdk.v2.model.AccountAlbumModel;
-import com.chute.sdk.v2.model.enums.AccountType;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
@@ -44,65 +41,13 @@ public class GCAccounts {
 		return new AccountsRequest(context, callback);
 	}
 
-	/**
-	 * Method used for getting list of object for a specific account. It returns
-	 * a JSon object using the following parameters: context, string value, the
-	 * given callback and parser.
-	 * 
-	 * @param context
-	 *            The application context.
-	 * @param accountId
-	 *            {@link AccountModel} ID, representing the specific account.
-	 * @param parser
-	 *            Instance of {@link GCHttpResponseParser} interface. You can
-	 *            add a custom parser or use the parser provided here {@see
-	 *            #objectMedia(Context, String, String, GCHttpCallback)}.
-	 * @param callback
-	 *            Instance of {@link GCHttpCallback} interface. According to the
-	 *            parser, the callback should have the same return type.
-	 * @return Instance of {@link AccountAlbumsRequest}, class that implements
-	 *         {@link GCHttpRequest}.
-	 */
-	public static HttpRequest albums(final Context context, final String accountId,
-			final HttpCallback<ListResponseModel<AccountAlbumModel>> callback) {
-		return new AccountAlbumsRequest(context, accountId, callback);
-	}
-
-	/**
-	 * Method used for getting media items for a specific object. It returns
-	 * JSon object using the following parameters: context, string values, the
-	 * given callback and parser.
-	 * 
-	 * @param context
-	 *            The application context.
-	 * @param accountId
-	 *            {@link AccountModel} ID, representing the specific account.
-	 * @param objectId
-	 *            {@link AccountAlbumModel} ID, representing the specific object
-	 *            from an account.
-	 * @param parser
-	 *            Instance of {@link GCHttpResponseParser} interface. You can
-	 *            add a custom parser or use the parser provided here {@see
-	 *            #objectMedia(Context, String, String, GCHttpCallback)}.
-	 * @param callback
-	 *            Instance of {@link GCHttpCallback} interface. According to the
-	 *            parser, the callback should have the same return type.
-	 * @return Instance of {@link AccountAlbumMediaRequest}, class that
-	 *         implements {@link GCHttpRequest}.
-	 */
-	public static HttpRequest albumMedia(final Context context, final String accountId, final String objectId,
-			final HttpCallback<ListResponseModel<AccountMediaModel>> callback) {
-		return new AccountAlbumMediaRequest(context, accountId, objectId, callback);
-	}
-
-	public static HttpRequest accountRoot(final Context context, final AccountType accountType, final String accountId,
+	public static HttpRequest accountRoot(final Context context, final String accountName, final String accountId,
 			final HttpCallback<ResponseModel<AccountBaseModel>> callback) {
-		return new AccountRootRequest(context, accountType, accountId, callback);
+		return new AccountRootRequest(context, accountName, accountId, callback);
 	}
 
-	public static HttpRequest accountSingle(final Context context, final AccountType accountType,
-			final String accountId, final String folderId,
-			final HttpCallback<ResponseModel<AccountBaseModel>> callback) {
-		return new AccountSingleRequest(context, accountType, accountId, folderId, callback);
+	public static HttpRequest accountSingle(final Context context, final String accountName, final String accountId,
+			final String folderId, final HttpCallback<ResponseModel<AccountBaseModel>> callback) {
+		return new AccountSingleRequest(context, accountName, accountId, folderId, callback);
 	}
 }

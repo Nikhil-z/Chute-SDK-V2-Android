@@ -3,6 +3,7 @@ package com.chute.sdk.v2.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.chute.sdk.v2.model.enums.MediaType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
@@ -13,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * specific account. Each object contains ID and name.
  * 
  */
-@JsonIgnoreProperties({"links"})
-public class AccountAlbumModel implements Parcelable {
+@JsonIgnoreProperties({ "links" })
+public class AccountAlbumModel implements Parcelable, MediaViewType {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = AccountAlbumModel.class.getSimpleName();
@@ -117,6 +118,11 @@ public class AccountAlbumModel implements Parcelable {
 		builder.append(name);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int getViewType() {
+		return MediaType.FOLDER.ordinal();
 	}
 
 }

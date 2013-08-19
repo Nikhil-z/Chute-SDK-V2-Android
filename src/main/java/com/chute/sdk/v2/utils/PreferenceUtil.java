@@ -114,6 +114,19 @@ public class PreferenceUtil {
 		return getPreferences().getString(accountType.getName() + "_uid", null);
 	}
 
+	// Account Shortcut
+	public void setShortcutForAccount(AccountType accountType, String shortcut) {
+		setPreference(accountType.getName() + "_shortcut", shortcut);
+	}
+
+	public boolean hasShortcut(AccountType accountType) {
+		return getPreferences().contains(accountType.getName() + "_shortcut");
+	}
+
+	public String getShortcutForAccount(AccountType accountType) {
+		return getPreferences().getString(accountType.getName() + "_shortcut", null);
+	}
+
 	// Account token
 	public String getAccountToken() {
 		return getPreferences().getString(ACCOUNT_TOKEN, null);
