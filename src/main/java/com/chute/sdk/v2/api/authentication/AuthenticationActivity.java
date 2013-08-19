@@ -75,14 +75,14 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		webViewAuthentication.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
 		// webViewAuthentication.clearCache(true);
-		//final WebSettings mWebSettings = webViewAuthentication.getSettings();
-//		mWebSettings.setSavePassword(false);
-//		mWebSettings.setSaveFormData(false);
-//		this.getBaseContext().deleteDatabase("webview.db");
-//		this.getBaseContext().deleteDatabase("webviewCache.db");
-//		CookieSyncManager.createInstance(this);
-//		CookieManager cookieManager = CookieManager.getInstance();
-//		cookieManager.removeAllCookie();
+		// final WebSettings mWebSettings = webViewAuthentication.getSettings();
+		// mWebSettings.setSavePassword(false);
+		// mWebSettings.setSaveFormData(false);
+		// this.getBaseContext().deleteDatabase("webview.db");
+		// this.getBaseContext().deleteDatabase("webviewCache.db");
+		// CookieSyncManager.createInstance(this);
+		// CookieManager cookieManager = CookieManager.getInstance();
+		// cookieManager.removeAllCookie();
 
 		final FrameLayout frameLayout = new FrameLayout(this);
 		frameLayout.setLayoutParams(new FrameLayout.LayoutParams(

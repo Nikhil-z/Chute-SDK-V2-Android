@@ -8,6 +8,7 @@ import com.chute.sdk.v2.model.AccountModel;
 import com.chute.sdk.v2.model.AccountAlbumModel;
 import com.chute.sdk.v2.model.enums.AccountType;
 import com.chute.sdk.v2.model.response.ListResponseModel;
+import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
@@ -95,13 +96,13 @@ public class GCAccounts {
 	}
 
 	public static HttpRequest accountRoot(final Context context, final AccountType accountType, final String accountId,
-			final HttpCallback<ListResponseModel<AccountBaseModel>> callback) {
+			final HttpCallback<ResponseModel<AccountBaseModel>> callback) {
 		return new AccountRootRequest(context, accountType, accountId, callback);
 	}
 
 	public static HttpRequest accountSingle(final Context context, final AccountType accountType,
 			final String accountId, final String folderId,
-			final HttpCallback<ListResponseModel<AccountBaseModel>> callback) {
+			final HttpCallback<ResponseModel<AccountBaseModel>> callback) {
 		return new AccountSingleRequest(context, accountType, accountId, folderId, callback);
 	}
 }
