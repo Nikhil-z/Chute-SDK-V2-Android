@@ -14,152 +14,150 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class AccountMediaModel implements Parcelable, MediaViewType {
 
-	@SuppressWarnings("unused")
-	private static final String TAG = AccountMediaModel.class.getSimpleName();
+  @SuppressWarnings("unused")
+  private static final String TAG = AccountMediaModel.class.getSimpleName();
 
-	/**
-	 * The unique identifier of the media item.
-	 */
-	@JsonProperty("id")
-	private String id;
-	/**
-	 * The URL that shows the location of the thumbnail.
-	 */
-	@JsonProperty("thumb")
-	private String thumb;
-	/**
-	 * The URL that shows the location of the large image.
-	 */
-	@JsonProperty("large")
-	private String large;
-	/**
-	 * The URl that shows the location of the media item.
-	 */
-	@JsonProperty("url")
-	private String url;
+  /**
+   * The unique identifier of the media item.
+   */
+  @JsonProperty("id")
+  private String id;
 
-	/**
-	 * Photo dimensions
-	 */
-	@JsonProperty("dimensions")
-	private String dimensions;
+  @JsonProperty("caption")
+  private String caption;
 
-	/**
-	 * Default non-args constructor.
-	 */
-	public AccountMediaModel() {
-		super();
-	}
+  /**
+   * Photo dimensions
+   */
+  @JsonProperty("dimensions")
+  private String dimensions;
 
-	/**
-	 * Getter and setter methods.
-	 */
-	public String getId() {
-		return id;
-	}
+  /**
+   * The URl that shows the location of the media item.
+   */
+  @JsonProperty("image_url")
+  private String imageUrl;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  /**
+   * The URL that shows the location of the thumbnail.
+   */
+  @JsonProperty("thumbnail")
+  private String thumbnail;
 
-	public String getThumbUrl() {
-		return thumb;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public AccountMediaModel() {
+    super();
+  }
 
-	public void setThumbUrl(String thumb) {
-		this.thumb = thumb;
-	}
+  /**
+   * Getter and setter methods.
+   */
+  public String getId() {
+    return id;
+  }
 
-	public String getLargeUrl() {
-		return large;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public void setLargeUrl(String large) {
-		this.large = large;
-	}
+  public String getThumbnail() {
+    return thumbnail;
+  }
 
-	public String getUrl() {
-		return url;
-	}
+  public void setThumbnail(String thumbnail) {
+    this.thumbnail = thumbnail;
+  }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+  public String getDimensions() {
+    return dimensions;
+  }
 
-	public String getDimensions() {
-		return dimensions;
-	}
+  public void setDimensions(String dimensions) {
+    this.dimensions = dimensions;
+  }
 
-	public void setDimensions(String dimensions) {
-		this.dimensions = dimensions;
-	}
+  public String getCaption() {
+    return caption;
+  }
 
-	public AccountMediaModel(Parcel in) {
-		id = in.readString();
-		thumb = in.readString();
-		large = in.readString();
-		url = in.readString();
-		dimensions = in.readString();
-	}
+  public void setCaption(String caption) {
+    this.caption = caption;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public String getImageUrl() {
+    return imageUrl;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(id);
-		dest.writeString(thumb);
-		dest.writeString(large);
-		dest.writeString(url);
-		dest.writeString(dimensions);
-	}
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
 
-	public static final Parcelable.Creator<AccountMediaModel> CREATOR = new Parcelable.Creator<AccountMediaModel>() {
+  public AccountMediaModel(Parcel in) {
+    id = in.readString();
+    caption = in.readString();
+    dimensions = in.readString();
+    imageUrl = in.readString();
+    thumbnail = in.readString();
+  }
 
-		@Override
-		public AccountMediaModel createFromParcel(Parcel in) {
-			return new AccountMediaModel(in);
-		}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-		@Override
-		public AccountMediaModel[] newArray(int size) {
-			return new AccountMediaModel[size];
-		}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(id);
+    dest.writeString(caption);
+    dest.writeString(dimensions);
+    dest.writeString(imageUrl);
+    dest.writeString(thumbnail);
+  }
 
-	};
+  public static final Parcelable.Creator<AccountMediaModel> CREATOR = new Parcelable.Creator<AccountMediaModel>() {
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("AccountMediaModel [id=");
-		builder.append(id);
-		builder.append(", thumb=");
-		builder.append(thumb);
-		builder.append(", large=");
-		builder.append(large);
-		builder.append(", url=");
-		builder.append(url);
-		builder.append(", dimensions=");
-		builder.append(dimensions);
-		builder.append("]");
-		return builder.toString();
-	}
+    @Override
+    public AccountMediaModel createFromParcel(Parcel in) {
+      return new AccountMediaModel(in);
+    }
 
-	@Override
-	public int getViewType() {
-		return MediaType.FILE.ordinal();
-	}
+    @Override
+    public AccountMediaModel[] newArray(int size) {
+      return new AccountMediaModel[size];
+    }
+
+  };
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("AccountMediaModel [id=");
+    builder.append(id);
+    builder.append(", caption=");
+    builder.append(caption);
+    builder.append(", dimensions=");
+    builder.append(dimensions);
+    builder.append(", imageUrl=");
+    builder.append(imageUrl);
+    builder.append(", thumbnail=");
+    builder.append(thumbnail);
+    builder.append("]");
+    return builder.toString();
+  }
+
+  @Override
+  public int getViewType() {
+    return MediaType.FILE.ordinal();
+  }
 
 }
