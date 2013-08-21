@@ -42,7 +42,6 @@ class CurrentUserAccountsRequest extends
       if (PreferenceUtil.isInitialized()) {
         for (final AccountModel account : responseModel.getData()) {
           PreferenceUtil.get().saveAccount(account);
-
         }
       }
       return responseModel;

@@ -45,11 +45,11 @@ public class PreferenceUtil {
   public static PreferenceUtil get() {
     return instance;
   }
-  
+
   public static boolean isInitialized() {
     return instance != null;
   }
-  
+
   public static void init(Context context) {
     if (instance == null) {
       instance = new PreferenceUtil(context.getApplicationContext());
@@ -91,7 +91,5 @@ public class PreferenceUtil {
   public boolean hasAccount(String accountType) {
     return getPreferences().contains(accountType);
   }
-
-  
 
 }
