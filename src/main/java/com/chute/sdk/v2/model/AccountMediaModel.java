@@ -3,7 +3,8 @@ package com.chute.sdk.v2.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.chute.sdk.v2.model.enums.MediaType;
+import com.chute.sdk.v2.model.enums.AccountMediaType;
+import com.chute.sdk.v2.model.interfaces.AccountMedia;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -12,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * URL, thumbnail URL and large image URL.
  * 
  */
-public class AccountMediaModel implements Parcelable, MediaViewType {
+public class AccountMediaModel implements Parcelable, AccountMedia {
 
   @SuppressWarnings("unused")
   private static final String TAG = AccountMediaModel.class.getSimpleName();
@@ -156,8 +157,8 @@ public class AccountMediaModel implements Parcelable, MediaViewType {
   }
 
   @Override
-  public int getViewType() {
-    return MediaType.FILE.ordinal();
+  public AccountMediaType getViewType() {
+    return AccountMediaType.FILE;
   }
 
 }
