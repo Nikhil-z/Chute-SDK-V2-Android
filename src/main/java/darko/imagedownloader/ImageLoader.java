@@ -27,7 +27,9 @@ package darko.imagedownloader;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLStreamHandler;
 import java.util.Collections;
 import java.util.Map;
@@ -43,6 +45,10 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
+
+import com.araneaapps.android.libs.logger.ALog;
+import com.squareup.okhttp.OkHttpClient;
+
 import darko.imagedownloader.PhotosQueue.PhotoToLoad;
 import darko.imagedownloader.PhotosQueue.QueueMethod;
 
@@ -295,13 +301,18 @@ public class ImageLoader {
 		try {
 			Bitmap bmp = null;
 			try {
+			  
+			    OkHttpClient client = new OkHttpClient();
+
 				final String protocol = Utils.getProtocol(url);
 				final URLStreamHandler streamHandler = streamFactory
 						.createURLStreamHandler(protocol);
+				
 				final BitmapContentHandler handler = new BitmapContentHandler(
 						bitmapSizeInPixels, f);
-				bmp = handler.getContent(new URL(null, url, streamHandler)
-						.openConnection());
+			    HttpURLConnection openConnection = client.open(new URL(null, url, streamHandler));
+
+			    bmp = handler.getContent(openConnection);
 				if (shouldCacheOnSD == false) {
 					f.delete();
 				}

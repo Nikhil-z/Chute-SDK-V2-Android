@@ -53,7 +53,6 @@ public class BitmapContentHandler extends ContentHandler {
 
 	@Override
 	public Bitmap getContent(URLConnection connection) throws IOException {
-		//
 		InputStream input = connection.getInputStream();
 		input = new BlockingFilterInputStream(input);
 
