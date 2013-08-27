@@ -122,4 +122,10 @@ public class AccountAlbumModel implements Parcelable, AccountMedia {
     return AccountMediaType.FOLDER;
   }
 
+  @Override
+  public String getThumbnail() {
+    // Not implemented
+    return null;
+  }
+
 }

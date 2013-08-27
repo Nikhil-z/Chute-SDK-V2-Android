@@ -161,4 +161,9 @@ public class AccountMediaModel implements Parcelable, AccountMedia {
     return AccountMediaType.FILE;
   }
 
+  @Override
+  public String getName() {
+    return getCaption();
+  }
+
 }
