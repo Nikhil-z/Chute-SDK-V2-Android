@@ -27,10 +27,6 @@ package com.chute.sdk.v2.api.upload;
 
 import java.io.File;
 
-import android.graphics.Bitmap;
-
-import com.chute.sdk.v2.model.AssetModel;
-
 /**
  * <b> IMPORTANT!! runs the updates in the thread that executed the request</b>
  * 
@@ -41,34 +37,25 @@ public interface UploadProgressListener {
 	/**
 	 * This is triggered when the
 	 * 
-	 * @param id
-	 *            the id of the asset you are currently uploading
-	 * @param filepath
-	 *            the filepath of the asset
-	 * @param thumbnail
-	 *            a small thumbnail that will be created from the asset before
-	 *            the upload starts
+	 * @param file
+	 *            the file you are currently uploading
 	 */
-//	public void onUploadStarted(AssetModel asset, final Bitmap thumbnail);
 	public void onUploadStarted(File file);
 
 	/**
 	 * @param total
-	 *            the total size of the asset
+	 *            Total size of the asset
 	 * @param current
-	 *            the ammount of data uploaded
+	 *            Amount of data uploaded
 	 */
 	public void onProgress(long total, long current);
 
 	/**
-	 * This triggers when the upload has finished, it doesnt carry the
+	 * This triggers when the upload has finished, it doesn't carry the
 	 * information about the status of the upload request
 	 * 
-	 * @param id
-	 *            the id of the asset
-	 * @param filepath
-	 *            the filepath of the asset
+	 * @param file
+	 *            the uploaded file
 	 */
 	public void onUploadFinished(File file);
-//	public void onUploadFinished(AssetModel asset);
 }
