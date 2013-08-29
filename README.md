@@ -25,7 +25,7 @@ Or use the jar with dependencies from target in your regular non-maven projects.
 ## 2.1.1
 
 	- Removed Account Store
-	- Initialization should always go through Chute.init(context,authConstants); A recommended way of doing this is by extending the Application class and adding this piece of code inside onCreate();
+	- Initialization should always go through <code>Chute.init(context,authConstants);</code> A recommended way of doing this is by extending the Application class and adding this piece of code in <code>onCreate();</code>
 
 Setup
 ====
@@ -69,7 +69,7 @@ Setup
     </code></pre>
 
    This will return a result in onActivityResult according to the status of the sign in.
-   The Authentication token will be persisted and used from inside GCAccount in every request towards the Chute API.
+   The Authentication token will be persisted and used from GCAccount in every request towards the Chute API.
 
 
 ## Request execution and callback
