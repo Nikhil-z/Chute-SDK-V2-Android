@@ -37,30 +37,30 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 
 public class AlbumsUpdateRequest extends
-		StringBodyHttpRequestImpl<ResponseModel<AlbumModel>> {
+    StringBodyHttpRequestImpl<ResponseModel<AlbumModel>> {
 
-	public static final String TAG = AlbumsUpdateRequest.class.getSimpleName();
-	private AlbumModel album;
+  public static final String TAG = AlbumsUpdateRequest.class.getSimpleName();
+  private AlbumModel album;
 
-	public AlbumsUpdateRequest(Context context, AlbumModel album,
-			HttpCallback<ResponseModel<AlbumModel>> callback) {
-		super(context, RequestMethod.PUT, new ResponseParser<AlbumModel>(
-				AlbumModel.class), callback);
-		if (TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException(
-					"Need to provide album ID for editing");
-		}
-		this.album = album;
-	}
+  public AlbumsUpdateRequest(Context context, AlbumModel album,
+      HttpCallback<ResponseModel<AlbumModel>> callback) {
+    super(context, RequestMethod.PUT, new ResponseParser<AlbumModel>(
+        AlbumModel.class), callback);
+    if (TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException(
+          "Need to provide album ID for editing");
+    }
+    this.album = album;
+  }
 
-	@Override
-	public String bodyContents() {
-		return this.album.serializeAlbum();
-	}
+  @Override
+  public String bodyContents() {
+    return this.album.serializeAlbum();
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ALBUMS_UPDATE, album.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ALBUMS_UPDATE, album.getId());
+  }
 
 }

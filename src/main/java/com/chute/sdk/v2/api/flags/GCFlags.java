@@ -35,80 +35,88 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * The {@link GCFlags} class is a helper class which contains methods for
- * manipulating with flags: getting, deleting and creating asset flags.
+ * The {@link GCFlags} class is a helper class which contains static methods for
+ * manipulating with flags.
+ * <p>
+ * Included methods:
+ * <ul>
+ * <li>Get list of flags
+ * <li>Create a flag
+ * <li>Remove a flag
+ * </ul>
  * 
  */
 public class GCFlags {
 
-	public static final String TAG = GCFlags.class.getSimpleName();
+  public static final String TAG = GCFlags.class.getSimpleName();
 
-	/**
-	 * Default non-args constructor
-	 */
-	public GCFlags() {
-	}
+  /**
+   * Default non-args constructor
+   */
+  public GCFlags() {
+  }
 
-	/**
-	 * Flags a specific asset inside an album. The asset will be marked for the
-	 * current user doing the requests.
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album that contains the flagged asset
-	 * @param asset
-	 *            - The asset to be flagged
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<FlagModel>}
-	 * @return - {@link FlagGetRequest}
-	 */
-	public static HttpRequest flag(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<FlagModel>> callback) {
-		return new FlagRequest(context, album, asset, callback);
-	}
+  /**
+   * Flags a specific asset in an album.
+   * <p>
+   * The asset will be marked for the current user executing the requests.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing the flagged asset
+   * @param asset
+   *          The asset to be flagged.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<FlagModel>}.
+   * @return {@link FlagGetRequest}.
+   */
+  public static HttpRequest flag(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<FlagModel>> callback) {
+    return new FlagRequest(context, album, asset, callback);
+  }
 
-	/**
-	 * Pulls a complete count of all flags associated with an asset inside an
-	 * album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album that holds the flagged asset
-	 * @param asset
-	 *            - Flagged asset
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<FlagModel>}
-	 * @return - {@link FlagGetRequest}
-	 */
-	public static HttpRequest get(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<FlagModel>> callback) {
-		return new FlagGetRequest(context, album, asset, callback);
-	}
+  /**
+   * Pulls a complete count of all flags associated with an asset in a specific
+   * album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album that holds the flagged asset.
+   * @param asset
+   *          The flagged asset.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<FlagModel>}.
+   * @return {@link FlagGetRequest}.
+   */
+  public static HttpRequest get(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<FlagModel>> callback) {
+    return new FlagGetRequest(context, album, asset, callback);
+  }
 
-	/**
-	 * Unflags a specific asset inside an album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album that holds the flagged asset
-	 * @param asset
-	 *            - Flagged asset
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<FlagModel>}
-	 * @return - {@link UnflagRequest}
-	 */
-	public static HttpRequest unflag(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<FlagModel>> callback) {
-		return new UnflagRequest(context, album, asset, callback);
+  /**
+   * Removes flag from an asset in a specific album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album holding the flagged asset.
+   * @param asset
+   *          The asset whose flag is about to be removed.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<FlagModel>}.
+   * @return {@link UnflagRequest}.
+   */
+  public static HttpRequest unflag(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<FlagModel>> callback) {
+    return new UnflagRequest(context, album, asset, callback);
 
-	}
+  }
 }

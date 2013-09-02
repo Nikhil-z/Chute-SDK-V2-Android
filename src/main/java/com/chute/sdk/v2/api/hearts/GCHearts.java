@@ -36,81 +36,86 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
  * The {@link GCHearts} class is a helper class which contains the following
- * methods for manipulating with asset hearts: getting, deleting and creating
- * hearts.
- * 
+ * static methods for manipulating with asset hearts:
+ * <ul>
+ * <li>Get asset heart
+ * <li>Delete asset heart
+ * <li>Create asset heart
+ * </ul>
  */
 public class GCHearts {
 
-	public static final String TAG = GCHearts.class.getSimpleName();
+  public static final String TAG = GCHearts.class.getSimpleName();
 
-	/**
-	 * Default non-args constructor
-	 */
-	public GCHearts() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+  /**
+   * Default non-args constructor
+   */
+  public GCHearts() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
 
-	/**
-	 * Hearts a specific asset inside an album. The heart will be marked for the
-	 * current user committing the requests
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album that holds the hearted asset
-	 * @param asset
-	 *            - Asset to be hearted
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<HeartModel>}
-	 * @return - {@link HeartRequest}
-	 */
-	public static HttpRequest heart(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<HeartModel>> callback) {
-		return new HeartRequest(context, album, asset, callback);
-	}
+  /**
+   * Hearts a specific asset in an album.
+   * <p>
+   * The heart will be marked for the current user executing the requests.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album that holds the hearted asset.
+   * @param asset
+   *          Asset to be hearted.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<HeartModel>}.
+   * @return {@link HeartRequest}.
+   */
+  public static HttpRequest heart(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<HeartModel>> callback) {
+    return new HeartRequest(context, album, asset, callback);
+  }
 
-	/**
-	 * Gets a number of all hearts associated with an asset inside an album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album that holds the hearted asset
-	 * @param asset
-	 *            - Hearted asset
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<HeartModel>}
-	 * @return - {@link HeartGetRequest}
-	 */
-	public static HttpRequest get(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<HeartModel>> callback) {
-		return new HeartGetRequest(context, album, asset, callback);
-	}
+  /**
+   * Gets a number of all hearts associated with an asset in a specific album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          -Album that holds the hearted asset.
+   * @param asset
+   *          Hearted asset.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<HeartModel>}.
+   * @return {@link HeartGetRequest}.
+   */
+  public static HttpRequest get(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<HeartModel>> callback) {
+    return new HeartGetRequest(context, album, asset, callback);
+  }
 
-	/**
-	 * Removes an existing heart from an asset.The heart will be marked for the
-	 * current user doing the requests
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album containing the hearted asset
-	 * @param asset
-	 *            - Hearted asset
-	 * @param callback
-	 *            -Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<HeartModel>}
-	 * @return - {@link UnheartRequest}
-	 */
-	public static HttpRequest unheart(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<HeartModel>> callback) {
-		return new UnheartRequest(context, album, asset, callback);
-	}
+  /**
+   * Removes an existing heart from an asset.
+   * <p>
+   * The heart will be marked for the current user executing the requests.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing the hearted asset.
+   * @param asset
+   *          Hearted asset.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<HeartModel>}.
+   * @return {@link UnheartRequest}.
+   */
+  public static HttpRequest unheart(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<HeartModel>> callback) {
+    return new UnheartRequest(context, album, asset, callback);
+  }
 }

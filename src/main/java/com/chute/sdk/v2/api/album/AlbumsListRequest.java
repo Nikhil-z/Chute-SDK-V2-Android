@@ -36,20 +36,20 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class AlbumsListRequest extends
-		ParameterHttpRequestImpl<ListResponseModel<AlbumModel>> {
+    ParameterHttpRequestImpl<ListResponseModel<AlbumModel>> {
 
-	@SuppressWarnings("unused")
-	private static final String TAG = AlbumsListRequest.class.getSimpleName();
+  @SuppressWarnings("unused")
+  private static final String TAG = AlbumsListRequest.class.getSimpleName();
 
-	public AlbumsListRequest(Context context,
-			HttpCallback<ListResponseModel<AlbumModel>> callback) {
-		super(context, RequestMethod.GET, new ListResponseParser<AlbumModel>(
-				AlbumModel.class), callback);
-	}
+  public AlbumsListRequest(Context context,
+      HttpCallback<ListResponseModel<AlbumModel>> callback) {
+    super(context, RequestMethod.GET, new ListResponseParser<AlbumModel>(
+        AlbumModel.class), callback);
+  }
 
-	@Override
-	protected String getUrl() {
-		return RestConstants.URL_ALBUMS_ALL;
-	}
+  @Override
+  protected String getUrl() {
+    return RestConstants.URL_ALBUMS_ALL;
+  }
 
 }

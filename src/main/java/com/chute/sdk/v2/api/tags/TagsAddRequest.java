@@ -18,48 +18,48 @@ import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class TagsAddRequest extends
-		StringBodyHttpRequestImpl<ListResponseModel<String>> {
+    StringBodyHttpRequestImpl<ListResponseModel<String>> {
 
-	public static final String TAG = TagsAddRequest.class.getSimpleName();
-	private AssetModel asset;
-	private AlbumModel album;
-	private ArrayList<String> tags;
+  public static final String TAG = TagsAddRequest.class.getSimpleName();
+  private AssetModel asset;
+  private AlbumModel album;
+  private ArrayList<String> tags;
 
-	public TagsAddRequest(Context context, AlbumModel album, AssetModel asset,
-			ArrayList<String> tags,
-			HttpCallback<ListResponseModel<String>> callback) {
-		super(context, RequestMethod.POST, new ListResponseParser<String>(
-				String.class), callback);
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		if (tags.size() == 0) {
-			throw new IllegalArgumentException(
-					"Need to provide tags for updating the asset");
-		}
-		this.asset = asset;
-		this.album = album;
-		this.tags = tags;
-	}
+  public TagsAddRequest(Context context, AlbumModel album, AssetModel asset,
+      ArrayList<String> tags,
+      HttpCallback<ListResponseModel<String>> callback) {
+    super(context, RequestMethod.POST, new ListResponseParser<String>(
+        String.class), callback);
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
+    }
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    if (tags.size() == 0) {
+      throw new IllegalArgumentException(
+          "Need to provide tags for updating the asset");
+    }
+    this.asset = asset;
+    this.album = album;
+    this.tags = tags;
+  }
 
-	@Override
-	public String bodyContents() {
-		try {
-			return JsonUtil.getMapper().writer().withRootName("tags")
-					.writeValueAsString(tags);
-		} catch (JsonProcessingException e) {
-			Log.e(TAG, "", e);
-		}
-		return null;
-	}
+  @Override
+  public String bodyContents() {
+    try {
+      return JsonUtil.getMapper().writer().withRootName("tags")
+          .writeValueAsString(tags);
+    } catch (JsonProcessingException e) {
+      Log.e(TAG, "", e);
+    }
+    return null;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
-				asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
+        asset.getId());
+  }
 
 }

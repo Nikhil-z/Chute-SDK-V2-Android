@@ -14,31 +14,31 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class CommentsListRequest extends
-		ParameterHttpRequestImpl<ListResponseModel<CommentModel>> {
+    ParameterHttpRequestImpl<ListResponseModel<CommentModel>> {
 
-	public static final String TAG = CommentsListRequest.class.getSimpleName();
-	private final AlbumModel album;
-	private final AssetModel asset;
+  public static final String TAG = CommentsListRequest.class.getSimpleName();
+  private final AlbumModel album;
+  private final AssetModel asset;
 
-	public CommentsListRequest(Context context, AlbumModel album,
-			AssetModel asset,
-			HttpCallback<ListResponseModel<CommentModel>> callback) {
-		super(context, RequestMethod.GET, new ListResponseParser<CommentModel>(
-				CommentModel.class), callback);
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		this.album = album;
-		this.asset = asset;
-	}
+  public CommentsListRequest(Context context, AlbumModel album,
+      AssetModel asset,
+      HttpCallback<ListResponseModel<CommentModel>> callback) {
+    super(context, RequestMethod.GET, new ListResponseParser<CommentModel>(
+        CommentModel.class), callback);
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    this.album = album;
+    this.asset = asset;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_COMMENTS_GET, album.getId(),
-				asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_COMMENTS_GET, album.getId(),
+        asset.getId());
+  }
 
 }

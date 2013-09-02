@@ -14,30 +14,30 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class VoteRequest extends
-		ParameterHttpRequestImpl<ResponseModel<VoteModel>> {
+    ParameterHttpRequestImpl<ResponseModel<VoteModel>> {
 
-	public static final String TAG = VotesGetRequest.class.getSimpleName();
-	private AlbumModel album;
-	private AssetModel asset;
+  public static final String TAG = VotesGetRequest.class.getSimpleName();
+  private AlbumModel album;
+  private AssetModel asset;
 
-	public VoteRequest(Context context, AlbumModel album, AssetModel asset,
-			HttpCallback<ResponseModel<VoteModel>> callback) {
-		super(context, RequestMethod.POST, new ResponseParser<VoteModel>(
-				VoteModel.class), callback);
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		this.album = album;
-		this.asset = asset;
-	}
+  public VoteRequest(Context context, AlbumModel album, AssetModel asset,
+      HttpCallback<ResponseModel<VoteModel>> callback) {
+    super(context, RequestMethod.POST, new ResponseParser<VoteModel>(
+        VoteModel.class), callback);
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
+    }
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    this.album = album;
+    this.asset = asset;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_VOTES, album.getId(),
-				asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_VOTES, album.getId(),
+        asset.getId());
+  }
 
 }

@@ -37,43 +37,44 @@ import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+
 @Deprecated
 public class AssetsListRequest extends
-		ParameterHttpRequestImpl<ListResponseModel<AssetModel>> {
+    ParameterHttpRequestImpl<ListResponseModel<AssetModel>> {
 
-	public static final String TAG = AssetsListRequest.class.getSimpleName();
+  public static final String TAG = AssetsListRequest.class.getSimpleName();
 
-	public AssetsListRequest(Context context, Sort sort, Filter filter,
-			HttpCallback<ListResponseModel<AssetModel>> callback) {
-		super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
-				AssetModel.class), callback);
-		if (sort != null) {
-			switch (sort.ordinal()) {
-			case 0:
-				addParam("sort", "id");
-				break;
-			case 1:
-				addParam("sort", "hearts");
-				break;
-			case 2:
-				addParam("sort", "position");
-				break;
-			}
-		}
-		if (filter != null) {
-			if (!TextUtils.isEmpty(filter.getUsername())) {
-				addParam("username", filter.getUsername());
-			}
-			if (!TextUtils.isEmpty(filter.getAccountType().name())) {
-				addParam("service", filter.getAccountType().name()
-						.toLowerCase());
-			}
-		}
-	}
+  public AssetsListRequest(Context context, Sort sort, Filter filter,
+      HttpCallback<ListResponseModel<AssetModel>> callback) {
+    super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
+        AssetModel.class), callback);
+    if (sort != null) {
+      switch (sort.ordinal()) {
+      case 0:
+        addParam("sort", "id");
+        break;
+      case 1:
+        addParam("sort", "hearts");
+        break;
+      case 2:
+        addParam("sort", "position");
+        break;
+      }
+    }
+    if (filter != null) {
+      if (!TextUtils.isEmpty(filter.getUsername())) {
+        addParam("username", filter.getUsername());
+      }
+      if (!TextUtils.isEmpty(filter.getAccountType().name())) {
+        addParam("service", filter.getAccountType().name()
+            .toLowerCase());
+      }
+    }
+  }
 
-	@Override
-	protected String getUrl() {
-		return RestConstants.URL_ASSETS_ALL;
-	}
+  @Override
+  protected String getUrl() {
+    return RestConstants.URL_ASSETS_ALL;
+  }
 
 }

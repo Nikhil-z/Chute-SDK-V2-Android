@@ -29,10 +29,10 @@ import android.util.SparseArray;
 
 public class HeartsMap extends SparseArray<Boolean> {
 
-	@SuppressWarnings("unused")
-	private static final String TAG = HeartsMap.class.getSimpleName();
+  @SuppressWarnings("unused")
+  private static final String TAG = HeartsMap.class.getSimpleName();
 
-	public HeartsMap() {
-	}
+  public HeartsMap() {
+  }
 
 }

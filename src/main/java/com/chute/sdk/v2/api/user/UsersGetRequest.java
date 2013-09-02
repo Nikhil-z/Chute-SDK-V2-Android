@@ -37,24 +37,24 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class UsersGetRequest extends
-		ParameterHttpRequestImpl<ResponseModel<UserModel>> {
+    ParameterHttpRequestImpl<ResponseModel<UserModel>> {
 
-	public static final String TAG = UsersGetRequest.class.getSimpleName();
-	private UserModel user;
+  public static final String TAG = UsersGetRequest.class.getSimpleName();
+  private UserModel user;
 
-	public UsersGetRequest(Context context, UserModel user,
-			HttpCallback<ResponseModel<UserModel>> callback) {
-		super(context, RequestMethod.GET, new ResponseParser<UserModel>(
-				UserModel.class), callback);
-		if (user == null || TextUtils.isEmpty(user.getId())) {
-			throw new IllegalArgumentException("Need to provide user ID");
-		}
-		this.user = user;
-	}
+  public UsersGetRequest(Context context, UserModel user,
+      HttpCallback<ResponseModel<UserModel>> callback) {
+    super(context, RequestMethod.GET, new ResponseParser<UserModel>(
+        UserModel.class), callback);
+    if (user == null || TextUtils.isEmpty(user.getId())) {
+      throw new IllegalArgumentException("Need to provide user ID");
+    }
+    this.user = user;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_USERS_GET, user.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_USERS_GET, user.getId());
+  }
 
 }

@@ -4,8 +4,8 @@ import android.util.SparseArray;
 
 public class VotesMap extends SparseArray<Boolean> {
 
-	public static final String TAG = VotesMap.class.getSimpleName();
+  public static final String TAG = VotesMap.class.getSimpleName();
 
-	public VotesMap() {
-	}
+  public VotesMap() {
+  }
 }

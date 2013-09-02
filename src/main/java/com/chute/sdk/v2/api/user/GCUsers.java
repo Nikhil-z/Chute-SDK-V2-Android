@@ -33,53 +33,57 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * Provides all actions connected to user management operations within Chute.
+ * The {@link GCUsers} class provides all actions connected to user management
+ * operations within Chute.
  * 
  */
 public class GCUsers {
-	@SuppressWarnings("unused")
-	private static final String TAG = GCUsers.class.getSimpleName();
 
-	/**
-	 * A private no-args default constructor.
-	 */
-	private GCUsers() {
-		super();
-	}
+  @SuppressWarnings("unused")
+  private static final String TAG = GCUsers.class.getSimpleName();
 
-	/**
-	 * Gets the user info for the provided id. Returns the full user info as a
-	 * response.
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param user
-	 *            - The {@link UserModel} containing the information to be
-	 *            retrieved
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<UserModel>}
-	 * @return - {@link UsersGetRequest}
-	 */
-	public static HttpRequest get(final Context context, final UserModel user,
-			final HttpCallback<ResponseModel<UserModel>> callback) {
-		return new UsersGetRequest(context, user, callback);
-	}
+  /**
+   * A private no-args default constructor.
+   */
+  private GCUsers() {
+    super();
+  }
 
-	/**
-	 * Gets the user model for the currently authenticated user by his
-	 * Authorization token. Returns the full user info as a response.
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<UserModel>}
-	 * @return - {@link UsersCurrentRequest}
-	 */
-	public static HttpRequest me(final Context context,
-			final HttpCallback<ResponseModel<UserModel>> callback) {
-		return new UsersCurrentRequest(context, callback);
-	}
+  /**
+   * Gets user info for the provided ID.
+   * <p>
+   * Returns full user info as a response.
+   * 
+   * @param context
+   *          The application context.
+   * @param user
+   *          The {@link UserModel} containing the information to be retrieved.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<UserModel>}.
+   * @return {@link UsersGetRequest}.
+   */
+  public static HttpRequest get(final Context context, final UserModel user,
+      final HttpCallback<ResponseModel<UserModel>> callback) {
+    return new UsersGetRequest(context, user, callback);
+  }
+
+  /**
+   * Gets the user model for the currently authenticated user by his
+   * Authorization token.
+   * <p>
+   * Returns full user info as a response.
+   * 
+   * @param context
+   *          The application context.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<UserModel>}.
+   * @return {@link UsersCurrentRequest}.
+   */
+  public static HttpRequest me(final Context context,
+      final HttpCallback<ResponseModel<UserModel>> callback) {
+    return new UsersCurrentRequest(context, callback);
+  }
 
 }

@@ -36,25 +36,25 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
-class AlbumsDeleteRequest extends
-		ParameterHttpRequestImpl<ResponseModel<AlbumModel>> {
+public class AlbumsDeleteRequest extends
+    ParameterHttpRequestImpl<ResponseModel<AlbumModel>> {
 
-	@SuppressWarnings("unused")
-	private static final String TAG = AlbumsDeleteRequest.class.getSimpleName();
-	private final AlbumModel album;
+  @SuppressWarnings("unused")
+  private static final String TAG = AlbumsDeleteRequest.class.getSimpleName();
+  private final AlbumModel album;
 
-	public AlbumsDeleteRequest(Context context, AlbumModel album,
-			HttpCallback<ResponseModel<AlbumModel>> callback) {
-		super(context, RequestMethod.DELETE, new ResponseParser<AlbumModel>(
-				AlbumModel.class), callback);
-		if (TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		this.album = album;
-	}
+  public AlbumsDeleteRequest(Context context, AlbumModel album,
+      HttpCallback<ResponseModel<AlbumModel>> callback) {
+    super(context, RequestMethod.DELETE, new ResponseParser<AlbumModel>(
+        AlbumModel.class), callback);
+    if (TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    this.album = album;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ALBUMS_DELETE, album.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ALBUMS_DELETE, album.getId());
+  }
 }

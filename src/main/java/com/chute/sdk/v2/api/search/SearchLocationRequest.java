@@ -14,36 +14,36 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class SearchLocationRequest extends
-		ParameterHttpRequestImpl<ListResponseModel<AssetModel>> {
+    ParameterHttpRequestImpl<ListResponseModel<AssetModel>> {
 
-	public static final String TAG = SearchLocationRequest.class
-			.getSimpleName();
+  public static final String TAG = SearchLocationRequest.class
+      .getSimpleName();
 
-	public SearchLocationRequest(Context context, AlbumModel album,
-			GeoLocationModel geoLocation, int radius,
-			HttpCallback<ListResponseModel<AssetModel>> callback) {
-		super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
-				AssetModel.class), callback);
-		if (geoLocation == null || TextUtils.isEmpty(geoLocation.getLatitude())
-				|| TextUtils.isEmpty(geoLocation.getLongitude())) {
-			throw new IllegalArgumentException(
-					"Need to provide geo location information to execute search");
-		}
-		if (radius == 0) {
-			throw new IllegalArgumentException(
-					"Need to provide the radius in meters to execute search");
-		}
-		if (album != null || !TextUtils.isEmpty(album.getId())) {
-			addParam("album_id", album.getId());
-		}
-		addParam("latitude", geoLocation.getLatitude());
-		addParam("longitude", geoLocation.getLongitude());
-		addParam("radius", String.valueOf(radius));
-	}
+  public SearchLocationRequest(Context context, AlbumModel album,
+      GeoLocationModel geoLocation, int radius,
+      HttpCallback<ListResponseModel<AssetModel>> callback) {
+    super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
+        AssetModel.class), callback);
+    if (geoLocation == null || TextUtils.isEmpty(geoLocation.getLatitude())
+        || TextUtils.isEmpty(geoLocation.getLongitude())) {
+      throw new IllegalArgumentException(
+          "Need to provide geo location information to execute search");
+    }
+    if (radius == 0) {
+      throw new IllegalArgumentException(
+          "Need to provide the radius in meters to execute search");
+    }
+    if (album != null || !TextUtils.isEmpty(album.getId())) {
+      addParam("album_id", album.getId());
+    }
+    addParam("latitude", geoLocation.getLatitude());
+    addParam("longitude", geoLocation.getLongitude());
+    addParam("radius", String.valueOf(radius));
+  }
 
-	@Override
-	protected String getUrl() {
-		return RestConstants.URL_SEARCH_LOCATION;
-	}
+  @Override
+  protected String getUrl() {
+    return RestConstants.URL_SEARCH_LOCATION;
+  }
 
 }

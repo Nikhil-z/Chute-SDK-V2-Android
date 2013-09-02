@@ -39,25 +39,25 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class AssetsExifRequest extends
-		ParameterHttpRequestImpl<ResponseModel<HashMap<String, String>>> {
+    ParameterHttpRequestImpl<ResponseModel<HashMap<String, String>>> {
 
-	public static final String TAG = AssetsExifRequest.class.getSimpleName();
-	private AssetModel asset;
+  public static final String TAG = AssetsExifRequest.class.getSimpleName();
+  private AssetModel asset;
 
-	public AssetsExifRequest(Context context, AssetModel asset,
-			HttpCallback<ResponseModel<HashMap<String, String>>> callback) {
-		super(context, RequestMethod.GET,
-				new ResponseParser<HashMap<String, String>>(HashMap.class),
-				callback);
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		this.asset = asset;
-	}
+  public AssetsExifRequest(Context context, AssetModel asset,
+      HttpCallback<ResponseModel<HashMap<String, String>>> callback) {
+    super(context, RequestMethod.GET,
+        new ResponseParser<HashMap<String, String>>(HashMap.class),
+        callback);
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
+    }
+    this.asset = asset;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_EXIF, asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ASSETS_EXIF, asset.getId());
+  }
 
 }

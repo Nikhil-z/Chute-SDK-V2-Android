@@ -31,19 +31,19 @@ import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
 
 public class ListResponseParser<T> extends
-		BaseJacksonMapperResponseParser<ListResponseModel<T>> {
+    BaseJacksonMapperResponseParser<ListResponseModel<T>> {
 
-	public static final String TAG = ListResponseParser.class.getSimpleName();
-	private final Class<?> cls;
+  public static final String TAG = ListResponseParser.class.getSimpleName();
+  private final Class<?> cls;
 
-	public ListResponseParser(Class<?> cls) {
-		this.cls = cls;
-	}
+  public ListResponseParser(Class<?> cls) {
+    this.cls = cls;
+  }
 
-	@Override
-	public ListResponseModel<T> parse(InputStream responseBody)
-			throws Exception {
-		return mapper.readValue(responseBody, mapper.getTypeFactory()
-				.constructParametricType(ListResponseModel.class, cls));
-	}
+  @Override
+  public ListResponseModel<T> parse(InputStream responseBody)
+      throws Exception {
+    return mapper.readValue(responseBody, mapper.getTypeFactory()
+        .constructParametricType(ListResponseModel.class, cls));
+  }
 }

@@ -31,18 +31,18 @@ import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
 
 public class ResponseParser<T> extends
-		BaseJacksonMapperResponseParser<ResponseModel<T>> {
+    BaseJacksonMapperResponseParser<ResponseModel<T>> {
 
-	public static final String TAG = ResponseParser.class.getSimpleName();
-	private final Class<?> cls;
+  public static final String TAG = ResponseParser.class.getSimpleName();
+  private final Class<?> cls;
 
-	public ResponseParser(Class<?> cls) {
-		this.cls = cls;
-	}
+  public ResponseParser(Class<?> cls) {
+    this.cls = cls;
+  }
 
-	@Override
-	public ResponseModel<T> parse(InputStream responseBody) throws Exception {
-		return mapper.readValue(responseBody, mapper.getTypeFactory()
-				.constructParametricType(ResponseModel.class, cls));
-	}
+  @Override
+  public ResponseModel<T> parse(InputStream responseBody) throws Exception {
+    return mapper.readValue(responseBody, mapper.getTypeFactory()
+        .constructParametricType(ResponseModel.class, cls));
+  }
 }

@@ -9,88 +9,90 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 
 public class CountingMultipartRequestEntity implements HttpEntity {
-	private final HttpEntity delegate;
 
-	private final ProgressListener listener;
+  private final HttpEntity delegate;
 
-	public CountingMultipartRequestEntity(final HttpEntity entity,
-			final ProgressListener listener) {
-		super();
-		this.delegate = entity;
-		this.listener = listener;
-	}
+  private final ProgressListener listener;
 
-	public long getContentLength() {
-		return this.delegate.getContentLength();
-	}
+  public CountingMultipartRequestEntity(final HttpEntity entity,
+      final ProgressListener listener) {
+    super();
+    this.delegate = entity;
+    this.listener = listener;
+  }
 
-	public Header getContentType() {
-		return this.delegate.getContentType();
-	}
+  public long getContentLength() {
+    return this.delegate.getContentLength();
+  }
 
-	public boolean isRepeatable() {
-		return this.delegate.isRepeatable();
-	}
+  public Header getContentType() {
+    return this.delegate.getContentType();
+  }
 
-	public static interface ProgressListener {
-		void transferred(long num);
-	}
+  public boolean isRepeatable() {
+    return this.delegate.isRepeatable();
+  }
 
-	public static class CountingOutputStream extends FilterOutputStream {
+  public static interface ProgressListener {
 
-		private final ProgressListener listener;
+    void transferred(long num);
+  }
 
-		private long transferred;
+  public static class CountingOutputStream extends FilterOutputStream {
 
-		public CountingOutputStream(final OutputStream out,
-				final ProgressListener listener) {
-			super(out);
-			this.listener = listener;
-			this.transferred = 0;
-		}
+    private final ProgressListener listener;
 
-		public void write(byte[] b, int off, int len) throws IOException {
-			out.write(b, off, len);
-			this.transferred += len;
-			this.listener.transferred(this.transferred);
-		}
+    private long transferred;
 
-		public void write(int b) throws IOException {
-			out.write(b);
-			this.transferred++;
-			this.listener.transferred(this.transferred);
-		}
-	}
+    public CountingOutputStream(final OutputStream out,
+        final ProgressListener listener) {
+      super(out);
+      this.listener = listener;
+      this.transferred = 0;
+    }
 
-	@Override
-	public void consumeContent() throws IOException {
-		this.delegate.consumeContent();
-	}
+    public void write(byte[] b, int off, int len) throws IOException {
+      out.write(b, off, len);
+      this.transferred += len;
+      this.listener.transferred(this.transferred);
+    }
 
-	@Override
-	public InputStream getContent() throws IOException, IllegalStateException {
-		return this.delegate.getContent();
-	}
+    public void write(int b) throws IOException {
+      out.write(b);
+      this.transferred++;
+      this.listener.transferred(this.transferred);
+    }
+  }
 
-	@Override
-	public Header getContentEncoding() {
-		return this.delegate.getContentEncoding();
-	}
+  @Override
+  public void consumeContent() throws IOException {
+    this.delegate.consumeContent();
+  }
 
-	@Override
-	public boolean isChunked() {
+  @Override
+  public InputStream getContent() throws IOException, IllegalStateException {
+    return this.delegate.getContent();
+  }
 
-		return this.delegate.isChunked();
-	}
+  @Override
+  public Header getContentEncoding() {
+    return this.delegate.getContentEncoding();
+  }
 
-	@Override
-	public boolean isStreaming() {
-		return this.delegate.isStreaming();
-	}
+  @Override
+  public boolean isChunked() {
 
-	@Override
-	public void writeTo(OutputStream out) throws IOException {
-		this.delegate.writeTo(new CountingOutputStream(out, this.listener));
+    return this.delegate.isChunked();
+  }
 
-	}
+  @Override
+  public boolean isStreaming() {
+    return this.delegate.isStreaming();
+  }
+
+  @Override
+  public void writeTo(OutputStream out) throws IOException {
+    this.delegate.writeTo(new CountingOutputStream(out, this.listener));
+
+  }
 }

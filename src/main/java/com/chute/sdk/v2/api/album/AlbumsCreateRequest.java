@@ -37,29 +37,31 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 
-class AlbumsCreateRequest extends StringBodyHttpRequestImpl<ResponseModel<AlbumModel>> {
+public class AlbumsCreateRequest extends
+    StringBodyHttpRequestImpl<ResponseModel<AlbumModel>> {
 
-	@SuppressWarnings("unused")
-	private static final String TAG = AlbumsCreateRequest.class.getSimpleName();
-	private final AlbumModel album;
+  @SuppressWarnings("unused")
+  private static final String TAG = AlbumsCreateRequest.class.getSimpleName();
+  private final AlbumModel album;
 
-	public AlbumsCreateRequest(Context context, AlbumModel album, HttpCallback<ResponseModel<AlbumModel>> callback) {
-		super(context, RequestMethod.POST, new ResponseParser<AlbumModel>(AlbumModel.class), callback);
-		if (album == null || TextUtils.isEmpty(album.getName())) {
-			throw new IllegalArgumentException("Need to provide album name");
-		}
-		this.album = album;
-	}
+  public AlbumsCreateRequest(Context context, AlbumModel album,
+      HttpCallback<ResponseModel<AlbumModel>> callback) {
+    super(context, RequestMethod.POST, new ResponseParser<AlbumModel>(AlbumModel.class),
+        callback);
+    if (album == null || TextUtils.isEmpty(album.getName())) {
+      throw new IllegalArgumentException("Need to provide album name");
+    }
+    this.album = album;
+  }
 
+  @Override
+  public String bodyContents() {
+    ALog.d("Body contents: " + this.album.serializeAlbum());
+    return this.album.serializeAlbum();
+  }
 
-	@Override
-	public String bodyContents() {
-		ALog.d("Body contents: " + this.album.serializeAlbum());
-		return this.album.serializeAlbum();
-	}
-
-	@Override
-	protected String getUrl() {
-		return RestConstants.URL_ALBUMS_CREATE;
-	}
+  @Override
+  protected String getUrl() {
+    return RestConstants.URL_ALBUMS_CREATE;
+  }
 }

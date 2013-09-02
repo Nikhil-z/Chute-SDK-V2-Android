@@ -38,35 +38,35 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 
 public class AssetsUpdateRequest extends
-		StringBodyHttpRequestImpl<ResponseModel<AssetModel>> {
+    StringBodyHttpRequestImpl<ResponseModel<AssetModel>> {
 
-	public static final String TAG = AssetsUpdateRequest.class.getSimpleName();
-	private AssetModel asset;
-	private AlbumModel album;
+  public static final String TAG = AssetsUpdateRequest.class.getSimpleName();
+  private AssetModel asset;
+  private AlbumModel album;
 
-	public AssetsUpdateRequest(Context context, AlbumModel album,
-			AssetModel asset, HttpCallback<ResponseModel<AssetModel>> callback) {
-		super(context, RequestMethod.PUT, new ResponseParser<AssetModel>(
-				AssetModel.class), callback);
-		this.asset = asset;
-		this.album = album;
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-	}
+  public AssetsUpdateRequest(Context context, AlbumModel album,
+      AssetModel asset, HttpCallback<ResponseModel<AssetModel>> callback) {
+    super(context, RequestMethod.PUT, new ResponseParser<AssetModel>(
+        AssetModel.class), callback);
+    this.asset = asset;
+    this.album = album;
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
+    }
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+  }
 
-	@Override
-	public String bodyContents() {
-		return this.asset.serializeAsset();
-	}
+  @Override
+  public String bodyContents() {
+    return this.asset.serializeAsset();
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_UPDATE, album.getId(),
-				asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ASSETS_UPDATE, album.getId(),
+        asset.getId());
+  }
 
 }

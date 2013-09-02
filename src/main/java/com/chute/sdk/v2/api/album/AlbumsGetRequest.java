@@ -37,26 +37,24 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 class AlbumsGetRequest extends
-		ParameterHttpRequestImpl<ResponseModel<AlbumModel>> {
+    ParameterHttpRequestImpl<ResponseModel<AlbumModel>> {
 
-	@SuppressWarnings("unused")
-	private static final String TAG = AlbumsGetRequest.class.getSimpleName();
-	private final AlbumModel album;
+  @SuppressWarnings("unused")
+  private static final String TAG = AlbumsGetRequest.class.getSimpleName();
+  private final AlbumModel album;
 
-	public AlbumsGetRequest(Context context, AlbumModel album,
-			HttpCallback<ResponseModel<AlbumModel>> callback) {
-		super(context, RequestMethod.GET, new ResponseParser<AlbumModel>(
-				AlbumModel.class), callback);
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		this.album = album;
-	}
-	
-	
+  public AlbumsGetRequest(Context context, AlbumModel album,
+      HttpCallback<ResponseModel<AlbumModel>> callback) {
+    super(context, RequestMethod.GET, new ResponseParser<AlbumModel>(
+        AlbumModel.class), callback);
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    this.album = album;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ALBUMS_GET, album.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ALBUMS_GET, album.getId());
+  }
 }

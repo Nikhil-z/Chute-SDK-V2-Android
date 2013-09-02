@@ -39,31 +39,31 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class GeoLocationGetRequest extends
-		ParameterHttpRequestImpl<ResponseModel<GeoLocationModel>> {
+    ParameterHttpRequestImpl<ResponseModel<GeoLocationModel>> {
 
-	public static final String TAG = GeoLocationGetRequest.class
-			.getSimpleName();
-	public AssetModel asset;
-	public AlbumModel album;
+  public static final String TAG = GeoLocationGetRequest.class
+      .getSimpleName();
+  public AssetModel asset;
+  public AlbumModel album;
 
-	public GeoLocationGetRequest(Context context, AlbumModel album,
-			AssetModel asset,
-			HttpCallback<ResponseModel<GeoLocationModel>> callback) {
-		super(context, RequestMethod.GET, new ResponseParser<GeoLocationModel>(
-				GeoLocationModel.class), callback);
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		this.asset = asset;
-		if (asset == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		this.album = album;
-	}
+  public GeoLocationGetRequest(Context context, AlbumModel album,
+      AssetModel asset,
+      HttpCallback<ResponseModel<GeoLocationModel>> callback) {
+    super(context, RequestMethod.GET, new ResponseParser<GeoLocationModel>(
+        GeoLocationModel.class), callback);
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
+    }
+    this.asset = asset;
+    if (asset == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    this.album = album;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_GEO_LOCATION,
-				album.getId(), asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ASSETS_GEO_LOCATION,
+        album.getId(), asset.getId());
+  }
 }

@@ -35,81 +35,83 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * The {@link GCVotes} class is a helper class which contains methods for
+ * The {@link GCVotes} class is a helper class that contains methods for
  * getting, deleting and creating asset votes.
  * 
  */
 public class GCVotes {
 
-	public static final String TAG = GCVotes.class.getSimpleName();
+  public static final String TAG = GCVotes.class.getSimpleName();
 
-	/**
-	 * Default non-args constructor
-	 */
-	public GCVotes() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+  /**
+   * Default non-args constructor
+   */
+  public GCVotes() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
 
-	/**
-	 * Creates a vote for a specific asset within an album. The vote will be
-	 * marked for the current user making the request
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album containing the voted asset
-	 * @param asset
-	 *            - Asset containing the created vote
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return - {@link VoteRequest}
-	 */
-	public static HttpRequest vote(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<VoteModel>> callback) {
-		return new VoteRequest(context, album, asset, callback);
-	}
+  /**
+   * Creates a vote for a specific asset within an album.
+   * <p>
+   * The vote will be marked for the current user making the request.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing the voted asset.
+   * @param asset
+   *          Asset containing the created vote.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AssetModel>}.
+   * @return {@link VoteRequest}.
+   */
+  public static HttpRequest vote(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<VoteModel>> callback) {
+    return new VoteRequest(context, album, asset, callback);
+  }
 
-	/**
-	 * Gets number of votes for a specific asset within an album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album containing the voted asset
-	 * @param asset
-	 *            - Asset whose votes we are counting
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return - {@link VotesGetRequest}
-	 */
-	public static HttpRequest get(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<VoteModel>> callback) {
-		return new VotesGetRequest(context, album, asset, callback);
-	}
+  /**
+   * Gets number of votes for a specific asset within an album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing the voted asset.
+   * @param asset
+   *          Asset whose votes are counted.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AssetModel>}.
+   * @return {@link VotesGetRequest}.
+   */
+  public static HttpRequest get(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<VoteModel>> callback) {
+    return new VotesGetRequest(context, album, asset, callback);
+  }
 
-	/**
-	 * Deletes an existing heart from an asset.The vote will be marked for the
-	 * current user making the requests
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album containing asset whose vote is going to be deleted
-	 * @param asset
-	 *            - Asset containing the vote we want to delete
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return - {@link UnvoteRequest}
-	 */
-	public static HttpRequest unvote(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new UnvoteRequest(context, album, asset, callback);
-	}
+  /**
+   * Deletes an existing heart from an asset.
+   * <p>
+   * The vote will be marked for the current user making the requests.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing asset whose vote is going to be deleted.
+   * @param asset
+   *          Asset containing the vote to be deleted.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AssetModel>}.
+   * @return {@link UnvoteRequest}.
+   */
+  public static HttpRequest unvote(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<AssetModel>> callback) {
+    return new UnvoteRequest(context, album, asset, callback);
+  }
 }

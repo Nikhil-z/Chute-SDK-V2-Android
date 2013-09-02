@@ -36,81 +36,85 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * The {@link GCComments} class is a helper class used for {@link CommentModel}
- * manipulation. The API enables you to use the following methods: getting,
- * adding and deleting a comment.
- * 
+ * The {@link GCComments} class is a helper class consisting solely of static
+ * methods used for {@link CommentModel} manipulation.
+ * <p>
+ * The API enables you to use the following methods:
+ * <ul>
+ * <li>Get comments
+ * <li>Add a comment
+ * <li>Delete a specific comment
+ * </ul>
  */
 public class GCComments {
 
-	public static final String TAG = GCComments.class.getSimpleName();
+  public static final String TAG = GCComments.class.getSimpleName();
 
-	/**
-	 * Default non-args constructor
-	 */
-	public GCComments() {
-		super();
-	}
+  /**
+   * Default non-args constructor
+   */
+  public GCComments() {
+    super();
+  }
 
-	/**
-	 * Pulls a complete list of all comments associated with an asset inside an
-	 * album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            -Album containing assets with comments
-	 * @param asset
-	 *            - Asset containing a list of comments
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<CommentModel>}
-	 * @return - {@link CommentsListRequest}
-	 */
-	public static HttpRequest list(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ListResponseModel<CommentModel>> callback) {
-		return new CommentsListRequest(context, album, asset, callback);
+  /**
+   * Pulls a complete list of all comments associated with an asset in an album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing assets with comments.
+   * @param asset
+   *          -Asset containing a list of comments.
+   * @param callback
+   *          -Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<CommentModel>}.
+   * @return {@link CommentsListRequest}.
+   */
+  public static HttpRequest list(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ListResponseModel<CommentModel>> callback) {
+    return new CommentsListRequest(context, album, asset, callback);
 
-	}
+  }
 
-	/**
-	 * Creates new comments for an asset inside an album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album the comment belongs to
-	 * @param asset
-	 *            - Asset the comment belongs to
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<CommentModel>}
-	 * @return - {@link CommentsCreateRequest}
-	 */
-	public static HttpRequest create(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final CommentModel comment,
-			final HttpCallback<ResponseModel<CommentModel>> callback) {
-		return new CommentsCreateRequest(context, album, asset, comment,
-				callback);
-	}
+  /**
+   * Creates new comments for an asset in a specific album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing asset the comment belongs to.
+   * @param asset
+   *          Asset the comment belongs to.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<CommentModel>}.
+   * @return {@link CommentsCreateRequest}.
+   */
+  public static HttpRequest create(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final CommentModel comment,
+      final HttpCallback<ResponseModel<CommentModel>> callback) {
+    return new CommentsCreateRequest(context, album, asset, comment,
+        callback);
+  }
 
-	/**
-	 * Deletes comments from an asset by using its ID
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param comment
-	 *            - The comment to be deleted
-	 * @param callback
-	 *            -Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<CommentModel>}
-	 * @return - {@link CommentsDeleteRequest}
-	 */
-	public static HttpRequest delete(final Context context,
-			final CommentModel comment,
-			final HttpCallback<ResponseModel<CommentModel>> callback) {
-		return new CommentsDeleteRequest(context, comment, callback);
-	}
+  /**
+   * Deletes comments from an asset by using its ID.
+   * 
+   * @param context
+   *          The application context.
+   * @param comment
+   *          The comment to be deleted.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<CommentModel>}.
+   * @return {@link CommentsDeleteRequest}.
+   */
+  public static HttpRequest delete(final Context context,
+      final CommentModel comment,
+      final HttpCallback<ResponseModel<CommentModel>> callback) {
+    return new CommentsDeleteRequest(context, comment, callback);
+  }
 }

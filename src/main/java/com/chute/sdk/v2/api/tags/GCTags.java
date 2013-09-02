@@ -39,118 +39,124 @@ import com.dg.libs.rest.callbacks.HttpCallback;
  * Tags are meta information placed on an asset. This kind of metadata helps
  * describe an item and allows it to be displayed by browsing or searching. Tags
  * are generally chosen informally and personally by the item’s creator or by
- * its viewer, depending on the client implementation. The API enables using the
- * following methods for manipulating with tags: getting, updating, deleting and
- * creating tags.
- * 
+ * its viewer, depending on the client implementation.
+ * <p>
+ * The API enables using the following methods for manipulating with tags:
+ * <ul>
+ * <li>Get list of asset tags
+ * <li>Update tags
+ * <li>Delete tags
+ * <li>Create tags
+ * </ul>
  */
 public class GCTags {
 
-	public static final String TAG = GCTags.class.getSimpleName();
+  public static final String TAG = GCTags.class.getSimpleName();
 
-	/**
-	 * Default non-args constructor
-	 */
-	public GCTags() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+  /**
+   * Default non-args constructor
+   */
+  public GCTags() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
 
-	/**
-	 * Pulls a complete list of all tags associated with an asset inside an
-	 * album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The album containing the asset with tags that are about to
-	 *            be listed
-	 * @param asset
-	 *            - The asset containing the specific tags
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return - {@link TagsListRequest}
-	 */
-	public static HttpRequest list(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ListResponseModel<String>> callback) {
-		return new TagsListRequest(context, album, asset, callback);
-	}
+  /**
+   * Pulls a complete list of all tags associated with an asset in a specific
+   * album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The album containing the asset with tags that are about to be
+   *          listed.
+   * @param asset
+   *          Asset containing the specific tags.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AssetModel>}.
+   * @return {@link TagsListRequest}.
+   */
+  public static HttpRequest list(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ListResponseModel<String>> callback) {
+    return new TagsListRequest(context, album, asset, callback);
+  }
 
-	/**
-	 * Replaces all existing tags within an asset with a new set of tags
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The album containing the asset with tags that are about to
-	 *            be updated
-	 * @param asset
-	 *            - The asset containing the specific tags
-	 * @param tags
-	 *            - List of new tags
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AssetModel>}
-	 * @return - {@link TagsReplaceRequest}
-	 */
-	public static HttpRequest update(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final ArrayList<String> tags,
-			final HttpCallback<ListResponseModel<String>> callback) {
-		return new TagsReplaceRequest(context, album, asset, tags, callback);
-	}
+  /**
+   * Replaces all existing tags within an asset with a new set of tags.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The album containing the asset with tags that are about to be
+   *          updated.
+   * @param asset
+   *          Asset containing the specific tags.
+   * @param tags
+   *          List of new tags.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AssetModel>}.
+   * @return - {@link TagsReplaceRequest}.
+   */
+  public static HttpRequest update(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final ArrayList<String> tags,
+      final HttpCallback<ListResponseModel<String>> callback) {
+    return new TagsReplaceRequest(context, album, asset, tags, callback);
+  }
 
-	/**
-	 * Adds more tags attached to an asset inside an album. The asset will not
-	 * share the tags between albums. Tags added will apply only to a specific
-	 * asset inside an album.
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The album containing the asset that will hold the newly
-	 *            created tags
-	 * @param asset
-	 *            - The asset containing the newly created tags
-	 * @param tags
-	 *            - List of tags to be added
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<String>}
-	 * @return - {@link TagsAddRequest}
-	 */
-	public static HttpRequest create(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final ArrayList<String> tags,
-			final HttpCallback<ListResponseModel<String>> callback) {
-		return new TagsAddRequest(context, album, asset, tags, callback);
-	}
+  /**
+   * Adds more tags attached to an asset in an album.
+   * <p>
+   * The asset will not share the tags between albums.
+   * <p>
+   * Tags added will apply only to a specific asset in an album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The album containing asset that will hold the newly created tags.
+   * @param asset
+   *          Asset containing the newly created tags.
+   * @param tags
+   *          List of tags to be added.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<String>}.
+   * @return {@link TagsAddRequest}.
+   */
+  public static HttpRequest create(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final ArrayList<String> tags,
+      final HttpCallback<ListResponseModel<String>> callback) {
+    return new TagsAddRequest(context, album, asset, tags, callback);
+  }
 
-	/**
-	 * Deletes tags from an asset by using tag names. This will modify the
-	 * existing tag array attached to an asset
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The album containing the asset whose tags are about to be
-	 *            deleted
-	 * @param asset
-	 *            - The asset whose tags are about to be deleted
-	 * @param tags
-	 *            - List of tags for removal
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<String>}
-	 * @return - {@link TagsDeleteRequest}
-	 */
-	public static HttpRequest delete(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final ArrayList<String> tags,
-			final HttpCallback<ListResponseModel<String>> callback) {
-		return new TagsDeleteRequest(context, album, asset, tags, callback);
-	}
+  /**
+   * Deletes tags from an asset by using tag names.
+   * <p>
+   * This request will modify the existing tag array attached to an asset.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing the asset whose tags are about to be deleted.
+   * @param asset
+   *          The asset whose tags are about to be deleted.
+   * @param tags
+   *          List of tags for removal.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<String>}.
+   * @return {@link TagsDeleteRequest}.
+   */
+  public static HttpRequest delete(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final ArrayList<String> tags,
+      final HttpCallback<ListResponseModel<String>> callback) {
+    return new TagsDeleteRequest(context, album, asset, tags, callback);
+  }
 
 }

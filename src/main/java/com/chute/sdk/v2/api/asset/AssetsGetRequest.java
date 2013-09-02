@@ -38,25 +38,25 @@ import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 @Deprecated
 public class AssetsGetRequest extends
-		ParameterHttpRequestImpl<ResponseModel<AssetModel>> {
+    ParameterHttpRequestImpl<ResponseModel<AssetModel>> {
 
-	public static final String TAG = AssetsGetRequest.class.getSimpleName();
-	private AssetModel asset;
+  public static final String TAG = AssetsGetRequest.class.getSimpleName();
+  private AssetModel asset;
 
-	public AssetsGetRequest(Context context, AssetModel asset,
-			HttpCallback<ResponseModel<AssetModel>> callback) {
-		super(context, RequestMethod.GET, new ResponseParser<AssetModel>(
-				AssetModel.class), callback);
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		this.asset = asset;
+  public AssetsGetRequest(Context context, AssetModel asset,
+      HttpCallback<ResponseModel<AssetModel>> callback) {
+    super(context, RequestMethod.GET, new ResponseParser<AssetModel>(
+        AssetModel.class), callback);
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
+    }
+    this.asset = asset;
 
-	}
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_GET, asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ASSETS_GET, asset.getId());
+  }
 
 }

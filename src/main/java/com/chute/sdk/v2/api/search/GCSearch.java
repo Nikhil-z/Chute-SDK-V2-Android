@@ -38,85 +38,88 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * Helper class that performs various search actions using the API methods
- * described below.
- * 
+ * {@link GCSearch} class is a helper class that performs various search actions
+ * using the following API methods:
+ * <ul>
+ * <li>Get list of assets containing a specific exif info
+ * <li>Get list of assets within a radius around a specific GeoLocation
+ * <li>Get list of assets containing specific tags
+ * </ul>
  */
 public class GCSearch {
 
-	public static final String TAG = GCSearch.class.getSimpleName();
+  public static final String TAG = GCSearch.class.getSimpleName();
 
-	/**
-	 * Default non-args constructor
-	 */
-	public GCSearch() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+  /**
+   * Default non-args constructor
+   */
+  public GCSearch() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
 
-	/**
-	 * Gets a list of all assets that have a specific EXIF info attached
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The search will include only assets belonging to this album
-	 * @param exif
-	 *            - The EXIF information used in the query
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<AssetModel>}
-	 * @return - {@link SearchExifRequest}
-	 */
-	public static HttpRequest exif(final Context context,
-			final AlbumModel album, final HashMap<String, String> exif,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new SearchExifRequest(context, album, exif, callback);
-	}
+  /**
+   * Gets a list of all assets with a specific EXIF info attached.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The search will include assets belonging to this album only.
+   * @param exif
+   *          The EXIF information used in the query.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AssetModel>}.
+   * @return {@link SearchExifRequest}.
+   */
+  public static HttpRequest exif(final Context context,
+      final AlbumModel album, final HashMap<String, String> exif,
+      final HttpCallback<ListResponseModel<AssetModel>> callback) {
+    return new SearchExifRequest(context, album, exif, callback);
+  }
 
-	/**
-	 * Performs a search for all assets in a radius around a specific
-	 * GeoLocation
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The search will include assets belonging to this album only
-	 * @param geoLocation
-	 *            - GPS latitude and longitude
-	 * @param radius
-	 *            - Radius in meters
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<AssetModel>}
-	 * @return - {@link SearchLocationRequest}
-	 */
-	public static HttpRequest location(final Context context,
-			final AlbumModel album, final GeoLocationModel geoLocation,
-			final int radius,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new SearchLocationRequest(context, album, geoLocation, radius,
-				callback);
-	}
+  /**
+   * Performs a search for all assets in a radius around a specific GeoLocation.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The search will include assets belonging to this album only.
+   * @param geoLocation
+   *          GPS latitude and longitude.
+   * @param radius
+   *          Radius in meters.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AssetModel>}.
+   * @return {@link SearchLocationRequest}.
+   */
+  public static HttpRequest location(final Context context,
+      final AlbumModel album, final GeoLocationModel geoLocation,
+      final int radius,
+      final HttpCallback<ListResponseModel<AssetModel>> callback) {
+    return new SearchLocationRequest(context, album, geoLocation, radius,
+        callback);
+  }
 
-	/**
-	 * Lists all assets containing specific tags
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The search will include assets belonging to this album only
-	 * @param tags
-	 *            - List of tags needed for the query
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<AssetModel>}
-	 * @return - {@link SearchUserRequest}
-	 */
-	public static HttpRequest tags(final Context context,
-			final AlbumModel album, final ArrayList<String> tags,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new SearchTagsRequest(context, album, tags, callback);
-	}
+  /**
+   * Lists all assets containing specific tags.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The search will include assets belonging to this album only.
+   * @param tags
+   *          List of tags needed for the query.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AssetModel>}.
+   * @return {@link SearchUserRequest}.
+   */
+  public static HttpRequest tags(final Context context,
+      final AlbumModel album, final ArrayList<String> tags,
+      final HttpCallback<ListResponseModel<AssetModel>> callback) {
+    return new SearchTagsRequest(context, album, tags, callback);
+  }
 
 }

@@ -14,42 +14,42 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 
 public class CommentsCreateRequest extends
-		StringBodyHttpRequestImpl<ResponseModel<CommentModel>> {
+    StringBodyHttpRequestImpl<ResponseModel<CommentModel>> {
 
-	public static final String TAG = CommentsCreateRequest.class
-			.getSimpleName();
-	private final AlbumModel album;
-	private final AssetModel asset;
-	private final CommentModel comment;
+  public static final String TAG = CommentsCreateRequest.class
+      .getSimpleName();
+  private final AlbumModel album;
+  private final AssetModel asset;
+  private final CommentModel comment;
 
-	public CommentsCreateRequest(Context context, AlbumModel album,
-			AssetModel asset, CommentModel comment,
-			HttpCallback<ResponseModel<CommentModel>> callback) {
-		super(context, RequestMethod.POST, new ResponseParser<CommentModel>(
-				CommentModel.class), callback);
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		if (comment == null || TextUtils.isEmpty(comment.getCommentText())) {
-			throw new IllegalArgumentException("Need to provide comment text");
-		}
-		this.album = album;
-		this.asset = asset;
-		this.comment = comment;
-	}
+  public CommentsCreateRequest(Context context, AlbumModel album,
+      AssetModel asset, CommentModel comment,
+      HttpCallback<ResponseModel<CommentModel>> callback) {
+    super(context, RequestMethod.POST, new ResponseParser<CommentModel>(
+        CommentModel.class), callback);
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
+    }
+    if (comment == null || TextUtils.isEmpty(comment.getCommentText())) {
+      throw new IllegalArgumentException("Need to provide comment text");
+    }
+    this.album = album;
+    this.asset = asset;
+    this.comment = comment;
+  }
 
-	@Override
-	public String bodyContents() {
-		return this.comment.serializeComment();
-	}
+  @Override
+  public String bodyContents() {
+    return this.comment.serializeComment();
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_COMMENTS_CREATE, album.getId(),
-				asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_COMMENTS_CREATE, album.getId(),
+        asset.getId());
+  }
 
 }

@@ -12,26 +12,26 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class CommentsDeleteRequest extends
-		ParameterHttpRequestImpl<ResponseModel<CommentModel>> {
+    ParameterHttpRequestImpl<ResponseModel<CommentModel>> {
 
-	public static final String TAG = CommentsDeleteRequest.class
-			.getSimpleName();
-	private final CommentModel comment;
+  public static final String TAG = CommentsDeleteRequest.class
+      .getSimpleName();
+  private final CommentModel comment;
 
-	public CommentsDeleteRequest(Context context, CommentModel comment,
-			HttpCallback<ResponseModel<CommentModel>> callback) {
-		super(context, RequestMethod.DELETE, new ResponseParser<CommentModel>(
-				CommentModel.class), callback);
-		if (comment == null || TextUtils.isEmpty(comment.getId())) {
-			throw new IllegalArgumentException("Need to provide comment ID");
-		}
-		this.comment = comment;
-	}
+  public CommentsDeleteRequest(Context context, CommentModel comment,
+      HttpCallback<ResponseModel<CommentModel>> callback) {
+    super(context, RequestMethod.DELETE, new ResponseParser<CommentModel>(
+        CommentModel.class), callback);
+    if (comment == null || TextUtils.isEmpty(comment.getId())) {
+      throw new IllegalArgumentException("Need to provide comment ID");
+    }
+    this.comment = comment;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String
-				.format(RestConstants.URL_COMMENTS_DELETE, comment.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String
+        .format(RestConstants.URL_COMMENTS_DELETE, comment.getId());
+  }
 
 }

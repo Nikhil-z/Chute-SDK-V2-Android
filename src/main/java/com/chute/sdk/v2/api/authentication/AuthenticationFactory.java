@@ -32,84 +32,85 @@ import com.chute.sdk.v2.model.enums.AccountType;
 import com.chute.sdk.v2.utils.RestConstants;
 
 public class AuthenticationFactory {
-	
-	public static final String EXTRA_ACCOUNT_TYPE = "account_type";
 
-	public static final int AUTHENTICATION_REQUEST_CODE = 123;
-	
-	@SuppressWarnings("unused")
-	private static final String TAG = AuthenticationFactory.class
-			.getSimpleName();
-	private AuthConstants authConstants;
+  public static final String EXTRA_ACCOUNT_TYPE = "account_type";
 
-	private static AuthenticationFactory instance;
-	
-	public static AuthenticationFactory getInstance(){
-		if(instance==null){
-			instance = new AuthenticationFactory();
-		}
-		return instance;
-	}
-	
-	private AuthenticationFactory() {
-	}
-	
-	public void setAuthConstants(AuthConstants authConstants) {
-		this.authConstants = authConstants;
-	}
+  public static final int AUTHENTICATION_REQUEST_CODE = 123;
 
-	public String getAuthenticationURL(AccountType accountType) {
-		if(authConstants==null){
-			throw new IllegalArgumentException("If you are using the Authentication activity, you need to pass in the Authentication Constants to start it");
-		}
-		StringBuilder stringBuilder;
-		stringBuilder = new StringBuilder(
-				String.format(RestConstants.BASE_AUTH_URL, accountType.getLoginMethod()));
-		stringBuilder.append("?");
-		stringBuilder.append("scope=" + AuthConstants.PERMISSIONS_SCOPE);
-		stringBuilder.append("&");
-		stringBuilder.append("response_type=code");
-		stringBuilder.append("&");
-		stringBuilder.append("client_id=" + authConstants.clientId);
-		stringBuilder.append("&");
-		stringBuilder.append("redirect_uri=" + AuthConstants.CALLBACK_URL);
-		return stringBuilder.toString();
-	}
+  @SuppressWarnings("unused")
+  private static final String TAG = AuthenticationFactory.class
+      .getSimpleName();
+  private AuthConstants authConstants;
 
-	/**
-	 * <p>
-	 * Use {@link #AUTHENTICATION_REQUEST_CODE} inside the onActivityResult to
-	 * check the request code
-	 * <p>
-	 * Use {@link Activity#RESULT_OK} for the result code if the auth was
-	 * successful
-	 * 
-	 * <pre>
-	 * <b> For errors use the following constants for the result code </b>
-	 * Use {@link GCAuthenticationActivity#CODE_HTTP_EXCEPTION}} - For connection problems
-	 * Use {@link GCAuthenticationActivity#CODE_HTTP_ERROR}} - For server issues, see logcat for detailed error
-	 * Use {@link GCAuthenticationActivity#CODE_PARSER_EXCEPTION}} - For result parsing errors, see logcat for details
-	 * </pre>
-	 * 
-	 * @param activity
-	 * @param accountType
-	 * @param scope
-	 * @param redirectUri
-	 * @param clientId
-	 * @param clientSecret
-	 */
-	public void startAuthenticationActivity(Activity activity, AccountType accountType) {
-		Intent intent = new Intent(activity, AuthenticationActivity.class);
-		intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType.ordinal());
-		activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
-	}
+  private static AuthenticationFactory instance;
 
-	public AuthConstants getAuthConstants() {
-		return authConstants;
-	}
+  public static AuthenticationFactory getInstance() {
+    if (instance == null) {
+      instance = new AuthenticationFactory();
+    }
+    return instance;
+  }
 
-	public boolean isRedirectUri(String url) {
-		return url.startsWith(AuthConstants.CALLBACK_URL);
-	}
+  private AuthenticationFactory() {
+  }
+
+  public void setAuthConstants(AuthConstants authConstants) {
+    this.authConstants = authConstants;
+  }
+
+  public String getAuthenticationURL(AccountType accountType) {
+    if (authConstants == null) {
+      throw new IllegalArgumentException(
+          "If you are using the Authentication activity, you need to pass in the Authentication Constants to start it");
+    }
+    StringBuilder stringBuilder;
+    stringBuilder = new StringBuilder(
+        String.format(RestConstants.BASE_AUTH_URL, accountType.getLoginMethod()));
+    stringBuilder.append("?");
+    stringBuilder.append("scope=" + AuthConstants.PERMISSIONS_SCOPE);
+    stringBuilder.append("&");
+    stringBuilder.append("response_type=code");
+    stringBuilder.append("&");
+    stringBuilder.append("client_id=" + authConstants.clientId);
+    stringBuilder.append("&");
+    stringBuilder.append("redirect_uri=" + AuthConstants.CALLBACK_URL);
+    return stringBuilder.toString();
+  }
+
+  /**
+   * <p>
+   * Use {@link #AUTHENTICATION_REQUEST_CODE} in onActivityResult to check the
+   * request code.
+   * <p>
+   * Use {@link Activity#RESULT_OK} as a result code if the authentication was
+   * successful.
+   * 
+   * <pre>
+   * <b> For errors use the following constants as a result code: </b>
+   * Use {@link GCAuthenticationActivity#CODE_HTTP_EXCEPTION}} - For connection problems.
+   * Use {@link GCAuthenticationActivity#CODE_HTTP_ERROR}} - For server issues. See logcat for detailed error.
+   * Use {@link GCAuthenticationActivity#CODE_PARSER_EXCEPTION}} - For result parsing errors. See logcat for details.
+   * </pre>
+   * 
+   * @param activity
+   * @param accountType
+   * @param scope
+   * @param redirectUri
+   * @param clientId
+   * @param clientSecret
+   */
+  public void startAuthenticationActivity(Activity activity, AccountType accountType) {
+    Intent intent = new Intent(activity, AuthenticationActivity.class);
+    intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType.ordinal());
+    activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
+  }
+
+  public AuthConstants getAuthConstants() {
+    return authConstants;
+  }
+
+  public boolean isRedirectUri(String url) {
+    return url.startsWith(AuthConstants.CALLBACK_URL);
+  }
 
 }

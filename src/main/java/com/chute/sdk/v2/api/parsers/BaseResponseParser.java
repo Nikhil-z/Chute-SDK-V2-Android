@@ -30,18 +30,18 @@ import java.io.InputStream;
 import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
 
 public class BaseResponseParser<T> extends
-		BaseJacksonMapperResponseParser<T> {
+    BaseJacksonMapperResponseParser<T> {
 
-	public static final String TAG = BaseResponseParser.class.getSimpleName();
-	private final Class<?> cls;
+  public static final String TAG = BaseResponseParser.class.getSimpleName();
+  private final Class<?> cls;
 
-	public BaseResponseParser(Class<?> cls) {
-		this.cls = cls;
-	}
+  public BaseResponseParser(Class<?> cls) {
+    this.cls = cls;
+  }
 
-	@Override
-	public T parse(InputStream responseBody) throws Exception {
-		return mapper.readValue(responseBody, mapper.getTypeFactory()
-				.constructParametricType(getClass(), cls));
-	}
+  @Override
+  public T parse(InputStream responseBody) throws Exception {
+    return mapper.readValue(responseBody, mapper.getTypeFactory()
+        .constructParametricType(getClass(), cls));
+  }
 }

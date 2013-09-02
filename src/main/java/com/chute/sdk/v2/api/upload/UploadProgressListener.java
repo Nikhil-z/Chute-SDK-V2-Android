@@ -28,34 +28,36 @@ package com.chute.sdk.v2.api.upload;
 import java.io.File;
 
 /**
- * <b> IMPORTANT!! runs the updates in the thread that executed the request</b>
+ * <b> IMPORTANT!! Runs the updates in the thread that executed the request.</b>
  * 
  * @author DArkO
  * 
  */
 public interface UploadProgressListener {
-	/**
-	 * This is triggered when the
-	 * 
-	 * @param file
-	 *            the file you are currently uploading
-	 */
-	public void onUploadStarted(File file);
 
-	/**
-	 * @param total
-	 *            Total size of the asset
-	 * @param current
-	 *            Amount of data uploaded
-	 */
-	public void onProgress(long total, long current);
+  /**
+   * This method is triggered when the upload is started.
+   * 
+   * @param file
+   *          The file that is currently uploading.
+   */
+  public void onUploadStarted(File file);
 
-	/**
-	 * This triggers when the upload has finished, it doesn't carry the
-	 * information about the status of the upload request
-	 * 
-	 * @param file
-	 *            the uploaded file
-	 */
-	public void onUploadFinished(File file);
+  /**
+   * @param total
+   *          Total size of the asset.
+   * @param current
+   *          Amount of data uploaded.
+   */
+  public void onProgress(long total, long current);
+
+  /**
+   * This method is triggered when the upload has finished.
+   * <p>
+   * It doesn't carry information about the status of the upload request.
+   * 
+   * @param file
+   *          The uploaded file.
+   */
+  public void onUploadFinished(File file);
 }

@@ -36,59 +36,59 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * Helper class that contains methods for getting geo-location info for an
- * asset.
+ * The {@link GCGeoLocation} class contains methods for getting geo-location
+ * info for an asset.
  */
 public class GCGeoLocation {
 
-	public static final String TAG = GCGeoLocation.class.getSimpleName();
+  public static final String TAG = GCGeoLocation.class.getSimpleName();
 
-	/**
-	 * Gets the coordinates attached to this asset marking the position where
-	 * the actual file (image for example) was created. Coordinates will be
-	 * presented as decimal degrees in the response
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album holding the asset with geo-location info
-	 * @param asset
-	 *            - Asset containing geo-location info
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<GeoLocationModel>}
-	 * @return - {@link GeoLocationGetRequest}
-	 */
-	public static HttpRequest get(final Context context,
-			final AlbumModel album, final AssetModel asset,
-			final HttpCallback<ResponseModel<GeoLocationModel>> callback) {
-		return new GeoLocationGetRequest(context, album, asset, callback);
-	}
+  /**
+   * Gets the coordinates attached to an asset marking the position where the
+   * actual file (image for example) was created.
+   * <p>
+   * Coordinates will be presented as decimal degrees in the response.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album holding the asset with geo-location info.
+   * @param asset
+   *          Asset containing geo-location info.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<GeoLocationModel>}.
+   * @return {@link GeoLocationGetRequest}.
+   */
+  public static HttpRequest get(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<GeoLocationModel>> callback) {
+    return new GeoLocationGetRequest(context, album, asset, callback);
+  }
 
-	/**
-	 * Gets a list of assets that are within a specified radius around a GPS
-	 * location
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param asset
-	 *            - Asset containing geo-location info
-	 * @param latitude
-	 *            - GPS latitude
-	 * @param longitude
-	 *            - GPS longitude
-	 * @param radius
-	 *            - Radius in meters
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<AssetModel>}
-	 * @return - {@link GeoLocationGetAssetsRequest}
-	 */
-	public static HttpRequest assets(final Context context,
-			final AssetModel asset, final String latitude,
-			final String longitude, final String radius,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new GeoLocationGetAssetsRequest(context, asset, latitude,
-				longitude, radius, callback);
-	}
+  /**
+   * Gets a list of assets within a specified radius around a GPS location.
+   * 
+   * @param context
+   *          The application context.
+   * @param asset
+   *          Asset containing geo-location info.
+   * @param latitude
+   *          GPS latitude.
+   * @param longitude
+   *          GPS longitude.
+   * @param radius
+   *          Radius in meters.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AssetModel>}.
+   * @return {@link GeoLocationGetAssetsRequest}.
+   */
+  public static HttpRequest assets(final Context context,
+      final AssetModel asset, final String latitude,
+      final String longitude, final String radius,
+      final HttpCallback<ListResponseModel<AssetModel>> callback) {
+    return new GeoLocationGetAssetsRequest(context, asset, latitude,
+        longitude, radius, callback);
+  }
 }

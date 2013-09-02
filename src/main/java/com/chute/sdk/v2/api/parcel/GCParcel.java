@@ -36,68 +36,69 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * Helper class that contains methods for getting album and asset parcels.
+ * Helper class that contains static methods for getting album and asset
+ * parcels.
  * 
  */
 public class GCParcel {
 
-	public static final String TAG = GCParcel.class.getSimpleName();
+  public static final String TAG = GCParcel.class.getSimpleName();
 
-	public GCParcel() {
-	}
+  public GCParcel() {
+  }
 
-	/**
-	 * Gets parcel info
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param parcel
-	 *            - The parcel to be retrieved
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<ParcelModel>}
-	 * @return - {@link ParcelGetRequest}
-	 */
-	public static HttpRequest get(final Context context,
-			final ParcelModel parcel,
-			final HttpCallback<ResponseModel<ParcelModel>> callback) {
-		return new ParcelGetRequest(context, parcel, callback);
-	}
+  /**
+   * Gets parcel info.
+   * 
+   * @param context
+   *          The application context.
+   * @param parcel
+   *          The parcel to be retrieved.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<ParcelModel>}.
+   * @return {@link ParcelGetRequest}.
+   */
+  public static HttpRequest get(final Context context,
+      final ParcelModel parcel,
+      final HttpCallback<ResponseModel<ParcelModel>> callback) {
+    return new ParcelGetRequest(context, parcel, callback);
+  }
 
-	/**
-	 * Returns a complete list of all parcels in an album
-	 * 
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album containing parcels
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<ParcelModel>}
-	 * @return {@link ParcelAlbumsRequest}
-	 */
-	public static HttpRequest albums(final Context context,
-			final AlbumModel album,
-			final HttpCallback<ListResponseModel<ParcelModel>> callback) {
-		return new ParcelAlbumsRequest(context, album, callback);
-	}
+  /**
+   * Returns a complete list of all parcels in an album.
+   * 
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Album containing parcels.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<ParcelModel>}.
+   * @return {@link ParcelAlbumsRequest}.
+   */
+  public static HttpRequest albums(final Context context,
+      final AlbumModel album,
+      final HttpCallback<ListResponseModel<ParcelModel>> callback) {
+    return new ParcelAlbumsRequest(context, album, callback);
+  }
 
-	/**
-	 * Pulls a list of all assets inside a parcel
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param parcel
-	 *            - Parcel containing list of assets
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<ParcelModel>}
-	 * @return - {@link ParcelAssetsRequest}
-	 */
-	public static HttpRequest assets(final Context context,
-			final ParcelModel parcel,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new ParcelAssetsRequest(context, parcel, callback);
-	}
+  /**
+   * Pulls a list of all assets in a specific parcel.
+   * 
+   * @param context
+   *          The application context.
+   * @param parcel
+   *          Parcel containing list of assets.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<ParcelModel>}.
+   * @return {@link ParcelAssetsRequest}.
+   */
+  public static HttpRequest assets(final Context context,
+      final ParcelModel parcel,
+      final HttpCallback<ListResponseModel<AssetModel>> callback) {
+    return new ParcelAssetsRequest(context, parcel, callback);
+  }
 }

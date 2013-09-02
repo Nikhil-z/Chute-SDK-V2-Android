@@ -37,182 +37,196 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * The {@link GCAlbums} class is a helper class that contains methods regarding
- * {@link AlbumModel}. The API enables users and developers to access the
- * following methods: creating, deleting, editing albums, getting an asset or a
- * list of assets from a specific album.
+ * The {@link GCAlbums} class is a helper class that consists exclusively of
+ * static methods regarding {@link AlbumModel}.
  * 
+ * <p>
+ * The API enables users and developers to access the following methods:
+ * <ul>
+ * <li>Create an album
+ * <li>Delete an album
+ * <li>Update an album
+ * <li>Get a specific asset from an album
+ * <li>Get a list of album assets
+ * <li>Import a list of asset URLs in a specific album
+ * <li>Add a list of asset IDs in a specific album
+ * <li>Remove a list of asset IDs in a specific album
+ * </ul>
  */
 public class GCAlbums {
-	public static final String TAG = GCAlbums.class.getSimpleName();
 
-	/**
-	 * A private no-args default constructor.
-	 */
-	private GCAlbums() {
-	}
+  public static final String TAG = GCAlbums.class.getSimpleName();
 
-	/**
-	 * Pulls a complete list of all the albums accessible to the user
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<AlbumModel>}
-	 * @return - {@link AlbumsListRequest}
-	 */
-	public static HttpRequest list(final Context context,
-			final HttpCallback<ListResponseModel<AlbumModel>> callback) {
-		return new AlbumsListRequest(context, callback);
-	}
+  /**
+   * A private no-args default constructor.
+   */
+  private GCAlbums() {
+  }
 
-	/**
-	 * Retrieves details of a specific album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The album to be retrieved
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AlbumModel>}
-	 * @return - {@link AlbumsGetRequest}
-	 */
-	public static HttpRequest get(final Context context,
-			final AlbumModel album,
-			final HttpCallback<ResponseModel<AlbumModel>> callback) {
-		return new AlbumsGetRequest(context, album, callback);
-	}
+  /**
+   * Pulls a complete list of all albums accessible to the user.
+   * 
+   * @param context
+   *          The application context.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AlbumModel>}.
+   * @return {@link AlbumsListRequest}.
+   */
+  public static HttpRequest list(final Context context,
+      final HttpCallback<ListResponseModel<AlbumModel>> callback) {
+    return new AlbumsListRequest(context, callback);
+  }
 
-	/**
-	 * Creates an album. Sending additional defined parameters will enable you
-	 * to customize name, privileges, visibility, moderation etc…
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The album to be created
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AlbumModel>}
-	 * @return - {@link AlbumsCreateRequest}
-	 */
-	public static HttpRequest create(final Context context,
-			final AlbumModel album,
-			final HttpCallback<ResponseModel<AlbumModel>> callback) {
-		return new AlbumsCreateRequest(context, album, callback);
-	}
+  /**
+   * Retrieves details for a specific album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The album whose details are to be returned.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AlbumModel>}
+   * @return {@link AlbumsGetRequest}
+   */
+  public static HttpRequest get(final Context context,
+      final AlbumModel album,
+      final HttpCallback<ResponseModel<AlbumModel>> callback) {
+    return new AlbumsGetRequest(context, album, callback);
+  }
 
-	/**
-	 * Updates existing album properties
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The album to be edited
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AlbumModel>}
-	 * @return - {@link AlbumsUpdateRequest}
-	 */
-	public static HttpRequest update(final Context context,
-			final AlbumModel album,
-			final HttpCallback<ResponseModel<AlbumModel>> callback) {
-		return new AlbumsUpdateRequest(context, album, callback);
-	}
+  /**
+   * Creates an album.
+   * <p>
+   * Sending additional defined parameters will enable you to customize name,
+   * privileges, visibility, moderation etc.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The album to be created.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AlbumModel>}.
+   * @return {@link AlbumsCreateRequest}.
+   */
+  public static HttpRequest create(final Context context,
+      final AlbumModel album,
+      final HttpCallback<ResponseModel<AlbumModel>> callback) {
+    return new AlbumsCreateRequest(context, album, callback);
+  }
 
-	/**
-	 * Deletes an album. Deletion will occur only if the user has the
-	 * appropriate permission to delete the album
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - The album to be deleted
-	 * @param callback
-	 *            - Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ResponseModel<AlbumModel>}
-	 * @return - {@link AlbumsDeleteRequest}
-	 */
-	public static HttpRequest delete(final Context context,
-			final AlbumModel album,
-			final HttpCallback<ResponseModel<AlbumModel>> callback) {
-		return new AlbumsDeleteRequest(context, album, callback);
-	}
+  /**
+   * Updates existing album properties.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          The album to be edited.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AlbumModel>}.
+   * @return {@link AlbumsUpdateRequest}.
+   */
+  public static HttpRequest update(final Context context,
+      final AlbumModel album,
+      final HttpCallback<ResponseModel<AlbumModel>> callback) {
+    return new AlbumsUpdateRequest(context, album, callback);
+  }
 
-	/**
-	 * Imports assets inside albums
-	 * 
-	 * @param context
-	 *            - The application context
-	 * @param album
-	 *            - Album needed to place the imported assets
-	 * @param urls
-	 *            - List of desired asset URLs for import
-	 * @param callback
-	 *            -Instance of {@link HttpCallback} interface. If successful,
-	 *            the callback returns {@link ListResponseModel<AssetModel>}
-	 * @return - {@link AlbumsImportRequest}
-	 */
-	public static HttpRequest imports(final Context context,
-			final AlbumModel album, final ArrayList<String> urls,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AlbumsImportRequest(context, album, urls, callback);
-	}
+  /**
+   * Deletes an album.
+   * <p>
+   * Deletion will occur only if the user has the appropriate permission to
+   * delete the album.
+   * 
+   * @param context
+   *          The application context
+   * @param album
+   *          The album to be deleted
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ResponseModel<AlbumModel>}.
+   * @return {@link AlbumsDeleteRequest}.
+   */
+  public static HttpRequest delete(final Context context,
+      final AlbumModel album,
+      final HttpCallback<ResponseModel<AlbumModel>> callback) {
+    return new AlbumsDeleteRequest(context, album, callback);
+  }
 
-	/**
-	 * The {@link GCAlbums.Assets} class is an inner class which contains
-	 * methods for getting a specific asset out of an album or a list of assets
-	 * 
-	 */
-	public static class Assets {
+  /**
+   * Imports assets in a specific album.
+   * 
+   * @param context
+   *          The application context
+   * @param album
+   *          Album needed to place the imported assets.
+   * @param urls
+   *          List of desired asset URLs for import.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AssetModel>}.
+   * @return {@link AlbumsImportRequest}.
+   */
+  public static HttpRequest imports(final Context context,
+      final AlbumModel album, final ArrayList<String> urls,
+      final HttpCallback<ListResponseModel<AssetModel>> callback) {
+    return new AlbumsImportRequest(context, album, urls, callback);
+  }
 
-		/**
-		 * Adds existing assets to an album. The assets must be already created
-		 * by upload or import.
-		 * 
-		 * @param context
-		 *            - The application context
-		 * @param album
-		 *            - Album that holds the added assets
-		 * @param assetIds
-		 *            - List of asset IDs we want to add to an album
-		 * @param callback
-		 *            - Instance of {@link HttpCallback} interface. If
-		 *            successful, the callback returns {@link ResponseModel
-		 *            <Void>}
-		 * @return - {@link AlbumsAddAssetsRequest}
-		 */
-		public static HttpRequest add(final Context context,
-				final AlbumModel album, final ArrayList<String> assetIds,
-				final HttpCallback<Void> callback) {
-			return new AlbumsAddAssetsRequest(context, album, assetIds,
-					callback);
-		}
+  /**
+   * The {@link GCAlbums.Assets} class is an inner class which contains methods
+   * for getting a specific asset out of an album or a list of assets.
+   * 
+   */
+  public static class Assets {
 
-		/**
-		 * Removes existing assets attached to an existing album
-		 * 
-		 * @param context
-		 *            - The application context
-		 * @param album
-		 *            - Album that holds the assets for removal
-		 * @param assetIds
-		 *            - List of asset IDs we want to delete from the given album
-		 * @param callback
-		 *            - Instance of {@link HttpCallback} interface. If
-		 *            successful, the callback returns {@link ResponseModel
-		 *            <Void>}
-		 * @return - {@link AlbumsRemoveAssetsRequest}
-		 */
-		public static HttpRequest remove(final Context context,
-				final AlbumModel album, final ArrayList<String> assetIds,
-				final HttpCallback<Void> callback) {
-			return new AlbumsRemoveAssetsRequest(context, album, assetIds,
-					callback);
-		}
+    /**
+     * Adds existing assets to an album.
+     * <p>
+     * The assets must be already created by upload or import.
+     * 
+     * @param context
+     *          The application context.
+     * @param album
+     *          Album that holds the added assets.
+     * @param assetIds
+     *          List of asset IDs to be added to the album.
+     * @param callback
+     *          Instance of {@link HttpCallback} interface. If successful, the
+     *          callback returns {@link ResponseModel <Void>}.
+     * @return {@link AlbumsAddAssetsRequest}.
+     */
+    public static HttpRequest add(final Context context,
+        final AlbumModel album, final ArrayList<String> assetIds,
+        final HttpCallback<Void> callback) {
+      return new AlbumsAddAssetsRequest(context, album, assetIds,
+          callback);
+    }
 
-	}
+    /**
+     * Removes existing assets attached to an album.
+     * 
+     * @param context
+     *          The application context.
+     * @param album
+     *          Album that holds the assets for removal.
+     * @param assetIds
+     *          List of asset IDs to be deleted from the given album.
+     * @param callback
+     *          Instance of {@link HttpCallback} interface. If successful, the
+     *          callback returns {@link ResponseModel <Void>}.
+     * @return {@link AlbumsRemoveAssetsRequest}.
+     */
+    public static HttpRequest remove(final Context context,
+        final AlbumModel album, final ArrayList<String> assetIds,
+        final HttpCallback<Void> callback) {
+      return new AlbumsRemoveAssetsRequest(context, album, assetIds,
+          callback);
+    }
+
+  }
 
 }

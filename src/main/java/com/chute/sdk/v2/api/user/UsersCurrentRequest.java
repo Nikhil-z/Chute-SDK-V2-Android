@@ -36,19 +36,19 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class UsersCurrentRequest extends
-		ParameterHttpRequestImpl<ResponseModel<UserModel>> {
+    ParameterHttpRequestImpl<ResponseModel<UserModel>> {
 
-	public static final String TAG = UsersCurrentRequest.class.getSimpleName();
+  public static final String TAG = UsersCurrentRequest.class.getSimpleName();
 
-	public UsersCurrentRequest(Context context,
-			HttpCallback<ResponseModel<UserModel>> callback) {
-		super(context, RequestMethod.GET, new ResponseParser<UserModel>(
-				UserModel.class), callback);
-	}
+  public UsersCurrentRequest(Context context,
+      HttpCallback<ResponseModel<UserModel>> callback) {
+    super(context, RequestMethod.GET, new ResponseParser<UserModel>(
+        UserModel.class), callback);
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_USERS_GET_CURRENT);
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_USERS_GET_CURRENT);
+  }
 
 }

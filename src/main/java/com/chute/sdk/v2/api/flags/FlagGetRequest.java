@@ -39,30 +39,30 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class FlagGetRequest extends
-		ParameterHttpRequestImpl<ResponseModel<FlagModel>> {
+    ParameterHttpRequestImpl<ResponseModel<FlagModel>> {
 
-	public static final String TAG = FlagGetRequest.class.getSimpleName();
-	private AssetModel asset;
-	private AlbumModel album;
+  public static final String TAG = FlagGetRequest.class.getSimpleName();
+  private AssetModel asset;
+  private AlbumModel album;
 
-	public FlagGetRequest(Context context, AlbumModel album, AssetModel asset,
-			HttpCallback<ResponseModel<FlagModel>> callback) {
-		super(context, RequestMethod.GET, new ResponseParser<FlagModel>(
-				FlagModel.class), callback);
-		if (asset == null || TextUtils.isEmpty(asset.getId())) {
-			throw new IllegalArgumentException("Need to provide asset ID");
-		}
-		if (album == null || TextUtils.isEmpty(album.getId())) {
-			throw new IllegalArgumentException("Need to provide album ID");
-		}
-		this.asset = asset;
-		this.album = album;
-	}
+  public FlagGetRequest(Context context, AlbumModel album, AssetModel asset,
+      HttpCallback<ResponseModel<FlagModel>> callback) {
+    super(context, RequestMethod.GET, new ResponseParser<FlagModel>(
+        FlagModel.class), callback);
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
+    }
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException("Need to provide album ID");
+    }
+    this.asset = asset;
+    this.album = album;
+  }
 
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_FLAGS_COUNT, album.getId(),
-				asset.getId());
-	}
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_FLAGS_COUNT, album.getId(),
+        asset.getId());
+  }
 
 }

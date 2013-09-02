@@ -32,30 +32,32 @@ import com.dg.libs.rest.domain.ResponseStatus;
 
 public abstract class HttpCallbackImpl<T> implements HttpCallback<T> {
 
-	public static final String TAG = HttpCallbackImpl.class.getSimpleName();
+  public static final String TAG = HttpCallbackImpl.class.getSimpleName();
 
-	@Override
-	public abstract void onSuccess(T responseData);
+  @Override
+  public abstract void onSuccess(T responseData);
 
-	/**
-	 * This is always triggered when an error occurs, For connection problems
-	 * the status code is {@link HttpStatus#SC_REQUEST_TIMEOUT}, other codes are
-	 * standard HTTPStatus messages
-	 * 
-	 * @param responseCode
-	 *            the {@link HttpStatus} code for the error
-	 * @param message
-	 *            a message containing the reason
-	 */
-	public void onGeneralError(int responseCode, String message) {
+  /**
+   * This method is always triggered when an error occurs.
+   * <p>
+   * For connection problems the status code is
+   * {@link HttpStatus#SC_REQUEST_TIMEOUT}, while the other codes are standard
+   * HTTPStatus messages.
+   * 
+   * @param responseCode
+   *          The {@link HttpStatus} code for the error.
+   * @param message
+   *          Message containing the reason the error occurred.
+   */
+  public void onGeneralError(int responseCode, String message) {
 
-	}
+  }
 
-	@Override
-	public void onHttpError(ResponseStatus responseStatus) {
-		onGeneralError(
-				HttpStatus.SC_REQUEST_TIMEOUT,
-				"Request Timeout, Connection problem: "
-						+ responseStatus.getStatusMessage());
-	}
+  @Override
+  public void onHttpError(ResponseStatus responseStatus) {
+    onGeneralError(
+        HttpStatus.SC_REQUEST_TIMEOUT,
+        "Request Timeout, Connection problem: "
+            + responseStatus.getStatusMessage());
+  }
 }
