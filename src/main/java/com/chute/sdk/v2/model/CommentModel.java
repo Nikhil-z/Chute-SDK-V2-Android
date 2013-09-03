@@ -38,219 +38,228 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 /**
  * Comments offer the ability for users to interact and comment on assets inside
- * an album. Each comment holds links, time and date of creation and update,
- * comment text, user name and user e-mail.
+ * an album.
+ * <p>
+ * Each comment holds links, time and date of creation and update, comment text,
+ * user name and user e-mail.
  * 
  */
 public class CommentModel implements Parcelable {
 
-	public static final String TAG = CommentModel.class.getSimpleName();
+  public static final String TAG = CommentModel.class.getSimpleName();
 
-	/**
-	 * Unique identifier
-	 */
-	@JsonProperty("id")
-	private String id;
-	/**
-	 * Comment links
-	 */
-	@JsonProperty("links")
-	private LinkModel links;
+  /**
+   * Unique identifier.
+   */
+  @JsonProperty("id")
+  private String id;
 
-	/**
-	 * The user the comment belongs to
-	 */
-	@JsonProperty("user")
-	private UserModel user;
-	/**
-	 * Date and time of creation
-	 */
-	@JsonProperty("created_at")
-	private String createdAt;
-	/**
-	 * Date and time of update
-	 */
-	@JsonProperty("updated_at")
-	private String updatedAt;
-	/**
-	 * Comment text
-	 */
-	@JsonProperty("comment_text")
-	private String commentText;
-	/**
-	 * Name of the user posting the comment
-	 */
-	@JsonProperty("name")
-	private String name;
-	/**
-	 * E-mail of the user posting the comment
-	 */
-	@JsonProperty("email")
-	private String email;
+  /**
+   * Comment links.
+   */
+  @JsonProperty("links")
+  private LinkModel links;
 
-	/**
-	 * Default non-args constructor
-	 */
-	public CommentModel() {
-	}
+  /**
+   * The user the comment belongs to.
+   */
+  @JsonProperty("user")
+  private UserModel user;
 
-	/**
-	 * Getters and setters
-	 */
+  /**
+   * Date and time of creation.
+   */
+  @JsonProperty("created_at")
+  private String createdAt;
 
-	public String getId() {
-		return id;
-	}
+  /**
+   * Date and time of update.
+   */
+  @JsonProperty("updated_at")
+  private String updatedAt;
 
-	public UserModel getUser() {
-		return user;
-	}
+  /**
+   * Comment text.
+   */
+  @JsonProperty("comment_text")
+  private String commentText;
 
-	public void setUser(UserModel user) {
-		this.user = user;
-	}
+  /**
+   * Name of the user posting the comment.
+   */
+  @JsonProperty("name")
+  private String name;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  /**
+   * E-mail of the user posting the comment.
+   */
+  @JsonProperty("email")
+  private String email;
 
-	public LinkModel getLinks() {
-		return links;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public CommentModel() {
+  }
 
-	public void setLinks(LinkModel links) {
-		this.links = links;
-	}
+  /**
+   * Getters and setters.
+   */
+  public String getId() {
+    return id;
+  }
 
-	public String getCreatedAt() {
-		return createdAt;
-	}
+  public UserModel getUser() {
+    return user;
+  }
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
+  public void setUser(UserModel user) {
+    this.user = user;
+  }
 
-	public String getUpdatedAt() {
-		return updatedAt;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public void setUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+  public LinkModel getLinks() {
+    return links;
+  }
 
-	public String getCommentText() {
-		return commentText;
-	}
+  public void setLinks(LinkModel links) {
+    this.links = links;
+  }
 
-	public void setCommentText(String commentText) {
-		this.commentText = commentText;
-	}
+  public String getCreatedAt() {
+    return createdAt;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public String getUpdatedAt() {
+    return updatedAt;
+  }
 
-	public String getEmail() {
-		return email;
-	}
+  public void setUpdatedAt(String updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public String getCommentText() {
+    return commentText;
+  }
 
-	public CommentModel(Parcel in) {
-		this();
-		id = in.readString();
-		links = in.readParcelable(LinkModel.class.getClassLoader());
-		createdAt = in.readString();
-		updatedAt = in.readString();
-		commentText = in.readString();
-		name = in.readString();
-		email = in.readString();
-		user = in.readParcelable(UserModel.class.getClassLoader());
-	}
+  public void setCommentText(String commentText) {
+    this.commentText = commentText;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public String getName() {
+    return name;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(id);
-		dest.writeParcelable(links, flags);
-		dest.writeString(createdAt);
-		dest.writeString(updatedAt);
-		dest.writeString(commentText);
-		dest.writeString(name);
-		dest.writeString(email);
-		dest.writeParcelable(user, flags);
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public static final Parcelable.Creator<CommentModel> CREATOR = new Parcelable.Creator<CommentModel>() {
+  public String getEmail() {
+    return email;
+  }
 
-		@Override
-		public CommentModel createFromParcel(Parcel in) {
-			return new CommentModel(in);
-		}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-		@Override
-		public CommentModel[] newArray(int size) {
-			return new CommentModel[size];
-		}
+  public CommentModel(Parcel in) {
+    this();
+    id = in.readString();
+    links = in.readParcelable(LinkModel.class.getClassLoader());
+    createdAt = in.readString();
+    updatedAt = in.readString();
+    commentText = in.readString();
+    name = in.readString();
+    email = in.readString();
+    user = in.readParcelable(UserModel.class.getClassLoader());
+  }
 
-	};
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-	/**
-	 * Method used for serializing Comment object as a String
-	 */
-	public String serializeComment() {
-		FilterProvider filters = new SimpleFilterProvider().addFilter("commentModelFilter",
-				SimpleBeanPropertyFilter.filterOutAllExcept("comment_text", "name", "email"));
-		String result = null;
-		try {
-			result = JsonUtil.getMapper().writer(filters).writeValueAsString(this);
-		} catch (JsonProcessingException e) {
-			ALog.d("", e);
-		}
-		return result;
-	}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(id);
+    dest.writeParcelable(links, flags);
+    dest.writeString(createdAt);
+    dest.writeString(updatedAt);
+    dest.writeString(commentText);
+    dest.writeString(name);
+    dest.writeString(email);
+    dest.writeParcelable(user, flags);
+  }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CommentModel [id=");
-		builder.append(id);
-		builder.append(", links=");
-		builder.append(links);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", updatedAt=");
-		builder.append(updatedAt);
-		builder.append(", commentText=");
-		builder.append(commentText);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append("]");
-		return builder.toString();
-	}
+  public static final Parcelable.Creator<CommentModel> CREATOR = new Parcelable.Creator<CommentModel>() {
+
+    @Override
+    public CommentModel createFromParcel(Parcel in) {
+      return new CommentModel(in);
+    }
+
+    @Override
+    public CommentModel[] newArray(int size) {
+      return new CommentModel[size];
+    }
+
+  };
+
+  /**
+   * Method used for serializing Comment object as a String
+   */
+  public String serializeComment() {
+    FilterProvider filters = new SimpleFilterProvider().addFilter("commentModelFilter",
+        SimpleBeanPropertyFilter.filterOutAllExcept("comment_text", "name", "email"));
+    String result = null;
+    try {
+      result = JsonUtil.getMapper().writer(filters).writeValueAsString(this);
+    } catch (JsonProcessingException e) {
+      ALog.d("", e);
+    }
+    return result;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("CommentModel [id=");
+    builder.append(id);
+    builder.append(", links=");
+    builder.append(links);
+    builder.append(", user=");
+    builder.append(user);
+    builder.append(", createdAt=");
+    builder.append(createdAt);
+    builder.append(", updatedAt=");
+    builder.append(updatedAt);
+    builder.append(", commentText=");
+    builder.append(commentText);
+    builder.append(", name=");
+    builder.append(name);
+    builder.append(", email=");
+    builder.append(email);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

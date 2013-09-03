@@ -37,175 +37,186 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SourceModel implements Parcelable {
 
-	public static final String TAG = SourceModel.class.getSimpleName();
+  public static final String TAG = SourceModel.class.getSimpleName();
 
-	/**
-	 * Asset source
-	 */
-	@JsonProperty("source")
-	private String source;
-	/**
-	 * Source ID
-	 */
-	@JsonProperty("source_id")
-	private String sourceId;
-	/**
-	 * Source URL
-	 */
-	@JsonProperty("source_url")
-	private String sourceUrl;
-	/**
-	 * Source service
-	 */
-	@JsonProperty("service")
-	private String service;
-	/**
-	 * Import ID
-	 */
-	@JsonProperty("import_id")
-	private String importId;
-	/**
-	 * Import URL
-	 */
-	@JsonProperty("import_url")
-	private String importUrl;
-	/**
-	 * Original URL
-	 */
-	@JsonProperty("original_url")
-	private String originalUrl;
+  /**
+   * Asset source.
+   */
+  @JsonProperty("source")
+  private String source;
 
-	public SourceModel() {
-	}
+  /**
+   * Source ID.
+   */
+  @JsonProperty("source_id")
+  private String sourceId;
 
-	/**
-	 * Getters and setters
-	 */
-	public String getSource() {
-		return source;
-	}
+  /**
+   * Source URL.
+   */
+  @JsonProperty("source_url")
+  private String sourceUrl;
 
-	public void setSource(String source) {
-		this.source = source;
-	}
+  /**
+   * Source service.
+   */
+  @JsonProperty("service")
+  private String service;
 
-	public String getSourceId() {
-		return sourceId;
-	}
+  /**
+   * Import ID.
+   */
+  @JsonProperty("import_id")
+  private String importId;
 
-	public void setSourceId(String sourceId) {
-		this.sourceId = sourceId;
-	}
+  /**
+   * Import URL.
+   */
+  @JsonProperty("import_url")
+  private String importUrl;
 
-	public String getSourceUrl() {
-		return sourceUrl;
-	}
+  /**
+   * Original URL.
+   */
+  @JsonProperty("original_url")
+  private String originalUrl;
 
-	public void setSourceUrl(String sourceUrl) {
-		this.sourceUrl = sourceUrl;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public SourceModel() {
+  }
 
-	public String getService() {
-		return service;
-	}
+  /**
+   * Getters and setters.
+   */
+  public String getSource() {
+    return source;
+  }
 
-	public void setService(String service) {
-		this.service = service;
-	}
+  public void setSource(String source) {
+    this.source = source;
+  }
 
-	public String getImportId() {
-		return importId;
-	}
+  public String getSourceId() {
+    return sourceId;
+  }
 
-	public void setImportId(String importId) {
-		this.importId = importId;
-	}
+  public void setSourceId(String sourceId) {
+    this.sourceId = sourceId;
+  }
 
-	public String getImportUrl() {
-		return importUrl;
-	}
+  public String getSourceUrl() {
+    return sourceUrl;
+  }
 
-	public void setImportUrl(String importUrl) {
-		this.importUrl = importUrl;
-	}
+  public void setSourceUrl(String sourceUrl) {
+    this.sourceUrl = sourceUrl;
+  }
 
-	public String getOriginalUrl() {
-		return originalUrl;
-	}
+  public String getService() {
+    return service;
+  }
 
-	public void setOriginalUrl(String originalUrl) {
-		this.originalUrl = originalUrl;
-	}
+  public void setService(String service) {
+    this.service = service;
+  }
 
-	public SourceModel(Parcel in) {
-		source = in.readString();
-		sourceId = in.readString();
-		sourceUrl = in.readString();
-		service = in.readString();
-		importId = in.readString();
-		importUrl = in.readString();
-		originalUrl = in.readString();
-	}
+  public String getImportId() {
+    return importId;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public void setImportId(String importId) {
+    this.importId = importId;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(source);
-		dest.writeString(sourceId);
-		dest.writeString(sourceUrl);
-		dest.writeString(service);
-		dest.writeString(importId);
-		dest.writeString(importUrl);
-		dest.writeString(originalUrl);
-	}
+  public String getImportUrl() {
+    return importUrl;
+  }
 
-	public static final Parcelable.Creator<SourceModel> CREATOR = new Parcelable.Creator<SourceModel>() {
+  public void setImportUrl(String importUrl) {
+    this.importUrl = importUrl;
+  }
 
-		@Override
-		public SourceModel createFromParcel(Parcel in) {
-			return new SourceModel(in);
-		}
+  public String getOriginalUrl() {
+    return originalUrl;
+  }
 
-		@Override
-		public SourceModel[] newArray(int size) {
-			return new SourceModel[size];
-		}
+  public void setOriginalUrl(String originalUrl) {
+    this.originalUrl = originalUrl;
+  }
 
-	};
+  public SourceModel(Parcel in) {
+    source = in.readString();
+    sourceId = in.readString();
+    sourceUrl = in.readString();
+    service = in.readString();
+    importId = in.readString();
+    importUrl = in.readString();
+    originalUrl = in.readString();
+  }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SourceModel [source=");
-		builder.append(source);
-		builder.append(", sourceId=");
-		builder.append(sourceId);
-		builder.append(", sourceUrl=");
-		builder.append(sourceUrl);
-		builder.append(", service=");
-		builder.append(service);
-		builder.append(", importId=");
-		builder.append(importId);
-		builder.append(", importUrl=");
-		builder.append(importUrl);
-		builder.append(", originalUrl=");
-		builder.append(originalUrl);
-		builder.append("]");
-		return builder.toString();
-	}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(source);
+    dest.writeString(sourceId);
+    dest.writeString(sourceUrl);
+    dest.writeString(service);
+    dest.writeString(importId);
+    dest.writeString(importUrl);
+    dest.writeString(originalUrl);
+  }
+
+  public static final Parcelable.Creator<SourceModel> CREATOR = new Parcelable.Creator<SourceModel>() {
+
+    @Override
+    public SourceModel createFromParcel(Parcel in) {
+      return new SourceModel(in);
+    }
+
+    @Override
+    public SourceModel[] newArray(int size) {
+      return new SourceModel[size];
+    }
+
+  };
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("SourceModel [source=");
+    builder.append(source);
+    builder.append(", sourceId=");
+    builder.append(sourceId);
+    builder.append(", sourceUrl=");
+    builder.append(sourceUrl);
+    builder.append(", service=");
+    builder.append(service);
+    builder.append(", importId=");
+    builder.append(importId);
+    builder.append(", importUrl=");
+    builder.append(importUrl);
+    builder.append(", originalUrl=");
+    builder.append(originalUrl);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

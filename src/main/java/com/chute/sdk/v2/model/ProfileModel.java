@@ -10,140 +10,149 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ProfileModel implements Parcelable {
 
-	/**
-	 * First name of the user
-	 */
-	@JsonProperty("first_name")
-	private String firstName;
-	/**
-	 * Last name of the user
-	 */
-	@JsonProperty("last_name")
-	private String lastName;
-	/**
-	 * User e-mail
-	 */
-	@JsonProperty("email")
-	private String email;
-	/**
-	 * User phone number
-	 */
-	@JsonProperty("phone_number")
-	private String phoneNumber;
-	/**
-	 * User birth year
-	 */
-	@JsonProperty("birth_year")
-	private String birthYear;
+  /**
+   * First name of the user.
+   */
+  @JsonProperty("first_name")
+  private String firstName;
 
-	/**
-	 * Getter and setter methods
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
+  /**
+   * Last name of the user.
+   */
+  @JsonProperty("last_name")
+  private String lastName;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+  /**
+   * User e-mail.
+   */
+  @JsonProperty("email")
+  private String email;
 
-	public String getLastName() {
-		return lastName;
-	}
+  /**
+   * User phone number.
+   */
+  @JsonProperty("phone_number")
+  private String phoneNumber;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+  /**
+   * User birth year.
+   */
+  @JsonProperty("birth_year")
+  private String birthYear;
 
-	public String getEmail() {
-		return email;
-	}
+  /**
+   * Getter and setter methods.
+   */
+  public String getFirstName() {
+    return firstName;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+  public String getLastName() {
+    return lastName;
+  }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-	public String getBirthYear() {
-		return birthYear;
-	}
+  public String getEmail() {
+    return email;
+  }
 
-	public void setBirthYear(String birthYear) {
-		this.birthYear = birthYear;
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	public ProfileModel() {
-	}
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
 
-	public ProfileModel(Parcel in) {
-		this();
-		firstName = in.readString();
-		lastName = in.readString();
-		email = in.readString();
-		phoneNumber = in.readString();
-		birthYear = in.readString();
-	}
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public String getBirthYear() {
+    return birthYear;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(firstName);
-		dest.writeString(lastName);
-		dest.writeString(email);
-		dest.writeString(phoneNumber);
-		dest.writeString(birthYear);
-	}
+  public void setBirthYear(String birthYear) {
+    this.birthYear = birthYear;
+  }
 
-	public static final Parcelable.Creator<ProfileModel> CREATOR = new Parcelable.Creator<ProfileModel>() {
+  /**
+   * Default non-args constructor.
+   */
+  public ProfileModel() {
+  }
 
-		@Override
-		public ProfileModel createFromParcel(Parcel in) {
-			return new ProfileModel(in);
-		}
+  public ProfileModel(Parcel in) {
+    this();
+    firstName = in.readString();
+    lastName = in.readString();
+    email = in.readString();
+    phoneNumber = in.readString();
+    birthYear = in.readString();
+  }
 
-		@Override
-		public ProfileModel[] newArray(int size) {
-			return new ProfileModel[size];
-		}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-	};
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(firstName);
+    dest.writeString(lastName);
+    dest.writeString(email);
+    dest.writeString(phoneNumber);
+    dest.writeString(birthYear);
+  }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ProfileModel [firstName=");
-		builder.append(firstName);
-		builder.append(", lastName=");
-		builder.append(lastName);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", phoneNumber=");
-		builder.append(phoneNumber);
-		builder.append(", birthYear=");
-		builder.append(birthYear);
-		builder.append("]");
-		return builder.toString();
-	}
+  public static final Parcelable.Creator<ProfileModel> CREATOR = new Parcelable.Creator<ProfileModel>() {
+
+    @Override
+    public ProfileModel createFromParcel(Parcel in) {
+      return new ProfileModel(in);
+    }
+
+    @Override
+    public ProfileModel[] newArray(int size) {
+      return new ProfileModel[size];
+    }
+
+  };
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("ProfileModel [firstName=");
+    builder.append(firstName);
+    builder.append(", lastName=");
+    builder.append(lastName);
+    builder.append(", email=");
+    builder.append(email);
+    builder.append(", phoneNumber=");
+    builder.append(phoneNumber);
+    builder.append(", birthYear=");
+    builder.append(birthYear);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

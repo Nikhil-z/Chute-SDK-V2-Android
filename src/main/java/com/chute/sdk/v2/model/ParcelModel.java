@@ -31,158 +31,162 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Parcels represent a group of assets. A parcel contains all assets that were
- * uploaded or imported in a single run. A simple example is calling the import
- * function with multiple image URLs. All these images will be grouped in a
- * single parcel.Each parcel consists of links, date and time of creation and
- * update and shortcut.
+ * Parcels represent a group of assets.
+ * <p>
+ * A parcel contains all assets that were uploaded or imported in a single run.
+ * A simple example is calling the import function with multiple image URLs. All
+ * these images will be grouped in a single parcel.
+ * <p>
+ * Each parcel consists of links, date and time of creation and update and
+ * shortcut.
  * 
  */
 public class ParcelModel implements Parcelable {
 
-	public static final String TAG = ParcelModel.class.getSimpleName();
+  public static final String TAG = ParcelModel.class.getSimpleName();
 
-	/**
-	 * Unique identifier
-	 */
-	@JsonProperty("id")
-	private String id;
-	/**
-	 * Parcel links
-	 */
-	@JsonProperty("links")
-	private LinkModel links;
-	/**
-	 * Date and time of creation
-	 */
-	@JsonProperty("created_at")
-	private String createdAt;
-	/**
-	 * Date and time of update
-	 */
-	@JsonProperty("updated_at")
-	private String updatedAt;
-	/**
-	 * Parcel shortcut
-	 */
-	@JsonProperty("shortcut")
-	private String shortcut;
+  /**
+   * Unique identifier.
+   */
+  @JsonProperty("id")
+  private String id;
 
-	/**
-	 * Default non-args constructor
-	 */
-	public ParcelModel() {
-	}
+  /**
+   * Parcel links.
+   */
+  @JsonProperty("links")
+  private LinkModel links;
 
-	/**
-	 * Getters and setters
-	 */
-	public String getId() {
-		return id;
-	}
+  /**
+   * Date and time of creation.
+   */
+  @JsonProperty("created_at")
+  private String createdAt;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  /**
+   * Date and time of update.
+   */
+  @JsonProperty("updated_at")
+  private String updatedAt;
 
-	public LinkModel getLinks() {
-		return links;
-	}
+  /**
+   * Parcel shortcut.
+   */
+  @JsonProperty("shortcut")
+  private String shortcut;
 
-	public void setLinks(LinkModel links) {
-		this.links = links;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public ParcelModel() {
+  }
 
-	public String getCreatedAt() {
-		return createdAt;
-	}
+  /**
+   * Getters and setters.
+   */
+  public String getId() {
+    return id;
+  }
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public String getUpdatedAt() {
-		return updatedAt;
-	}
+  public LinkModel getLinks() {
+    return links;
+  }
 
-	public void setUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+  public void setLinks(LinkModel links) {
+    this.links = links;
+  }
 
-	public String getShortcut() {
-		return shortcut;
-	}
+  public String getCreatedAt() {
+    return createdAt;
+  }
 
-	public void setShortcut(String shortcut) {
-		this.shortcut = shortcut;
-	}
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
 
-	public ParcelModel(Parcel in) {
-		id = in.readString();
-		links = in.readParcelable(LinkModel.class.getClassLoader());
-		createdAt = in.readString();
-		updatedAt = in.readString();
-		shortcut = in.readString();
-	}
+  public String getUpdatedAt() {
+    return updatedAt;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public void setUpdatedAt(String updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(id);
-		dest.writeParcelable(links, flags);
-		dest.writeString(createdAt);
-		dest.writeString(updatedAt);
-		dest.writeString(shortcut);
-	}
+  public String getShortcut() {
+    return shortcut;
+  }
 
-	public static final Parcelable.Creator<ParcelModel> CREATOR = new Parcelable.Creator<ParcelModel>() {
+  public void setShortcut(String shortcut) {
+    this.shortcut = shortcut;
+  }
 
-		@Override
-		public ParcelModel createFromParcel(Parcel in) {
-			return new ParcelModel(in);
-		}
+  public ParcelModel(Parcel in) {
+    id = in.readString();
+    links = in.readParcelable(LinkModel.class.getClassLoader());
+    createdAt = in.readString();
+    updatedAt = in.readString();
+    shortcut = in.readString();
+  }
 
-		@Override
-		public ParcelModel[] newArray(int size) {
-			return new ParcelModel[size];
-		}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-	};
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(id);
+    dest.writeParcelable(links, flags);
+    dest.writeString(createdAt);
+    dest.writeString(updatedAt);
+    dest.writeString(shortcut);
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ParcelModel [id=");
-		builder.append(id);
-		builder.append(", links=");
-		builder.append(links);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", updatedAt=");
-		builder.append(updatedAt);
-		builder.append(", shortcut=");
-		builder.append(shortcut);
-		builder.append("]");
-		return builder.toString();
-	}
+  public static final Parcelable.Creator<ParcelModel> CREATOR = new Parcelable.Creator<ParcelModel>() {
+
+    @Override
+    public ParcelModel createFromParcel(Parcel in) {
+      return new ParcelModel(in);
+    }
+
+    @Override
+    public ParcelModel[] newArray(int size) {
+      return new ParcelModel[size];
+    }
+
+  };
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("ParcelModel [id=");
+    builder.append(id);
+    builder.append(", links=");
+    builder.append(links);
+    builder.append(", createdAt=");
+    builder.append(createdAt);
+    builder.append(", updatedAt=");
+    builder.append(updatedAt);
+    builder.append(", shortcut=");
+    builder.append(shortcut);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

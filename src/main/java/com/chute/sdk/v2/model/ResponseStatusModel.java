@@ -29,115 +29,123 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The {@link ResponseStatusModel} class represents the status of the response.
+ * <p>
  * It holds info regarding error messages, error codes, protocol version, href
  * and API limitations.
  * 
  */
 public class ResponseStatusModel {
 
-	public static final String TAG = ResponseStatusModel.class.getSimpleName();
+  public static final String TAG = ResponseStatusModel.class.getSimpleName();
 
-	/**
-	 * Response title
-	 */
-	@JsonProperty("title")
-	private String title;
+  /**
+   * Response title.
+   */
+  @JsonProperty("title")
+  private String title;
 
-	/**
-	 * Error message
-	 */
-	@JsonProperty("error")
-	private String error;
-	/**
-	 * Protocol version
-	 */
-	@JsonProperty("version")
-	private int version;
-	/**
-	 * Error code
-	 */
-	@JsonProperty("code")
-	private int code;
-	/**
-	 * Href info
-	 */
-	@JsonProperty("href")
-	private String href;
+  /**
+   * Error message.
+   */
+  @JsonProperty("error")
+  private String error;
 
-	/**
-	 * API calls limits
-	 */
-	@JsonProperty("api_limits")
-	private ApiLimitsModel apiLimits;
+  /**
+   * Protocol version.
+   */
+  @JsonProperty("version")
+  private int version;
 
-	/**
-	 * Getters and setters
-	 */
-	public String getError() {
-		return error;
-	}
+  /**
+   * Error code.
+   */
+  @JsonProperty("code")
+  private int code;
 
-	public String getTitle() {
-		return title;
-	}
+  /**
+   * Href info.
+   */
+  @JsonProperty("href")
+  private String href;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+  /**
+   * API calls limits.
+   */
+  @JsonProperty("api_limits")
+  private ApiLimitsModel apiLimits;
 
-	public void setError(String error) {
-		this.error = error;
-	}
+  /**
+   * Getters and setters.
+   */
+  public String getError() {
+    return error;
+  }
 
-	public int getVersion() {
-		return version;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public void setVersion(int version) {
-		this.version = version;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	public int getCode() {
-		return code;
-	}
+  public void setError(String error) {
+    this.error = error;
+  }
 
-	public void setCode(int code) {
-		this.code = code;
-	}
+  public int getVersion() {
+    return version;
+  }
 
-	public String getHref() {
-		return href;
-	}
+  public void setVersion(int version) {
+    this.version = version;
+  }
 
-	public void setHref(String href) {
-		this.href = href;
-	}
+  public int getCode() {
+    return code;
+  }
 
-	public ApiLimitsModel getApiLimits() {
-		return apiLimits;
-	}
+  public void setCode(int code) {
+    this.code = code;
+  }
 
-	public void setApiLimits(ApiLimitsModel apiLimits) {
-		this.apiLimits = apiLimits;
-	}
+  public String getHref() {
+    return href;
+  }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ResponseStatusModel [title=");
-		builder.append(title);
-		builder.append(", error=");
-		builder.append(error);
-		builder.append(", version=");
-		builder.append(version);
-		builder.append(", code=");
-		builder.append(code);
-		builder.append(", href=");
-		builder.append(href);
-		builder.append(", apiLimits=");
-		builder.append(apiLimits);
-		builder.append("]");
-		return builder.toString();
-	}
+  public void setHref(String href) {
+    this.href = href;
+  }
+
+  public ApiLimitsModel getApiLimits() {
+    return apiLimits;
+  }
+
+  public void setApiLimits(ApiLimitsModel apiLimits) {
+    this.apiLimits = apiLimits;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("ResponseStatusModel [title=");
+    builder.append(title);
+    builder.append(", error=");
+    builder.append(error);
+    builder.append(", version=");
+    builder.append(version);
+    builder.append(", code=");
+    builder.append(code);
+    builder.append(", href=");
+    builder.append(href);
+    builder.append(", apiLimits=");
+    builder.append(apiLimits);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

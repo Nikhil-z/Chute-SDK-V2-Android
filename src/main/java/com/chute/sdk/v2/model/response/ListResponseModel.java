@@ -37,73 +37,72 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * {@link ResponseStatusModel} and data object.
  * 
  * @param <T>
- *            - The response received can be of any kind.
+ *          The response received can be of any kind.
  */
 public class ListResponseModel<T> {
 
-	public static final String TAG = ListResponseModel.class.getSimpleName();
+  public static final String TAG = ListResponseModel.class.getSimpleName();
 
-	/**
-	 * Data object
-	 */
-	@JsonProperty("data")
-	private List<T> data;
+  /**
+   * Data object
+   */
+  @JsonProperty("data")
+  private List<T> data;
 
-	/**
-	 * Pagination
-	 */
-	@JsonProperty("paginations")
-	private PaginationModel pagination;
+  /**
+   * Pagination
+   */
+  @JsonProperty("paginations")
+  private PaginationModel pagination;
 
-	/**
-	 * Response status
-	 */
-	@JsonProperty("response")
-	private ResponseStatusModel response;
+  /**
+   * Response status
+   */
+  @JsonProperty("response")
+  private ResponseStatusModel response;
 
-	/**
-	 * Getters and setters
-	 */
-	public PaginationModel getPagination() {
-		return pagination;
-	}
+  /**
+   * Getters and setters
+   */
+  public PaginationModel getPagination() {
+    return pagination;
+  }
 
-	public void setPagination(PaginationModel pagination) {
-		this.pagination = pagination;
-	}
+  public void setPagination(PaginationModel pagination) {
+    this.pagination = pagination;
+  }
 
-	public ResponseStatusModel getResponse() {
-		return response;
-	}
+  public ResponseStatusModel getResponse() {
+    return response;
+  }
 
-	public void setResponse(ResponseStatusModel response) {
-		this.response = response;
-	}
+  public void setResponse(ResponseStatusModel response) {
+    this.response = response;
+  }
 
-	public List<T> getData() {
-		return data;
-	}
+  public List<T> getData() {
+    return data;
+  }
 
-	public void setData(List<T> data) {
-		this.data = data;
-	}
+  public void setData(List<T> data) {
+    this.data = data;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ListResponseModel [data=");
-		builder.append(data);
-		builder.append(", pagination=");
-		builder.append(pagination);
-		builder.append(", response=");
-		builder.append(response);
-		builder.append("]");
-		return builder.toString();
-	}
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("ListResponseModel [data=");
+    builder.append(data);
+    builder.append(", pagination=");
+    builder.append(pagination);
+    builder.append(", response=");
+    builder.append(response);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

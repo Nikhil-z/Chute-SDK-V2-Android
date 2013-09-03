@@ -37,111 +37,113 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CounterModel implements Parcelable {
 
-	/**
-	 * Number of photos
-	 */
-	@JsonProperty("photos")
-	private long photos;
-	/**
-	 * Number of videos
-	 */
-	@JsonProperty("videos")
-	private long videos;
-	/**
-	 * Number of inbox items
-	 */
-	@JsonProperty("inbox")
-	private long inbox;
+  /**
+   * Number of photos.
+   */
+  @JsonProperty("photos")
+  private long photos;
 
-	public CounterModel() {
-	}
+  /**
+   * Number of videos.
+   */
+  @JsonProperty("videos")
+  private long videos;
 
-	/**
-	 * Getters and setters
-	 */
-	public long getPhotos() {
-		return photos;
-	}
+  /**
+   * Number of inbox items.
+   */
+  @JsonProperty("inbox")
+  private long inbox;
 
-	public void setPhotos(long photos) {
-		this.photos = photos;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public CounterModel() {
+  }
 
-	public long getVideos() {
-		return videos;
-	}
+  /**
+   * Getters and setters.
+   */
+  public long getPhotos() {
+    return photos;
+  }
 
-	public void setVideos(long videos) {
-		this.videos = videos;
-	}
+  public void setPhotos(long photos) {
+    this.photos = photos;
+  }
 
-	public long getInbox() {
-		return inbox;
-	}
+  public long getVideos() {
+    return videos;
+  }
 
-	public void setInbox(long inbox) {
-		this.inbox = inbox;
-	}
+  public void setVideos(long videos) {
+    this.videos = videos;
+  }
 
-	public CounterModel(Parcel in) {
-		this();
-		photos = in.readLong();
-		videos = in.readLong();
-		inbox = in.readLong();
-	}
+  public long getInbox() {
+    return inbox;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public void setInbox(long inbox) {
+    this.inbox = inbox;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeLong(photos);
-		dest.writeLong(videos);
-		dest.writeLong(inbox);
-	}
+  public CounterModel(Parcel in) {
+    this();
+    photos = in.readLong();
+    videos = in.readLong();
+    inbox = in.readLong();
+  }
 
-	public static final Parcelable.Creator<CounterModel> CREATOR = new Parcelable.Creator<CounterModel>() {
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-		@Override
-		public CounterModel createFromParcel(Parcel in) {
-			return new CounterModel(in);
-		}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeLong(photos);
+    dest.writeLong(videos);
+    dest.writeLong(inbox);
+  }
 
-		@Override
-		public CounterModel[] newArray(int size) {
-			return new CounterModel[size];
-		}
+  public static final Parcelable.Creator<CounterModel> CREATOR = new Parcelable.Creator<CounterModel>() {
 
-	};
+    @Override
+    public CounterModel createFromParcel(Parcel in) {
+      return new CounterModel(in);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CounterModel [photos=");
-		builder.append(photos);
-		builder.append(", videos=");
-		builder.append(videos);
-		builder.append(", inbox=");
-		builder.append(inbox);
-		builder.append("]");
-		return builder.toString();
-	}
+    @Override
+    public CounterModel[] newArray(int size) {
+      return new CounterModel[size];
+    }
+
+  };
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("CounterModel [photos=");
+    builder.append(photos);
+    builder.append(", videos=");
+    builder.append(videos);
+    builder.append(", inbox=");
+    builder.append(inbox);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

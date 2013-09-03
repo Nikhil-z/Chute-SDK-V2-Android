@@ -34,52 +34,52 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SourceCountModel {
 
-	public static final String TAG = SourceCountModel.class.getSimpleName();
+  public static final String TAG = SourceCountModel.class.getSimpleName();
 
-	/**
-	 * Number of uploaded assets
-	 */
-	@JsonProperty("uploads")
-	private int uploads;
-	/**
-	 * Number of imported assets
-	 */
-	@JsonProperty("imports")
-	private int imports;
+  /**
+   * Number of uploaded assets.
+   */
+  @JsonProperty("uploads")
+  private int uploads;
 
-	/**
-	 * Getters and setters
-	 */
-	public int getUploads() {
-		return uploads;
-	}
+  /**
+   * Number of imported assets.
+   */
+  @JsonProperty("imports")
+  private int imports;
 
-	public void setUploads(int uploads) {
-		this.uploads = uploads;
-	}
+  /**
+   * Getters and setters.
+   */
+  public int getUploads() {
+    return uploads;
+  }
 
-	public int getImports() {
-		return imports;
-	}
+  public void setUploads(int uploads) {
+    this.uploads = uploads;
+  }
 
-	public void setImports(int imports) {
-		this.imports = imports;
-	}
+  public int getImports() {
+    return imports;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SourceCountModel [uploads=");
-		builder.append(uploads);
-		builder.append(", imports=");
-		builder.append(imports);
-		builder.append("]");
-		return builder.toString();
-	}
+  public void setImports(int imports) {
+    this.imports = imports;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("SourceCountModel [uploads=");
+    builder.append(uploads);
+    builder.append(", imports=");
+    builder.append(imports);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

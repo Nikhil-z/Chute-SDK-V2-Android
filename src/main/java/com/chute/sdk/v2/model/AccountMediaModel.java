@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The {@link AccountMediaModel} class represents the concept of a media item
- * for a specific object that belongs to an account. Each media item contains
- * URL, thumbnail URL and large image URL.
+ * from a specific album that belongs to an account. Each media item contains
+ * URL, thumbnail URL, dimensions and caption.
  * 
  */
 public class AccountMediaModel implements Parcelable, AccountMedia {
@@ -24,23 +24,26 @@ public class AccountMediaModel implements Parcelable, AccountMedia {
   @JsonProperty("id")
   private String id;
 
+  /**
+   * Item name or caption.
+   */
   @JsonProperty("caption")
   private String caption;
 
   /**
-   * Photo dimensions
+   * Item dimensions
    */
   @JsonProperty("dimensions")
   private String dimensions;
 
   /**
-   * The URl that shows the location of the media item.
+   * The URL that shows the location of the media item.
    */
   @JsonProperty("image_url")
   private String imageUrl;
 
   /**
-   * The URL that shows the location of the thumbnail.
+   * The URL that shows the location of the item thumbnail.
    */
   @JsonProperty("thumbnail")
   private String thumbnail;
@@ -139,6 +142,10 @@ public class AccountMediaModel implements Parcelable, AccountMedia {
 
   };
 
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
@@ -156,11 +163,19 @@ public class AccountMediaModel implements Parcelable, AccountMedia {
     return builder.toString();
   }
 
+  /*
+   * (non-Javadoc)
+   * @see com.chute.sdk.v2.model.interfaces.AccountMedia#getViewType()
+   */
   @Override
   public AccountMediaType getViewType() {
     return AccountMediaType.FILE;
   }
 
+  /*
+   * (non-Javadoc)
+   * @see com.chute.sdk.v2.model.interfaces.AccountMedia#getName()
+   */
   @Override
   public String getName() {
     return getCaption();

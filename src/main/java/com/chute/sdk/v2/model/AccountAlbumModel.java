@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * {@link AccountAlbumModel} class represents the concept of an object for a
- * specific account. Each object contains ID and name.
+ * {@link AccountAlbumModel} class represents the concept of an album from a
+ * specific account. Each album contains ID and name.
  * 
  */
 @JsonIgnoreProperties({ "links" })
@@ -20,12 +20,12 @@ public class AccountAlbumModel implements Parcelable, AccountMedia {
   private static final String TAG = AccountAlbumModel.class.getSimpleName();
 
   /**
-   * The unique identifier of the object.
+   * The unique identifier of the album.
    */
   @JsonProperty("id")
   private String id;
   /**
-   * Name of the object.
+   * Name of the album.
    */
   @JsonProperty("name")
   private String name;
@@ -106,6 +106,10 @@ public class AccountAlbumModel implements Parcelable, AccountMedia {
     }
   };
 
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
@@ -117,15 +121,13 @@ public class AccountAlbumModel implements Parcelable, AccountMedia {
     return builder.toString();
   }
 
+  /*
+   * (non-Javadoc)
+   * @see com.chute.sdk.v2.model.interfaces.AccountMedia#getViewType()
+   */
   @Override
   public AccountMediaType getViewType() {
     return AccountMediaType.FOLDER;
-  }
-
-  @Override
-  public String getThumbnail() {
-    // Not implemented
-    return null;
   }
 
 }

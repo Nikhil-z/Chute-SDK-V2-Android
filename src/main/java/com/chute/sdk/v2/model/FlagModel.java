@@ -31,208 +31,213 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The {@link FlagModel} class represents a concept of asset flag. Each flag
- * consists of: links, date of creation and update, identifier, asset ID and
- * album ID the flag belongs to.
+ * The {@link FlagModel} class represents a concept of asset flag.
+ * <p>
+ * Each flag consists of: links, date of creation and update, identifier, asset
+ * ID and album ID the flag belongs to.
  * 
  */
 public class FlagModel implements Parcelable {
 
-	public static final String TAG = FlagModel.class.getSimpleName();
+  public static final String TAG = FlagModel.class.getSimpleName();
 
-	/**
-	 * Unique identifier
-	 */
-	@JsonProperty("id")
-	private String id;
-	/**
-	 * Flag links
-	 */
-	@JsonProperty("links")
-	private LinkModel links;
-	/**
-	 * Date and time of creation
-	 */
-	@JsonProperty("created_at")
-	private String createdAt;
-	/**
-	 * Date and time of update
-	 */
-	@JsonProperty("updated_at")
-	private String updatedAt;
-	/**
-	 * Flag identifier
-	 */
-	@JsonProperty("identifier")
-	private String identifier;
-	/**
-	 * Album containing the flagged asset
-	 */
-	@JsonProperty("album_id")
-	private String albumId;
-	/**
-	 * Asset the flag belongs to
-	 */
-	@JsonProperty("asset_id")
-	private String assetId;
-	/**
-	 * Number of flags per asset
-	 */
-	@JsonProperty("count")
-	private int count;
+  /**
+   * Unique identifier.
+   */
+  @JsonProperty("id")
+  private String id;
 
-	/**
-	 * Default non-args constructor
-	 */
-	public FlagModel() {
-	}
+  /**
+   * Flag links.
+   */
+  @JsonProperty("links")
+  private LinkModel links;
 
-	/**
-	 * Getters and setters
-	 */
-	public String getId() {
-		return id;
-	}
+  /**
+   * Date and time of creation.
+   */
+  @JsonProperty("created_at")
+  private String createdAt;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  /**
+   * Date and time of update.
+   */
+  @JsonProperty("updated_at")
+  private String updatedAt;
 
-	public LinkModel getLinks() {
-		return links;
-	}
+  /**
+   * Flag identifier.
+   */
+  @JsonProperty("identifier")
+  private String identifier;
 
-	public void setLinks(LinkModel links) {
-		this.links = links;
-	}
+  /**
+   * Album containing the flagged asset.
+   */
+  @JsonProperty("album_id")
+  private String albumId;
 
-	public String getCreatedAt() {
-		return createdAt;
-	}
+  /**
+   * Asset the flag belongs to.
+   */
+  @JsonProperty("asset_id")
+  private String assetId;
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
+  /**
+   * Number of flags per asset.
+   */
+  @JsonProperty("count")
+  private int count;
 
-	public String getUpdatedAt() {
-		return updatedAt;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public FlagModel() {
+  }
 
-	public void setUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+  /**
+   * Getters and setters.
+   */
+  public String getId() {
+    return id;
+  }
 
-	public String getIdentifier() {
-		return identifier;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
-	}
+  public LinkModel getLinks() {
+    return links;
+  }
 
-	public String getAlbumId() {
-		return albumId;
-	}
+  public void setLinks(LinkModel links) {
+    this.links = links;
+  }
 
-	public void setAlbumId(String albumId) {
-		this.albumId = albumId;
-	}
+  public String getCreatedAt() {
+    return createdAt;
+  }
 
-	public String getAssetId() {
-		return assetId;
-	}
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
 
-	public void setAssetId(String assetId) {
-		this.assetId = assetId;
-	}
+  public String getUpdatedAt() {
+    return updatedAt;
+  }
 
-	public int getCount() {
-		return count;
-	}
+  public void setUpdatedAt(String updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
-	public void setCount(int count) {
-		this.count = count;
-	}
+  public String getIdentifier() {
+    return identifier;
+  }
 
-	public FlagModel(Parcel in) {
-		id = in.readString();
-		links = in.readParcelable(LinkModel.class.getClassLoader());
-		createdAt = in.readString();
-		updatedAt = in.readString();
-		identifier = in.readString();
-		albumId = in.readString();
-		assetId = in.readString();
-		count = in.readInt();
-	}
+  public void setIdentifier(String identifier) {
+    this.identifier = identifier;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public String getAlbumId() {
+    return albumId;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(id);
-		dest.writeParcelable(links, flags);
-		dest.writeString(createdAt);
-		dest.writeString(updatedAt);
-		dest.writeString(identifier);
-		dest.writeString(albumId);
-		dest.writeString(assetId);
-		dest.writeInt(count);
+  public void setAlbumId(String albumId) {
+    this.albumId = albumId;
+  }
 
-	}
+  public String getAssetId() {
+    return assetId;
+  }
 
-	public static final Parcelable.Creator<FlagModel> CREATOR = new Parcelable.Creator<FlagModel>() {
+  public void setAssetId(String assetId) {
+    this.assetId = assetId;
+  }
 
-		@Override
-		public FlagModel createFromParcel(Parcel in) {
-			return new FlagModel(in);
-		}
+  public int getCount() {
+    return count;
+  }
 
-		@Override
-		public FlagModel[] newArray(int size) {
-			return new FlagModel[size];
-		}
+  public void setCount(int count) {
+    this.count = count;
+  }
 
-	};
+  public FlagModel(Parcel in) {
+    id = in.readString();
+    links = in.readParcelable(LinkModel.class.getClassLoader());
+    createdAt = in.readString();
+    updatedAt = in.readString();
+    identifier = in.readString();
+    albumId = in.readString();
+    assetId = in.readString();
+    count = in.readInt();
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("FlagModel [id=");
-		builder.append(id);
-		builder.append(", links=");
-		builder.append(links);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", updatedAt=");
-		builder.append(updatedAt);
-		builder.append(", identifier=");
-		builder.append(identifier);
-		builder.append(", albumId=");
-		builder.append(albumId);
-		builder.append(", assetId=");
-		builder.append(assetId);
-		builder.append(", count=");
-		builder.append(count);
-		builder.append("]");
-		return builder.toString();
-	}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(id);
+    dest.writeParcelable(links, flags);
+    dest.writeString(createdAt);
+    dest.writeString(updatedAt);
+    dest.writeString(identifier);
+    dest.writeString(albumId);
+    dest.writeString(assetId);
+    dest.writeInt(count);
+
+  }
+
+  public static final Parcelable.Creator<FlagModel> CREATOR = new Parcelable.Creator<FlagModel>() {
+
+    @Override
+    public FlagModel createFromParcel(Parcel in) {
+      return new FlagModel(in);
+    }
+
+    @Override
+    public FlagModel[] newArray(int size) {
+      return new FlagModel[size];
+    }
+
+  };
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("FlagModel [id=");
+    builder.append(id);
+    builder.append(", links=");
+    builder.append(links);
+    builder.append(", createdAt=");
+    builder.append(createdAt);
+    builder.append(", updatedAt=");
+    builder.append(updatedAt);
+    builder.append(", identifier=");
+    builder.append(identifier);
+    builder.append(", albumId=");
+    builder.append(albumId);
+    builder.append(", assetId=");
+    builder.append(assetId);
+    builder.append(", count=");
+    builder.append(count);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

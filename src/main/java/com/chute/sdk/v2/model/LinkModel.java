@@ -36,188 +36,202 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class LinkModel implements Parcelable {
 
-	/**
-	 * Self data links
-	 */
-	@JsonProperty("self")
-	private LinkInfoModel self;
-	/**
-	 * Asset links
-	 */
-	@JsonProperty("assets")
-	private LinkInfoModel assets;
-	/**
-	 * Exif data links
-	 */
-	@JsonProperty("exif")
-	private LinkInfoModel exif;
-	/**
-	 * Geo location links
-	 */
-	@JsonProperty("geo")
-	private LinkInfoModel geo;
-	/**
-	 * Hearting info links
-	 */
-	@JsonProperty("heart")
-	private LinkInfoModel heart;
-	/**
-	 * Vote info links
-	 */
-	@JsonProperty("vote")
-	private LinkInfoModel vote;
-	/**
-	 * Parcel links
-	 */
-	@JsonProperty("parcels")
-	private LinkInfoModel parcels;
+  /**
+   * Self data links.
+   */
+  @JsonProperty("self")
+  private LinkInfoModel self;
 
-	@JsonProperty("media")
-	private LinkInfoModel media;
+  /**
+   * Asset links.
+   */
+  @JsonProperty("assets")
+  private LinkInfoModel assets;
 
-	public LinkModel() {
-	}
+  /**
+   * Exif data links.
+   */
+  @JsonProperty("exif")
+  private LinkInfoModel exif;
 
-	/**
-	 * Getters and setters
-	 */
-	public LinkInfoModel getSelf() {
-		return self;
-	}
+  /**
+   * Geo location links.
+   */
+  @JsonProperty("geo")
+  private LinkInfoModel geo;
 
-	public void setSelf(LinkInfoModel self) {
-		this.self = self;
-	}
+  /**
+   * Hearting info links.
+   */
+  @JsonProperty("heart")
+  private LinkInfoModel heart;
 
-	public LinkInfoModel getAssets() {
-		return assets;
-	}
+  /**
+   * Vote info links.
+   */
+  @JsonProperty("vote")
+  private LinkInfoModel vote;
 
-	public void setAssets(LinkInfoModel assets) {
-		this.assets = assets;
-	}
+  /**
+   * Parcel links.
+   */
+  @JsonProperty("parcels")
+  private LinkInfoModel parcels;
 
-	public LinkInfoModel getExif() {
-		return exif;
-	}
+  /**
+   * Media links.
+   */
+  @JsonProperty("media")
+  private LinkInfoModel media;
 
-	public void setExif(LinkInfoModel exif) {
-		this.exif = exif;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public LinkModel() {
+  }
 
-	public LinkInfoModel getGeo() {
-		return geo;
-	}
+  /**
+   * Getters and setters
+   */
+  public LinkInfoModel getSelf() {
+    return self;
+  }
 
-	public void setGeo(LinkInfoModel geo) {
-		this.geo = geo;
-	}
+  public void setSelf(LinkInfoModel self) {
+    this.self = self;
+  }
 
-	public LinkInfoModel getHeart() {
-		return heart;
-	}
+  public LinkInfoModel getAssets() {
+    return assets;
+  }
 
-	public void setHeart(LinkInfoModel heart) {
-		this.heart = heart;
-	}
+  public void setAssets(LinkInfoModel assets) {
+    this.assets = assets;
+  }
 
-	public LinkInfoModel getVote() {
-		return vote;
-	}
+  public LinkInfoModel getExif() {
+    return exif;
+  }
 
-	public void setVote(LinkInfoModel vote) {
-		this.vote = vote;
-	}
+  public void setExif(LinkInfoModel exif) {
+    this.exif = exif;
+  }
 
-	public LinkInfoModel getParcels() {
-		return parcels;
-	}
+  public LinkInfoModel getGeo() {
+    return geo;
+  }
 
-	public void setParcels(LinkInfoModel parcels) {
-		this.parcels = parcels;
-	}
+  public void setGeo(LinkInfoModel geo) {
+    this.geo = geo;
+  }
 
-	public LinkInfoModel getMedia() {
-		return media;
-	}
+  public LinkInfoModel getHeart() {
+    return heart;
+  }
 
-	public void setMedia(LinkInfoModel media) {
-		this.media = media;
-	}
+  public void setHeart(LinkInfoModel heart) {
+    this.heart = heart;
+  }
 
-	public LinkModel(Parcel in) {
-		self = in.readParcelable(LinkInfoModel.class.getClassLoader());
-		assets = in.readParcelable(LinkInfoModel.class.getClassLoader());
-		exif = in.readParcelable(LinkInfoModel.class.getClassLoader());
-		geo = in.readParcelable(LinkInfoModel.class.getClassLoader());
-		heart = in.readParcelable(LinkInfoModel.class.getClassLoader());
-		vote = in.readParcelable(LinkInfoModel.class.getClassLoader());
-		parcels = in.readParcelable(LinkInfoModel.class.getClassLoader());
-		media = in.readParcelable(LinkInfoModel.class.getClassLoader());
-	}
+  public LinkInfoModel getVote() {
+    return vote;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public void setVote(LinkInfoModel vote) {
+    this.vote = vote;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeParcelable(self, flags);
-		dest.writeParcelable(assets, flags);
-		dest.writeParcelable(exif, flags);
-		dest.writeParcelable(geo, flags);
-		dest.writeParcelable(heart, flags);
-		dest.writeParcelable(vote, flags);
-		dest.writeParcelable(parcels, flags);
-		dest.writeParcelable(media, flags);
-	}
+  public LinkInfoModel getParcels() {
+    return parcels;
+  }
 
-	public static final Parcelable.Creator<LinkModel> CREATOR = new Parcelable.Creator<LinkModel>() {
+  public void setParcels(LinkInfoModel parcels) {
+    this.parcels = parcels;
+  }
 
-		@Override
-		public LinkModel createFromParcel(Parcel in) {
-			return new LinkModel(in);
-		}
+  public LinkInfoModel getMedia() {
+    return media;
+  }
 
-		@Override
-		public LinkModel[] newArray(int size) {
-			return new LinkModel[size];
-		}
+  public void setMedia(LinkInfoModel media) {
+    this.media = media;
+  }
 
-	};
+  public LinkModel(Parcel in) {
+    self = in.readParcelable(LinkInfoModel.class.getClassLoader());
+    assets = in.readParcelable(LinkInfoModel.class.getClassLoader());
+    exif = in.readParcelable(LinkInfoModel.class.getClassLoader());
+    geo = in.readParcelable(LinkInfoModel.class.getClassLoader());
+    heart = in.readParcelable(LinkInfoModel.class.getClassLoader());
+    vote = in.readParcelable(LinkInfoModel.class.getClassLoader());
+    parcels = in.readParcelable(LinkInfoModel.class.getClassLoader());
+    media = in.readParcelable(LinkInfoModel.class.getClassLoader());
+  }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("LinkModel [self=");
-		builder.append(self);
-		builder.append(", assets=");
-		builder.append(assets);
-		builder.append(", exif=");
-		builder.append(exif);
-		builder.append(", geo=");
-		builder.append(geo);
-		builder.append(", heart=");
-		builder.append(heart);
-		builder.append(", vote=");
-		builder.append(vote);
-		builder.append(", parcels=");
-		builder.append(parcels);
-		builder.append(", media=");
-		builder.append(media);
-		builder.append("]");
-		return builder.toString();
-	}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeParcelable(self, flags);
+    dest.writeParcelable(assets, flags);
+    dest.writeParcelable(exif, flags);
+    dest.writeParcelable(geo, flags);
+    dest.writeParcelable(heart, flags);
+    dest.writeParcelable(vote, flags);
+    dest.writeParcelable(parcels, flags);
+    dest.writeParcelable(media, flags);
+  }
+
+  public static final Parcelable.Creator<LinkModel> CREATOR = new Parcelable.Creator<LinkModel>() {
+
+    @Override
+    public LinkModel createFromParcel(Parcel in) {
+      return new LinkModel(in);
+    }
+
+    @Override
+    public LinkModel[] newArray(int size) {
+      return new LinkModel[size];
+    }
+
+  };
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("LinkModel [self=");
+    builder.append(self);
+    builder.append(", assets=");
+    builder.append(assets);
+    builder.append(", exif=");
+    builder.append(exif);
+    builder.append(", geo=");
+    builder.append(geo);
+    builder.append(", heart=");
+    builder.append(heart);
+    builder.append(", vote=");
+    builder.append(vote);
+    builder.append(", parcels=");
+    builder.append(parcels);
+    builder.append(", media=");
+    builder.append(media);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

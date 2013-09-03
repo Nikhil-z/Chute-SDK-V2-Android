@@ -34,52 +34,52 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UserCountModel {
 
-	public static final String TAG = UserCountModel.class.getSimpleName();
+  public static final String TAG = UserCountModel.class.getSimpleName();
 
-	/**
-	 * Number of uploaded assets
-	 */
-	@JsonProperty("via_upload")
-	private int viaUpload;
-	/**
-	 * Number of imported assets
-	 */
-	@JsonProperty("via_import")
-	private int viaImport;
+  /**
+   * Number of uploaded assets.
+   */
+  @JsonProperty("via_upload")
+  private int viaUpload;
 
-	/**
-	 * Getters and setters
-	 */
-	public int getViaUpload() {
-		return viaUpload;
-	}
+  /**
+   * Number of imported assets.
+   */
+  @JsonProperty("via_import")
+  private int viaImport;
 
-	public void setViaUpload(int viaUpload) {
-		this.viaUpload = viaUpload;
-	}
+  /**
+   * Getters and setters.
+   */
+  public int getViaUpload() {
+    return viaUpload;
+  }
 
-	public int getViaImport() {
-		return viaImport;
-	}
+  public void setViaUpload(int viaUpload) {
+    this.viaUpload = viaUpload;
+  }
 
-	public void setViaImport(int viaImport) {
-		this.viaImport = viaImport;
-	}
+  public int getViaImport() {
+    return viaImport;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("UserCountModel [viaUpload=");
-		builder.append(viaUpload);
-		builder.append(", viaImport=");
-		builder.append(viaImport);
-		builder.append("]");
-		return builder.toString();
-	}
+  public void setViaImport(int viaImport) {
+    this.viaImport = viaImport;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("UserCountModel [viaUpload=");
+    builder.append(viaUpload);
+    builder.append(", viaImport=");
+    builder.append(viaImport);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

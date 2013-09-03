@@ -36,96 +36,96 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class LinkInfoModel implements Parcelable {
 
-	/**
-	 * Href link info
-	 */
-	@JsonProperty("href")
-	private String href;
+  /**
+   * Href link info.
+   */
+  @JsonProperty("href")
+  private String href;
 
-	/**
-	 * Link title
-	 */
-	@JsonProperty("title")
-	private String title;
+  /**
+   * Link title.
+   */
+  @JsonProperty("title")
+  private String title;
 
-	public LinkInfoModel() {
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public LinkInfoModel() {
+  }
 
-	/**
-	 * Getters and setters
-	 */
-	public String getHref() {
-		return href;
-	}
+  /**
+   * Getters and setters.
+   */
+  public String getHref() {
+    return href;
+  }
 
-	public void setHref(String href) {
-		this.href = href;
-	}
+  public void setHref(String href) {
+    this.href = href;
+  }
 
-	public String getTitle() {
-		return title;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	public LinkInfoModel(Parcel in) {
-		this();
-		href = in.readString();
-		title = in.readString();
+  public LinkInfoModel(Parcel in) {
+    this();
+    href = in.readString();
+    title = in.readString();
 
-	}
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(href);
-		dest.writeString(title);
-	}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(href);
+    dest.writeString(title);
+  }
 
-	public static final Parcelable.Creator<LinkInfoModel> CREATOR = new Parcelable.Creator<LinkInfoModel>() {
+  public static final Parcelable.Creator<LinkInfoModel> CREATOR = new Parcelable.Creator<LinkInfoModel>() {
 
-		@Override
-		public LinkInfoModel createFromParcel(Parcel in) {
-			return new LinkInfoModel(in);
-		}
+    @Override
+    public LinkInfoModel createFromParcel(Parcel in) {
+      return new LinkInfoModel(in);
+    }
 
-		@Override
-		public LinkInfoModel[] newArray(int size) {
-			return new LinkInfoModel[size];
-		}
+    @Override
+    public LinkInfoModel[] newArray(int size) {
+      return new LinkInfoModel[size];
+    }
 
-	};
+  };
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("LinkInfoModel [href=");
-		builder.append(href);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append("]");
-		return builder.toString();
-	}
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("LinkInfoModel [href=");
+    builder.append(href);
+    builder.append(", title=");
+    builder.append(title);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

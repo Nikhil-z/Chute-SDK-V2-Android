@@ -36,98 +36,96 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class GeoLocationModel implements Parcelable {
 
-	public static final String TAG = GeoLocationModel.class.getSimpleName();
+  public static final String TAG = GeoLocationModel.class.getSimpleName();
 
-	/**
-	 * GPS latitude
-	 */
-	@JsonProperty("latitude")
-	private String latitude;
-	/**
-	 * GPS longitude
-	 */
-	@JsonProperty("longitude")
-	private String longitude;
+  /**
+   * GPS latitude.
+   */
+  @JsonProperty("latitude")
+  private String latitude;
 
-	/**
-	 * Default non-args constructor
-	 */
-	public GeoLocationModel() {
-	}
+  /**
+   * GPS longitude.
+   */
+  @JsonProperty("longitude")
+  private String longitude;
 
-	/**
-	 * Getters and setters
-	 */
-	public String getLatitude() {
-		return latitude;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public GeoLocationModel() {
+  }
 
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
+  /**
+   * Getters and setters.
+   */
+  public String getLatitude() {
+    return latitude;
+  }
 
-	public String getLongitude() {
-		return longitude;
-	}
+  public void setLatitude(String latitude) {
+    this.latitude = latitude;
+  }
 
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
-	}
+  public String getLongitude() {
+    return longitude;
+  }
 
-	public GeoLocationModel(Parcel in) {
-		latitude = in.readString();
-		longitude = in.readString();
-	}
+  public void setLongitude(String longitude) {
+    this.longitude = longitude;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public GeoLocationModel(Parcel in) {
+    latitude = in.readString();
+    longitude = in.readString();
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(latitude);
-		dest.writeString(longitude);
-	}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-	public static final Parcelable.Creator<GeoLocationModel> CREATOR = new Parcelable.Creator<GeoLocationModel>() {
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(latitude);
+    dest.writeString(longitude);
+  }
 
-		@Override
-		public GeoLocationModel createFromParcel(Parcel in) {
-			return new GeoLocationModel(in);
-		}
+  public static final Parcelable.Creator<GeoLocationModel> CREATOR = new Parcelable.Creator<GeoLocationModel>() {
 
-		@Override
-		public GeoLocationModel[] newArray(int size) {
-			return new GeoLocationModel[size];
-		}
+    @Override
+    public GeoLocationModel createFromParcel(Parcel in) {
+      return new GeoLocationModel(in);
+    }
 
-	};
+    @Override
+    public GeoLocationModel[] newArray(int size) {
+      return new GeoLocationModel[size];
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("GeoLocationModel [latitude=");
-		builder.append(latitude);
-		builder.append(", longitude=");
-		builder.append(longitude);
-		builder.append("]");
-		return builder.toString();
-	}
+  };
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("GeoLocationModel [latitude=");
+    builder.append(latitude);
+    builder.append(", longitude=");
+    builder.append(longitude);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

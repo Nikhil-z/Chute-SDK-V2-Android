@@ -29,135 +29,142 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The {@link PaginationModel} class wraps up information about pagination of
- * the response. The response can show total pages, current page, previous page,
- * first page, last page and number of responses per page.
+ * the response.
+ * <p>
+ * The response can show total pages, current page, previous page, first page,
+ * last page and number of responses per page.
  * 
  */
 public class PaginationModel {
 
-	/**
-	 * Number of total response pages
-	 */
-	@JsonProperty("total_pages")
-	private long totalPages;
-	/**
-	 * The current page of the response
-	 */
-	@JsonProperty("current_page")
-	private long currentPage;
-	/**
-	 * The next page of the response
-	 */
-	@JsonProperty("next_page")
-	private Object nextPage;
-	/**
-	 * The previous page of the response
-	 */
-	@JsonProperty("previous_page")
-	private Object previousPage;
-	/**
-	 * The first page of the response
-	 */
-	@JsonProperty("first_page")
-	private String firstPage;
-	/**
-	 * The last page of the response
-	 */
-	@JsonProperty("last_page")
-	private String lastPage;
-	/**
-	 * Number of responses per page
-	 */
-	@JsonProperty("per_page")
-	private int perPage = 30;
+  /**
+   * Number of total response pages.
+   */
+  @JsonProperty("total_pages")
+  private long totalPages;
 
-	/**
-	 * Getters and setters
-	 */
-	public long getTotalPages() {
-		return totalPages;
-	}
+  /**
+   * The current page of the response.
+   */
+  @JsonProperty("current_page")
+  private long currentPage;
 
-	public void setTotalPages(long totalPages) {
-		this.totalPages = totalPages;
-	}
+  /**
+   * The next page of the response.
+   */
+  @JsonProperty("next_page")
+  private Object nextPage;
 
-	public long getCurrentPage() {
-		return currentPage;
-	}
+  /**
+   * The previous page of the response.
+   */
+  @JsonProperty("previous_page")
+  private Object previousPage;
 
-	public void setCurrentPage(long currentPage) {
-		this.currentPage = currentPage;
-	}
+  /**
+   * The first page of the response.
+   */
+  @JsonProperty("first_page")
+  private String firstPage;
 
-	public Object getNextPage() {
-		return nextPage;
-	}
+  /**
+   * The last page of the response.
+   */
+  @JsonProperty("last_page")
+  private String lastPage;
 
-	public void setNextPage(Object nextPage) {
-		this.nextPage = nextPage;
-	}
+  /**
+   * Number of responses per page.
+   */
+  @JsonProperty("per_page")
+  private int perPage = 30;
 
-	public Object getPreviousPage() {
-		return previousPage;
-	}
+  /**
+   * Getters and setters.
+   */
+  public long getTotalPages() {
+    return totalPages;
+  }
 
-	public void setPreviousPage(Object previousPage) {
-		this.previousPage = previousPage;
-	}
+  public void setTotalPages(long totalPages) {
+    this.totalPages = totalPages;
+  }
 
-	public String getFirstPage() {
-		return firstPage;
-	}
+  public long getCurrentPage() {
+    return currentPage;
+  }
 
-	public void setFirstPage(String firstPage) {
-		this.firstPage = firstPage;
-	}
+  public void setCurrentPage(long currentPage) {
+    this.currentPage = currentPage;
+  }
 
-	public String getLastPage() {
-		return lastPage;
-	}
+  public Object getNextPage() {
+    return nextPage;
+  }
 
-	public void setLastPage(String lastPage) {
-		this.lastPage = lastPage;
-	}
+  public void setNextPage(Object nextPage) {
+    this.nextPage = nextPage;
+  }
 
-	public int getPerPage() {
-		return perPage;
-	}
+  public Object getPreviousPage() {
+    return previousPage;
+  }
 
-	public String getPerPageAsString() {
-		return String.valueOf(perPage);
-	}
+  public void setPreviousPage(Object previousPage) {
+    this.previousPage = previousPage;
+  }
 
-	public void setPerPage(int perPage) {
-		this.perPage = perPage;
-	}
+  public String getFirstPage() {
+    return firstPage;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PaginationModel [totalPages=");
-		builder.append(totalPages);
-		builder.append(", currentPage=");
-		builder.append(currentPage);
-		builder.append(", nextPage=");
-		builder.append(nextPage);
-		builder.append(", previousPage=");
-		builder.append(previousPage);
-		builder.append(", firstPage=");
-		builder.append(firstPage);
-		builder.append(", lastPage=");
-		builder.append(lastPage);
-		builder.append(", perPage=");
-		builder.append(perPage);
-		builder.append("]");
-		return builder.toString();
-	}
+  public void setFirstPage(String firstPage) {
+    this.firstPage = firstPage;
+  }
+
+  public String getLastPage() {
+    return lastPage;
+  }
+
+  public void setLastPage(String lastPage) {
+    this.lastPage = lastPage;
+  }
+
+  public int getPerPage() {
+    return perPage;
+  }
+
+  public String getPerPageAsString() {
+    return String.valueOf(perPage);
+  }
+
+  public void setPerPage(int perPage) {
+    this.perPage = perPage;
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("PaginationModel [totalPages=");
+    builder.append(totalPages);
+    builder.append(", currentPage=");
+    builder.append(currentPage);
+    builder.append(", nextPage=");
+    builder.append(nextPage);
+    builder.append(", previousPage=");
+    builder.append(previousPage);
+    builder.append(", firstPage=");
+    builder.append(firstPage);
+    builder.append(", lastPage=");
+    builder.append(lastPage);
+    builder.append(", perPage=");
+    builder.append(perPage);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

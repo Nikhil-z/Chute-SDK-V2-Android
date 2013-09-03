@@ -37,91 +37,97 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class DimensionsModel implements Parcelable {
 
-	public static final String TAG = DimensionsModel.class.getSimpleName();
+  public static final String TAG = DimensionsModel.class.getSimpleName();
 
-	/**
-	 * Width of the asset
-	 */
-	@JsonProperty("width")
-	private String width;
-	/**
-	 * Asset height
-	 */
-	@JsonProperty("height")
-	private String height;
+  /**
+   * Width of the asset.
+   */
+  @JsonProperty("width")
+  private String width;
 
-	public DimensionsModel() {
-	}
+  /**
+   * Asset height.
+   */
+  @JsonProperty("height")
+  private String height;
 
-	/**
-	 * Getters and setters
-	 */
-	public String getWidth() {
-		return width;
-	}
+  /**
+   * Default non-args constructor.
+   */
+  public DimensionsModel() {
+  }
 
-	public void setWidth(String width) {
-		this.width = width;
-	}
+  /**
+   * Getters and setters.
+   */
+  public String getWidth() {
+    return width;
+  }
 
-	public String getHeight() {
-		return height;
-	}
+  public void setWidth(String width) {
+    this.width = width;
+  }
 
-	public void setHeight(String height) {
-		this.height = height;
-	}
+  public String getHeight() {
+    return height;
+  }
 
-	public DimensionsModel(Parcel in) {
-		this();
-		width = in.readString();
-		height = in.readString();
-	}
+  public void setHeight(String height) {
+    this.height = height;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#describeContents()
-	 */
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+  public DimensionsModel(Parcel in) {
+    this();
+    width = in.readString();
+    height = in.readString();
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-	 */
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(width);
-		dest.writeString(height);
-	}
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#describeContents()
+   */
+  @Override
+  public int describeContents() {
+    return 0;
+  }
 
-	public static final Parcelable.Creator<DimensionsModel> CREATOR = new Parcelable.Creator<DimensionsModel>() {
+  /*
+   * (non-Javadoc)
+   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+   */
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(width);
+    dest.writeString(height);
+  }
 
-		@Override
-		public DimensionsModel createFromParcel(Parcel in) {
-			return new DimensionsModel(in);
-		}
+  public static final Parcelable.Creator<DimensionsModel> CREATOR = new Parcelable.Creator<DimensionsModel>() {
 
-		@Override
-		public DimensionsModel[] newArray(int size) {
-			return new DimensionsModel[size];
-		}
+    @Override
+    public DimensionsModel createFromParcel(Parcel in) {
+      return new DimensionsModel(in);
+    }
 
-	};
+    @Override
+    public DimensionsModel[] newArray(int size) {
+      return new DimensionsModel[size];
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DimensionsModel [width=");
-		builder.append(width);
-		builder.append(", height=");
-		builder.append(height);
-		builder.append("]");
-		return builder.toString();
-	}
+  };
+
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("DimensionsModel [width=");
+    builder.append(width);
+    builder.append(", height=");
+    builder.append(height);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

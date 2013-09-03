@@ -41,9 +41,10 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 /**
  * An asset represents a single media item and all information connected to it,
- * viewed by everyone or privileged users. Each asset consists of links,
- * thumbnail, URL, type, caption, dimensions, source and the user which the
- * asset belongs to.
+ * viewed by everyone or privileged users.
+ * <p>
+ * Each asset consists of links, thumbnail, URL, type, caption, dimensions,
+ * source and the user which the asset belongs to.
  * 
  */
 @JsonFilter("assetModelFilter")
@@ -52,111 +53,136 @@ public class AssetModel implements Parcelable {
   public static final String TAG = AssetModel.class.getSimpleName();
 
   /**
-   * Unique identifier
+   * Unique identifier.
    */
   @JsonProperty("id")
   private String id;
+
   /**
-   * Asset links
+   * Asset links.
    */
   @JsonProperty("links")
   private LinkModel links;
+
   /**
-   * Thumbnail of the asset
+   * Thumbnail of the asset.
    */
   @JsonProperty("thumbnail")
   private String thumbnail;
+
   /**
-   * Asset URL
+   * Asset URL.
    */
   @JsonProperty("url")
   private String url;
+
   /**
-   * Asset type. It can be image or video
+   * Asset type.
+   * <p>
+   * It can be image or video.
    */
   @JsonProperty("type")
   private String type;
+
   /**
-   * Asset caption information
+   * Asset caption information.
    */
   @JsonProperty("caption")
   private String caption;
+
   /**
-   * Width and height of the asset
+   * Width and height of the asset.
    */
   @JsonProperty("dimensions")
   private DimensionsModel dimensions;
+
   /**
-   * Asset source information
+   * Asset source information.
    */
   @JsonProperty("source")
   private SourceModel source;
+
   /**
-   * The user the asset belongs to
+   * The user the asset belongs to.
    */
   @JsonProperty("user")
   private UserModel user;
 
   /**
-   * Number of asset votes
+   * Number of asset votes.
    */
   @JsonProperty("votes")
   private int votes;
+
   /**
-   * Number of asset hearts
+   * Number of asset hearts.
    */
   @JsonProperty("hearts")
   private int hearts;
+
   /**
-   * Asset tags
+   * Asset tags.
    */
   @JsonProperty("tags")
   private ArrayList<String> tags;
+
   /**
-   * Time and date of creating the asset
+   * Time and date of creating the asset.
    */
   @JsonProperty("created_at")
   private String createdAt;
 
   /**
-   * Time and date of updating the asset
+   * Time and date of updating the asset.
    */
   @JsonProperty("updated_at")
   private String updatedAt;
+
   /**
-   * Asset shortcut
+   * Asset shortcut.
    */
   @JsonProperty("shortcut")
   private String shortcut;
+
   /**
-   * Asset location
+   * Asset location.
    */
   @JsonProperty("location")
   private String location;
+
   /**
-   * Asset origins
+   * Asset origins.
    */
   @JsonProperty("service")
   private String service;
+
   /**
-   * Chute asset ID
+   * Chute asset ID.
    */
   @JsonProperty("chute_asset_id")
   private String chuteAssetId;
 
+  /**
+   * Flag indicating whether the asset is in portrait.
+   */
   @JsonProperty("is_portrait")
   private boolean isPortrait;
 
+  /**
+   * Username of the user.
+   */
   @JsonProperty("username")
   private String username;
 
+  /**
+   * Default non-args constructor.
+   */
   public AssetModel() {
   }
 
   /**
    * Getters and setters
    */
-
   public String getId() {
     return id;
   }
@@ -408,6 +434,10 @@ public class AssetModel implements Parcelable {
     return result;
   }
 
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
