@@ -305,7 +305,7 @@ public class ImageLoader {
         final BitmapContentHandler handler = new BitmapContentHandler(
             bitmapSizeInPixels, f);
 
-        if (url.startsWith("https")) {
+        if (url.startsWith("http")) {
           OkHttpClient client = new OkHttpClient();
           HttpURLConnection openConnection = client
               .open(new URL(null, url, streamHandler));
