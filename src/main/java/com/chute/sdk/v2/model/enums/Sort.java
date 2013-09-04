@@ -26,13 +26,14 @@
 package com.chute.sdk.v2.model.enums;
 
 /**
- * Enumerator needed for asset sorting. Assets can be sorted by ID, hearts or
- * position. Default sorting is done by the album, which sorts assets by ID or
- * position if manually set by the user.
+ * Enumerator needed for asset sorting.
+ * <p>
+ * Assets can be sorted by ID, hearts or position. Default sorting is done by
+ * the album, which sorts assets by ID or position if manually set by the user.
  * 
  */
 public enum Sort {
 
-	ID, HEARTS, POSITION
+  ID, HEARTS, POSITION
 
 }

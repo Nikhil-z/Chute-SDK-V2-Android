@@ -26,7 +26,8 @@
 package com.chute.sdk.v2.utils;
 
 public class Constants {
-	public static final String TAG = Constants.class.getSimpleName();
 
-	public static final String CURRENT_USER_ID = "me";
+  public static final String TAG = Constants.class.getSimpleName();
+
+  public static final String CURRENT_USER_ID = "me";
 }

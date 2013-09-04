@@ -10,20 +10,25 @@ import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 
 /**
- * The {@link GCAccounts} is a helper class that contains methods for getting
- * accounts and list of albums and media items for the specific account.
- * 
+ * The {@link GCAccounts} is a helper class that contains static methods for:
+ * <ul>
+ * <li>Getting all user accounts
+ * <li>Getting a list of albums for a specific account
+ * <li>Getting a list of media items from an album
+ * </ul>
  */
 public class GCAccounts {
 
   public static final String TAG = GCAccounts.class.getSimpleName();
 
   /**
-   * Method used for getting accounts. Returns JSon object containing list of
-   * accounts using context and given callback.
+   * Method used for getting accounts.
+   * <p>
+   * Returns JSon object containing list of accounts using context and given
+   * callback.
    * 
    * @param context
-   *          The application context
+   *          The application context.
    * @param callback
    *          Instance of {@link GCHttpCallback} interface. Returns
    *          {@link ListResponseModel} containing list of accounts.
@@ -39,17 +44,19 @@ public class GCAccounts {
    * Gets list of albums and media items for a specific account.
    * 
    * @param context
-   *          Application context
+   *          Application context.
    * @param accountName
-   *          Account name. It can be: facebook, flickr, instagram, picasa,
-   *          google, googledrive, skydrive or dropbox
+   *          Account name.
+   *          <p>
+   *          It can be: facebook, flickr, instagram, picasa, google,
+   *          googledrive, skydrive or dropbox
    * @param accountId
-   *          Account ID
+   *          Account ID.
    * @param callback
    *          Instance of {@link GCHttpCallback} interface. Returns
-   *          {@link ResponseModel} containing {@link AccountBaseModel}
+   *          {@link ResponseModel} containing {@link AccountBaseModel}.
    * @return Instance of {@link AccountRootRequest}, class that implements
-   *         {@link GCHttpRequest}
+   *         {@link GCHttpRequest}.
    */
   public static HttpRequest accountRoot(final Context context, final String accountName,
       final String accountId,
@@ -59,22 +66,23 @@ public class GCAccounts {
 
   /**
    * Returns all immediate subfolders and items of the parent folder.
-   * Gets albums and media items that belong to an account album.
    * 
    * @param context
-   *          Application context
+   *          Application context.
    * @param accountName
-   *          Account name. It can be: facebook, flickr, instagram, picasa,
-   *          google, googledrive, skydrive or dropbox
+   *          Account name.
+   *          <p>
+   *          It can be: facebook, flickr, instagram, picasa, google,
+   *          googledrive, skydrive or dropbox
    * @param accountId
-   *          Account ID
+   *          Account ID.
    * @param folderId
-   *          Account album ID
+   *          Account album ID.
    * @param callback
    *          Instance of {@link GCHttpCallback} interface. Returns
-   *          {@link ResponseModel} containing {@link AccountBaseModel}
+   *          {@link ResponseModel} containing {@link AccountBaseModel}.
    * @return Instance of {@link AccountSingleRequest}, class that implements
-   *         {@link GCHttpRequest}
+   *         {@link GCHttpRequest}.
    */
   public static HttpRequest accountSingle(final Context context,
       final String accountName, final String accountId,

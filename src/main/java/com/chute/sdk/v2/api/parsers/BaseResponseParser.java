@@ -29,6 +29,12 @@ import java.io.InputStream;
 
 import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
 
+/**
+ * Base class for parsing JSon using the Jackson API.
+ * 
+ * @param <T>
+ *          Any class representing object model of processed JSon response.
+ */
 public class BaseResponseParser<T> extends
     BaseJacksonMapperResponseParser<T> {
 

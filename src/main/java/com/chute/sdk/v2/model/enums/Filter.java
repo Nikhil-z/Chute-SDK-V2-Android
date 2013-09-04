@@ -25,7 +25,6 @@
 //
 package com.chute.sdk.v2.model.enums;
 
-
 /**
  * The {@link Filter} class is a wrapper around certain parameters needed for
  * filtering and ordering assets.
@@ -33,61 +32,60 @@ package com.chute.sdk.v2.model.enums;
  */
 public class Filter {
 
-	/**
-	 * Username of the user whose assets are listed
-	 */
-	private String username;
-	/**
-	 * Name of the service. Supported services: Twitter, Instagram, Facebook,
-	 * Flickr, Picasa.
-	 */
-	private AccountType accountType;
+  /**
+   * Username of the user whose assets are listed
+   */
+  private String username;
+  /**
+   * Name of the service. Supported services: Twitter, Instagram, Facebook,
+   * Flickr, Picasa, Google, GoogleDrive, SkyDrive, Dropbox.
+   */
+  private AccountType accountType;
 
-	/**
-	 * Getters and setters
-	 */
-	public String getUsername() {
-		return username;
-	}
+  /**
+   * Getters and setters
+   */
+  public String getUsername() {
+    return username;
+  }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-	public AccountType getAccountType() {
-		return accountType;
-	}
+  public AccountType getAccountType() {
+    return accountType;
+  }
 
-	/**
-	 * If the user chooses service listed in {@link AccountType} that is not
-	 * supported, new Runtime Exception is thrown.
-	 * 
-	 * @param accountType
-	 *            - Name of the service
-	 */
-	public void setAccountType(AccountType accountType) {
-		if (accountType.equals(AccountType.CHUTE)
-				|| accountType.equals(AccountType.FOURSQUARE)) {
-			throw new RuntimeException("Account type not supported!");
-		} else {
-			this.accountType = accountType;
-		}
-	}
+  /**
+   * If the user chooses service listed in {@link AccountType} that is not
+   * supported, new Runtime Exception is thrown.
+   * 
+   * @param accountType
+   *          - Name of the service
+   */
+  public void setAccountType(AccountType accountType) {
+    if (accountType.equals(AccountType.CHUTE)
+        || accountType.equals(AccountType.FOURSQUARE)) {
+      throw new RuntimeException("Account type not supported!");
+    } else {
+      this.accountType = accountType;
+    }
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Filter [username=");
-		builder.append(username);
-		builder.append(", accountType=");
-		builder.append(accountType);
-		builder.append("]");
-		return builder.toString();
-	}
+  /*
+   * (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("Filter [username=");
+    builder.append(username);
+    builder.append(", accountType=");
+    builder.append(accountType);
+    builder.append("]");
+    return builder.toString();
+  }
 
 }

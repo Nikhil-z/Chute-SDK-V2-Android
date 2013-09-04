@@ -30,6 +30,13 @@ import java.io.InputStream;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.parsers.BaseJacksonMapperResponseParser;
 
+/**
+ * {@link ResponseParser} wraps up {@link ResponseModel} and single object
+ * describing the response from the server.
+ * 
+ * @param <T>
+ *          Any class representing object model of processed JSon content.
+ */
 public class ResponseParser<T> extends
     BaseJacksonMapperResponseParser<ResponseModel<T>> {
 

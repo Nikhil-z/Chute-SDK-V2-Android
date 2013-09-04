@@ -28,113 +28,116 @@ package com.chute.sdk.v2.utils;
 /** @author DArkO */
 public class RestConstants {
 
-	public static final String BASE_URL = "https://api.getchute.com/v2";
-	public static final String BASE_UPLOAD_URL = "http://upload.getchute.com";
-	public static final String BASE_AUTH_URL = "http://getchute.com/v2/oauth/%s/authorize";
-	public static final String URL_AUTHENTICATION_TOKEN = BASE_URL + "/oauth/token";
+  public static final String BASE_URL = "https://api.getchute.com/v2";
+  public static final String BASE_UPLOAD_URL = "http://upload.getchute.com";
+  public static final String BASE_AUTH_URL = "http://getchute.com/v2/oauth/%s/authorize";
+  public static final String URL_AUTHENTICATION_TOKEN = BASE_URL + "/oauth/token";
 
-	// ALBUMS
-	public static final String URL_ALBUMS_ALL = BASE_URL + "/albums";
-	public static final String URL_ALBUMS_GET = BASE_URL + "/albums/%s";
-	public static final String URL_ALBUMS_CREATE = BASE_URL + "/albums";
-	public static final String URL_ALBUMS_UPDATE = BASE_URL + "/albums/%s";
-	public static final String URL_ALBUMS_DELETE = BASE_URL + "/albums/%s";
-	public static final String URL_ALBUMS_GET_ASSET = BASE_URL
-			+ "/albums/%s/assets/%s";
-	public static final String URL_ALBUMS_GET_ALL_ASSETS = BASE_URL
-			+ "/albums/%s/assets";
-	public static final String URL_ALBUMS_ADD_ASSETS = BASE_URL
-			+ "/albums/%s/add_assets";
-	public static final String URL_ALBUMS_REMOVE_ASSETS = BASE_URL
-			+ "/albums/%s/remove_assets";
+  // ALBUMS
+  public static final String URL_ALBUMS_ALL = BASE_URL + "/albums";
+  public static final String URL_ALBUMS_GET = BASE_URL + "/albums/%s";
+  public static final String URL_ALBUMS_CREATE = BASE_URL + "/albums";
+  public static final String URL_ALBUMS_UPDATE = BASE_URL + "/albums/%s";
+  public static final String URL_ALBUMS_DELETE = BASE_URL + "/albums/%s";
+  public static final String URL_ALBUMS_GET_ASSET = BASE_URL
+      + "/albums/%s/assets/%s";
+  public static final String URL_ALBUMS_GET_ALL_ASSETS = BASE_URL
+      + "/albums/%s/assets";
+  public static final String URL_ALBUMS_ADD_ASSETS = BASE_URL
+      + "/albums/%s/add_assets";
+  public static final String URL_ALBUMS_REMOVE_ASSETS = BASE_URL
+      + "/albums/%s/remove_assets";
 
-	// ASSETS
-	public static final String URL_ASSETS_UPLOAD = BASE_UPLOAD_URL + "/assets";
-	public static final String URL_ASSETS_ALL = BASE_URL + "/assets";
-	public static final String URL_ASSETS_GET = BASE_URL + "/assets/%s";
-	public static final String URL_ASSETS_EXIF = BASE_URL + "/assets/%s/exif";
-	public static final String URL_ASSETS_UPDATE = BASE_URL + "/assets/%s";
-	public static final String URL_ASSETS_DELETE = BASE_URL
-			+ "/albums/%s/assets/%s";
-	public static final String URL_ASSETS_CAPTION_SET = BASE_UPLOAD_URL
-			+ "/albums/%s/assets/%s";
-	public static final String URL_ASSETS_GEO_LOCATION = BASE_URL
-			+ "albums/%s/assets/%s/geo";
-	public static final String URL_ASSETS_GET_GEO_LOCATION = BASE_URL
-			+ "/assets/geo/%s,%s/%s";
-	public static final String URL_ASSETS_TAGS = BASE_URL
-			+ "/albums/%s/assets/%s/tags";
+  // ASSETS
+  public static final String URL_ASSETS_UPLOAD = BASE_UPLOAD_URL + "/assets";
+  public static final String URL_ASSETS_ALL = BASE_URL + "/assets";
+  public static final String URL_ASSETS_GET = BASE_URL + "/assets/%s";
+  public static final String URL_ASSETS_EXIF = BASE_URL + "/assets/%s/exif";
+  public static final String URL_ASSETS_UPDATE = BASE_URL + "/assets/%s";
+  public static final String URL_ASSETS_DELETE = BASE_URL
+      + "/albums/%s/assets/%s";
+  public static final String URL_ASSETS_CAPTION_SET = BASE_UPLOAD_URL
+      + "/albums/%s/assets/%s";
+  public static final String URL_ASSETS_GEO_LOCATION = BASE_URL
+      + "albums/%s/assets/%s/geo";
+  public static final String URL_ASSETS_GET_GEO_LOCATION = BASE_URL
+      + "/assets/geo/%s,%s/%s";
+  public static final String URL_ASSETS_TAGS = BASE_URL
+      + "/albums/%s/assets/%s/tags";
 
-	// USERS
-	public static final String URL_USERS_GET = BASE_URL + "/users/%s";
-	public static final String URL_USERS_GET_ALBUMS = BASE_URL
-			+ "/users/%s/albums";
-	public static final String URL_USERS_GET_CURRENT = BASE_URL + "/me";
+  // USERS
+  public static final String URL_USERS_GET = BASE_URL + "/users/%s";
+  public static final String URL_USERS_GET_ALBUMS = BASE_URL
+      + "/users/%s/albums";
+  public static final String URL_USERS_GET_CURRENT = BASE_URL + "/me";
 
-	// COMMENTS
-	public static final String URL_COMMENTS_GET = BASE_URL
-			+ "/albums/%s/assets/%s/comments";
-	public static final String URL_COMMENTS_CREATE = BASE_URL
-			+ "/albums/%s/assets/%s/comments";
-	public static final String URL_COMMENTS_DELETE = BASE_URL + "/comments/%s";
+  // COMMENTS
+  public static final String URL_COMMENTS_GET = BASE_URL
+      + "/albums/%s/assets/%s/comments";
+  public static final String URL_COMMENTS_CREATE = BASE_URL
+      + "/albums/%s/assets/%s/comments";
+  public static final String URL_COMMENTS_DELETE = BASE_URL + "/comments/%s";
 
-	// IMPORT
-	public static final String URL_ALBUMS_IMPORT = BASE_URL
-			+ "/albums/%s/assets/import";
-	public static final String URL_ASSETS_IMPORT = BASE_URL + "/assets/import";
+  // IMPORT
+  public static final String URL_ALBUMS_IMPORT = BASE_URL
+      + "/albums/%s/assets/import";
+  public static final String URL_ASSETS_IMPORT = BASE_URL + "/assets/import";
 
-	// SEARCH
-	public static final String URL_SEARCH_EXIF = BASE_URL + "/search/exif";
-	public static final String URL_SEARCH_LOCATION = BASE_URL
-			+ "/search/location";
-	public static final String URL_SEARCH_TAGS = BASE_URL + "/search/tags";
-	public static final String URL_SEARCH_USER = BASE_URL + "/search/user";
+  // SEARCH
+  public static final String URL_SEARCH_EXIF = BASE_URL + "/search/exif";
+  public static final String URL_SEARCH_LOCATION = BASE_URL
+      + "/search/location";
+  public static final String URL_SEARCH_TAGS = BASE_URL + "/search/tags";
+  public static final String URL_SEARCH_USER = BASE_URL + "/search/user";
 
-	// FLAGS
-	public static final String URL_FLAGS_COUNT = BASE_URL
-			+ "/albums/%s/assets/%s/flags";
-	public static final String URL_FLAGS_CREATE = BASE_URL
-			+ "/albums/%s/assets/%s/flags";
-	public static final String URL_FLAGS_REMOVE = BASE_URL
-			+ "/albums/%s/assets/%s/flags";
+  // FLAGS
+  public static final String URL_FLAGS_COUNT = BASE_URL
+      + "/albums/%s/assets/%s/flags";
+  public static final String URL_FLAGS_CREATE = BASE_URL
+      + "/albums/%s/assets/%s/flags";
+  public static final String URL_FLAGS_REMOVE = BASE_URL
+      + "/albums/%s/assets/%s/flags";
 
-	// VOTES
-	public static final String URL_VOTES = BASE_URL
-			+ "/albums/%s/assets/%s/votes";
+  // VOTES
+  public static final String URL_VOTES = BASE_URL
+      + "/albums/%s/assets/%s/votes";
 
-	// HEARTS
-	public static final String URL_HEARTS_COUNT = BASE_URL
-			+ "/albums/%s/assets/%s/hearts";
-	public static final String URL_HEARTS_CREATE = BASE_URL
-			+ "/albums/%s/assets/%s/hearts";
-	public static final String URL_HEARTS_REMOVE = BASE_URL
-			+ "/albums/%s/assets/%s/hearts";
+  // HEARTS
+  public static final String URL_HEARTS_COUNT = BASE_URL
+      + "/albums/%s/assets/%s/hearts";
+  public static final String URL_HEARTS_CREATE = BASE_URL
+      + "/albums/%s/assets/%s/hearts";
+  public static final String URL_HEARTS_REMOVE = BASE_URL
+      + "/albums/%s/assets/%s/hearts";
 
-	// PARCELS
-	public static final String URL_PARCELS_GET = BASE_URL + "/parcels/%s";
-	public static final String URL_PARCELS_ALBUMS = BASE_URL
-			+ "/albums/%s/parcels";
-	public static final String URL_PARCELS_ASSETS = BASE_URL
-			+ "/parcels/%s/assets";
+  // PARCELS
+  public static final String URL_PARCELS_GET = BASE_URL + "/parcels/%s";
+  public static final String URL_PARCELS_ALBUMS = BASE_URL
+      + "/albums/%s/parcels";
+  public static final String URL_PARCELS_ASSETS = BASE_URL
+      + "/parcels/%s/assets";
 
-	// BATCH
-	public static final String URL_BATCH_GET = BASE_URL + "/batch";
+  // BATCH
+  public static final String URL_BATCH_GET = BASE_URL + "/batch";
 
-	// UPLOAD
-	public static final String URL_UPLOAD_TOKEN = BASE_URL + "/uploads";
-	public static final String URL_UPLOAD_COMPLETE = BASE_URL
-			+ "/uploads/%s/complete";
-	public static final String URL_UPLOAD_ONE_STEP = BASE_UPLOAD_URL + "/v2/albums/%s/assets/upload";
+  // UPLOAD
+  public static final String URL_UPLOAD_TOKEN = BASE_URL + "/uploads";
+  public static final String URL_UPLOAD_COMPLETE = BASE_URL
+      + "/uploads/%s/complete";
+  public static final String URL_UPLOAD_ONE_STEP = BASE_UPLOAD_URL
+      + "/v2/albums/%s/assets/upload";
 
-	//ACCOUNTS
-	public static final String BASE_ACCOUNT_URL = "http://accounts.getchute.com";
-	public static final String URL_ACCOUNTS = BASE_URL + "/me/accounts";
-	
-	public static final String URL_ACCOUNT_ALBUMS = BASE_ACCOUNT_URL + "/v2/accounts/%s/albums";
-	public static final String URL_ACCOUNT_MEDIA = BASE_ACCOUNT_URL + "/v2/accounts/%s/albums/%s/media";
-	
-	public static final String URL_ACCOUNT_ROOT = BASE_ACCOUNT_URL + "/v2/%s/%s/files";
-	public static final String URL_ACCOUNT_SINGLE = BASE_ACCOUNT_URL + "/v2/%s/%s/folders/%s/files";
-	
+  // ACCOUNTS
+  public static final String BASE_ACCOUNT_URL = "http://accounts.getchute.com";
+  public static final String URL_ACCOUNTS = BASE_URL + "/me/accounts";
+
+  public static final String URL_ACCOUNT_ALBUMS = BASE_ACCOUNT_URL
+      + "/v2/accounts/%s/albums";
+  public static final String URL_ACCOUNT_MEDIA = BASE_ACCOUNT_URL
+      + "/v2/accounts/%s/albums/%s/media";
+
+  public static final String URL_ACCOUNT_ROOT = BASE_ACCOUNT_URL + "/v2/%s/%s/files";
+  public static final String URL_ACCOUNT_SINGLE = BASE_ACCOUNT_URL
+      + "/v2/%s/%s/folders/%s/files";
 
 }

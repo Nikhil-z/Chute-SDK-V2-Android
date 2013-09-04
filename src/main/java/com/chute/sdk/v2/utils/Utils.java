@@ -38,78 +38,78 @@ import android.util.Log;
 import android.util.TypedValue;
 
 public class Utils {
-	public static final String TAG = Utils.class.getSimpleName();
 
-	private Utils() {
-		super();
-	}
+  public static final String TAG = Utils.class.getSimpleName();
 
-	public static Bundle decodeUrl(String s) {
-		Bundle params = new Bundle();
-		if (s != null) {
-			s = s.substring(s.indexOf("?") + 1);
-			int anchor = s.indexOf("#");
-			if (anchor >= 0) {
-				s = s.substring(0, anchor);
-			}
-			String array[] = s.split("&");
-			for (String parameter : array) {
-				Log.e(TAG, parameter);
-				String v[] = parameter.split("=");
-				try {
-					params.putString(URLDecoder.decode(v[0], "UTF-8"),
-							URLDecoder.decode(v[1], "UTF-8"));
-				} catch (ArrayIndexOutOfBoundsException e) {
-				} catch (UnsupportedEncodingException e) {
-				}
-			}
-		}
-		return params;
-	}
+  private Utils() {
+    super();
+  }
 
-	/**
-	 * This method is used to modify the media URL to point to a path for a
-	 * custom sized photo Create wrapper methods that will generate your
-	 * predefined photo sizes ex. 100x100, 320x320
-	 * 
-	 * @param url
-	 *            the URL that is sent from chute
-	 * @param height
-	 *            the required height
-	 * @param width
-	 *            the required width
-	 * @return a modified String for the custom size photo location
-	 */
-	public static String getCustomSizePhotoURL(String url, int height, int width) {
-		StringBuilder sb = new StringBuilder(url);
-		sb.append("/" + height + "x" + width);
-		return sb.toString();
-	}
+  public static Bundle decodeUrl(String s) {
+    Bundle params = new Bundle();
+    if (s != null) {
+      s = s.substring(s.indexOf("?") + 1);
+      int anchor = s.indexOf("#");
+      if (anchor >= 0) {
+        s = s.substring(0, anchor);
+      }
+      String array[] = s.split("&");
+      for (String parameter : array) {
+        Log.e(TAG, parameter);
+        String v[] = parameter.split("=");
+        try {
+          params.putString(URLDecoder.decode(v[0], "UTF-8"),
+              URLDecoder.decode(v[1], "UTF-8"));
+        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (UnsupportedEncodingException e) {
+        }
+      }
+    }
+    return params;
+  }
 
-	public static int pixelsFromDp(Context context, int value) {
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-				value, context.getResources().getDisplayMetrics());
-	}
+  /**
+   * This method is used to modify the media URL to point to a path for a custom
+   * sized photo Create wrapper methods that will generate your predefined photo
+   * sizes ex. 100x100, 320x320
+   * 
+   * @param url
+   *          the URL that is sent from chute
+   * @param height
+   *          the required height
+   * @param width
+   *          the required width
+   * @return a modified String for the custom size photo location
+   */
+  public static String getCustomSizePhotoURL(String url, int height, int width) {
+    StringBuilder sb = new StringBuilder(url);
+    sb.append("/" + height + "x" + width);
+    return sb.toString();
+  }
 
-	/**
-	 * Removes BOM from InputStream
-	 * 
-	 * @param inputStream
-	 * @return
-	 * @throws IOException
-	 */
-	public static InputStream checkForUtf8BOMAndDiscardIfAny(
-			InputStream inputStream) throws IOException {
-		PushbackInputStream pushbackInputStream = new PushbackInputStream(
-				new BufferedInputStream(inputStream), 3);
-		byte[] bom = new byte[3];
-		if (pushbackInputStream.read(bom) != -1) {
-			if (!(bom[0] == (byte) 0xEF && bom[1] == (byte) 0xBB && bom[2] == (byte) 0xBF)) {
-				pushbackInputStream.unread(bom);
-			}
-		}
-		return pushbackInputStream;
-	}
-	
+  public static int pixelsFromDp(Context context, int value) {
+    return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        value, context.getResources().getDisplayMetrics());
+  }
+
+  /**
+   * Removes BOM from InputStream
+   * 
+   * @param inputStream
+   * @return
+   * @throws IOException
+   */
+  public static InputStream checkForUtf8BOMAndDiscardIfAny(
+      InputStream inputStream) throws IOException {
+    PushbackInputStream pushbackInputStream = new PushbackInputStream(
+        new BufferedInputStream(inputStream), 3);
+    byte[] bom = new byte[3];
+    if (pushbackInputStream.read(bom) != -1) {
+      if (!(bom[0] == (byte) 0xEF && bom[1] == (byte) 0xBB && bom[2] == (byte) 0xBF)) {
+        pushbackInputStream.unread(bom);
+      }
+    }
+    return pushbackInputStream;
+  }
 
 }
