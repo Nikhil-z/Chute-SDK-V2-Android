@@ -25,7 +25,7 @@ Or use the jar with dependencies from target in your regular non-maven projects.
 ## 2.1.1
 
 	- Removed Account Store
-	- Initialization should always go through <code>Chute.init(context,authConstants);</code> A recommended way of doing this is by extending the Application class and adding this piece of code in <code>onCreate();</code>
+	- Initialization should always go through <code>Chute.init(context,authConstants); </code> A recommended way of doing this is by extending the Application class and adding this piece of code in <code>onCreate(); </code>
 
 Setup
 ====
@@ -94,7 +94,7 @@ Basic Tasks
 
 ## Uploading Assets
 
-Use the folowing code to execute an upload request. This method needs an asset collection that will contain the paths to the photos that you want to upload and a collection of chutes you want the assets to be linked to.
+Use the folowing code to execute an upload request. This method needs a list of image paths to be uploaded and an album the assets to be linked to.
 
 
 <pre><code>
@@ -114,13 +114,13 @@ GCAssets.uploadOneStep(context, uploadListener, album, filePath, callback).execu
 </code></pre>
 
 For progress updates include a ProgressListener that implements the UploadProgressListener Interface. 
-Important note: the Callback runs in the thread that is executing the request.
+Important note: the callback runs in the thread that is executing the request.
 
 
 
 ## Displaying Assets
 
-The SDK includes a way to asynchronously bind photos to imageViews.
+The SDK includes a way to asynchronously bind photos to ImageViews.
 To use this feature, you need to follow a couple of steps to include and configure the ImageLoader in your project:
 
 1. Use and modify the folowing code inside the Application class to create an instance of the ImageLoader. The Loader uses SDcard cache with a combination of an in-memory implementation.
@@ -173,8 +173,7 @@ imageLoader.displayImage(url, imageView, imageLoaderListener);
 
 ## Organizing Assets
 
-Assets are organized in Albums
-
+Assets are organized in Albums.
 To get all the assets for a specific album use:
 
 <pre><code>
