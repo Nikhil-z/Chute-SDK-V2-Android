@@ -64,6 +64,7 @@ public class CommentsCreateRequest extends
     this.album = album;
     this.asset = asset;
     this.comment = comment;
+    addHeader("Content-Type", "application/json");
   }
 
   @Override
