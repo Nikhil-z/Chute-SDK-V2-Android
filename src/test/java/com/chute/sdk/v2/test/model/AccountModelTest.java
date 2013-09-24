@@ -2,12 +2,12 @@ package com.chute.sdk.v2.test.model;
 
 import java.io.IOException;
 
+import junit.framework.TestCase;
+
 import com.chute.sdk.v2.model.AccountModel;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-
-import junit.framework.TestCase;
 
 public class AccountModelTest extends TestCase {
 
