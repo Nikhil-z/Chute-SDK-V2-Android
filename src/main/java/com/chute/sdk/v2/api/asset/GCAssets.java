@@ -195,7 +195,7 @@ public class GCAssets {
    *          callback returns {@link ListResponseModel<AssetModel>}.
    * @return {@link AssetsFileUploadRequest}.
    */
-  public static HttpRequest uploadOneStep(final Context context,
+  public static HttpRequest upload(final Context context,
       final UploadProgressListener uploadListener,
       final AlbumModel album, final String filePath,
       final HttpCallback<ListResponseModel<AssetModel>> callback) {

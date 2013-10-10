@@ -59,6 +59,7 @@ public class AlbumsAddAssetsRequest extends StringBodyHttpRequestImpl<Void> {
     }
     this.album = album;
     this.assetIds = assetIds;
+    client.addHeader("Content-Type", "application/json");
   }
 
   @Override

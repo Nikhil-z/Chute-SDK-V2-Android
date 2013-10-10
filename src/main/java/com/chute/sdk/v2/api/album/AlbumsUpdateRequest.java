@@ -51,6 +51,7 @@ public class AlbumsUpdateRequest extends
           "Need to provide album ID for editing");
     }
     this.album = album;
+    client.addHeader("Content-Type", "application/json");
   }
 
   @Override

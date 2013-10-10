@@ -56,6 +56,7 @@ public class AssetsUpdateRequest extends
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");
     }
+    client.addHeader("Content-Type", "application/json");
   }
 
   @Override

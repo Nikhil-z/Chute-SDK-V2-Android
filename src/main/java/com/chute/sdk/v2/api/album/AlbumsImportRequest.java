@@ -62,7 +62,7 @@ public class AlbumsImportRequest extends
       throw new IllegalArgumentException("Need to provide list of URLs for import");
     }
     this.urls = urls;
-    addHeader("Content-Type", "application/json");
+    client.addHeader("Content-Type", "application/json");
   }
 
   @Override

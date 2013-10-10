@@ -52,6 +52,7 @@ public class AlbumsCreateRequest extends
       throw new IllegalArgumentException("Need to provide album name");
     }
     this.album = album;
+    client.addHeader("Content-Type", "application/json");
   }
 
   @Override

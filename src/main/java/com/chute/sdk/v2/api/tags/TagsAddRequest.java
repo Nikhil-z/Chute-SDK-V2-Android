@@ -68,6 +68,7 @@ public class TagsAddRequest extends
     this.asset = asset;
     this.album = album;
     this.tags = tags;
+    client.addHeader("Content-Type", "application/json");
   }
 
   @Override
