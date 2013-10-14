@@ -51,131 +51,138 @@ import com.dg.libs.rest.parsers.StringHttpResponseParser;
 
 public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
-	private static final String TAG = AuthenticationActivity.class.getSimpleName();
-	public static final int CODE_HTTP_EXCEPTION = 4;
-	public static final int CODE_HTTP_ERROR = 5;
-	public static final int CODE_PARSER_EXCEPTION = 6;
+  private static final String TAG = AuthenticationActivity.class.getSimpleName();
+  public static final int CODE_HTTP_EXCEPTION = 4;
+  public static final int CODE_HTTP_ERROR = 5;
+  public static final int CODE_PARSER_EXCEPTION = 6;
 
-	private WebView webViewAuthentication;
+  private WebView webViewAuthentication;
 
-	private AuthenticationFactory authenticationFactory;
+  private AuthenticationFactory authenticationFactory;
 
-	private ProgressBar pb;
+  private ProgressBar pb;
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+  /** Called when the activity is first created. */
+  @Override
+  public void onCreate(final Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-		webViewAuthentication = new WebView(this);
-		webViewAuthentication.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-		webViewAuthentication.setWebViewClient(new AuthWebViewClient());
-		webViewAuthentication.getSettings().setJavaScriptEnabled(true);
-		webViewAuthentication.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+    webViewAuthentication = new WebView(this);
+    webViewAuthentication.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+        LayoutParams.FILL_PARENT));
+    webViewAuthentication.setWebViewClient(new AuthWebViewClient());
+    webViewAuthentication.getSettings().setJavaScriptEnabled(true);
+    webViewAuthentication.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
-		// webViewAuthentication.clearCache(true);
-		// final WebSettings mWebSettings = webViewAuthentication.getSettings();
-		// mWebSettings.setSavePassword(false);
-		// mWebSettings.setSaveFormData(false);
-		// this.getBaseContext().deleteDatabase("webview.db");
-		// this.getBaseContext().deleteDatabase("webviewCache.db");
-		// CookieSyncManager.createInstance(this);
-		// CookieManager cookieManager = CookieManager.getInstance();
-		// cookieManager.removeAllCookie();
+    // webViewAuthentication.clearCache(true);
+    // final WebSettings mWebSettings = webViewAuthentication.getSettings();
+    // mWebSettings.setSavePassword(false);
+    // mWebSettings.setSaveFormData(false);
+    // this.getBaseContext().deleteDatabase("webview.db");
+    // this.getBaseContext().deleteDatabase("webviewCache.db");
+    // CookieSyncManager.createInstance(this);
+    // CookieManager cookieManager = CookieManager.getInstance();
+    // cookieManager.removeAllCookie();
 
-		final FrameLayout frameLayout = new FrameLayout(this);
-		frameLayout.setLayoutParams(new FrameLayout.LayoutParams(
+    final FrameLayout frameLayout = new FrameLayout(this);
+    frameLayout.setLayoutParams(new FrameLayout.LayoutParams(
 
-		LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-		pb = new ProgressBar(this);
-		final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(100, 100);
-		layoutParams.gravity = Gravity.CENTER;
-		pb.setLayoutParams(layoutParams);
-		frameLayout.addView(webViewAuthentication);
-		frameLayout.addView(pb);
-		setContentView(frameLayout);
+        LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+    pb = new ProgressBar(this);
+    final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(100, 100);
+    layoutParams.gravity = Gravity.CENTER;
+    pb.setLayoutParams(layoutParams);
+    frameLayout.addView(webViewAuthentication);
+    frameLayout.addView(pb);
+    setContentView(frameLayout);
 
-		authenticationFactory = AuthenticationFactory.getInstance();
-		webViewAuthentication.loadUrl(authenticationFactory.getAuthenticationURL(AccountType.values()[getIntent()
-				.getExtras().getInt(AuthenticationFactory.EXTRA_ACCOUNT_TYPE)]));
-	}
+    authenticationFactory = AuthenticationFactory.getInstance();
+    webViewAuthentication.loadUrl(authenticationFactory.getAuthenticationURL(AccountType
+        .values()[getIntent()
+        .getExtras().getInt(AuthenticationFactory.EXTRA_ACCOUNT_TYPE)]));
+  }
 
-	private final class AuthenticationCodeCallback implements HttpCallback<String> {
+  private final class AuthenticationCodeCallback implements HttpCallback<String> {
 
-		@Override
-		public void onSuccess(final String responseData) {
-			setResult(Activity.RESULT_OK);
-			finish();
-		}
+    @Override
+    public void onSuccess(final String responseData) {
+      setResult(Activity.RESULT_OK);
+      finish();
+    }
 
-		@Override
-		public void onHttpError(ResponseStatus responseCode) {
-			ALog.d(TAG, "Response Not Valid, " + " Code: " + responseCode);
-			setResult(CODE_HTTP_ERROR);
-			finish();
-		}
-	}
+    @Override
+    public void onHttpError(ResponseStatus responseCode) {
+      ALog.d(TAG, "Response Not Valid, " + " Code: " + responseCode);
+      setResult(CODE_HTTP_ERROR);
+      finish();
+    }
+  }
 
-	/** @author darko.grozdanovski */
-	private final class AuthenticationResponseParser extends StringHttpResponseParser<String> {
-		@Override
-		public String parse(final String responseBody) throws JSONException {
-			final JSONObject obj = new JSONObject(responseBody);
-			TokenAuthenticationProvider.getInstance().setToken(obj.getString("access_token"));
-			return responseBody;
-		}
+  /** @author darko.grozdanovski */
+  private final class AuthenticationResponseParser extends
+      StringHttpResponseParser<String> {
 
-	}
+    @Override
+    public String parse(final String responseBody) throws JSONException {
+      final JSONObject obj = new JSONObject(responseBody);
+      TokenAuthenticationProvider.getInstance().setToken(obj.getString("access_token"));
+      return responseBody;
+    }
 
-	private class AuthWebViewClient extends WebViewClient {
-		/** @author darko.grozdanovski */
+  }
 
-		@Override
-		public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
-			Log.e(TAG, "Override " + url);
-			return super.shouldOverrideUrlLoading(view, url);
-		}
+  private class AuthWebViewClient extends WebViewClient {
 
-		@Override
-		public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
-			ALog.d(TAG, "Page started " + url);
-			try {
-				if (authenticationFactory.isRedirectUri(url)) {
-					final Bundle params = Utils.decodeUrl(url);
-					final String code = params.getString("code");
-					if (TextUtils.isEmpty(code)) {
-						setResult(CODE_HTTP_ERROR);
-						finish();
-					}
-					view.stopLoading();
-					new AuthenticationTokenRequest<String>(getApplicationContext(), AuthenticationFactory.getInstance()
-							.getAuthConstants(), code, new AuthenticationResponseParser(),
-							new AuthenticationCodeCallback()).executeAsync();
-				}
-			} catch (final Exception e) {
-				ALog.d(TAG, "AUTHENTICATION FAILED", e);
-				setResult(CODE_HTTP_EXCEPTION);
-				finish();
-			} finally {
-				pb.setVisibility(View.VISIBLE);
-			}
-			super.onPageStarted(view, url, favicon);
-		}
+    /** @author darko.grozdanovski */
 
-		@Override
-		public void onPageFinished(final WebView view, final String url) {
-			ALog.e(TAG, "Page finished " + url);
-			pb.setVisibility(View.GONE);
-			super.onPageFinished(view, url);
-		}
+    @Override
+    public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
+      Log.e(TAG, "Override " + url);
+      return super.shouldOverrideUrlLoading(view, url);
+    }
 
-		@Override
-		public void onReceivedError(final WebView view, final int errorCode, final String description,
-				final String failingUrl) {
-			ALog.e(TAG, "Error " + failingUrl);
-			super.onReceivedError(view, errorCode, description, failingUrl);
-		}
-	}
+    @Override
+    public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
+      ALog.d(TAG, "Page started " + url);
+      try {
+        if (authenticationFactory.isRedirectUri(url)) {
+          final Bundle params = Utils.decodeUrl(url);
+          final String code = params.getString("code");
+          if (TextUtils.isEmpty(code)) {
+            setResult(CODE_HTTP_ERROR);
+            finish();
+          }
+          view.stopLoading();
+          new AuthenticationTokenRequest<String>(getApplicationContext(),
+              AuthenticationFactory.getInstance()
+                  .getAuthConstants(), code, new AuthenticationResponseParser(),
+              new AuthenticationCodeCallback()).executeAsync();
+        }
+      } catch (final Exception e) {
+        ALog.d(TAG, "AUTHENTICATION FAILED", e);
+        setResult(CODE_HTTP_EXCEPTION);
+        finish();
+      } finally {
+        pb.setVisibility(View.VISIBLE);
+      }
+      super.onPageStarted(view, url, favicon);
+    }
+
+    @Override
+    public void onPageFinished(final WebView view, final String url) {
+      ALog.e(TAG, "Page finished " + url);
+      pb.setVisibility(View.GONE);
+      super.onPageFinished(view, url);
+    }
+
+    @Override
+    public void onReceivedError(final WebView view, final int errorCode,
+        final String description,
+        final String failingUrl) {
+      ALog.e(TAG, "Error " + failingUrl);
+      super.onReceivedError(view, errorCode, description, failingUrl);
+    }
+  }
 
 }

@@ -23,20 +23,38 @@
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-package com.chute.sdk.v2.api.authentication;
+package com.chute.sdk.v2.api.accounts;
 
-public class AuthConstants {
+import android.content.Context;
+import android.text.TextUtils;
 
-  public String clientId;
-  public String clientSecret;
-  public static final String PERMISSIONS_SCOPE = "";
-  public static String CALLBACK_URL = "http://getchute.com/oauth/callback";
+import com.chute.sdk.v2.api.parsers.ListResponseParser;
+import com.chute.sdk.v2.model.AccountModel;
+import com.chute.sdk.v2.model.response.ListResponseModel;
+import com.chute.sdk.v2.utils.RestConstants;
+import com.dg.libs.rest.callbacks.HttpCallback;
+import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
+class CurrentUserUnlinkAccountsRequest extends
+    ParameterHttpRequestImpl<ListResponseModel<AccountModel>> {
 
-  public AuthConstants(String clientId, String clientSecret) {
-    super();
-    this.clientId = clientId;
-    this.clientSecret = clientSecret;
+  public static final String TAG = CurrentUserUnlinkAccountsRequest.class.getSimpleName();
+  private final String accountId;
+
+  public CurrentUserUnlinkAccountsRequest(final Context context, final String accountId,
+      final HttpCallback<ListResponseModel<AccountModel>> callback) {
+    super(context, RequestMethod.DELETE, new ListResponseParser<AccountModel>(
+        AccountModel.class), callback);
+    this.accountId = accountId;
+    if (TextUtils.isEmpty(accountId)) {
+      throw new NullPointerException("Need to provide account ID");
+    }
+  }
+
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_UNLINK_ACCOUNTS, accountId);
   }
 
 }

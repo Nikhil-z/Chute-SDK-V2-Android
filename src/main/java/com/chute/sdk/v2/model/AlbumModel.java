@@ -52,7 +52,7 @@ public class AlbumModel implements Parcelable {
    */
   @JsonProperty("id")
   private String id;
-
+  
   /**
    * Album links.
    */

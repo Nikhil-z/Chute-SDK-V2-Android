@@ -22,21 +22,40 @@
 //  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-package com.chute.sdk.v2.api.authentication;
+// 
+package com.chute.sdk.v2.api.album;
 
-public class AuthConstants {
+import android.content.Context;
+import android.text.TextUtils;
 
-  public String clientId;
-  public String clientSecret;
-  public static final String PERMISSIONS_SCOPE = "";
-  public static String CALLBACK_URL = "http://getchute.com/oauth/callback";
+import com.chute.sdk.v2.api.parsers.ListResponseParser;
+import com.chute.sdk.v2.model.AlbumModel;
+import com.chute.sdk.v2.model.response.ListResponseModel;
+import com.chute.sdk.v2.utils.RestConstants;
+import com.dg.libs.rest.callbacks.HttpCallback;
+import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
+public class AlbumsListNestedAlbumsRequest extends
+    ParameterHttpRequestImpl<ListResponseModel<AlbumModel>> {
 
-  public AuthConstants(String clientId, String clientSecret) {
-    super();
-    this.clientId = clientId;
-    this.clientSecret = clientSecret;
+  @SuppressWarnings("unused")
+  private static final String TAG = AlbumsListNestedAlbumsRequest.class.getSimpleName();
+  private final AlbumModel album;
+
+  public AlbumsListNestedAlbumsRequest(Context context, AlbumModel album,
+      HttpCallback<ListResponseModel<AlbumModel>> callback) {
+    super(context, RequestMethod.GET, new ListResponseParser<AlbumModel>(
+        AlbumModel.class), callback);
+    if (album == null || TextUtils.isEmpty(album.getName())) {
+      throw new IllegalArgumentException("Need to provide the album ID");
+    }
+    this.album = album;
+  }
+
+  @Override
+  protected String getUrl() {
+    return String.format(RestConstants.URL_ALBUMS_LIST_NESTED_ALBUMS, album.getId());
   }
 
 }

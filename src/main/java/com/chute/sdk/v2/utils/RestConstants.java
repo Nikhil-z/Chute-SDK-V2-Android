@@ -47,6 +47,7 @@ public class RestConstants {
       + "/albums/%s/add_assets";
   public static final String URL_ALBUMS_REMOVE_ASSETS = BASE_URL
       + "/albums/%s/remove_assets";
+  public static final String URL_ALBUMS_LIST_NESTED_ALBUMS = BASE_URL + "albums/%s/albums";
 
   // ASSETS
   public static final String URL_ASSETS_UPLOAD = BASE_UPLOAD_URL + "/assets";
@@ -126,7 +127,6 @@ public class RestConstants {
       + "/uploads/%s/complete";
   public static final String URL_UPLOAD_ONE_STEP = BASE_UPLOAD_URL
       + "/v2/albums/%s/assets/upload";
-  
 
   // ACCOUNTS
   public static final String BASE_ACCOUNT_URL = "http://accounts.getchute.com";
@@ -140,5 +140,8 @@ public class RestConstants {
   public static final String URL_ACCOUNT_ROOT = BASE_ACCOUNT_URL + "/v2/%s/%s/files";
   public static final String URL_ACCOUNT_SINGLE = BASE_ACCOUNT_URL
       + "/v2/%s/%s/folders/%s/files";
+  
+  // unlink user from account
+  public static final String URL_UNLINK_ACCOUNTS = BASE_URL + "/me/accounts/%s";
 
 }
