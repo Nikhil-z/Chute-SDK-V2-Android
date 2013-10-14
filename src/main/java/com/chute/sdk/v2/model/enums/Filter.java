@@ -37,7 +37,7 @@ public class Filter {
    */
   private String username;
   /**
-   * Name of the service. Supported services: Twitter, Instagram, Facebook,
+   * Name of the service. Supported services: Chute, Twitter, Instagram, Facebook,
    * Flickr, Picasa, Google, GoogleDrive, SkyDrive, Dropbox.
    */
   private AccountType accountType;
@@ -65,8 +65,7 @@ public class Filter {
    *          - Name of the service
    */
   public void setAccountType(AccountType accountType) {
-    if (accountType.equals(AccountType.CHUTE)
-        || accountType.equals(AccountType.FOURSQUARE)) {
+        if (accountType.equals(AccountType.FOURSQUARE)) {
       throw new RuntimeException("Account type not supported!");
     } else {
       this.accountType = accountType;
