@@ -1,9 +1,9 @@
 // Copyright (c) 2011, Chute Corporation. All rights reserved.
-//
-//  Redistribution and use in source and binary forms, with or without modification,
+// 
+//  Redistribution and use in source and binary forms, with or without modification, 
 //  are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright notice, this
+// 
+//     * Redistributions of source code must retain the above copyright notice, this 
 //       list of conditions and the following disclaimer.
 //     * Redistributions in binary form must reproduce the above copyright notice,
 //       this list of conditions and the following disclaimer in the documentation
@@ -11,9 +11,9 @@
 //     * Neither the name of the  Chute Corporation nor the names
 //       of its contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-//
+// 
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 //  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
 //  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
@@ -28,53 +28,49 @@ package com.chute.sdk.v2.api.asset;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.chute.sdk.v2.api.parsers.ListResponseParser;
+import com.chute.sdk.v2.api.parsers.ResponseParser;
+import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
-import com.chute.sdk.v2.model.enums.Filter;
-import com.chute.sdk.v2.model.enums.Sort;
-import com.chute.sdk.v2.model.response.ListResponseModel;
+import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
-@Deprecated
-public class AssetsListRequest extends
-    ParameterHttpRequestImpl<ListResponseModel<AssetModel>> {
+public class AssetsMoveRequest extends
+    ParameterHttpRequestImpl<ResponseModel<AssetModel>> {
 
-  public static final String TAG = AssetsListRequest.class.getSimpleName();
+  public static final String TAG = AssetsMoveRequest.class
+      .getSimpleName();
+  final AlbumModel album;
+  final AssetModel asset;
+  final String newAlbumId;
 
-  public AssetsListRequest(Context context, Sort sort, Filter filter,
-      HttpCallback<ListResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
+  public AssetsMoveRequest(Context context, AlbumModel album, AssetModel asset,
+      String newAlbumId,
+      HttpCallback<ResponseModel<AssetModel>> callback) {
+    super(context, RequestMethod.POST, new ResponseParser<AssetModel>(
         AssetModel.class), callback);
-    if (sort != null) {
-      switch (sort.ordinal()) {
-      case 0:
-        addParam("sort", "id");
-        break;
-      case 1:
-        addParam("sort", "hearts");
-        break;
-      case 2:
-        addParam("sort", "position");
-        break;
-      }
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException(
+          "Need to provide album ID for moving the asset to another album");
     }
-    if (filter != null) {
-      if (!TextUtils.isEmpty(filter.getUsername())) {
-        addParam("username", filter.getUsername());
-      }
-      if (!TextUtils.isEmpty(filter.getAccountType().name())) {
-        addParam("service", filter.getAccountType().name()
-            .toLowerCase());
-      }
+    if (asset == null || TextUtils.isEmpty(asset.getId())) {
+      throw new IllegalArgumentException("Need to provide asset ID");
     }
+    if (newAlbumId == null) {
+      throw new IllegalArgumentException(
+          "Need to provide album ID of the album you wish to move the asset to");
+    }
+    this.album = album;
+    this.asset = asset;
+    this.newAlbumId = newAlbumId;
   }
 
   @Override
   protected String getUrl() {
-    return RestConstants.URL_ASSETS_ALL;
+    return String.format(RestConstants.URL_ASSETS_MOVE,
+        album.getId(), asset.getId(), newAlbumId);
   }
 
 }

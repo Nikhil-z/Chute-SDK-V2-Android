@@ -47,10 +47,9 @@ public class GCAccounts {
   public static final String TAG = GCAccounts.class.getSimpleName();
 
   /**
-   * Method used for getting accounts.
+   * Method used for getting all accounts for the currently authenticated user.
    * <p>
-   * Returns JSon object containing list of accounts using context and given
-   * callback.
+   * Returns list of accounts using context and given callback.
    * 
    * @param context
    *          The application context.
@@ -63,6 +62,27 @@ public class GCAccounts {
   public static HttpRequest allUserAccounts(final Context context,
       final HttpCallback<ListResponseModel<AccountModel>> callback) {
     return new CurrentUserAccountsRequest(context, callback);
+  }
+
+  /**
+   * Unlinks all accounts for the currently authenticated user.
+   * <p>
+   * Returns list of accounts using context and given callback.
+   * 
+   * @param context
+   *          The application context.
+   * @param accountId
+   *          {@link AccountModel} ID
+   * @param callback
+   *          Instance of {@link GCHttpCallback} interface. Returns
+   *          {@link ListResponseModel} containing list of accounts.
+   * @return Instance of {@link CurrentUserAccountsRequest}, class that
+   *         implements {@link GCHttpRequest}.
+   */
+  public static HttpRequest unlinkUserAccounts(final Context context,
+      final String accountId,
+      final HttpCallback<ListResponseModel<AccountModel>> callback) {
+    return new CurrentUserUnlinkAccountsRequest(context, accountId, callback);
   }
 
   /**

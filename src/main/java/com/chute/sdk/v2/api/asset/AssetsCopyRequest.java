@@ -22,13 +22,14 @@
 //  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 package com.chute.sdk.v2.api.asset;
 
 import android.content.Context;
 import android.text.TextUtils;
 
 import com.chute.sdk.v2.api.parsers.ResponseParser;
+import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
@@ -36,27 +37,40 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
-@Deprecated
-public class AssetsGetRequest extends
+public class AssetsCopyRequest extends
     ParameterHttpRequestImpl<ResponseModel<AssetModel>> {
 
-  public static final String TAG = AssetsGetRequest.class.getSimpleName();
-  private AssetModel asset;
+  public static final String TAG = AssetsCopyRequest.class
+      .getSimpleName();
+  final AlbumModel album;
+  final AssetModel asset;
+  final String newAlbumId;
 
-  public AssetsGetRequest(Context context, AssetModel asset,
+  public AssetsCopyRequest(Context context, AlbumModel album, AssetModel asset,
+      String newAlbumId,
       HttpCallback<ResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.GET, new ResponseParser<AssetModel>(
+    super(context, RequestMethod.POST, new ResponseParser<AssetModel>(
         AssetModel.class), callback);
+    if (album == null || TextUtils.isEmpty(album.getId())) {
+      throw new IllegalArgumentException(
+          "Need to provide album ID for coping the asset to another album");
+    }
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");
     }
+    if (newAlbumId == null) {
+      throw new IllegalArgumentException(
+          "Need to provide album ID of the album you wish to copy the asset to");
+    }
+    this.album = album;
     this.asset = asset;
-
+    this.newAlbumId = newAlbumId;
   }
 
   @Override
   protected String getUrl() {
-    return String.format(RestConstants.URL_ASSETS_GET, asset.getId());
+    return String.format(RestConstants.URL_ASSETS_COPY,
+        album.getId(), asset.getId(), newAlbumId);
   }
 
 }

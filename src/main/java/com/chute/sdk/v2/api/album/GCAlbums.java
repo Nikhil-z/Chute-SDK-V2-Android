@@ -79,6 +79,23 @@ public class GCAlbums {
   }
 
   /**
+   * Pulls a complete list of all albums nested inside a specific album.
+   * 
+   * @param context
+   *          The application context.
+   * @param album
+   *          Parent album.
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AlbumModel>}.
+   * @return {@link AlbumsListRequest}.
+   */
+  public static HttpRequest listNested(final Context context, final AlbumModel album,
+      final HttpCallback<ListResponseModel<AlbumModel>> callback) {
+    return new AlbumsListNestedAlbumsRequest(context, album, callback);
+  }
+
+  /**
    * Retrieves details for a specific album.
    * 
    * @param context
