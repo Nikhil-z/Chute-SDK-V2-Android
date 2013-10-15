@@ -37,6 +37,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -75,15 +78,17 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     webViewAuthentication.getSettings().setJavaScriptEnabled(true);
     webViewAuthentication.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
-    // webViewAuthentication.clearCache(true);
-    // final WebSettings mWebSettings = webViewAuthentication.getSettings();
-    // mWebSettings.setSavePassword(false);
-    // mWebSettings.setSaveFormData(false);
-    // this.getBaseContext().deleteDatabase("webview.db");
-    // this.getBaseContext().deleteDatabase("webviewCache.db");
-    // CookieSyncManager.createInstance(this);
-    // CookieManager cookieManager = CookieManager.getInstance();
-    // cookieManager.removeAllCookie();
+    if (TokenAuthenticationProvider.getInstance().isTokenValid() == false) {
+      webViewAuthentication.clearCache(true);
+      final WebSettings mWebSettings = webViewAuthentication.getSettings();
+      mWebSettings.setSavePassword(false);
+      mWebSettings.setSaveFormData(false);
+      this.getBaseContext().deleteDatabase("webview.db");
+      this.getBaseContext().deleteDatabase("webviewCache.db");
+      CookieSyncManager.createInstance(this);
+      CookieManager cookieManager = CookieManager.getInstance();
+      cookieManager.removeAllCookie();
+    }
 
     final FrameLayout frameLayout = new FrameLayout(this);
     frameLayout.setLayoutParams(new FrameLayout.LayoutParams(
@@ -105,6 +110,11 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
   private final class AuthenticationCodeCallback implements HttpCallback<String> {
 
+    
+    public AuthenticationCodeCallback() {
+      pb.setVisibility(View.VISIBLE);
+    }
+    
     @Override
     public void onSuccess(final String responseData) {
       setResult(Activity.RESULT_OK);
@@ -147,6 +157,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     @Override
     public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
       ALog.d(TAG, "Page started " + url);
+      pb.setVisibility(View.VISIBLE);
       try {
         if (authenticationFactory.isRedirectUri(url)) {
           final Bundle params = Utils.decodeUrl(url);
@@ -156,6 +167,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
             finish();
           }
           view.stopLoading();
+          
           new AuthenticationTokenRequest<String>(getApplicationContext(),
               AuthenticationFactory.getInstance()
                   .getAuthConstants(), code, new AuthenticationResponseParser(),
@@ -165,8 +177,6 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
         ALog.d(TAG, "AUTHENTICATION FAILED", e);
         setResult(CODE_HTTP_EXCEPTION);
         finish();
-      } finally {
-        pb.setVisibility(View.VISIBLE);
       }
       super.onPageStarted(view, url, favicon);
     }
@@ -174,7 +184,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     @Override
     public void onPageFinished(final WebView view, final String url) {
       ALog.e(TAG, "Page finished " + url);
-      pb.setVisibility(View.VISIBLE);
+      pb.setVisibility(View.GONE);
       super.onPageFinished(view, url);
     }
 

@@ -93,6 +93,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
     Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
     editor.remove(TOKEN_KEY);
     boolean commit = editor.commit();
+    token = null;
     return commit;
   }
 
