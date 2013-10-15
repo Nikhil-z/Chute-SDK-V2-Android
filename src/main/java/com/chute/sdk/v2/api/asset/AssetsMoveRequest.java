@@ -43,11 +43,11 @@ public class AssetsMoveRequest extends
   public static final String TAG = AssetsMoveRequest.class
       .getSimpleName();
   final AlbumModel album;
+  final AlbumModel newAlbum;
   final AssetModel asset;
-  final String newAlbumId;
 
   public AssetsMoveRequest(Context context, AlbumModel album, AssetModel asset,
-      String newAlbumId,
+      AlbumModel newAlbum,
       HttpCallback<ResponseModel<AssetModel>> callback) {
     super(context, RequestMethod.POST, new ResponseParser<AssetModel>(
         AssetModel.class), callback);
@@ -58,19 +58,19 @@ public class AssetsMoveRequest extends
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");
     }
-    if (newAlbumId == null) {
+    if (newAlbum == null || TextUtils.isEmpty(newAlbum.getId())) {
       throw new IllegalArgumentException(
           "Need to provide album ID of the album you wish to move the asset to");
     }
     this.album = album;
     this.asset = asset;
-    this.newAlbumId = newAlbumId;
+    this.newAlbum = newAlbum;
   }
 
   @Override
   protected String getUrl() {
     return String.format(RestConstants.URL_ASSETS_MOVE,
-        album.getId(), asset.getId(), newAlbumId);
+        album.getId(), asset.getId(), newAlbum.getId());
   }
 
 }

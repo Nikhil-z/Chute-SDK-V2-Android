@@ -145,4 +145,7 @@ public class RestConstants {
   public static final String URL_ACCOUNT_SINGLE = BASE_ACCOUNT_URL
       + "/v2/%s/%s/folders/%s/files";
 
+  // STORAGE
+  public static final String URL_STORE = BASE_URL + "/store/%s/%s";
+
 }

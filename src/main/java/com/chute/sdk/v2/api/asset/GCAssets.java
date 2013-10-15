@@ -211,17 +211,17 @@ public class GCAssets {
    *          Album holding the asset to be moved.
    * @param asset
    *          Asset you wish to move to another album.
-   * @param newAlbumId
-   *          ID of the album that is going to store the moved asset.
+   * @param newAlbum
+   *          Album that is going to store the moved asset.
    * @param callback
    *          Instance of {@link HttpCallback} interface. If successful, the
    *          callback returns {@link ResponseModel<AssetModel>}.
    * @return {@link AssetsMoveRequest}
    */
   public static HttpRequest move(final Context context, final AlbumModel album,
-      final AssetModel asset,
-      final String newAlbumId, final HttpCallback<ResponseModel<AssetModel>> callback) {
-    return new AssetsMoveRequest(context, album, asset, newAlbumId, callback);
+      final AssetModel asset, final AlbumModel newAlbum,
+      final HttpCallback<ResponseModel<AssetModel>> callback) {
+    return new AssetsMoveRequest(context, album, asset, newAlbum, callback);
   }
 
   /**
@@ -233,17 +233,17 @@ public class GCAssets {
    *          Album holding the asset to be copied.
    * @param asset
    *          Asset you wish to copy to another album
-   * @param newAlbumId
-   *          ID of the album that is going to store the copied asset.
+   * @param newAlbum
+   *          Album that is going to store the copied asset.
    * @param callback
    *          Instance of {@link HttpCallback} interface. If successful, the
    *          callback returns {@link ResponseModel<AssetModel>}.
    * @return {@link AssetsCopyRequest}
    */
   public static HttpRequest copy(final Context context, final AlbumModel album,
-      final AssetModel asset,
-      final String newAlbumId, final HttpCallback<ResponseModel<AssetModel>> callback) {
-    return new AssetsCopyRequest(context, album, asset, newAlbumId, callback);
+      final AssetModel asset, final AlbumModel newAlbum,
+      final HttpCallback<ResponseModel<AssetModel>> callback) {
+    return new AssetsCopyRequest(context, album, asset, newAlbum, callback);
   }
 
 }
