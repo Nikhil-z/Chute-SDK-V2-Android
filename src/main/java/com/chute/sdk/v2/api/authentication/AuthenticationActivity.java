@@ -108,6 +108,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     @Override
     public void onSuccess(final String responseData) {
       setResult(Activity.RESULT_OK);
+      pb.setVisibility(View.GONE);
       finish();
     }
 
@@ -115,6 +116,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     public void onHttpError(ResponseStatus responseCode) {
       ALog.d(TAG, "Response Not Valid, " + " Code: " + responseCode);
       setResult(CODE_HTTP_ERROR);
+      pb.setVisibility(View.GONE);
       finish();
     }
   }
@@ -172,7 +174,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     @Override
     public void onPageFinished(final WebView view, final String url) {
       ALog.e(TAG, "Page finished " + url);
-      pb.setVisibility(View.GONE);
+      pb.setVisibility(View.VISIBLE);
       super.onPageFinished(view, url);
     }
 
