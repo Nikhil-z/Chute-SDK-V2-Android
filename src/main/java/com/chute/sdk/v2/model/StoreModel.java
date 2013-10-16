@@ -1,5 +1,6 @@
 package com.chute.sdk.v2.model;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,7 +9,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.araneaapps.android.libs.logger.ALog;
+import com.chute.sdk.v2.utils.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.cfg.MapperConfig;
 
 public class StoreModel {
 
@@ -80,19 +86,19 @@ public class StoreModel {
     return builder.toString();
   }
 
-  public List<String> getStorageValue() {
-    List<String> valueList = new ArrayList<String>();
+  public StoreValueModel getStorageValue() {
+    ObjectMapper mapper = JsonUtil.getMapper();
+    StoreValueModel storeModel = null;
     try {
-      JSONObject jsonValue = new JSONObject(value);
-      JSONArray dataArray = jsonValue.getJSONArray("data");
-      for (int i = 0; i < dataArray.length(); i++) {
-        String arrayValue = dataArray.getString(i);
-        valueList.add(arrayValue);
-      }
-    } catch (JSONException e) {
-      ALog.e("JSON Exception: " + e.getMessage());
+      storeModel = mapper.readValue(value, mapper.constructType(StoreValueModel.class));
+    } catch (JsonParseException e) {
+      ALog.d("JsonParseException: " + e.getMessage());
+    } catch (JsonMappingException e) {
+      ALog.d("JsonMappingException: " + e.getMessage());
+    } catch (IOException e) {
+      ALog.d("IOException: " + e.getMessage());
     }
-    return valueList;
+    return storeModel;
 
   }
 

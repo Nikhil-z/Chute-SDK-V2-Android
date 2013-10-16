@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 
 import com.chute.sdk.v2.model.StoreModel;
+import com.chute.sdk.v2.model.StoreValueModel;
 import com.chute.sdk.v2.model.enums.StoreType;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
@@ -56,9 +57,9 @@ public class GCStore {
    * @return {@link StoreCreateStorage}
    */
   public static HttpRequest create(final Context context, final StoreType type,
-      String key, List<String> values,
+      String key, StoreValueModel value,
       final HttpCallback<ResponseModel<StoreModel>> callback) {
-    return new StoreCreateStorage(context, type, key, values, callback);
+    return new StoreCreateStorage(context, type, key, value, callback);
   }
 
   /**

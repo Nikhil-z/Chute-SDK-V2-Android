@@ -11,6 +11,7 @@ import android.content.Context;
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.StoreModel;
+import com.chute.sdk.v2.model.StoreValueModel;
 import com.chute.sdk.v2.model.enums.StoreType;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
@@ -23,38 +24,28 @@ public class StoreCreateStorage extends
 
   private final StoreType type;
   private final String key;
-  private final List<String> values;
+  private final StoreValueModel value;
 
   public StoreCreateStorage(Context context, final StoreType type, final String key,
-      final List<String> values,
+      final StoreValueModel value,
       HttpCallback<ResponseModel<StoreModel>> callback) {
     super(context, RequestMethod.POST, new ResponseParser<StoreModel>(StoreModel.class),
         callback);
     if (type == null) {
       throw new IllegalArgumentException("Need to provide storage type");
     }
-    if (values == null || values.isEmpty()) {
+    if (value == null ) {
       throw new IllegalArgumentException("Need to provide list of value strings");
     }
     this.type = type;
     this.key = key;
-    this.values = values;
+    this.value = value;
     addParam("Content-Type", "application/json");
   }
 
   @Override
   public String bodyContents() {
-    JSONObject jsonObject = new JSONObject();
-    JSONArray array = new JSONArray();
-    for (String value : values) {
-      array.put(value);
-    }
-    try {
-      jsonObject.put("data", array);
-    } catch (JSONException e) {
-      ALog.e("Json Exception: " + e.getMessage());
-    }
-    return jsonObject.toString();
+    return value.fromObjectToJson();
   }
 
   @Override
