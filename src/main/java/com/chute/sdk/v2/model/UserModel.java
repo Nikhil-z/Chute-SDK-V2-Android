@@ -98,6 +98,11 @@ public class UserModel implements Parcelable {
   private String oauthToken;
 
   /**
+   * User status. It can be pending or verified.
+   */
+  private String status;
+
+  /**
    * Default non-args constructor.
    */
   public UserModel() {
@@ -186,6 +191,14 @@ public class UserModel implements Parcelable {
     this.oauthToken = oauthToken;
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
   public UserModel(Parcel in) {
     this();
     id = in.readString();
@@ -198,6 +211,7 @@ public class UserModel implements Parcelable {
     profile = in.readParcelable(ProfileModel.class.getClassLoader());
     email = in.readString();
     oauthToken = in.readString();
+    status = in.readString();
   }
 
   /*
@@ -225,6 +239,7 @@ public class UserModel implements Parcelable {
     dest.writeParcelable(profile, flags);
     dest.writeString(email);
     dest.writeString(oauthToken);
+    dest.writeString(status);
   }
 
   public static final Parcelable.Creator<UserModel> CREATOR = new Parcelable.Creator<UserModel>() {
@@ -268,6 +283,8 @@ public class UserModel implements Parcelable {
     builder.append(email);
     builder.append(", oauthToken=");
     builder.append(oauthToken);
+    builder.append(", status=");
+    builder.append(status);
     builder.append("]");
     return builder.toString();
   }
