@@ -110,11 +110,10 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
   private final class AuthenticationCodeCallback implements HttpCallback<String> {
 
-    
     public AuthenticationCodeCallback() {
       pb.setVisibility(View.VISIBLE);
     }
-    
+
     @Override
     public void onSuccess(final String responseData) {
       setResult(Activity.RESULT_OK);
@@ -167,11 +166,16 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
             finish();
           }
           view.stopLoading();
-          
+
           new AuthenticationTokenRequest<String>(getApplicationContext(),
               AuthenticationFactory.getInstance()
                   .getAuthConstants(), code, new AuthenticationResponseParser(),
               new AuthenticationCodeCallback()).executeAsync();
+        }
+        if (authenticationFactory.isAuthenticationCancelcedRedirectUri(url)) {
+          ALog.d(TAG, "AUTHENTICATION CANCELED");
+          setResult(RESULT_CANCELED);
+          finish();
         }
       } catch (final Exception e) {
         ALog.d(TAG, "AUTHENTICATION FAILED", e);

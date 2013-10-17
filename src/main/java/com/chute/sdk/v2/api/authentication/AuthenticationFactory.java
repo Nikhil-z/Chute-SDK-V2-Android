@@ -113,4 +113,8 @@ public class AuthenticationFactory {
     return url.startsWith(AuthConstants.CALLBACK_URL);
   }
 
+  public boolean isAuthenticationCancelcedRedirectUri(String url) {
+    return url.equals(AuthConstants.AUTHENTICATION_FAIL_REDIRECT_URL);
+  }
+
 }

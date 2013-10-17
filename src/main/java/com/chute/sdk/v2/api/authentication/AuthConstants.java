@@ -31,7 +31,8 @@ public class AuthConstants {
   public String clientSecret;
   public static final String PERMISSIONS_SCOPE = "";
   public static String CALLBACK_URL = "http://getchute.com/oauth/callback";
-
+  public static final String AUTHENTICATION_FAIL_REDIRECT_URL =
+      "http://getchute.com/v2/oauth/failure";
 
   public AuthConstants(String clientId, String clientSecret) {
     super();
