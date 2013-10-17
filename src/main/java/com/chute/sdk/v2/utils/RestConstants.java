@@ -146,6 +146,7 @@ public class RestConstants {
       + "/v2/%s/%s/folders/%s/files";
 
   // STORAGE
-  public static final String URL_STORE = BASE_URL + "/store/%s/%s";
+  public static final String URL_STORE = BASE_URL + "/store/%s";
+  public static final String URL_STORE_KEY = BASE_URL + "/store/%s/%s";
 
 }

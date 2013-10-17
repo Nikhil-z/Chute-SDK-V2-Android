@@ -1,17 +1,11 @@
 package com.chute.sdk.v2.api.store;
 
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.StoreModel;
 import com.chute.sdk.v2.model.enums.StoreType;
+import com.chute.sdk.v2.model.interfaces.StoreableValue;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
@@ -23,10 +17,10 @@ public class StoreUpdateStorage extends
 
   private final StoreType type;
   private final String key;
-  private final List<String> values;
+  private final StoreableValue storeableValue;
 
   public StoreUpdateStorage(Context context, final StoreType type, final String key,
-      final List<String> values,
+      final StoreableValue storeableValue,
       HttpCallback<ResponseModel<StoreModel>> callback) {
     super(context, RequestMethod.PUT, new ResponseParser<StoreModel>(StoreModel.class),
         callback);
@@ -37,29 +31,23 @@ public class StoreUpdateStorage extends
       throw new IllegalArgumentException(
           "Need to provide the key of the value you wish to update");
     }
+    if (storeableValue == null) {
+      throw new IllegalArgumentException("Need to provide storeable object as a value");
+    }
     this.type = type;
     this.key = key;
-    this.values = values;
+    this.storeableValue = storeableValue;
+    addParam("Content-Type", "application/json");
   }
 
   @Override
   public String bodyContents() {
-    JSONObject jsonObject = new JSONObject();
-    JSONArray array = new JSONArray();
-    for (String value : values) {
-      array.put(value);
-    }
-    try {
-      jsonObject.put("data", array);
-    } catch (JSONException e) {
-      ALog.e("Json Exception: " + e.getMessage());
-    }
-    return jsonObject.toString();
+    return storeableValue.storeValueToJson();
   }
 
   @Override
   protected String getUrl() {
-    return String.format(RestConstants.URL_STORE, type.name().toLowerCase(), key);
+    return String.format(RestConstants.URL_STORE_KEY, type.name().toLowerCase(), key);
   }
 
 }

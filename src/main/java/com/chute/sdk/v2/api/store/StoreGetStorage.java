@@ -33,7 +33,7 @@ public class StoreGetStorage extends ParameterHttpRequestImpl<ResponseModel<Stor
 
   @Override
   protected String getUrl() {
-    return String.format(RestConstants.URL_STORE, type.name().toLowerCase(), key);
+    return String.format(RestConstants.URL_STORE_KEY, type.name().toLowerCase(), key);
   }
 
 }

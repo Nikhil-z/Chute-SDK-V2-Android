@@ -27,6 +27,27 @@ Or use the jar with dependencies from target in your regular non-maven projects.
 	- Removed Account Store
 	- Initialization should always go through <code>Chute.init(context,authConstants); </code> A recommended way of doing this is by extending the Application class and adding this piece of code in <code>onCreate(); </code>
 
+## 2.2.2
+
+	- Support custom http and https handlers
+
+## 2.2.3
+
+	- Added License file
+        
+## 2.2.4
+
+	- Clear token and auth credentials
+
+## 2.2.5
+
+	- Added API calls for: move/copy assets, nested albums, unlink user accounts
+
+## 2.2.6
+
+	- Handled authentication canceled redirect URL
+	- Added API calls for key-value storage
+
 Setup
 ====
 

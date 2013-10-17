@@ -1,18 +1,11 @@
 package com.chute.sdk.v2.api.store;
 
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.StoreModel;
-import com.chute.sdk.v2.model.StoreValueModel;
 import com.chute.sdk.v2.model.enums.StoreType;
+import com.chute.sdk.v2.model.interfaces.StoreableValue;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
@@ -24,33 +17,45 @@ public class StoreCreateStorage extends
 
   private final StoreType type;
   private final String key;
-  private final StoreValueModel value;
+  private final StoreableValue storeableValue;
 
   public StoreCreateStorage(Context context, final StoreType type, final String key,
-      final StoreValueModel value,
+      final StoreableValue storeableValue,
       HttpCallback<ResponseModel<StoreModel>> callback) {
     super(context, RequestMethod.POST, new ResponseParser<StoreModel>(StoreModel.class),
         callback);
     if (type == null) {
       throw new IllegalArgumentException("Need to provide storage type");
     }
-    if (value == null ) {
-      throw new IllegalArgumentException("Need to provide list of value strings");
+    if (storeableValue == null) {
+      throw new IllegalArgumentException("Need to provide storeable object as a value");
     }
     this.type = type;
     this.key = key;
-    this.value = value;
+    this.storeableValue = storeableValue;
     addParam("Content-Type", "application/json");
   }
 
   @Override
   public String bodyContents() {
-    return value.fromObjectToJson();
+    return storeableValue.storeValueToJson();
   }
 
   @Override
   protected String getUrl() {
-    return String.format(RestConstants.URL_STORE, type.name().toLowerCase(), key);
+    String url = "";
+    if (key == null) {
+      /*
+       * The server generates key for the indicated value
+       */
+      url = String.format(RestConstants.URL_STORE, type.name().toLowerCase());
+    } else {
+      /*
+       * Use predefined key for the indicated value
+       */
+      url = String.format(RestConstants.URL_STORE_KEY, type.name().toLowerCase(), key);
+    }
+    return url;
   }
 
 }

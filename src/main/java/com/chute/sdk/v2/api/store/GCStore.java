@@ -1,12 +1,10 @@
 package com.chute.sdk.v2.api.store;
 
-import java.util.List;
-
 import android.content.Context;
 
 import com.chute.sdk.v2.model.StoreModel;
-import com.chute.sdk.v2.model.StoreValueModel;
 import com.chute.sdk.v2.model.enums.StoreType;
+import com.chute.sdk.v2.model.interfaces.StoreableValue;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
@@ -57,7 +55,7 @@ public class GCStore {
    * @return {@link StoreCreateStorage}
    */
   public static HttpRequest create(final Context context, final StoreType type,
-      String key, StoreValueModel value,
+      String key, StoreableValue value,
       final HttpCallback<ResponseModel<StoreModel>> callback) {
     return new StoreCreateStorage(context, type, key, value, callback);
   }
@@ -79,9 +77,9 @@ public class GCStore {
    * @return {@link StoreUpdateStorage}
    */
   public static HttpRequest update(final Context context, final StoreType type,
-      String key, List<String> values,
+      String key, StoreableValue value,
       final HttpCallback<ResponseModel<StoreModel>> callback) {
-    return new StoreUpdateStorage(context, type, key, values, callback);
+    return new StoreUpdateStorage(context, type, key, value, callback);
   }
 
   /**
