@@ -28,6 +28,7 @@ package com.chute.sdk.v2.api.comment;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -36,10 +37,9 @@ import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 
 public class CommentsCreateRequest extends
-    StringBodyHttpRequestImpl<ResponseModel<CommentModel>> {
+    BaseStringBodyHttpRequest<ResponseModel<CommentModel>> {
 
   public static final String TAG = CommentsCreateRequest.class
       .getSimpleName();
@@ -64,7 +64,6 @@ public class CommentsCreateRequest extends
     this.album = album;
     this.asset = asset;
     this.comment = comment;
-    client.addHeader("Content-Type", "application/json");
   }
 
   @Override

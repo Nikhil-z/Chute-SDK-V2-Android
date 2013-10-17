@@ -28,16 +28,16 @@ package com.chute.sdk.v2.api.album;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 
 public class AlbumsUpdateRequest extends
-    StringBodyHttpRequestImpl<ResponseModel<AlbumModel>> {
+    BaseStringBodyHttpRequest<ResponseModel<AlbumModel>> {
 
   public static final String TAG = AlbumsUpdateRequest.class.getSimpleName();
   private AlbumModel album;
@@ -51,7 +51,6 @@ public class AlbumsUpdateRequest extends
           "Need to provide album ID for editing");
     }
     this.album = album;
-    client.addHeader("Content-Type", "application/json");
   }
 
   @Override

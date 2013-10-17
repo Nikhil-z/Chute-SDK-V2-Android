@@ -2,6 +2,7 @@ package com.chute.sdk.v2.api.store;
 
 import android.content.Context;
 
+import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.StoreModel;
 import com.chute.sdk.v2.model.enums.StoreType;
@@ -10,10 +11,9 @@ import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 
 public class StoreUpdateStorage extends
-    StringBodyHttpRequestImpl<ResponseModel<StoreModel>> {
+    BaseStringBodyHttpRequest<ResponseModel<StoreModel>> {
 
   private final StoreType type;
   private final String key;
@@ -37,7 +37,6 @@ public class StoreUpdateStorage extends
     this.type = type;
     this.key = key;
     this.storeableValue = storeableValue;
-    addParam("Content-Type", "application/json");
   }
 
   @Override

@@ -29,16 +29,16 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.araneaapps.android.libs.logger.ALog;
+import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 
 public class AlbumsCreateRequest extends
-    StringBodyHttpRequestImpl<ResponseModel<AlbumModel>> {
+    BaseStringBodyHttpRequest<ResponseModel<AlbumModel>> {
 
   @SuppressWarnings("unused")
   private static final String TAG = AlbumsCreateRequest.class.getSimpleName();
@@ -52,7 +52,6 @@ public class AlbumsCreateRequest extends
       throw new IllegalArgumentException("Need to provide album name");
     }
     this.album = album;
-    client.addHeader("Content-Type", "application/json");
   }
 
   @Override

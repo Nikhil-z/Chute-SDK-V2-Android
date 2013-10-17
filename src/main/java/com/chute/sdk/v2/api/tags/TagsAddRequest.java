@@ -31,6 +31,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -39,11 +40,10 @@ import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class TagsAddRequest extends
-    StringBodyHttpRequestImpl<ListResponseModel<String>> {
+    BaseStringBodyHttpRequest<ListResponseModel<String>> {
 
   public static final String TAG = TagsAddRequest.class.getSimpleName();
   private AssetModel asset;
@@ -68,7 +68,6 @@ public class TagsAddRequest extends
     this.asset = asset;
     this.album = album;
     this.tags = tags;
-    client.addHeader("Content-Type", "application/json");
   }
 
   @Override
