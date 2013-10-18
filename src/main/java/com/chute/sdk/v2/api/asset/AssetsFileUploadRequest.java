@@ -42,8 +42,10 @@ import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
+import com.dg.libs.rest.HttpRequestStore;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.domain.RequestOptions;
 import com.dg.libs.rest.requests.EntityHttpRequestImpl;
 
 public class AssetsFileUploadRequest extends
@@ -110,4 +112,10 @@ public class AssetsFileUploadRequest extends
     }
   }
 
+  @Override
+  public void executeAsync() {
+    RequestOptions requestOptions = new RequestOptions();
+    requestOptions.setRunInSingleThread(true);
+    HttpRequestStore.getInstance(getContext()).launchServiceIntent(this, requestOptions);
+  }
 }
