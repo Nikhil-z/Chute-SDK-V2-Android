@@ -94,7 +94,7 @@ public class CountingMultipartRequestEntity implements HttpEntity {
 
     public void write(byte[] b, int off, int len) throws IOException {
       if(isCanceled){
-        throw new IOException("Execution canceled by user");
+        throw new UploadInterruptedException("Execution canceled by user");
       }
       out.write(b, off, len);
       this.transferred += len;
