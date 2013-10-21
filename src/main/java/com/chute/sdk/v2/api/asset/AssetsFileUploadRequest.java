@@ -55,6 +55,7 @@ public class AssetsFileUploadRequest extends
   private AlbumModel album;
   private UploadProgressListener uploadListener;
   private File file;
+  private CountingMultipartRequestEntity countingMultipartRequestEntity;
 
   public AssetsFileUploadRequest(Context context, UploadProgressListener uploadListener,
       AlbumModel album,
@@ -70,19 +71,26 @@ public class AssetsFileUploadRequest extends
     if (filePath == null) {
       throw new NullPointerException("File path cannot be null");
     }
-  }
-
-  @Override
-  public HttpEntity getEntity() {
+    
     MultipartEntity multipartEntity = null;
     try {
       multipartEntity = new MultipartEntity();
       multipartEntity.addPart("filedata", new FileBody(file));
-      return new CountingMultipartRequestEntity(multipartEntity, this);
+      countingMultipartRequestEntity = new CountingMultipartRequestEntity(multipartEntity, this);
     } catch (Exception e) {
       ALog.d("Multipart Entitiy Exception = " + e.getMessage(), e);
+      throw new IllegalArgumentException("Unable to create entity");
     }
-    throw new IllegalArgumentException("Unable to create entity");
+    
+  }
+  
+  public void cancel(){
+    countingMultipartRequestEntity.cancel();
+  }
+
+  @Override
+  public HttpEntity getEntity() {
+    return countingMultipartRequestEntity;
   }
 
   @Override
