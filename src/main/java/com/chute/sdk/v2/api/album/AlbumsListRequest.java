@@ -42,16 +42,19 @@ public class AlbumsListRequest extends
   @SuppressWarnings("unused")
   private static final String TAG = AlbumsListRequest.class.getSimpleName();
 
-  public AlbumsListRequest(Context context, PaginationModel paginationModel,
+  public AlbumsListRequest(Context context, boolean includeCoverAsset,
+      PaginationModel paginationModel,
       HttpCallback<ListResponseModel<AlbumModel>> callback) {
     super(context, RequestMethod.GET, new ListResponseParser<AlbumModel>(
         AlbumModel.class), callback);
     addParam("per_page", paginationModel.getPerPageAsString());
+    if (includeCoverAsset == true) {
+      addParam("include", "cover_asset");
+    }
   }
 
   @Override
   protected String getUrl() {
-    
     return RestConstants.URL_ALBUMS_ALL;
   }
 

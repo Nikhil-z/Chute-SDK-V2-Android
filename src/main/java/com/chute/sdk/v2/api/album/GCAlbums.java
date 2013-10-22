@@ -77,9 +77,10 @@ public class GCAlbums {
    *          callback returns {@link ListResponseModel<AlbumModel>}.
    * @return {@link AlbumsListRequest}.
    */
-  public static HttpRequest list(final Context context,
+  public static HttpRequest list(final Context context, boolean includeCoverAsset,
       final HttpCallback<ListResponseModel<AlbumModel>> callback) {
-    return new AlbumsListRequest(context, new PaginationModel(), callback);
+    return new AlbumsListRequest(context, includeCoverAsset, new PaginationModel(),
+        callback);
   }
 
   public static HttpRequest getNextPageOfAlbums(final Context context,
