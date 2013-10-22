@@ -25,6 +25,8 @@
 //
 package com.chute.sdk.v2.model;
 
+import android.text.TextUtils;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -53,13 +55,13 @@ public class PaginationModel {
    * The next page of the response.
    */
   @JsonProperty("next_page")
-  private Object nextPage;
+  private String nextPage;
 
   /**
    * The previous page of the response.
    */
   @JsonProperty("previous_page")
-  private Object previousPage;
+  private String previousPage;
 
   /**
    * The first page of the response.
@@ -98,20 +100,28 @@ public class PaginationModel {
     this.currentPage = currentPage;
   }
 
-  public Object getNextPage() {
+  public String getNextPage() {
     return nextPage;
   }
 
-  public void setNextPage(Object nextPage) {
+  public void setNextPage(String nextPage) {
     this.nextPage = nextPage;
   }
 
-  public Object getPreviousPage() {
+  public boolean hasNextPage() {
+    return TextUtils.isEmpty(nextPage) == false;
+  }
+  
+  public String getPreviousPage() {
     return previousPage;
   }
 
-  public void setPreviousPage(Object previousPage) {
+  public void setPreviousPage(String previousPage) {
     this.previousPage = previousPage;
+  }
+
+  public boolean hasPreviousPage() {
+    return TextUtils.isEmpty(previousPage) == false;
   }
 
   public String getFirstPage() {

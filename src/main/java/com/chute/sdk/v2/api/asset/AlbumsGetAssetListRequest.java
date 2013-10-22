@@ -54,13 +54,15 @@ public class AlbumsGetAssetListRequest extends
       throw new IllegalArgumentException("Need to provide album ID");
     }
     this.album = album;
-    addParam("per_page", pagination.getPerPageAsString());
+    if(pagination!=null){
+      addParam("per_page", pagination.getPerPageAsString());
+    }
   }
 
   @Override
   protected String getUrl() {
-    return String.format(RestConstants.URL_ALBUMS_GET_ALL_ASSETS,
-        album.getId());
+      return String.format(RestConstants.URL_ALBUMS_GET_ALL_ASSETS,
+          album.getId());
   }
 
 }

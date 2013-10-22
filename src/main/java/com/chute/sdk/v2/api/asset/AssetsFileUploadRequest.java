@@ -42,8 +42,10 @@ import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
+import com.dg.libs.rest.HttpRequestStore;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.domain.RequestOptions;
 import com.dg.libs.rest.requests.EntityHttpRequestImpl;
 
 public class AssetsFileUploadRequest extends
@@ -53,6 +55,7 @@ public class AssetsFileUploadRequest extends
   private AlbumModel album;
   private UploadProgressListener uploadListener;
   private File file;
+  private CountingMultipartRequestEntity countingMultipartRequestEntity;
 
   public AssetsFileUploadRequest(Context context, UploadProgressListener uploadListener,
       AlbumModel album,
@@ -68,19 +71,26 @@ public class AssetsFileUploadRequest extends
     if (filePath == null) {
       throw new NullPointerException("File path cannot be null");
     }
-  }
-
-  @Override
-  public HttpEntity getEntity() {
+    
     MultipartEntity multipartEntity = null;
     try {
       multipartEntity = new MultipartEntity();
       multipartEntity.addPart("filedata", new FileBody(file));
-      return new CountingMultipartRequestEntity(multipartEntity, this);
+      countingMultipartRequestEntity = new CountingMultipartRequestEntity(multipartEntity, this);
     } catch (Exception e) {
       ALog.d("Multipart Entitiy Exception = " + e.getMessage(), e);
+      throw new IllegalArgumentException("Unable to create entity");
     }
-    throw new IllegalArgumentException("Unable to create entity");
+    
+  }
+  
+  public void cancel(){
+    countingMultipartRequestEntity.cancel();
+  }
+
+  @Override
+  public HttpEntity getEntity() {
+    return countingMultipartRequestEntity;
   }
 
   @Override
@@ -110,4 +120,10 @@ public class AssetsFileUploadRequest extends
     }
   }
 
+  @Override
+  public void executeAsync() {
+    RequestOptions requestOptions = new RequestOptions();
+    requestOptions.setRunInSingleThread(true);
+    HttpRequestStore.getInstance(getContext()).launchServiceIntent(this, requestOptions);
+  }
 }

@@ -31,6 +31,7 @@ import com.chute.sdk.v2.api.authentication.AuthConstants;
 import com.chute.sdk.v2.api.authentication.AuthenticationFactory;
 import com.chute.sdk.v2.api.authentication.TokenAuthenticationProvider;
 import com.chute.sdk.v2.utils.PreferenceUtil;
+import com.dg.libs.rest.HttpRequestStore;
 import com.dg.libs.rest.client.BaseRestClient;
 
 public class Chute {
@@ -57,6 +58,7 @@ public class Chute {
    *          authentication to chute or any of the other services.
    */
   public static void init(Context context, AuthConstants constants, String token) {
+    HttpRequestStore.init(context);
     PreferenceUtil.init(context);
     TokenAuthenticationProvider.init(context);
     if (token != null) {

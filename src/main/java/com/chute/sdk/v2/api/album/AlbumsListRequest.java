@@ -29,6 +29,7 @@ import android.content.Context;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
+import com.chute.sdk.v2.model.PaginationModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
@@ -41,14 +42,16 @@ public class AlbumsListRequest extends
   @SuppressWarnings("unused")
   private static final String TAG = AlbumsListRequest.class.getSimpleName();
 
-  public AlbumsListRequest(Context context,
+  public AlbumsListRequest(Context context, PaginationModel paginationModel,
       HttpCallback<ListResponseModel<AlbumModel>> callback) {
     super(context, RequestMethod.GET, new ListResponseParser<AlbumModel>(
         AlbumModel.class), callback);
+    addParam("per_page", paginationModel.getPerPageAsString());
   }
 
   @Override
   protected String getUrl() {
+    
     return RestConstants.URL_ALBUMS_ALL;
   }
 

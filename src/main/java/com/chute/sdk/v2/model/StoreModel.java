@@ -1,6 +1,12 @@
 package com.chute.sdk.v2.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.model.interfaces.StoreableValue;
@@ -83,7 +89,8 @@ public class StoreModel {
 
   public StoreableValue getStorageValue() {
     ObjectMapper mapper = JsonUtil.getMapper();
-    mapper = mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.OBJECT_AND_NON_CONCRETE);
+    mapper = mapper
+        .enableDefaultTyping(ObjectMapper.DefaultTyping.OBJECT_AND_NON_CONCRETE);
     StoreableValue storeValue = null;
     try {
       storeValue = mapper.readValue(value, mapper.constructType(StoreableValue.class));

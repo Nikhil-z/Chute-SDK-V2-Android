@@ -33,18 +33,24 @@ import java.io.OutputStream;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 
+import com.chute.sdk.v2.exceptions.UploadInterruptedException;
+
 public class CountingMultipartRequestEntity implements HttpEntity {
 
   private final HttpEntity delegate;
 
   private final ProgressListener listener;
 
+  private CountingOutputStream countingOutputStream;
+
+  private boolean isCanceled = false;
+  
   public CountingMultipartRequestEntity(final HttpEntity entity,
       final ProgressListener listener) {
     super();
     this.delegate = entity;
     this.listener = listener;
-  }
+  }  
 
   public long getContentLength() {
     return this.delegate.getContentLength();
@@ -62,12 +68,22 @@ public class CountingMultipartRequestEntity implements HttpEntity {
 
     void transferred(long num);
   }
+  
+  public void cancel() {
+    isCanceled = true;
+  }
+  
+  public boolean isCanceled() {
+    return isCanceled;
+  }
 
-  public static class CountingOutputStream extends FilterOutputStream {
+  
+  public class CountingOutputStream extends FilterOutputStream {
 
     private final ProgressListener listener;
 
     private long transferred;
+    
 
     public CountingOutputStream(final OutputStream out,
         final ProgressListener listener) {
@@ -77,18 +93,25 @@ public class CountingMultipartRequestEntity implements HttpEntity {
     }
 
     public void write(byte[] b, int off, int len) throws IOException {
+      if(isCanceled){
+        throw new UploadInterruptedException("Execution canceled by user");
+      }
       out.write(b, off, len);
       this.transferred += len;
       this.listener.transferred(this.transferred);
     }
 
     public void write(int b) throws IOException {
+      if(isCanceled){
+        throw new UploadInterruptedException("Execution canceled by user");
+      }
       out.write(b);
       this.transferred++;
       this.listener.transferred(this.transferred);
     }
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public void consumeContent() throws IOException {
     this.delegate.consumeContent();
@@ -117,7 +140,8 @@ public class CountingMultipartRequestEntity implements HttpEntity {
 
   @Override
   public void writeTo(OutputStream out) throws IOException {
-    this.delegate.writeTo(new CountingOutputStream(out, this.listener));
+    countingOutputStream = new CountingOutputStream(out, this.listener);
+    this.delegate.writeTo(countingOutputStream);
 
   }
 }
