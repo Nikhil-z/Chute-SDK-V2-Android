@@ -44,31 +44,25 @@ public class AlbumsGetAssetListRequest extends
   public static final String TAG = AlbumsGetAssetListRequest.class
       .getSimpleName();
   final AlbumModel album;
-  private PaginationModel pagination;
 
   public AlbumsGetAssetListRequest(Context context, AlbumModel album,
       PaginationModel pagination,
       HttpCallback<ListResponseModel<AssetModel>> callback) {
     super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
         AssetModel.class), callback);
-    this.pagination = pagination;
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");
     }
     this.album = album;
+    if(pagination!=null){
+      addParam("per_page", pagination.getPerPageAsString());
+    }
   }
 
   @Override
   protected String getUrl() {
-    if (pagination != null && pagination.hasNextPage()) {
-      return pagination.getNextPage();
-    } else {
-      if(pagination!=null){
-        addParam("per_page", pagination.getPerPageAsString());
-      }
       return String.format(RestConstants.URL_ALBUMS_GET_ALL_ASSETS,
           album.getId());
-    }
   }
 
 }

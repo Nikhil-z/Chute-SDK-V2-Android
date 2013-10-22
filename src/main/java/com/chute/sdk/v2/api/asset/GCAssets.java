@@ -29,6 +29,8 @@ import java.util.HashMap;
 
 import android.content.Context;
 
+import com.chute.sdk.v2.api.base.PageRequest;
+import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.api.upload.UploadProgressListener;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -37,6 +39,7 @@ import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
+import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 
 /**
  * The {@link GCAssets} class is a helper class that consists static methods
@@ -158,6 +161,14 @@ public class GCAssets {
       PaginationModel pagination,
       final HttpCallback<ListResponseModel<AssetModel>> callback) {
     return new AlbumsGetAssetListRequest(context, album, pagination, callback);
+  }
+
+  public static HttpRequest getNextPageOfAssets(final Context context,
+      PaginationModel model,
+      final HttpCallback<ListResponseModel<AssetModel>> callback) {
+    return new PageRequest<ListResponseModel<AssetModel>>(context, RequestMethod.GET,
+        model.getNextPage(), new ListResponseParser<AssetModel>(
+            AssetModel.class), callback);
   }
 
   /**

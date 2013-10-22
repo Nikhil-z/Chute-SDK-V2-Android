@@ -41,25 +41,18 @@ public class AlbumsListRequest extends
 
   @SuppressWarnings("unused")
   private static final String TAG = AlbumsListRequest.class.getSimpleName();
-  private PaginationModel pagination;
 
-  public AlbumsListRequest(Context context, PaginationModel pagination,
+  public AlbumsListRequest(Context context, PaginationModel paginationModel,
       HttpCallback<ListResponseModel<AlbumModel>> callback) {
     super(context, RequestMethod.GET, new ListResponseParser<AlbumModel>(
         AlbumModel.class), callback);
-    this.pagination = pagination;
+    addParam("per_page", paginationModel.getPerPageAsString());
   }
 
   @Override
   protected String getUrl() {
-    if(pagination!=null && pagination.hasNextPage()){
-      return pagination.getNextPage();
-    } else {
-      if(pagination!=null){
-        addParam("per_page", pagination.getPerPageAsString());
-      }
-      return RestConstants.URL_ALBUMS_ALL;
-    }
+    
+    return RestConstants.URL_ALBUMS_ALL;
   }
 
 }
