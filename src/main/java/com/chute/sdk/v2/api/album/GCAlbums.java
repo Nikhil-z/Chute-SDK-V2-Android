@@ -31,6 +31,7 @@ import android.content.Context;
 
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
+import com.chute.sdk.v2.model.PaginationModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
@@ -75,9 +76,14 @@ public class GCAlbums {
    */
   public static HttpRequest list(final Context context,
       final HttpCallback<ListResponseModel<AlbumModel>> callback) {
-    return new AlbumsListRequest(context, callback);
+    return new AlbumsListRequest(context,new PaginationModel(), callback);
   }
 
+  public static HttpRequest list(final Context context, PaginationModel pagination,
+      final HttpCallback<ListResponseModel<AlbumModel>> callback) {
+    return new AlbumsListRequest(context, pagination, callback);
+  }
+  
   /**
    * Pulls a complete list of all albums nested inside a specific album.
    * 
