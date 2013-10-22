@@ -25,6 +25,9 @@
 // 
 package com.chute.sdk.v2.api.album;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -32,6 +35,7 @@ import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
+import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
@@ -43,8 +47,9 @@ public class AlbumsCreateRequest extends
   @SuppressWarnings("unused")
   private static final String TAG = AlbumsCreateRequest.class.getSimpleName();
   private final AlbumModel album;
+  private final AssetModel asset;
 
-  public AlbumsCreateRequest(Context context, AlbumModel album,
+  public AlbumsCreateRequest(Context context, AlbumModel album, AssetModel asset,
       HttpCallback<ResponseModel<AlbumModel>> callback) {
     super(context, RequestMethod.POST, new ResponseParser<AlbumModel>(AlbumModel.class),
         callback);
@@ -52,12 +57,25 @@ public class AlbumsCreateRequest extends
       throw new IllegalArgumentException("Need to provide album name");
     }
     this.album = album;
+    this.asset = asset;
   }
 
   @Override
   public String bodyContents() {
-    ALog.d("Body contents: " + this.album.serializeAlbum());
-    return this.album.serializeAlbum();
+    String bodyContents = null;
+    JSONObject json = new JSONObject();
+    if (asset != null) {
+      try {
+        json.put("name", album.getName());
+        json.put("cover_asset_id", asset.getId());
+        bodyContents = json.toString();
+      } catch (JSONException e) {
+        ALog.e("JSONException: " + e.getMessage());
+      }
+    } else {
+      bodyContents = this.album.serializeAlbum();
+    }
+    return bodyContents;
   }
 
   @Override

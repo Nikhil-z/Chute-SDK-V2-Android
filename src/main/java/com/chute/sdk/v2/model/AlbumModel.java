@@ -126,10 +126,10 @@ public class AlbumModel implements Parcelable {
   private String imagesCount;
 
   /**
-   * Last added asset
+   * Album's first asset
    */
   @JsonProperty("asset")
-  private AssetModel lastAssetInAlbum;
+  private AssetModel asset;
 
   /**
    * Cover asset
@@ -250,12 +250,12 @@ public class AlbumModel implements Parcelable {
     this.imagesCount = imagesCount;
   }
 
-  public AssetModel getLastAssetInAlbum() {
-    return lastAssetInAlbum;
+  public AssetModel getAsset() {
+    return asset;
   }
 
-  public void setLastAssetInAlbum(AssetModel lastAssetInAlbum) {
-    this.lastAssetInAlbum = lastAssetInAlbum;
+  public void setAsset(AssetModel asset) {
+    this.asset = asset;
   }
 
   public AssetModel getCoverAsset() {
@@ -297,7 +297,7 @@ public class AlbumModel implements Parcelable {
     description = in.readString();
     parentId = in.readString();
     imagesCount = in.readString();
-    lastAssetInAlbum = in.readParcelable(AssetModel.class.getClassLoader());
+    asset = in.readParcelable(AssetModel.class.getClassLoader());
     coverAsset = in.readParcelable(AssetModel.class.getClassLoader());
   }
 
@@ -329,7 +329,7 @@ public class AlbumModel implements Parcelable {
     dest.writeString(description);
     dest.writeString(parentId);
     dest.writeString(imagesCount);
-    dest.writeParcelable(lastAssetInAlbum, flags);
+    dest.writeParcelable(asset, flags);
     dest.writeParcelable(coverAsset, flags);
   }
 
@@ -380,8 +380,8 @@ public class AlbumModel implements Parcelable {
     builder.append(parentId);
     builder.append(", imagesCount=");
     builder.append(imagesCount);
-    builder.append(", lastAssetInAlbum=");
-    builder.append(lastAssetInAlbum);
+    builder.append(", asset=");
+    builder.append(asset);
     builder.append(", coverAsset=");
     builder.append(coverAsset);
     builder.append("]");

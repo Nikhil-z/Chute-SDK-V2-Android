@@ -61,7 +61,7 @@ public class GCAssets {
   private static final String TAG = GCAssets.class.getSimpleName();
 
   /**
-   * A private no-args default constructor.
+   * Private no-args default constructor.
    */
   private GCAssets() {
     super();

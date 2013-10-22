@@ -72,6 +72,8 @@ public class GCAlbums {
    * 
    * @param context
    *          The application context.
+   * @param includeCoverAsset
+   *          true if you wish to include the cover asset in the response
    * @param callback
    *          Instance of {@link HttpCallback} interface. If successful, the
    *          callback returns {@link ListResponseModel<AlbumModel>}.
@@ -83,6 +85,18 @@ public class GCAlbums {
         callback);
   }
 
+  /**
+   * Gets albums next page
+   * 
+   * @param context
+   *          The application context
+   * @param pagination
+   *          {@link PaginationModel} containing page info
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AlbumModel>}.
+   * @return {@link PageRequest}
+   */
   public static HttpRequest getNextPageOfAlbums(final Context context,
       PaginationModel pagination,
       final HttpCallback<ListResponseModel<AlbumModel>> callback) {
@@ -127,6 +141,17 @@ public class GCAlbums {
   }
 
   /**
+   * Overloaded method
+   * 
+   * @see #create(Context, AlbumModel, AssetModel, HttpCallback)
+   */
+  public static HttpRequest create(final Context context,
+      final AlbumModel album,
+      final HttpCallback<ResponseModel<AlbumModel>> callback) {
+    return create(context, album, null, callback);
+  }
+
+  /**
    * Creates an album.
    * <p>
    * Sending additional defined parameters will enable you to customize name,
@@ -136,33 +161,34 @@ public class GCAlbums {
    *          The application context.
    * @param album
    *          The album to be created.
+   * @param asset
+   *          The asset used as album cover
    * @param callback
    *          Instance of {@link HttpCallback} interface. If successful, the
    *          callback returns {@link ResponseModel<AlbumModel>}.
    * @return {@link AlbumsCreateRequest}.
    */
   public static HttpRequest create(final Context context,
-      final AlbumModel album,
+      final AlbumModel album, AssetModel asset,
       final HttpCallback<ResponseModel<AlbumModel>> callback) {
-    return new AlbumsCreateRequest(context, album, callback);
+    return new AlbumsCreateRequest(context, album, asset, callback);
   }
 
   /**
-   * Updates existing album properties.
+   * Overloaded method
    * 
-   * @param context
-   *          The application context.
-   * @param album
-   *          The album to be edited.
-   * @param callback
-   *          Instance of {@link HttpCallback} interface. If successful, the
-   *          callback returns {@link ResponseModel<AlbumModel>}.
-   * @return {@link AlbumsUpdateRequest}.
+   * @see #update(Context, AlbumModel, AssetModel, HttpCallback)
    */
   public static HttpRequest update(final Context context,
       final AlbumModel album,
       final HttpCallback<ResponseModel<AlbumModel>> callback) {
-    return new AlbumsUpdateRequest(context, album, callback);
+    return update(context, album, null, callback);
+  }
+
+  public static HttpRequest update(final Context context,
+      final AlbumModel album, final AssetModel asset,
+      final HttpCallback<ResponseModel<AlbumModel>> callback) {
+    return new AlbumsUpdateRequest(context, album, asset, callback);
   }
 
   /**
