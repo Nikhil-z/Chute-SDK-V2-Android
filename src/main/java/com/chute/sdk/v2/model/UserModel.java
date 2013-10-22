@@ -28,14 +28,7 @@ package com.chute.sdk.v2.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.araneaapps.android.libs.logger.ALog;
-import com.chute.sdk.v2.utils.JsonUtil;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 /**
  * The {@link UserModel} class contains user features such as: links, name,

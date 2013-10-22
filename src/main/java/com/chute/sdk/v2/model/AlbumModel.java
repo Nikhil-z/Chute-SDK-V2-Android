@@ -52,7 +52,7 @@ public class AlbumModel implements Parcelable {
    */
   @JsonProperty("id")
   private String id;
-  
+
   /**
    * Album links.
    */
@@ -118,6 +118,24 @@ public class AlbumModel implements Parcelable {
    */
   @JsonProperty("parent_id")
   private String parentId;
+
+  /**
+   * Number of images in the album
+   */
+  @JsonProperty("images_count")
+  private String imagesCount;
+
+  /**
+   * Last added asset
+   */
+  @JsonProperty("asset")
+  private AssetModel lastAssetInAlbum;
+
+  /**
+   * Cover asset
+   */
+  @JsonProperty("cover_asset")
+  private AssetModel coverAsset;
 
   /**
    * Default non-args constructor
@@ -224,6 +242,30 @@ public class AlbumModel implements Parcelable {
     this.parentId = parentId;
   }
 
+  public String getImagesCount() {
+    return imagesCount;
+  }
+
+  public void setImagesCount(String imagesCount) {
+    this.imagesCount = imagesCount;
+  }
+
+  public AssetModel getLastAssetInAlbum() {
+    return lastAssetInAlbum;
+  }
+
+  public void setLastAssetInAlbum(AssetModel lastAssetInAlbum) {
+    this.lastAssetInAlbum = lastAssetInAlbum;
+  }
+
+  public AssetModel getCoverAsset() {
+    return coverAsset;
+  }
+
+  public void setCoverAsset(AssetModel coverAsset) {
+    this.coverAsset = coverAsset;
+  }
+
   /**
    * Method used for serializing Album object as a String.
    */
@@ -254,6 +296,9 @@ public class AlbumModel implements Parcelable {
     updatedAt = in.readString();
     description = in.readString();
     parentId = in.readString();
+    imagesCount = in.readString();
+    lastAssetInAlbum = in.readParcelable(AssetModel.class.getClassLoader());
+    coverAsset = in.readParcelable(AssetModel.class.getClassLoader());
   }
 
   /*
@@ -283,6 +328,9 @@ public class AlbumModel implements Parcelable {
     dest.writeString(updatedAt);
     dest.writeString(description);
     dest.writeString(parentId);
+    dest.writeString(imagesCount);
+    dest.writeParcelable(lastAssetInAlbum, flags);
+    dest.writeParcelable(coverAsset, flags);
   }
 
   public static final Parcelable.Creator<AlbumModel> CREATOR = new Parcelable.Creator<AlbumModel>() {
@@ -330,6 +378,12 @@ public class AlbumModel implements Parcelable {
     builder.append(description);
     builder.append(", parentId=");
     builder.append(parentId);
+    builder.append(", imagesCount=");
+    builder.append(imagesCount);
+    builder.append(", lastAssetInAlbum=");
+    builder.append(lastAssetInAlbum);
+    builder.append(", coverAsset=");
+    builder.append(coverAsset);
     builder.append("]");
     return builder.toString();
   }
