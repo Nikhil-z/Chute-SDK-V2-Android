@@ -52,7 +52,7 @@ public class ListResponseModel<T> {
   /**
    * Pagination
    */
-  @JsonProperty("paginations")
+  @JsonProperty("pagination")
   private PaginationModel pagination;
 
   /**
