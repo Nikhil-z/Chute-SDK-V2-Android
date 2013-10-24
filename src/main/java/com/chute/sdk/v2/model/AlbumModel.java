@@ -128,14 +128,7 @@ public class AlbumModel implements Parcelable {
   /**
    * Album's first asset
    */
-  @JsonProperty("asset")
   private AssetModel asset;
-
-  /**
-   * Cover asset
-   */
-  @JsonProperty("cover_asset")
-  private AssetModel coverAsset;
 
   /**
    * Default non-args constructor
@@ -250,6 +243,7 @@ public class AlbumModel implements Parcelable {
     this.imagesCount = imagesCount;
   }
 
+  @JsonProperty("asset")
   public AssetModel getAsset() {
     return asset;
   }
@@ -258,12 +252,13 @@ public class AlbumModel implements Parcelable {
     this.asset = asset;
   }
 
+  @JsonProperty("cover_asset")
   public AssetModel getCoverAsset() {
-    return coverAsset;
+    return asset;
   }
-
+  
   public void setCoverAsset(AssetModel coverAsset) {
-    this.coverAsset = coverAsset;
+    this.asset = coverAsset;
   }
 
   /**
@@ -298,7 +293,6 @@ public class AlbumModel implements Parcelable {
     parentId = in.readString();
     imagesCount = in.readString();
     asset = in.readParcelable(AssetModel.class.getClassLoader());
-    coverAsset = in.readParcelable(AssetModel.class.getClassLoader());
   }
 
   /*
@@ -330,7 +324,6 @@ public class AlbumModel implements Parcelable {
     dest.writeString(parentId);
     dest.writeString(imagesCount);
     dest.writeParcelable(asset, flags);
-    dest.writeParcelable(coverAsset, flags);
   }
 
   public static final Parcelable.Creator<AlbumModel> CREATOR = new Parcelable.Creator<AlbumModel>() {
@@ -382,8 +375,6 @@ public class AlbumModel implements Parcelable {
     builder.append(imagesCount);
     builder.append(", asset=");
     builder.append(asset);
-    builder.append(", coverAsset=");
-    builder.append(coverAsset);
     builder.append("]");
     return builder.toString();
   }
