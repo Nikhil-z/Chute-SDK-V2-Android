@@ -32,6 +32,7 @@ import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -252,12 +253,8 @@ public class AlbumModel implements Parcelable {
     this.asset = asset;
   }
 
-  @JsonProperty("cover_asset")
-  public AssetModel getCoverAsset() {
-    return asset;
-  }
-  
-  public void setCoverAsset(AssetModel coverAsset) {
+  @JsonSetter("cover_asset")
+  private void setCoverAsset(AssetModel coverAsset) {
     this.asset = coverAsset;
   }
 

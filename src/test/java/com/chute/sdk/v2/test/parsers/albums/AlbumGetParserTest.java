@@ -21,7 +21,7 @@ public class AlbumGetParserTest extends TestCase {
 			assertNotNull(album.getData().getCreatedAt());
 			assertNotNull(album.getData().getLinks());
 			assertNotNull(album.getData().getUser());
-			assertNotNull(album.getData().getCoverAsset());
+			assertNotNull(album.getData().getAsset());
 		} catch (Exception e) {
 			fail();
 		}
