@@ -34,6 +34,7 @@ import com.chute.sdk.v2.utils.RestConstants;
 public class AuthenticationFactory {
 
   public static final String EXTRA_ACCOUNT_TYPE = "account_type";
+  public static final String EXTRA_COOKIE_ACCOUNTS = "cookie_accounts";
 
   public static final int AUTHENTICATION_REQUEST_CODE = 123;
 
@@ -99,9 +100,17 @@ public class AuthenticationFactory {
    * @param clientId
    * @param clientSecret
    */
-  public void startAuthenticationActivity(Activity activity, AccountType accountType) {
+  public void startAuthenticationActivity(Activity activity, AccountType accountType,
+      boolean clearCookiesForAccount) {
     Intent intent = new Intent(activity, AuthenticationActivity.class);
     intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType.ordinal());
+//    List<Integer> clearCookiesList = new ArrayList<Integer>();
+//    for (AccountType account : clearCookiesFromAccounts) {
+//      clearCookiesList.add(account.ordinal());
+//    }
+//    intent.putIntegerArrayListExtra(EXTRA_COOKIE_ACCOUNTS,
+//        (ArrayList<Integer>) clearCookiesList);
+    intent.putExtra(EXTRA_COOKIE_ACCOUNTS, clearCookiesForAccount);
     activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
   }
 

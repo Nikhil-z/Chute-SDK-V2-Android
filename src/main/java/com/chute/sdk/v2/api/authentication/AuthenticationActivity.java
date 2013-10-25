@@ -64,12 +64,27 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
   private AuthenticationFactory authenticationFactory;
 
   private ProgressBar pb;
+  private CookieManager cookieManager;
+  private String loadWebViewUrl;
+  private AccountType accountType;
+  private boolean shouldClearCookiesForAccount;
 
   /** Called when the activity is first created. */
   @Override
   public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+    authenticationFactory = AuthenticationFactory.getInstance();
+    accountType = AccountType.values()[getIntent().getExtras().getInt(
+        AuthenticationFactory.EXTRA_ACCOUNT_TYPE)];
+    loadWebViewUrl = authenticationFactory
+        .getAuthenticationURL(accountType);
+    shouldClearCookiesForAccount = getIntent().getExtras().getBoolean(
+        AuthenticationFactory.EXTRA_COOKIE_ACCOUNTS);
+
+    CookieSyncManager.createInstance(this);
+    cookieManager = CookieManager.getInstance();
 
     webViewAuthentication = new WebView(this);
     webViewAuthentication.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
@@ -85,8 +100,6 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
       mWebSettings.setSaveFormData(false);
       this.getBaseContext().deleteDatabase("webview.db");
       this.getBaseContext().deleteDatabase("webviewCache.db");
-      CookieSyncManager.createInstance(this);
-      CookieManager cookieManager = CookieManager.getInstance();
       cookieManager.removeAllCookie();
     }
 
@@ -101,11 +114,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     frameLayout.addView(webViewAuthentication);
     frameLayout.addView(pb);
     setContentView(frameLayout);
-
-    authenticationFactory = AuthenticationFactory.getInstance();
-    webViewAuthentication.loadUrl(authenticationFactory.getAuthenticationURL(AccountType
-        .values()[getIntent()
-        .getExtras().getInt(AuthenticationFactory.EXTRA_ACCOUNT_TYPE)]));
+    webViewAuthentication.loadUrl(loadWebViewUrl);
   }
 
   private final class AuthenticationCodeCallback implements HttpCallback<String> {
@@ -188,6 +197,26 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     @Override
     public void onPageFinished(final WebView view, final String url) {
       ALog.e(TAG, "Page finished " + url);
+
+      CookieSyncManager.getInstance().sync();
+      // Get the cookie from cookie jar.
+      String cookie = CookieManager.getInstance().getCookie(url);
+      if (cookie == null) {
+        ALog.d("No cookies");
+        return;
+      }
+      String[] pairs = cookie.split(";");
+      for (int i = 0; i < pairs.length; ++i) {
+        String[] parts = pairs[i].split("=", 2);
+        ALog.d("Cookie name: " + parts[0]);
+        ALog.d("Cookie value: " + parts[1]);
+        cookieManager.removeSessionCookie();
+        if (parts.length == 2 &&
+            parts[1].equalsIgnoreCase(accountType.name())) {
+          String cookieString = "cookieName=;expires=Mon, 17 Oct 2011 10:47:11 UTC;";
+          cookieManager.setCookie(url, cookieString);
+        }
+      }
       pb.setVisibility(View.GONE);
       super.onPageFinished(view, url);
     }
