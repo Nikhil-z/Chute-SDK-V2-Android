@@ -104,12 +104,6 @@ public class AuthenticationFactory {
       boolean clearCookiesForAccount) {
     Intent intent = new Intent(activity, AuthenticationActivity.class);
     intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType.ordinal());
-//    List<Integer> clearCookiesList = new ArrayList<Integer>();
-//    for (AccountType account : clearCookiesFromAccounts) {
-//      clearCookiesList.add(account.ordinal());
-//    }
-//    intent.putIntegerArrayListExtra(EXTRA_COOKIE_ACCOUNTS,
-//        (ArrayList<Integer>) clearCookiesList);
     intent.putExtra(EXTRA_COOKIE_ACCOUNTS, clearCookiesForAccount);
     activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
   }

@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import android.accounts.AccountAuthenticatorActivity;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -58,6 +59,8 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
   public static final int CODE_HTTP_EXCEPTION = 4;
   public static final int CODE_HTTP_ERROR = 5;
   public static final int CODE_PARSER_EXCEPTION = 6;
+  public static final int RESULT_DIFFERENT_CHUTE_USER_AUTHENTICATED = 7;
+  public static final String INTENT_DIFFERENT_CHUTE_USER_TOKEN = "intent_different_chute_user_token";
 
   private WebView webViewAuthentication;
 
@@ -125,7 +128,23 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
     @Override
     public void onSuccess(final String responseData) {
-      setResult(Activity.RESULT_OK);
+      TokenAuthenticationProvider tokenProvider = TokenAuthenticationProvider
+          .getInstance();
+      String token = null;
+      try {
+        JSONObject obj = new JSONObject(responseData);
+        token = obj.getString("access_token");
+      } catch (JSONException e) {
+        ALog.d("JSONException: " + e.getMessage());
+      }
+      if (tokenProvider.isTokenValid() && !token.equals(tokenProvider.getToken())) {
+        Intent intent = new Intent();
+        intent.putExtra(INTENT_DIFFERENT_CHUTE_USER_TOKEN, token);
+        setResult(RESULT_DIFFERENT_CHUTE_USER_AUTHENTICATED, intent);
+      } else {
+        tokenProvider.setToken(token);
+        setResult(Activity.RESULT_OK);
+      }
       pb.setVisibility(View.GONE);
       finish();
     }
@@ -145,8 +164,6 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
     @Override
     public String parse(final String responseBody) throws JSONException {
-      final JSONObject obj = new JSONObject(responseBody);
-      TokenAuthenticationProvider.getInstance().setToken(obj.getString("access_token"));
       return responseBody;
     }
 
@@ -197,26 +214,19 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     @Override
     public void onPageFinished(final WebView view, final String url) {
       ALog.e(TAG, "Page finished " + url);
-
-      CookieSyncManager.getInstance().sync();
-      // Get the cookie from cookie jar.
-      String cookie = CookieManager.getInstance().getCookie(url);
-      if (cookie == null) {
-        ALog.d("No cookies");
-        return;
-      }
-      String[] pairs = cookie.split(";");
-      for (int i = 0; i < pairs.length; ++i) {
-        String[] parts = pairs[i].split("=", 2);
-        ALog.d("Cookie name: " + parts[0]);
-        ALog.d("Cookie value: " + parts[1]);
-        cookieManager.removeSessionCookie();
-        if (parts.length == 2 &&
-            parts[1].equalsIgnoreCase(accountType.name())) {
-          String cookieString = "cookieName=;expires=Mon, 17 Oct 2011 10:47:11 UTC;";
-          cookieManager.setCookie(url, cookieString);
-        }
-      }
+      /*
+       * if (shouldClearCookiesForAccount) {
+       * CookieSyncManager.getInstance().sync(); // Get the cookie from cookie
+       * jar. String cookie = CookieManager.getInstance().getCookie(url); if
+       * (cookie == null) { ALog.d("No cookies"); return; } String[] pairs =
+       * cookie.split(";"); for (int i = 0; i < pairs.length; ++i) { String[]
+       * parts = pairs[i].split("=", 2); ALog.d("Cookie name: " + parts[0]);
+       * ALog.d("Cookie value: " + parts[1]);
+       * cookieManager.removeSessionCookie(); if (parts.length == 2 &&
+       * parts[1].equalsIgnoreCase(accountType.name())) { String cookieString =
+       * "cookieName=;expires=Mon, 17 Oct 2011 10:47:11 UTC;";
+       * cookieManager.setCookie(url, cookieString); } } }
+       */
       pb.setVisibility(View.GONE);
       super.onPageFinished(view, url);
     }
