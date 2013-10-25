@@ -66,6 +66,25 @@ public class GCAlbums {
    */
   private GCAlbums() {
   }
+  
+
+  /**
+   * Pulls a complete list of all albums accessible to the user.
+   * 
+   * @param context
+   *          The application context.
+   * @param includeCoverAsset
+   *          true if you wish to include the cover asset in the response
+   * @param callback
+   *          Instance of {@link HttpCallback} interface. If successful, the
+   *          callback returns {@link ListResponseModel<AlbumModel>}.
+   * @return {@link AlbumsListRequest}.
+   */
+  public static HttpRequest list(final Context context,
+      final HttpCallback<ListResponseModel<AlbumModel>> callback) {
+    return new AlbumsListRequest(context, false, new PaginationModel(),
+        callback);
+  }
 
   /**
    * Pulls a complete list of all albums accessible to the user.

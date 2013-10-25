@@ -50,6 +50,7 @@ public class AlbumsListRequest extends
     addParam("per_page", paginationModel.getPerPageAsString());
     if (includeCoverAsset == true) {
       addParam("include", "cover_asset");
+      addParam("include", "asset");
     }
   }
 
