@@ -106,7 +106,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
       cookieManager.removeAllCookie();
     }
 
-    if (shouldClearCookiesForAccount) {
+    if (shouldClearCookiesForAccount == true) {
       CookieSyncManager.getInstance().sync(); // Get the cookie from cookie jar
 
       String cookieUrl = accountType.getLoginMethod().toLowerCase() + ".com";
@@ -227,7 +227,9 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     @Override
     public void onPageFinished(final WebView view, final String url) {
       ALog.e(TAG, "Page finished " + url);
-      CookieSyncManager.getInstance().sync();
+      if (shouldClearCookiesForAccount == true) {
+        CookieSyncManager.getInstance().sync();
+      }
       pb.setVisibility(View.GONE);
       super.onPageFinished(view, url);
     }
@@ -247,14 +249,12 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
       String[] parts = cookieValues[i].split("=", 2);
       ALog.d("Cookie Name: " + parts[0]);
       ALog.d("Cookie Value: " + parts[1]);
-
       /*
        * if (parts.length == 2 && parts[1].equalsIgnoreCase(accountType.name()))
        * { String[] cookieparts = cookies[i].split("=");
        * CookieManager.getInstance().setCookie(url, cookieValues[0].trim() +
        * "=; Expires=Sat, 31 Dec 2005 23:59:59 GMT");
        */
-
       String cookieString =
           "cookieName=;expires=Sat, 31 Dec 2005 23:59:59 GMT;";
       cookieManager.setCookie(url, cookieString);
