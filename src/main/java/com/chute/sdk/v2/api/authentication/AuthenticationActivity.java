@@ -67,10 +67,10 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
   private AuthenticationFactory authenticationFactory;
 
   private ProgressBar pb;
-  private CookieManager cookieManager;
   private String loadWebViewUrl;
   private AccountType accountType;
   private boolean shouldClearCookiesForAccount;
+  private CookieManager cookieManager;
 
   /** Called when the activity is first created. */
   @Override
@@ -86,9 +86,6 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     shouldClearCookiesForAccount = getIntent().getExtras().getBoolean(
         AuthenticationFactory.EXTRA_COOKIE_ACCOUNTS);
 
-    CookieSyncManager.createInstance(this);
-    cookieManager = CookieManager.getInstance();
-
     webViewAuthentication = new WebView(this);
     webViewAuthentication.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
         LayoutParams.FILL_PARENT));
@@ -96,14 +93,30 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     webViewAuthentication.getSettings().setJavaScriptEnabled(true);
     webViewAuthentication.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
+    CookieSyncManager.createInstance(webViewAuthentication.getContext());
+    cookieManager = CookieManager.getInstance();
+
+    final WebSettings mWebSettings = webViewAuthentication.getSettings();
     if (TokenAuthenticationProvider.getInstance().isTokenValid() == false) {
       webViewAuthentication.clearCache(true);
-      final WebSettings mWebSettings = webViewAuthentication.getSettings();
       mWebSettings.setSavePassword(false);
       mWebSettings.setSaveFormData(false);
       this.getBaseContext().deleteDatabase("webview.db");
       this.getBaseContext().deleteDatabase("webviewCache.db");
       cookieManager.removeAllCookie();
+    }
+
+    if (shouldClearCookiesForAccount) {
+      CookieSyncManager.getInstance().sync(); // Get the cookie from cookie jar
+
+      String cookieUrl = accountType.getLoginMethod().toLowerCase() + ".com";
+      String cookie = cookieManager.getCookie(cookieUrl);
+      ALog.d("cookie: " + cookie);
+      if (cookie == null) {
+        ALog.d("No cookies");
+      } else {
+        removeCookies(cookie, cookieUrl);
+      }
     }
 
     final FrameLayout frameLayout = new FrameLayout(this);
@@ -214,19 +227,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     @Override
     public void onPageFinished(final WebView view, final String url) {
       ALog.e(TAG, "Page finished " + url);
-      /*
-       * if (shouldClearCookiesForAccount) {
-       * CookieSyncManager.getInstance().sync(); // Get the cookie from cookie
-       * jar. String cookie = CookieManager.getInstance().getCookie(url); if
-       * (cookie == null) { ALog.d("No cookies"); return; } String[] pairs =
-       * cookie.split(";"); for (int i = 0; i < pairs.length; ++i) { String[]
-       * parts = pairs[i].split("=", 2); ALog.d("Cookie name: " + parts[0]);
-       * ALog.d("Cookie value: " + parts[1]);
-       * cookieManager.removeSessionCookie(); if (parts.length == 2 &&
-       * parts[1].equalsIgnoreCase(accountType.name())) { String cookieString =
-       * "cookieName=;expires=Mon, 17 Oct 2011 10:47:11 UTC;";
-       * cookieManager.setCookie(url, cookieString); } } }
-       */
+      CookieSyncManager.getInstance().sync();
       pb.setVisibility(View.GONE);
       super.onPageFinished(view, url);
     }
@@ -238,6 +239,30 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
       ALog.e(TAG, "Error " + failingUrl);
       super.onReceivedError(view, errorCode, description, failingUrl);
     }
+  }
+
+  private void removeCookies(String cookie, String url) {
+    String[] cookieValues = cookie.split(";");
+    for (int i = 0; i < cookieValues.length; ++i) {
+      String[] parts = cookieValues[i].split("=", 2);
+      ALog.d("Cookie Name: " + parts[0]);
+      ALog.d("Cookie Value: " + parts[1]);
+
+      /*
+       * if (parts.length == 2 && parts[1].equalsIgnoreCase(accountType.name()))
+       * { String[] cookieparts = cookies[i].split("=");
+       * CookieManager.getInstance().setCookie(url, cookieValues[0].trim() +
+       * "=; Expires=Sat, 31 Dec 2005 23:59:59 GMT");
+       */
+
+      String cookieString =
+          "cookieName=;expires=Sat, 31 Dec 2005 23:59:59 GMT;";
+      cookieManager.setCookie(url, cookieString);
+      cookieManager.removeSessionCookie();
+      cookieManager.removeExpiredCookie();
+
+    }
+
   }
 
 }
