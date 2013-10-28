@@ -27,7 +27,6 @@ package com.chute.sdk.v2.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.chute.sdk.v2.model.AccountModel;
 
@@ -36,6 +35,8 @@ public class PreferenceUtil {
   public static final String TAG = PreferenceUtil.class.getSimpleName();
   private final Context context;
 
+  private static final String PREF_FILE_NAME = "chute_preferences";
+  
   private PreferenceUtil(Context context) {
     this.context = context;
   }
@@ -57,7 +58,11 @@ public class PreferenceUtil {
   }
 
   public SharedPreferences getPreferences() {
-    return PreferenceManager.getDefaultSharedPreferences(context);
+    return context.getSharedPreferences(PREF_FILE_NAME,
+        Context.MODE_PRIVATE);
+  }
+  public void clearAll(){
+    getPreferences().edit().clear().commit();
   }
 
   private final <T> void setPreference(final String key, final T value) {

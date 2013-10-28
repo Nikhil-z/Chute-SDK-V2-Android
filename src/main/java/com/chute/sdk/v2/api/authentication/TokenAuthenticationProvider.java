@@ -32,6 +32,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.araneaapps.android.libs.logger.ALog;
+import com.chute.sdk.v2.utils.PreferenceUtil;
 import com.dg.libs.rest.authentication.AuthenticationProvider;
 import com.dg.libs.rest.client.BaseRestClient;
 
@@ -93,6 +94,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
     Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
     editor.remove(TOKEN_KEY);
     boolean commit = editor.commit();
+    PreferenceUtil.get().clearAll();
     token = null;
     return commit;
   }
