@@ -107,6 +107,10 @@ public class AuthenticationFactory {
     intent.putExtra(EXTRA_COOKIE_ACCOUNTS, clearCookiesForAccount);
     activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
   }
+  
+  public void startAuthenticationActivity(Activity activity, AccountType accountType) {
+    startAuthenticationActivity(activity, accountType, false);
+  }
 
   public AuthConstants getAuthConstants() {
     return authConstants;
