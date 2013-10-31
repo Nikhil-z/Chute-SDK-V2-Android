@@ -81,8 +81,9 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     authenticationFactory = AuthenticationFactory.getInstance();
     accountType = AccountType.values()[getIntent().getExtras().getInt(
         AuthenticationFactory.EXTRA_ACCOUNT_TYPE)];
+    boolean shouldRetainSession = getIntent().getExtras().getBoolean(AuthenticationFactory.EXTRA_RETAIN_SESSION);
     loadWebViewUrl = authenticationFactory
-        .getAuthenticationURL(accountType);
+        .getAuthenticationURL(accountType, shouldRetainSession);
     shouldClearCookiesForAccount = getIntent().getExtras().getBoolean(
         AuthenticationFactory.EXTRA_COOKIE_ACCOUNTS);
 

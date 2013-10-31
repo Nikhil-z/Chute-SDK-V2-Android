@@ -35,6 +35,7 @@ public class AuthenticationFactory {
 
   public static final String EXTRA_ACCOUNT_TYPE = "account_type";
   public static final String EXTRA_COOKIE_ACCOUNTS = "cookie_accounts";
+  public static final String EXTRA_RETAIN_SESSION = "retain_session";
 
   public static final int AUTHENTICATION_REQUEST_CODE = 123;
 
@@ -59,7 +60,7 @@ public class AuthenticationFactory {
     this.authConstants = authConstants;
   }
 
-  public String getAuthenticationURL(AccountType accountType) {
+  public String getAuthenticationURL(AccountType accountType, boolean shouldRetainSession) {
     if (authConstants == null) {
       throw new IllegalArgumentException(
           "If you are using the Authentication activity, you need to pass in the Authentication Constants to start it");
@@ -74,6 +75,10 @@ public class AuthenticationFactory {
     stringBuilder.append("&");
     stringBuilder.append("client_id=" + authConstants.clientId);
     stringBuilder.append("&");
+    if (shouldRetainSession) {
+      stringBuilder.append("retain_session=true");
+      stringBuilder.append("&");
+    }
     stringBuilder.append("redirect_uri=" + AuthConstants.CALLBACK_URL);
     return stringBuilder.toString();
   }
@@ -101,15 +106,19 @@ public class AuthenticationFactory {
    * @param clientSecret
    */
   public void startAuthenticationActivity(Activity activity, AccountType accountType,
-      boolean clearCookiesForAccount) {
+      AuthenticationOptions options) {
     Intent intent = new Intent(activity, AuthenticationActivity.class);
     intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType.ordinal());
-    intent.putExtra(EXTRA_COOKIE_ACCOUNTS, clearCookiesForAccount);
+    if (options != null) {
+      intent.putExtra(EXTRA_COOKIE_ACCOUNTS, options.clearCookiesForAccount);
+      intent.putExtra(EXTRA_RETAIN_SESSION, options.shouldRetainSession);
+    }
     activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
   }
-  
+
   public void startAuthenticationActivity(Activity activity, AccountType accountType) {
-    startAuthenticationActivity(activity, accountType, false);
+    startAuthenticationActivity(activity, accountType,
+        new AuthenticationOptions.Builder().build());
   }
 
   public AuthConstants getAuthConstants() {
