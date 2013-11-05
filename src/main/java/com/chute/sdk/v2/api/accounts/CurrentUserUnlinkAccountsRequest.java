@@ -36,7 +36,7 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
-class CurrentUserUnlinkAccountsRequest extends
+public class CurrentUserUnlinkAccountsRequest extends
     ParameterHttpRequestImpl<ListResponseModel<AccountModel>> {
 
   public static final String TAG = CurrentUserUnlinkAccountsRequest.class.getSimpleName();

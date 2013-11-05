@@ -70,6 +70,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
   private String loadWebViewUrl;
   private AccountType accountType;
   private boolean shouldClearCookiesForAccount;
+  private boolean shouldClearAllCookies;
   private CookieManager cookieManager;
 
   /** Called when the activity is first created. */
@@ -86,6 +87,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
         .getAuthenticationURL(accountType, shouldRetainSession);
     shouldClearCookiesForAccount = getIntent().getExtras().getBoolean(
         AuthenticationFactory.EXTRA_COOKIE_ACCOUNTS);
+    shouldClearAllCookies = getIntent().getExtras().getBoolean(AuthenticationFactory.EXTRA_COOKIE_ALL);
 
     webViewAuthentication = new WebView(this);
     webViewAuthentication.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
@@ -98,7 +100,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
     cookieManager = CookieManager.getInstance();
 
     final WebSettings mWebSettings = webViewAuthentication.getSettings();
-    if (TokenAuthenticationProvider.getInstance().isTokenValid() == false) {
+    if (TokenAuthenticationProvider.getInstance().isTokenValid() == false || shouldClearAllCookies == true) {
       webViewAuthentication.clearCache(true);
       mWebSettings.setSavePassword(false);
       mWebSettings.setSaveFormData(false);

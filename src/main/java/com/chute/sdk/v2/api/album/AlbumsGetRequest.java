@@ -36,7 +36,7 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
-class AlbumsGetRequest extends
+public class AlbumsGetRequest extends
     ParameterHttpRequestImpl<ResponseModel<AlbumModel>> {
 
   @SuppressWarnings("unused")

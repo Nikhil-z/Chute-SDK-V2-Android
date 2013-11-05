@@ -36,7 +36,7 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
-class AccountSingleRequest extends
+public class AccountSingleRequest extends
     ParameterHttpRequestImpl<ResponseModel<AccountBaseModel>> {
 
   public static final String TAG = AccountSingleRequest.class.getSimpleName();

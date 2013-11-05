@@ -4,17 +4,20 @@ package com.chute.sdk.v2.api.authentication;
 public class AuthenticationOptions {
 
   boolean clearCookiesForAccount;
+  boolean clearAllCookies;
   boolean shouldRetainSession;
 
   private AuthenticationOptions(AuthenticationOptions.Builder builder) {
     super();
     this.clearCookiesForAccount = builder.clearCookiesForAccount;
     this.shouldRetainSession = builder.shouldRetainSession;
+    this.clearAllCookies = builder.clearAllCookies;
   }
 
   public static class Builder {
 
     boolean clearCookiesForAccount = false;
+    boolean clearAllCookies = false;
     boolean shouldRetainSession = true;
     
     public Builder() {
@@ -30,6 +33,12 @@ public class AuthenticationOptions {
       this.shouldRetainSession = shouldRetainSession;
       return this;
     }
+    
+    public Builder setClearAllCookies(boolean clearAllCookies) {
+        this.clearAllCookies = clearAllCookies;
+        return this;
+      }
+
 
     public AuthenticationOptions build() {
       return new AuthenticationOptions(this);

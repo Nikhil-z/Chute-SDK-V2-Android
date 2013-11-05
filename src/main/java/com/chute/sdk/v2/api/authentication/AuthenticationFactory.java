@@ -33,104 +33,109 @@ import com.chute.sdk.v2.utils.RestConstants;
 
 public class AuthenticationFactory {
 
-  public static final String EXTRA_ACCOUNT_TYPE = "account_type";
-  public static final String EXTRA_COOKIE_ACCOUNTS = "cookie_accounts";
-  public static final String EXTRA_RETAIN_SESSION = "retain_session";
+	public static final String EXTRA_ACCOUNT_TYPE = "account_type";
+	public static final String EXTRA_COOKIE_ACCOUNTS = "cookie_accounts";
+	public static final String EXTRA_COOKIE_ALL = "cookie_all";
+	public static final String EXTRA_RETAIN_SESSION = "retain_session";
 
-  public static final int AUTHENTICATION_REQUEST_CODE = 123;
+	public static final int AUTHENTICATION_REQUEST_CODE = 123;
 
-  @SuppressWarnings("unused")
-  private static final String TAG = AuthenticationFactory.class
-      .getSimpleName();
-  private AuthConstants authConstants;
+	@SuppressWarnings("unused")
+	private static final String TAG = AuthenticationFactory.class
+			.getSimpleName();
+	private AuthConstants authConstants;
 
-  private static AuthenticationFactory instance;
+	private static AuthenticationFactory instance;
 
-  public static AuthenticationFactory getInstance() {
-    if (instance == null) {
-      instance = new AuthenticationFactory();
-    }
-    return instance;
-  }
+	public static AuthenticationFactory getInstance() {
+		if (instance == null) {
+			instance = new AuthenticationFactory();
+		}
+		return instance;
+	}
 
-  private AuthenticationFactory() {
-  }
+	private AuthenticationFactory() {
+	}
 
-  public void setAuthConstants(AuthConstants authConstants) {
-    this.authConstants = authConstants;
-  }
+	public void setAuthConstants(AuthConstants authConstants) {
+		this.authConstants = authConstants;
+	}
 
-  public String getAuthenticationURL(AccountType accountType, boolean shouldRetainSession) {
-    if (authConstants == null) {
-      throw new IllegalArgumentException(
-          "If you are using the Authentication activity, you need to pass in the Authentication Constants to start it");
-    }
-    StringBuilder stringBuilder;
-    stringBuilder = new StringBuilder(
-        String.format(RestConstants.BASE_AUTH_URL, accountType.getLoginMethod()));
-    stringBuilder.append("?");
-    stringBuilder.append("scope=" + AuthConstants.PERMISSIONS_SCOPE);
-    stringBuilder.append("&");
-    stringBuilder.append("response_type=code");
-    stringBuilder.append("&");
-    stringBuilder.append("client_id=" + authConstants.clientId);
-    stringBuilder.append("&");
-    if (shouldRetainSession) {
-      stringBuilder.append("retain_session=true");
-      stringBuilder.append("&");
-    }
-    stringBuilder.append("redirect_uri=" + AuthConstants.CALLBACK_URL);
-    return stringBuilder.toString();
-  }
+	public String getAuthenticationURL(AccountType accountType,
+			boolean shouldRetainSession) {
+		if (authConstants == null) {
+			throw new IllegalArgumentException(
+					"If you are using the Authentication activity, you need to pass in the Authentication Constants to start it");
+		}
+		StringBuilder stringBuilder;
+		stringBuilder = new StringBuilder(String.format(
+				RestConstants.BASE_AUTH_URL, accountType.getLoginMethod()));
+		stringBuilder.append("?");
+		stringBuilder.append("scope=" + AuthConstants.PERMISSIONS_SCOPE);
+		stringBuilder.append("&");
+		stringBuilder.append("response_type=code");
+		stringBuilder.append("&");
+		stringBuilder.append("client_id=" + authConstants.clientId);
+		stringBuilder.append("&");
+		if (shouldRetainSession) {
+			stringBuilder.append("retain_session=true");
+			stringBuilder.append("&");
+		}
+		stringBuilder.append("redirect_uri=" + AuthConstants.CALLBACK_URL);
+		return stringBuilder.toString();
+	}
 
-  /**
-   * <p>
-   * Use {@link #AUTHENTICATION_REQUEST_CODE} in onActivityResult to check the
-   * request code.
-   * <p>
-   * Use {@link Activity#RESULT_OK} as a result code if the authentication was
-   * successful.
-   * 
-   * <pre>
-   * <b> For errors use the following constants as a result code: </b>
-   * Use {@link GCAuthenticationActivity#CODE_HTTP_EXCEPTION}} - For connection problems.
-   * Use {@link GCAuthenticationActivity#CODE_HTTP_ERROR}} - For server issues. See logcat for detailed error.
-   * Use {@link GCAuthenticationActivity#CODE_PARSER_EXCEPTION}} - For result parsing errors. See logcat for details.
-   * </pre>
-   * 
-   * @param activity
-   * @param accountType
-   * @param scope
-   * @param redirectUri
-   * @param clientId
-   * @param clientSecret
-   */
-  public void startAuthenticationActivity(Activity activity, AccountType accountType,
-      AuthenticationOptions options) {
-    Intent intent = new Intent(activity, AuthenticationActivity.class);
-    intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType.ordinal());
-    if (options != null) {
-      intent.putExtra(EXTRA_COOKIE_ACCOUNTS, options.clearCookiesForAccount);
-      intent.putExtra(EXTRA_RETAIN_SESSION, options.shouldRetainSession);
-    }
-    activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
-  }
+	/**
+	 * <p>
+	 * Use {@link #AUTHENTICATION_REQUEST_CODE} in onActivityResult to check the
+	 * request code.
+	 * <p>
+	 * Use {@link Activity#RESULT_OK} as a result code if the authentication was
+	 * successful.
+	 * 
+	 * <pre>
+	 * <b> For errors use the following constants as a result code: </b>
+	 * Use {@link GCAuthenticationActivity#CODE_HTTP_EXCEPTION}} - For connection problems.
+	 * Use {@link GCAuthenticationActivity#CODE_HTTP_ERROR}} - For server issues. See logcat for detailed error.
+	 * Use {@link GCAuthenticationActivity#CODE_PARSER_EXCEPTION}} - For result parsing errors. See logcat for details.
+	 * </pre>
+	 * 
+	 * @param activity
+	 * @param accountType
+	 * @param scope
+	 * @param redirectUri
+	 * @param clientId
+	 * @param clientSecret
+	 */
+	public void startAuthenticationActivity(Activity activity,
+			AccountType accountType, AuthenticationOptions options) {
+		Intent intent = new Intent(activity, AuthenticationActivity.class);
+		intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType.ordinal());
+		if (options != null) {
+			intent.putExtra(EXTRA_COOKIE_ACCOUNTS,
+					options.clearCookiesForAccount);
+			intent.putExtra(EXTRA_COOKIE_ALL, options.clearAllCookies);
+			intent.putExtra(EXTRA_RETAIN_SESSION, options.shouldRetainSession);
+		}
+		activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);
+	}
 
-  public void startAuthenticationActivity(Activity activity, AccountType accountType) {
-    startAuthenticationActivity(activity, accountType,
-        new AuthenticationOptions.Builder().build());
-  }
+	public void startAuthenticationActivity(Activity activity,
+			AccountType accountType) {
+		startAuthenticationActivity(activity, accountType,
+				new AuthenticationOptions.Builder().build());
+	}
 
-  public AuthConstants getAuthConstants() {
-    return authConstants;
-  }
+	public AuthConstants getAuthConstants() {
+		return authConstants;
+	}
 
-  public boolean isRedirectUri(String url) {
-    return url.startsWith(AuthConstants.CALLBACK_URL);
-  }
+	public boolean isRedirectUri(String url) {
+		return url.startsWith(AuthConstants.CALLBACK_URL);
+	}
 
-  public boolean isAuthenticationCancelcedRedirectUri(String url) {
-    return url.equals(AuthConstants.AUTHENTICATION_FAIL_REDIRECT_URL);
-  }
+	public boolean isAuthenticationCancelcedRedirectUri(String url) {
+		return url.equals(AuthConstants.AUTHENTICATION_FAIL_REDIRECT_URL);
+	}
 
 }
