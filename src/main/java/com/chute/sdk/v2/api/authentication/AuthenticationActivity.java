@@ -55,217 +55,226 @@ import com.dg.libs.rest.parsers.StringHttpResponseParser;
 
 public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
-  private static final String TAG = AuthenticationActivity.class.getSimpleName();
-  public static final int CODE_HTTP_EXCEPTION = 4;
-  public static final int CODE_HTTP_ERROR = 5;
-  public static final int CODE_PARSER_EXCEPTION = 6;
-  public static final int RESULT_DIFFERENT_CHUTE_USER_AUTHENTICATED = 7;
-  public static final String INTENT_DIFFERENT_CHUTE_USER_TOKEN = "intent_different_chute_user_token";
+	private static final String TAG = AuthenticationActivity.class
+			.getSimpleName();
+	public static final int CODE_HTTP_EXCEPTION = 4;
+	public static final int CODE_HTTP_ERROR = 5;
+	public static final int CODE_PARSER_EXCEPTION = 6;
+	public static final int RESULT_DIFFERENT_CHUTE_USER_AUTHENTICATED = 7;
+	public static final String INTENT_DIFFERENT_CHUTE_USER_TOKEN = "intent_different_chute_user_token";
 
-  private WebView webViewAuthentication;
+	private WebView webViewAuthentication;
 
-  private AuthenticationFactory authenticationFactory;
+	private AuthenticationFactory authenticationFactory;
 
-  private ProgressBar pb;
-  private String loadWebViewUrl;
-  private AccountType accountType;
-  private boolean shouldClearCookiesForAccount;
-  private boolean shouldClearAllCookies;
-  private CookieManager cookieManager;
+	private ProgressBar pb;
+	private String loadWebViewUrl;
+	private AccountType accountType;
+	private boolean shouldClearCookiesForAccount;
+	private CookieManager cookieManager;
 
-  /** Called when the activity is first created. */
-  @Override
-  public void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-    authenticationFactory = AuthenticationFactory.getInstance();
-    accountType = AccountType.values()[getIntent().getExtras().getInt(
-        AuthenticationFactory.EXTRA_ACCOUNT_TYPE)];
-    boolean shouldRetainSession = getIntent().getExtras().getBoolean(AuthenticationFactory.EXTRA_RETAIN_SESSION);
-    loadWebViewUrl = authenticationFactory
-        .getAuthenticationURL(accountType, shouldRetainSession);
-    shouldClearCookiesForAccount = getIntent().getExtras().getBoolean(
-        AuthenticationFactory.EXTRA_COOKIE_ACCOUNTS);
-    shouldClearAllCookies = getIntent().getExtras().getBoolean(AuthenticationFactory.EXTRA_COOKIE_ALL);
+		authenticationFactory = AuthenticationFactory.getInstance();
+		accountType = AccountType.values()[getIntent().getExtras().getInt(
+				AuthenticationFactory.EXTRA_ACCOUNT_TYPE)];
+		boolean shouldRetainSession = getIntent().getExtras().getBoolean(
+				AuthenticationFactory.EXTRA_RETAIN_SESSION);
+		loadWebViewUrl = authenticationFactory.getAuthenticationURL(
+				accountType, shouldRetainSession);
+		shouldClearCookiesForAccount = getIntent().getExtras().getBoolean(
+				AuthenticationFactory.EXTRA_COOKIE_ACCOUNTS);
 
-    webViewAuthentication = new WebView(this);
-    webViewAuthentication.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-        LayoutParams.FILL_PARENT));
-    webViewAuthentication.setWebViewClient(new AuthWebViewClient());
-    webViewAuthentication.getSettings().setJavaScriptEnabled(true);
-    webViewAuthentication.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+		webViewAuthentication = new WebView(this);
+		webViewAuthentication.setLayoutParams(new LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		webViewAuthentication.setWebViewClient(new AuthWebViewClient());
+		webViewAuthentication.getSettings().setJavaScriptEnabled(true);
+		webViewAuthentication
+				.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
-    CookieSyncManager.createInstance(webViewAuthentication.getContext());
-    cookieManager = CookieManager.getInstance();
+		CookieSyncManager.createInstance(webViewAuthentication.getContext());
+		cookieManager = CookieManager.getInstance();
 
-    final WebSettings mWebSettings = webViewAuthentication.getSettings();
-    if (TokenAuthenticationProvider.getInstance().isTokenValid() == false || shouldClearAllCookies == true) {
-      webViewAuthentication.clearCache(true);
-      mWebSettings.setSavePassword(false);
-      mWebSettings.setSaveFormData(false);
-      this.getBaseContext().deleteDatabase("webview.db");
-      this.getBaseContext().deleteDatabase("webviewCache.db");
-      cookieManager.removeAllCookie();
-    }
+		final WebSettings mWebSettings = webViewAuthentication.getSettings();
+		if (TokenAuthenticationProvider.getInstance().isTokenValid() == false) {
+			webViewAuthentication.clearCache(true);
+			mWebSettings.setSavePassword(false);
+			mWebSettings.setSaveFormData(false);
+			this.getBaseContext().deleteDatabase("webview.db");
+			this.getBaseContext().deleteDatabase("webviewCache.db");
+			cookieManager.removeAllCookie();
+		}
 
-    if (shouldClearCookiesForAccount == true) {
-      CookieSyncManager.getInstance().sync(); // Get the cookie from cookie jar
+		if (shouldClearCookiesForAccount == true) {
+			CookieSyncManager.getInstance().sync(); // Get the cookie from
+													// cookie jar
 
-      String cookieUrl = accountType.getLoginMethod().toLowerCase() + ".com";
-      String cookie = cookieManager.getCookie(cookieUrl);
-      ALog.d("cookie: " + cookie);
-      if (cookie == null) {
-        ALog.d("No cookies");
-      } else {
-        removeCookies(cookie, cookieUrl);
-      }
-    }
+			String cookieUrl = accountType.getLoginMethod().toLowerCase()
+					+ ".com";
+			String cookie = cookieManager.getCookie(cookieUrl);
+			ALog.d("cookie: " + cookie);
+			if (cookie == null) {
+				ALog.d("No cookies");
+			} else {
+				removeCookies(cookie, cookieUrl);
+			}
+		}
 
-    final FrameLayout frameLayout = new FrameLayout(this);
-    frameLayout.setLayoutParams(new FrameLayout.LayoutParams(
+		final FrameLayout frameLayout = new FrameLayout(this);
+		frameLayout.setLayoutParams(new FrameLayout.LayoutParams(
 
-        LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-    pb = new ProgressBar(this);
-    final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(100, 100);
-    layoutParams.gravity = Gravity.CENTER;
-    pb.setLayoutParams(layoutParams);
-    frameLayout.addView(webViewAuthentication);
-    frameLayout.addView(pb);
-    setContentView(frameLayout);
-    webViewAuthentication.loadUrl(loadWebViewUrl);
-  }
+		LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		pb = new ProgressBar(this);
+		final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+				100, 100);
+		layoutParams.gravity = Gravity.CENTER;
+		pb.setLayoutParams(layoutParams);
+		frameLayout.addView(webViewAuthentication);
+		frameLayout.addView(pb);
+		setContentView(frameLayout);
+		webViewAuthentication.loadUrl(loadWebViewUrl);
+	}
 
-  private final class AuthenticationCodeCallback implements HttpCallback<String> {
+	private final class AuthenticationCodeCallback implements
+			HttpCallback<String> {
 
-    public AuthenticationCodeCallback() {
-      pb.setVisibility(View.VISIBLE);
-    }
+		public AuthenticationCodeCallback() {
+			pb.setVisibility(View.VISIBLE);
+		}
 
-    @Override
-    public void onSuccess(final String responseData) {
-      TokenAuthenticationProvider tokenProvider = TokenAuthenticationProvider
-          .getInstance();
-      String token = null;
-      try {
-        JSONObject obj = new JSONObject(responseData);
-        token = obj.getString("access_token");
-      } catch (JSONException e) {
-        ALog.d("JSONException: " + e.getMessage());
-      }
-      if (tokenProvider.isTokenValid() && !token.equals(tokenProvider.getToken())) {
-        Intent intent = new Intent();
-        intent.putExtra(INTENT_DIFFERENT_CHUTE_USER_TOKEN, token);
-        setResult(RESULT_DIFFERENT_CHUTE_USER_AUTHENTICATED, intent);
-      } else {
-        tokenProvider.setToken(token);
-        setResult(Activity.RESULT_OK);
-      }
-      pb.setVisibility(View.GONE);
-      finish();
-    }
+		@Override
+		public void onSuccess(final String responseData) {
+			TokenAuthenticationProvider tokenProvider = TokenAuthenticationProvider
+					.getInstance();
+			String token = null;
+			try {
+				JSONObject obj = new JSONObject(responseData);
+				token = obj.getString("access_token");
+			} catch (JSONException e) {
+				ALog.d("JSONException: " + e.getMessage());
+			}
+			if (tokenProvider.isTokenValid()
+					&& !token.equals(tokenProvider.getToken())) {
+				Intent intent = new Intent();
+				intent.putExtra(INTENT_DIFFERENT_CHUTE_USER_TOKEN, token);
+				setResult(RESULT_DIFFERENT_CHUTE_USER_AUTHENTICATED, intent);
+			} else {
+				tokenProvider.setToken(token);
+				setResult(Activity.RESULT_OK);
+			}
+			pb.setVisibility(View.GONE);
+			finish();
+		}
 
-    @Override
-    public void onHttpError(ResponseStatus responseCode) {
-      ALog.d(TAG, "Response Not Valid, " + " Code: " + responseCode);
-      setResult(CODE_HTTP_ERROR);
-      pb.setVisibility(View.GONE);
-      finish();
-    }
-  }
+		@Override
+		public void onHttpError(ResponseStatus responseCode) {
+			ALog.d(TAG, "Response Not Valid, " + " Code: " + responseCode);
+			setResult(CODE_HTTP_ERROR);
+			pb.setVisibility(View.GONE);
+			finish();
+		}
+	}
 
-  /** @author darko.grozdanovski */
-  private final class AuthenticationResponseParser extends
-      StringHttpResponseParser<String> {
+	/** @author darko.grozdanovski */
+	private final class AuthenticationResponseParser extends
+			StringHttpResponseParser<String> {
 
-    @Override
-    public String parse(final String responseBody) throws JSONException {
-      return responseBody;
-    }
+		@Override
+		public String parse(final String responseBody) throws JSONException {
+			return responseBody;
+		}
 
-  }
+	}
 
-  private class AuthWebViewClient extends WebViewClient {
+	private class AuthWebViewClient extends WebViewClient {
 
-    /** @author darko.grozdanovski */
+		/** @author darko.grozdanovski */
 
-    @Override
-    public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
-      Log.e(TAG, "Override " + url);
-      return super.shouldOverrideUrlLoading(view, url);
-    }
+		@Override
+		public boolean shouldOverrideUrlLoading(final WebView view,
+				final String url) {
+			Log.e(TAG, "Override " + url);
+			return super.shouldOverrideUrlLoading(view, url);
+		}
 
-    @Override
-    public void onPageStarted(final WebView view, final String url, final Bitmap favicon) {
-      ALog.d(TAG, "Page started " + url);
-      pb.setVisibility(View.VISIBLE);
-      try {
-        if (authenticationFactory.isRedirectUri(url)) {
-          final Bundle params = Utils.decodeUrl(url);
-          final String code = params.getString("code");
-          if (TextUtils.isEmpty(code)) {
-            setResult(CODE_HTTP_ERROR);
-            finish();
-          }
-          view.stopLoading();
+		@Override
+		public void onPageStarted(final WebView view, final String url,
+				final Bitmap favicon) {
+			ALog.d(TAG, "Page started " + url);
+			pb.setVisibility(View.VISIBLE);
+			try {
+				if (authenticationFactory.isRedirectUri(url)) {
+					final Bundle params = Utils.decodeUrl(url);
+					final String code = params.getString("code");
+					if (TextUtils.isEmpty(code)) {
+						setResult(CODE_HTTP_ERROR);
+						finish();
+					}
+					view.stopLoading();
 
-          new AuthenticationTokenRequest<String>(getApplicationContext(),
-              AuthenticationFactory.getInstance()
-                  .getAuthConstants(), code, new AuthenticationResponseParser(),
-              new AuthenticationCodeCallback()).executeAsync();
-        }
-        if (authenticationFactory.isAuthenticationCancelcedRedirectUri(url)) {
-          ALog.d(TAG, "AUTHENTICATION CANCELED");
-          setResult(RESULT_CANCELED);
-          finish();
-        }
-      } catch (final Exception e) {
-        ALog.d(TAG, "AUTHENTICATION FAILED", e);
-        setResult(CODE_HTTP_EXCEPTION);
-        finish();
-      }
-      super.onPageStarted(view, url, favicon);
-    }
+					new AuthenticationTokenRequest<String>(
+							getApplicationContext(), AuthenticationFactory
+									.getInstance().getAuthConstants(), code,
+							new AuthenticationResponseParser(),
+							new AuthenticationCodeCallback()).executeAsync();
+				}
+				if (authenticationFactory
+						.isAuthenticationCancelcedRedirectUri(url)) {
+					ALog.d(TAG, "AUTHENTICATION CANCELED");
+					setResult(RESULT_CANCELED);
+					finish();
+				}
+			} catch (final Exception e) {
+				ALog.d(TAG, "AUTHENTICATION FAILED", e);
+				setResult(CODE_HTTP_EXCEPTION);
+				finish();
+			}
+			super.onPageStarted(view, url, favicon);
+		}
 
-    @Override
-    public void onPageFinished(final WebView view, final String url) {
-      ALog.e(TAG, "Page finished " + url);
-      if (shouldClearCookiesForAccount == true) {
-        CookieSyncManager.getInstance().sync();
-      }
-      pb.setVisibility(View.GONE);
-      super.onPageFinished(view, url);
-    }
+		@Override
+		public void onPageFinished(final WebView view, final String url) {
+			ALog.e(TAG, "Page finished " + url);
+			if (shouldClearCookiesForAccount == true) {
+				CookieSyncManager.getInstance().sync();
+			}
+			pb.setVisibility(View.GONE);
+			super.onPageFinished(view, url);
+		}
 
-    @Override
-    public void onReceivedError(final WebView view, final int errorCode,
-        final String description,
-        final String failingUrl) {
-      ALog.e(TAG, "Error " + failingUrl);
-      super.onReceivedError(view, errorCode, description, failingUrl);
-    }
-  }
+		@Override
+		public void onReceivedError(final WebView view, final int errorCode,
+				final String description, final String failingUrl) {
+			ALog.e(TAG, "Error " + failingUrl);
+			super.onReceivedError(view, errorCode, description, failingUrl);
+		}
+	}
 
-  private void removeCookies(String cookie, String url) {
-    String[] cookieValues = cookie.split(";");
-    for (int i = 0; i < cookieValues.length; ++i) {
-      String[] parts = cookieValues[i].split("=", 2);
-      ALog.d("Cookie Name: " + parts[0]);
-      ALog.d("Cookie Value: " + parts[1]);
-      /*
-       * if (parts.length == 2 && parts[1].equalsIgnoreCase(accountType.name()))
-       * { String[] cookieparts = cookies[i].split("=");
-       * CookieManager.getInstance().setCookie(url, cookieValues[0].trim() +
-       * "=; Expires=Sat, 31 Dec 2005 23:59:59 GMT");
-       */
-      String cookieString =
-          "cookieName=;expires=Sat, 31 Dec 2005 23:59:59 GMT;";
-      cookieManager.setCookie(url, cookieString);
-      cookieManager.removeSessionCookie();
-      cookieManager.removeExpiredCookie();
+	private void removeCookies(String cookie, String url) {
+		String[] cookieValues = cookie.split(";");
+		for (int i = 0; i < cookieValues.length; ++i) {
+			String[] parts = cookieValues[i].split("=", 2);
+			ALog.d("Cookie Name: " + parts[0]);
+			ALog.d("Cookie Value: " + parts[1]);
+			/*
+			 * if (parts.length == 2 &&
+			 * parts[1].equalsIgnoreCase(accountType.name())) { String[]
+			 * cookieparts = cookies[i].split("=");
+			 * CookieManager.getInstance().setCookie(url, cookieValues[0].trim()
+			 * + "=; Expires=Sat, 31 Dec 2005 23:59:59 GMT");
+			 */
+			String cookieString = "cookieName=;expires=Sat, 31 Dec 2005 23:59:59 GMT;";
+			cookieManager.setCookie(url, cookieString);
+			cookieManager.removeSessionCookie();
+			cookieManager.removeExpiredCookie();
 
-    }
+		}
 
-  }
+	}
 
 }
