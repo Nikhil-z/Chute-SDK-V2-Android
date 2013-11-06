@@ -39,51 +39,70 @@ import com.dg.libs.rest.callbacks.HttpCallback;
  */
 public class GCUsers {
 
-  @SuppressWarnings("unused")
-  private static final String TAG = GCUsers.class.getSimpleName();
+	@SuppressWarnings("unused")
+	private static final String TAG = GCUsers.class.getSimpleName();
 
-  /**
-   * A private no-args default constructor.
-   */
-  private GCUsers() {
-    super();
-  }
+	/**
+	 * A private no-args default constructor.
+	 */
+	private GCUsers() {
+		super();
+	}
 
-  /**
-   * Gets user info for the provided ID.
-   * <p>
-   * Returns full user info as a response.
-   * 
-   * @param context
-   *          The application context.
-   * @param user
-   *          The {@link UserModel} containing the information to be retrieved.
-   * @param callback
-   *          Instance of {@link HttpCallback} interface. If successful, the
-   *          callback returns {@link ResponseModel<UserModel>}.
-   * @return {@link UsersGetRequest}.
-   */
-  public static HttpRequest get(final Context context, final UserModel user,
-      final HttpCallback<ResponseModel<UserModel>> callback) {
-    return new UsersGetRequest(context, user, callback);
-  }
+	/**
+	 * Gets user info for the provided ID.
+	 * <p>
+	 * Returns full user info as a response.
+	 * 
+	 * @param context
+	 *            The application context.
+	 * @param user
+	 *            The {@link UserModel} containing the information to be
+	 *            retrieved.
+	 * @param callback
+	 *            Instance of {@link HttpCallback} interface. If successful, the
+	 *            callback returns {@link ResponseModel<UserModel>}.
+	 * @return {@link UsersGetRequest}.
+	 */
+	public static HttpRequest get(final Context context, final UserModel user,
+			final HttpCallback<ResponseModel<UserModel>> callback) {
+		return new UsersGetRequest(context, user, callback);
+	}
 
-  /**
-   * Gets the user model for the currently authenticated user by his
-   * Authorization token.
-   * <p>
-   * Returns full user info as a response.
-   * 
-   * @param context
-   *          The application context.
-   * @param callback
-   *          Instance of {@link HttpCallback} interface. If successful, the
-   *          callback returns {@link ResponseModel<UserModel>}.
-   * @return {@link UsersCurrentRequest}.
-   */
-  public static HttpRequest me(final Context context,
-      final HttpCallback<ResponseModel<UserModel>> callback) {
-    return new UsersCurrentRequest(context, callback);
-  }
+	/**
+	 * Gets the user model for the currently authenticated user by his
+	 * Authorization token.
+	 * <p>
+	 * Returns full user info as a response.
+	 * 
+	 * @param context
+	 *            The application context.
+	 * @param callback
+	 *            Instance of {@link HttpCallback} interface. If successful, the
+	 *            callback returns {@link ResponseModel<UserModel>}.
+	 * @return {@link UsersCurrentRequest}.
+	 */
+	public static HttpRequest me(final Context context,
+			final HttpCallback<ResponseModel<UserModel>> callback) {
+		return new UsersCurrentRequest(context, callback);
+	}
+
+	/**
+	 * Updates user name, title and company.
+	 * 
+	 * @param context
+	 *            The application context.
+	 * @param user
+	 *            The user to be updated.
+	 * @param callback
+	 *            Instance of {@link HttpCallback} interface. If successful, the
+	 *            callback returns {@link ResponseModel<UserModel>}.
+	 * @return {@link UsersUpdateRequest}
+	 */
+	public static HttpRequest update(final Context context,
+			final UserModel user,
+			final HttpCallback<ResponseModel<UserModel>> callback) {
+		return new UsersUpdateRequest(context, user, callback);
+	}
 
 }

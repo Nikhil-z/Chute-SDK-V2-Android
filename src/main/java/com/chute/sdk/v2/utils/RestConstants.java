@@ -74,6 +74,7 @@ public class RestConstants {
   public static final String URL_USERS_GET_ALBUMS = BASE_URL
       + "/users/%s/albums";
   public static final String URL_USERS_GET_CURRENT = BASE_URL + "/me";
+  public static final String URL_USERS_UPDATE = BASE_URL + "/users/%s";
 
   // COMMENTS
   public static final String URL_COMMENTS_GET = BASE_URL
