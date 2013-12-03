@@ -43,6 +43,7 @@ import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebViewDatabase;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -117,10 +118,10 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 			String cookieUrl = accountType.getLoginMethod().toLowerCase()
 					+ ".com";
 			String cookie = cookieManager.getCookie(cookieUrl);
-			ALog.d("cookie: " + cookie);
 			if (cookie == null) {
 				ALog.d("No cookies");
 			} else {
+				ALog.d("cookie: " + cookie);
 				removeCookies(cookie, cookieUrl);
 			}
 		}
@@ -259,8 +260,8 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		String[] cookieValues = cookie.split(";");
 		for (int i = 0; i < cookieValues.length; ++i) {
 			String[] parts = cookieValues[i].split("=", 2);
-			ALog.d("Cookie Name: " + parts[0]);
-			ALog.d("Cookie Value: " + parts[1]);
+//			ALog.d("Cookie Name: " + parts[0]);
+//			ALog.d("Cookie Value: " + parts[1]);
 			/*
 			 * if (parts.length == 2 &&
 			 * parts[1].equalsIgnoreCase(accountType.name())) { String[]
