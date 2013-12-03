@@ -28,9 +28,9 @@ package com.chute.sdk.v2.utils;
 /** @author DArkO */
 public class RestConstants {
 
-  public static final String BASE_URL = "https://api.getchute.com/v2";
-  public static final String BASE_UPLOAD_URL = "http://upload.getchute.com";
-  public static final String BASE_AUTH_URL = "http://getchute.com/v2/oauth/%s/authorize";
+  public static String BASE_URL = "https://api.getchute.com/v2";
+  public static String BASE_UPLOAD_URL = "http://upload.getchute.com";
+  public static String BASE_AUTH_URL = "http://getchute.com/v2/oauth/%s/authorize";
   public static final String URL_AUTHENTICATION_TOKEN = BASE_URL + "/oauth/token";
 
   // ALBUMS
