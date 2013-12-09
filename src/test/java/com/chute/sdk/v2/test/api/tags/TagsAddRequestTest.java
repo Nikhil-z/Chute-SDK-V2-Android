@@ -3,6 +3,7 @@ package com.chute.sdk.v2.test.api.tags;
 import junit.framework.TestCase;
 
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class TagsAddRequestTest extends TestCase {
@@ -17,6 +18,7 @@ public class TagsAddRequestTest extends TestCase {
 		} catch (JsonProcessingException e) {
 			fail("Serialization threw an exception: " + e.getMessage());
 		}
-		assertEquals("{\"tags\":[\"chute\",\"office\",\"HQ\"]}", result);
+		String expected = TestUtil.readResourceAsString("request/TagsAdd.json");
+		assertEquals(expected, result);
 	}
 }

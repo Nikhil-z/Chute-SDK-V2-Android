@@ -2,22 +2,32 @@ package com.chute.sdk.v2.test.parsers.albums;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.io.IOUtils;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
+import com.chute.sdk.v2.utils.TestUtil;
 
 public class AlbumListParserTest extends TestCase {
 
 	public void testAlbumsListParser() {
-		String jsonResponse = "{\"response\":{\"version\":2,\"code\":200,\"href\":\"https://api.getchute.com/v2/albums?bearer_token=d1291c9058c4928e8b403f9418c365e3f233082d7459d3a34f9c61beefac5167\"},\"data\":[],\"pagination\":{\"current_page\":1,\"next_page\":null,\"previous_page\":null,\"first_page\":\"https://api.getchute.com/v2/albums?bearer_token=d1291c9058c4928e8b403f9418c365e3f233082d7459d3a34f9c61beefac5167\",\"per_page\":5}}";
 		ListResponseParser<AlbumModel> parser = new ListResponseParser<AlbumModel>(
 				AlbumModel.class);
 		try {
-			ListResponseModel<AlbumModel> model = parser.parse(IOUtils
-					.toInputStream(jsonResponse));
-			assertNotNull(model.getData());
+			ListResponseModel<AlbumModel> model = parser.parse(TestUtil
+					.readResourceAsStream("parser/album/AlbumList.json"));
+			AlbumModel album =  model.getData().get(0);
+			assertEquals(album.getId(), "2489813");
+			assertNotNull(album.getLinks());
+			assertEquals(album.getCreatedAt(), "2013-12-09T13:24:27Z");
+			assertEquals(album.getUpdatedAt(), "2013-12-09T13:24:27Z");
+			assertEquals(album.getShortcut(), "arIhoqkp");
+			assertEquals(album.getName(), "new");
+			assertEquals(album.getDescription(), "description");
+			assertNotNull(album.getUser());
+			assertEquals(album.isModerateMedia(), false);
+			assertEquals(album.isModerateComments(), false);
+			assertEquals(album.getParentId(), "23");
 		} catch (Exception e) {
 			fail();
 		}

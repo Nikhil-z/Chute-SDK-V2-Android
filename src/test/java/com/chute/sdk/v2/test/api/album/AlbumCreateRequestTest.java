@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.test.factories.FactoryManager;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -23,8 +24,8 @@ public class AlbumCreateRequestTest extends TestCase {
 								"moderate_media"));
 		String result = JsonUtil.getMapper().writer(filters)
 				.writeValueAsString(album);
-		assertEquals(
-				"{\"name\":\"car make\",\"moderate_media\":false,\"moderate_comments\":false}",
-				result);
+		String expected = TestUtil
+				.readResourceAsString("request/AlbumCreate.json");
+		assertEquals(expected, result);
 	}
 }

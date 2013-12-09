@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import com.chute.sdk.v2.model.LinkModel;
 import com.chute.sdk.v2.test.factories.FactoryManager;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -22,7 +23,8 @@ public class LinksModelTest extends TestCase {
 				SimpleBeanPropertyFilter.filterOutAllExcept("self"));
 		String result = JsonUtil.getMapper().writer(filter)
 				.writeValueAsString(model);
-		String expected = "{\"self\":{\"href\":\"http://api.getchute.com/v2/assets/364003199\",\"title\":\"Asset Details\"}}";
+		String expected = TestUtil
+				.readResourceAsString("model/LinksModel.json");
 		assertEquals(expected, result);
 
 	}

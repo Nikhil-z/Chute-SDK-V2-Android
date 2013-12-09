@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import com.chute.sdk.v2.model.DimensionsModel;
 import com.chute.sdk.v2.test.factories.FactoryManager;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -22,7 +23,7 @@ public class DimensionsModelTest extends TestCase {
 				SimpleBeanPropertyFilter.filterOutAllExcept("width", "height"));
 		String result = JsonUtil.getMapper().writer(filterProvider)
 				.writeValueAsString(model);
-		String expected = "{\"width\":\"75\",\"height\":\"75\"}";
+		String expected = TestUtil.readResourceAsString("model/DimensionsModel.json");
 		assertEquals(expected, result);
 
 	}

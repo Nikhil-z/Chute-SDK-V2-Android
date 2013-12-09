@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import com.chute.sdk.v2.model.LinkInfoModel;
 import com.chute.sdk.v2.test.factories.FactoryManager;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -22,7 +23,7 @@ public class LinkInfoModelTest extends TestCase {
 				SimpleBeanPropertyFilter.filterOutAllExcept("href", "title"));
 		String result = JsonUtil.getMapper().writer(filterProvider)
 				.writeValueAsString(model);
-		String expected = "{\"href\":\"http://api.getchute.com/v2/assets/364003199\",\"title\":\"Asset Details\"}";
+		String expected = TestUtil.readResourceAsString("model/LinkInfoModel.json");
 		assertEquals(expected, result);
 
 	}

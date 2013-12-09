@@ -29,70 +29,71 @@ import static java.net.URLDecoder.decode;
 import static java.net.URLEncoder.encode;
 
 import java.io.UnsupportedEncodingException;
+
 public class TextUtil {
 
-  @SuppressWarnings("unused")
-  private static final String TAG = TextUtil.class.getSimpleName();
-  public static final String ENCODING_CHARSET = "UTF-8";
+	@SuppressWarnings("unused")
+	private static final String TAG = TextUtil.class.getSimpleName();
+	public static final String ENCODING_CHARSET = "UTF-8";
 
-  private TextUtil() {
-  }
+	private TextUtil() {
+	}
 
-  public static String truncate(String value, int length) {
-    if (value != null && value.length() > length) {
-      value = value.substring(0, length);
-      value += "...";
-    }
-    return value;
-  }
+	public static String truncate(String value, int length) {
+		if (value != null && value.length() > length) {
+			value = value.substring(0, length);
+			value += "...";
+		}
+		return value;
+	}
 
-  public static String urlEncode(String string) {
-    if (string == null)
-      return null;
-    try {
-      return encode(string, ENCODING_CHARSET);
-    } catch (UnsupportedEncodingException e) {
-      throw new IllegalStateException("Platform doesn't support "
-          + ENCODING_CHARSET, e);
-    }
-  }
+	public static String urlEncode(String string) {
+		if (string == null)
+			return null;
+		try {
+			return encode(string, ENCODING_CHARSET);
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException("Platform doesn't support "
+					+ ENCODING_CHARSET, e);
+		}
+	}
 
-  public static String urlDecode(String string) {
-    if (string == null)
-      return null;
-    try {
-      return decode(string, ENCODING_CHARSET);
-    } catch (UnsupportedEncodingException e) {
-      throw new IllegalStateException("Platform doesn't support "
-          + ENCODING_CHARSET, e);
-    }
-  }
+	public static String urlDecode(String string) {
+		if (string == null)
+			return null;
+		try {
+			return decode(string, ENCODING_CHARSET);
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException("Platform doesn't support "
+					+ ENCODING_CHARSET, e);
+		}
+	}
 
-  /**
-   * Is {@code string} blank (null or only whitespace)?
-   * 
-   * @param string
-   *          The string to check.
-   * @return {@code true} if {@code string} is blank, {@code false} otherwise.
-   */
-  public static boolean isBlank(String string) {
-    return string == null || "".equals(string.trim());
-  }
+	/**
+	 * Is {@code string} blank (null or only whitespace)?
+	 * 
+	 * @param string
+	 *            The string to check.
+	 * @return {@code true} if {@code string} is blank, {@code false} otherwise.
+	 */
+	public static boolean isBlank(String string) {
+		return string == null || "".equals(string.trim());
+	}
 
-  /**
-   * Returns a trimmed version of {@code string}, or an empty string if
-   * {@code string} is {@code null} or the trimmed version is a blank string.
-   * 
-   * @param string
-   *          The string to trim.
-   * @return A trimmed version of {@code string}, or an empty string if
-   *         {@code string} is {@code null} or the trimmed version is a blank
-   *         string.
-   */
-  public static String trimToEmpty(String string) {
-    if (isBlank(string))
-      return "";
-    return string.trim();
-  }
+	/**
+	 * Returns a trimmed version of {@code string}, or an empty string if
+	 * {@code string} is {@code null} or the trimmed version is a blank string.
+	 * 
+	 * @param string
+	 *            The string to trim.
+	 * @return A trimmed version of {@code string}, or an empty string if
+	 *         {@code string} is {@code null} or the trimmed version is a blank
+	 *         string.
+	 */
+	public static String trimToEmpty(String string) {
+		if (isBlank(string))
+			return "";
+		return string.trim();
+	}
 
 }

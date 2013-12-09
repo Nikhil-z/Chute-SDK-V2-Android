@@ -1,43 +1,44 @@
 package com.chute.sdk.v2.test.parsers.assets;
 
-import java.io.ByteArrayInputStream;
 
 import junit.framework.TestCase;
 
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
+import com.chute.sdk.v2.utils.TestUtil;
 
 public class AssetListParserTest extends TestCase {
 
 	public void testAssetListParser() {
 
-		String response = "{\"response\":{\"title\":\"Asset Listing\",\"version\":2,\"code\":200,\"href\":\"https://api.getchute.com/v2/albums/2400518/assets?bearer_token=d1291c9058c4928e8b403f9418c365e3f233082d7459d3a34f9c61beefac5167\"},\"data\":[{\"id\":448080848,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080848\",\"title\":\"Asset Details\"},\"exif\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080848/exif\",\"title\":\"Exif Details\"},\"geo\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080848/geo\",\"title\":\"Geo Details\"},\"heart\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080848/hearts\",\"title\":\"Heart\"},\"vote\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080848/votes\",\"title\":\"Vote\"}},\"created_at\":\"2013-05-16T14:59:46Z\",\"updated_at\":\"2013-05-16T14:59:59Z\",\"thumbnail\":\"http://media.getchute.com/m/uk6issply/c/2400518/75x75\",\"url\":\"http://media.getchute.com/m/uk6issply/c/2400518\",\"shortcut\":\"uk6issply\",\"type\":\"image\",\"caption\":\"asset1\",\"dimensions\":{\"width\":null,\"height\":null},\"location\":{\"latitude\":\"23\",\"longitude\":\"2335351\"},\"source\":{\"source\":\"chute\",\"source_id\":null,\"source_url\":\"http://media.getchute.com.s3.amazonaws.com/assets/images/448080848/448080848-uk6issply.jpg\",\"service\":null,\"import_id\":null,\"import_url\":null},\"service\":\"uploaded\",\"user\":{\"id\":545,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/users/545\",\"title\":\"User Details\"}},\"created_at\":\"2012-01-17T19:53:39Z\",\"updated_at\":\"2012-09-15T10:55:51Z\",\"name\":\"darko1002001\",\"username\":\"darko1002001\",\"avatar\":\"http://static.getchute.com/v1/images/avatar-100x100.png\",\"profile\":null},\"votes\":0,\"hearts\":0,\"tags\":[],\"chute_asset_id\":\"714958192\"},{\"id\":448080310,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080310\",\"title\":\"Asset Details\"},\"exif\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080310/exif\",\"title\":\"Exif Details\"},\"geo\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080310/geo\",\"title\":\"Geo Details\"},\"heart\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080310/hearts\",\"title\":\"Heart\"},\"vote\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448080310/votes\",\"title\":\"Vote\"}},\"created_at\":\"2013-05-16T14:59:32Z\",\"updated_at\":\"2013-05-16T14:59:45Z\",\"thumbnail\":\"http://media.getchute.com/m/uk69Muewj/c/2400518/75x75\",\"url\":\"http://media.getchute.com/m/uk69Muewj/c/2400518\",\"shortcut\":\"uk69Muewj\",\"type\":\"image\",\"caption\":\"asset2\",\"dimensions\":{\"width\":null,\"height\":null},\"location\":{\"latitude\":\"2\",\"longitude\":\"31313\"},\"source\":{\"source\":\"chute\",\"source_id\":null,\"source_url\":\"http://media.getchute.com.s3.amazonaws.com/assets/images/448080310/448080310-uk69Muewj.jpg\",\"service\":null,\"import_id\":null,\"import_url\":null},\"service\":\"uploaded\",\"user\":{\"id\":545,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/users/545\",\"title\":\"User Details\"}},\"created_at\":\"2012-01-17T19:53:39Z\",\"updated_at\":\"2012-09-15T10:55:51Z\",\"name\":\"darko1002001\",\"username\":\"darko1002001\",\"avatar\":\"http://static.getchute.com/v1/images/avatar-100x100.png\",\"profile\":null},\"votes\":0,\"hearts\":0,\"tags\":[],\"chute_asset_id\":\"714957404\"},{\"id\":448049635,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049635\",\"title\":\"Asset Details\"},\"exif\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049635/exif\",\"title\":\"Exif Details\"},\"geo\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049635/geo\",\"title\":\"Geo Details\"},\"heart\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049635/hearts\",\"title\":\"Heart\"},\"vote\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049635/votes\",\"title\":\"Vote\"}},\"created_at\":\"2013-05-16T14:41:18Z\",\"updated_at\":\"2013-05-16T14:41:32Z\",\"thumbnail\":\"http://media.getchute.com/m/ujYb1fsdg/c/2400518/75x75\",\"url\":\"http://media.getchute.com/m/ujYb1fsdg/c/2400518\",\"shortcut\":\"ujYb1fsdg\",\"type\":\"image\",\"caption\":\"asset3\",\"dimensions\":{\"width\":null,\"height\":null},\"location\":null,\"source\":{\"source\":\"chute\",\"source_id\":null,\"source_url\":\"http://media.getchute.com.s3.amazonaws.com/assets/images/448049635/448049635-ujYb1fsdg.jpg\",\"service\":null,\"import_id\":null,\"import_url\":null},\"service\":\"uploaded\",\"user\":{\"id\":545,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/users/545\",\"title\":\"User Details\"}},\"created_at\":\"2012-01-17T19:53:39Z\",\"updated_at\":\"2012-09-15T10:55:51Z\",\"name\":\"darko1002001\",\"username\":\"darko1002001\",\"avatar\":\"http://static.getchute.com/v1/images/avatar-100x100.png\",\"profile\":null},\"votes\":0,\"hearts\":0,\"tags\":[],\"chute_asset_id\":\"714912198\"},{\"id\":448049119,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049119\",\"title\":\"Asset Details\"},\"exif\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049119/exif\",\"title\":\"Exif Details\"},\"geo\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049119/geo\",\"title\":\"Geo Details\"},\"heart\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049119/hearts\",\"title\":\"Heart\"},\"vote\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/448049119/votes\",\"title\":\"Vote\"}},\"created_at\":\"2013-05-16T14:41:04Z\",\"updated_at\":\"2013-05-16T14:41:17Z\",\"thumbnail\":\"http://media.getchute.com/m/ujY2Hqvma/c/2400518/75x75\",\"url\":\"http://media.getchute.com/m/ujY2Hqvma/c/2400518\",\"shortcut\":\"ujY2Hqvma\",\"type\":\"image\",\"caption\":\"asset4\",\"dimensions\":{\"width\":null,\"height\":null},\"location\":null,\"source\":{\"source\":\"chute\",\"source_id\":null,\"source_url\":\"http://media.getchute.com.s3.amazonaws.com/assets/images/448049119/448049119-ujY2Hqvma.jpg\",\"service\":null,\"import_id\":null,\"import_url\":null},\"service\":\"uploaded\",\"user\":{\"id\":545,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/users/545\",\"title\":\"User Details\"}},\"created_at\":\"2012-01-17T19:53:39Z\",\"updated_at\":\"2012-09-15T10:55:51Z\",\"name\":\"darko1002001\",\"username\":\"darko1002001\",\"avatar\":\"http://static.getchute.com/v1/images/avatar-100x100.png\",\"profile\":null},\"votes\":0,\"hearts\":0,\"tags\":[],\"chute_asset_id\":\"714911593\"},{\"id\":435650204,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/435650204\",\"title\":\"Asset Details\"},\"exif\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/435650204/exif\",\"title\":\"Exif Details\"},\"geo\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/435650204/geo\",\"title\":\"Geo Details\"},\"heart\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/435650204/hearts\",\"title\":\"Heart\"},\"vote\":{\"href\":\"http://api.getchute.com/v2/albums/2400518/assets/435650204/votes\",\"title\":\"Vote\"}},\"created_at\":\"2013-05-10T12:12:06Z\",\"updated_at\":\"2013-05-10T12:12:15Z\",\"thumbnail\":\"http://media.getchute.com/m/ttWwcoasc/c/2400518/75x75\",\"url\":\"http://media.getchute.com/m/ttWwcoasc/c/2400518\",\"shortcut\":\"ttWwcoasc\",\"type\":\"image\",\"caption\":\"asset5\",\"dimensions\":{\"width\":null,\"height\":null},\"location\":null,\"source\":{\"source\":\"chute\",\"source_id\":null,\"source_url\":\"http://media.getchute.com.s3.amazonaws.com/assets/images/435650204/435650204-ttWwcoasc.jpg\",\"service\":null,\"import_id\":null,\"import_url\":null},\"service\":\"uploaded\",\"user\":{\"id\":545,\"links\":{\"self\":{\"href\":\"http://api.getchute.com/v2/users/545\",\"title\":\"User Details\"}},\"created_at\":\"2012-01-17T19:53:39Z\",\"updated_at\":\"2012-09-15T10:55:51Z\",\"name\":\"darko1002001\",\"username\":\"darko1002001\",\"avatar\":\"http://static.getchute.com/v1/images/avatar-100x100.png\",\"profile\":null},\"votes\":0,\"hearts\":1,\"tags\":[],\"chute_asset_id\":\"696576989\"}]}";
 		ListResponseParser<AssetModel> parser = new ListResponseParser<AssetModel>(
 				AssetModel.class);
 		try {
 			ListResponseModel<AssetModel> assetList = parser
-					.parse(new ByteArrayInputStream(response.getBytes()));
+					.parse(TestUtil.readResourceAsStream("parser/asset/AssetList.json"));
 			AssetModel asset = assetList.getData().get(0);
-			assertEquals(asset.getId(), "448080848");
+			assertEquals(asset.getId(), "669437128");
 			assertNotNull(asset.getLinks());
-			assertEquals(asset.getThumbnail(),
-					"http://media.getchute.com/m/uk6issply/c/2400518/75x75");
-			assertEquals(asset.getUrl(),
-					"http://media.getchute.com/m/uk6issply/c/2400518");
+			assertEquals(asset.getCreatedAt(), "2013-09-26T15:26:56Z");
+			assertEquals(asset.getUpdatedAt(), "2013-09-26T15:26:56Z");
+			assertEquals(asset.getShortcut(), "JiTb2fble");
 			assertEquals(asset.getType(), "image");
-			assertEquals(asset.getCaption(), "asset1");
-			assertNotNull(asset.getDimensions());
-			assertNotNull(asset.getSource());
-			assertNotNull(asset.getUser());
-			assertEquals(asset.getVotes(), 0);
-			assertNotNull(asset.getTags());
-			assertEquals(asset.getCreatedAt(), "2013-05-16T14:59:46Z");
-			assertEquals(asset.getUpdatedAt(), "2013-05-16T14:59:59Z");
-			assertEquals(asset.getShortcut(), "uk6issply");
+			assertEquals(asset.getCaption(), "caption");
 			assertNotNull(asset.getLocation());
+			assertNotNull(asset.getSource());
 			assertEquals(asset.getService(), "uploaded");
-			assertEquals(asset.getChuteAssetId(), "714958192");
+			assertEquals(asset.getUsername(), "username");
+			assertEquals(asset.getThumbnail(),
+					"http://media.getchute.com/m/JiTb2fble/c/2476863/75x75");
+			assertEquals(asset.getUrl(),
+					"http://media.getchute.com/m/JiTb2fble/c/2476863");
+			assertNotNull(asset.getDimensions());
+			assertNotNull(asset.getUser());
+			assertEquals(asset.getVotes(), 3);
+			assertEquals(asset.getHearts(), 3);
+			assertNotNull(asset.getTags());
+			assertEquals(asset.getChuteAssetId(), "1027295339");
 		} catch (Exception e) {
 			fail();
 		}
