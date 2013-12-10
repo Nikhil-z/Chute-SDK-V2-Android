@@ -65,7 +65,7 @@ public class RestConstants {
   public static final String URL_ASSETS_GET_GEO_LOCATION = BASE_URL
       + "/assets/geo/%s,%s/%s";
   public static final String URL_ASSETS_TAGS = BASE_URL
-      + "/albums/%s/assets/%s/tags";
+      + "/albums/%s/assets/%s/tags/%s";
   public static final String URL_ASSETS_MOVE = BASE_URL + "/albums/%s/assets/%s/move/%s";
   public static final String URL_ASSETS_COPY = BASE_URL + "/albums/%s/assets/%s/copy/%s";
 

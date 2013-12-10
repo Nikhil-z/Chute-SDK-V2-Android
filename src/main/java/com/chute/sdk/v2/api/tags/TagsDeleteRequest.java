@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.tags;
 
-import java.util.ArrayList;
-
-import org.json.JSONArray;
+import java.util.List;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -47,9 +45,10 @@ public class TagsDeleteRequest extends
 	public static final String TAG = TagsDeleteRequest.class.getSimpleName();
 	private AssetModel asset;
 	private AlbumModel album;
+	private List<String> tags;
 
 	public TagsDeleteRequest(Context context, AlbumModel album,
-			AssetModel asset, ArrayList<String> tags,
+			AssetModel asset, List<String> tags,
 			HttpCallback<ListResponseModel<String>> callback) {
 		super(context, RequestMethod.DELETE, new ListResponseParser<String>(
 				String.class), callback);
@@ -65,21 +64,14 @@ public class TagsDeleteRequest extends
 		}
 		this.asset = asset;
 		this.album = album;
-		addParams(tags);
+		this.tags = tags;
 	}
 
-	private void addParams(ArrayList<String> tags) {
-		JSONArray array = new JSONArray();
-		for (String tag : tags) {
-			array.put(tag);
-		}
-		addParam("tags", array.toString());
-	}
 
 	@Override
 	protected String getUrl() {
 		return String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
-				asset.getId());
+				asset.getId(), TextUtils.join(",", tags));
 	}
 
 }
