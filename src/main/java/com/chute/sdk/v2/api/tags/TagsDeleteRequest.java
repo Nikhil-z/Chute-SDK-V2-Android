@@ -42,51 +42,44 @@ import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
 public class TagsDeleteRequest extends
-    ParameterHttpRequestImpl<ListResponseModel<String>> {
+		ParameterHttpRequestImpl<ListResponseModel<String>> {
 
-  public static final String TAG = TagsDeleteRequest.class.getSimpleName();
-  private AssetModel asset;
-  private AlbumModel album;
-  private ArrayList<String> tags;
+	public static final String TAG = TagsDeleteRequest.class.getSimpleName();
+	private AssetModel asset;
+	private AlbumModel album;
 
-  public TagsDeleteRequest(Context context, AlbumModel album,
-      AssetModel asset, ArrayList<String> tags,
-      HttpCallback<ListResponseModel<String>> callback) {
-    super(context, RequestMethod.DELETE, new ListResponseParser<String>(
-        String.class), callback);
-    this.tags = tags;
-    if (asset == null || TextUtils.isEmpty(asset.getId())) {
-      throw new IllegalArgumentException("Need to provide asset ID");
-    }
-    if (album == null || TextUtils.isEmpty(album.getId())) {
-      throw new IllegalArgumentException("Need to provide album ID");
-    }
-    if (tags.size() == 0) {
-      throw new IllegalArgumentException(
-          "Need to provide tags for updating the asset");
-    }
-    this.asset = asset;
-    this.album = album;
-  }
+	public TagsDeleteRequest(Context context, AlbumModel album,
+			AssetModel asset, ArrayList<String> tags,
+			HttpCallback<ListResponseModel<String>> callback) {
+		super(context, RequestMethod.DELETE, new ListResponseParser<String>(
+				String.class), callback);
+		if (asset == null || TextUtils.isEmpty(asset.getId())) {
+			throw new IllegalArgumentException("Need to provide asset ID");
+		}
+		if (album == null || TextUtils.isEmpty(album.getId())) {
+			throw new IllegalArgumentException("Need to provide album ID");
+		}
+		if (tags.size() == 0) {
+			throw new IllegalArgumentException(
+					"Need to provide tags for updating the asset");
+		}
+		this.asset = asset;
+		this.album = album;
+		addParams(tags);
+	}
 
-  @Override
-  protected void doBeforeRunRequestInBackgroundThread() {
-    super.doBeforeRunRequestInBackgroundThread();
-    addParams(tags);
-  }
+	private void addParams(ArrayList<String> tags) {
+		JSONArray array = new JSONArray();
+		for (String tag : tags) {
+			array.put(tag);
+		}
+		addParam("tags", array.toString());
+	}
 
-  private void addParams(ArrayList<String> tags) {
-    JSONArray array = new JSONArray();
-    for (String tag : tags) {
-      array.put(tag);
-    }
-    addParam("tags", array.toString());
-  }
-
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
-        asset.getId());
-  }
+	@Override
+	protected String getUrl() {
+		return String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
+				asset.getId());
+	}
 
 }

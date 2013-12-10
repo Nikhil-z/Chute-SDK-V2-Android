@@ -55,7 +55,7 @@ public class RestConstants {
   public static final String URL_ASSETS_ALL = BASE_URL + "/assets";
   public static final String URL_ASSETS_GET = BASE_URL + "/assets/%s";
   public static final String URL_ASSETS_EXIF = BASE_URL + "/assets/%s/exif";
-  public static final String URL_ASSETS_UPDATE = BASE_URL + "/assets/%s";
+  public static final String URL_ASSETS_UPDATE = BASE_URL + "/albums/%s/assets/%s";
   public static final String URL_ASSETS_DELETE = BASE_URL
       + "/albums/%s/assets/%s";
   public static final String URL_ASSETS_CAPTION_SET = BASE_UPLOAD_URL
