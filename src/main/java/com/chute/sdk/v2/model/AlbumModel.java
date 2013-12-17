@@ -48,332 +48,337 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 @JsonFilter("albumModelFilter")
 public class AlbumModel implements Parcelable {
 
-  /**
-   * Unique identifier.
-   */
-  @JsonProperty("id")
-  private String id;
+	/**
+	 * Unique identifier.
+	 */
+	@JsonProperty("id")
+	private String id;
 
-  /**
-   * Album links.
-   */
-  @JsonProperty("links")
-  private LinkModel links;
+	/**
+	 * Album links.
+	 */
+	@JsonProperty("links")
+	private LinkModel links;
 
-  /**
-   * Album counters.
-   */
-  @JsonProperty("counters")
-  private CounterModel counters;
+	/**
+	 * Album counters.
+	 */
+	@JsonProperty("counters")
+	private CounterModel counters;
 
-  /**
-   * Album Shortcut.
-   */
-  @JsonProperty("shortcut")
-  private String shortcut;
+	/**
+	 * Album Shortcut.
+	 */
+	@JsonProperty("shortcut")
+	private String shortcut;
 
-  /**
-   * Album name.
-   */
-  @JsonProperty("name")
-  private String name;
+	/**
+	 * Album name.
+	 */
+	@JsonProperty("name")
+	private String name;
 
-  /**
-   * The user the album belongs to.
-   */
-  @JsonProperty("user")
-  private UserModel user;
+	/**
+	 * The user the album belongs to.
+	 */
+	@JsonProperty("user")
+	private UserModel user;
 
-  /**
-   * Flag indicating whether media is moderated.
-   */
-  @JsonProperty("moderate_media")
-  private boolean moderateMedia = false;
+	/**
+	 * Flag indicating whether media is moderated.
+	 */
+	@JsonProperty("moderate_media")
+	private boolean moderateMedia = false;
 
-  /**
-   * Flag indicating whether comments are moderated.
-   */
-  @JsonProperty("moderate_comments")
-  private boolean moderateComments = false;
+	/**
+	 * Flag indicating whether comments are moderated.
+	 */
+	@JsonProperty("moderate_comments")
+	private boolean moderateComments = false;
 
-  /**
-   * Time and date of creating the album.
-   */
-  @JsonProperty("created_at")
-  private String createdAt;
+	/**
+	 * Time and date of creating the album.
+	 */
+	@JsonProperty("created_at")
+	private String createdAt;
 
-  /**
-   * Time and date of updating the album.
-   */
-  @JsonProperty("updated_at")
-  private String updatedAt;
+	/**
+	 * Time and date of updating the album.
+	 */
+	@JsonProperty("updated_at")
+	private String updatedAt;
 
-  /**
-   * Album description.
-   */
-  @JsonProperty("description")
-  private String description;
+	/**
+	 * Album description.
+	 */
+	@JsonProperty("description")
+	private String description;
 
-  /**
-   * Parent ID of the album.
-   */
-  @JsonProperty("parent_id")
-  private String parentId;
+	/**
+	 * Parent ID of the album.
+	 */
+	@JsonProperty("parent_id")
+	private String parentId;
 
-  /**
-   * Number of images in the album
-   */
-  @JsonProperty("images_count")
-  private String imagesCount;
+	/**
+	 * Number of images in the album
+	 */
+	@JsonProperty("images_count")
+	private int imagesCount;
 
-  /**
-   * Album's first asset
-   */
-  private AssetModel asset;
+	/**
+	 * Album's first asset
+	 */
+	private AssetModel asset;
 
-  /**
-   * Default non-args constructor
-   */
-  public AlbumModel() {
-  }
+	/**
+	 * Default non-args constructor
+	 */
+	public AlbumModel() {
+	}
 
-  /**
-   * Getters and setters
-   */
-  public String getId() {
-    return id;
-  }
+	/**
+	 * Getters and setters
+	 */
+	public String getId() {
+		return id;
+	}
 
-  public void setId(String id) {
-    this.id = id;
-  }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-  public LinkModel getLinks() {
-    return links;
-  }
+	public LinkModel getLinks() {
+		return links;
+	}
 
-  public void setLinks(LinkModel links) {
-    this.links = links;
-  }
+	public void setLinks(LinkModel links) {
+		this.links = links;
+	}
 
-  public CounterModel getCounters() {
-    return counters;
-  }
+	public CounterModel getCounters() {
+		return counters;
+	}
 
-  public void setCounters(CounterModel counters) {
-    this.counters = counters;
-  }
+	public void setCounters(CounterModel counters) {
+		this.counters = counters;
+	}
 
-  public String getShortcut() {
-    return shortcut;
-  }
+	public String getShortcut() {
+		return shortcut;
+	}
 
-  public void setShortcut(String shortcut) {
-    this.shortcut = shortcut;
-  }
+	public void setShortcut(String shortcut) {
+		this.shortcut = shortcut;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public UserModel getUser() {
-    return user;
-  }
+	public UserModel getUser() {
+		return user;
+	}
 
-  public void setUser(UserModel user) {
-    this.user = user;
-  }
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
 
-  public boolean isModerateMedia() {
-    return moderateMedia;
-  }
+	public boolean isModerateMedia() {
+		return moderateMedia;
+	}
 
-  public void setModerateMedia(boolean moderateMedia) {
-    this.moderateMedia = moderateMedia;
-  }
+	public void setModerateMedia(boolean moderateMedia) {
+		this.moderateMedia = moderateMedia;
+	}
 
-  public boolean isModerateComments() {
-    return moderateComments;
-  }
+	public boolean isModerateComments() {
+		return moderateComments;
+	}
 
-  public void setModerateComments(boolean moderateComments) {
-    this.moderateComments = moderateComments;
-  }
+	public void setModerateComments(boolean moderateComments) {
+		this.moderateComments = moderateComments;
+	}
 
-  public String getCreatedAt() {
-    return createdAt;
-  }
+	public String getCreatedAt() {
+		return createdAt;
+	}
 
-  public void setCreatedAt(String createdAt) {
-    this.createdAt = createdAt;
-  }
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
 
-  public String getUpdatedAt() {
-    return updatedAt;
-  }
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
 
-  public void setUpdatedAt(String updatedAt) {
-    this.updatedAt = updatedAt;
-  }
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
-  public String getDescription() {
-    return description;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public String getParentId() {
-    return parentId;
-  }
+	public String getParentId() {
+		return parentId;
+	}
 
-  public void setParentId(String parentId) {
-    this.parentId = parentId;
-  }
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
 
-  public String getImagesCount() {
-    return imagesCount;
-  }
+	public int getImagesCount() {
+		return imagesCount;
+	}
 
-  public void setImagesCount(String imagesCount) {
-    this.imagesCount = imagesCount;
-  }
+	public void setImagesCount(int imagesCount) {
+		this.imagesCount = imagesCount;
+	}
 
-  @JsonProperty("asset")
-  public AssetModel getAsset() {
-    return asset;
-  }
+	@JsonProperty("asset")
+	public AssetModel getAsset() {
+		return asset;
+	}
 
-  public void setAsset(AssetModel asset) {
-    this.asset = asset;
-  }
+	public void setAsset(AssetModel asset) {
+		this.asset = asset;
+	}
 
-  @JsonSetter("cover_asset")
-  private void setCoverAsset(AssetModel coverAsset) {
-    this.asset = coverAsset;
-  }
+	@JsonSetter("cover_asset")
+	private void setCoverAsset(AssetModel coverAsset) {
+		this.asset = coverAsset;
+	}
 
-  /**
-   * Method used for serializing Album object as a String.
-   */
-  public String serializeAlbum() {
-    FilterProvider filters = new SimpleFilterProvider().addFilter("albumModelFilter",
-        SimpleBeanPropertyFilter.filterOutAllExcept("name", "moderate_comments",
-            "moderate_media"));
-    String result = null;
-    try {
-      result = JsonUtil.getMapper().writer(filters).writeValueAsString(this);
-    } catch (JsonProcessingException e) {
-      ALog.d("", e);
-    }
-    return result;
-  }
+	/**
+	 * Method used for serializing Album object as a String.
+	 */
+	public String serializeAlbum() {
+		FilterProvider filters = new SimpleFilterProvider().addFilter(
+				"albumModelFilter", SimpleBeanPropertyFilter
+						.filterOutAllExcept("name", "moderate_comments",
+								"moderate_media"));
+		String result = null;
+		try {
+			result = JsonUtil.getMapper().writer(filters)
+					.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			ALog.d("", e);
+		}
+		return result;
+	}
 
-  public AlbumModel(Parcel in) {
-    this();
-    id = in.readString();
-    links = in.readParcelable(LinkModel.class.getClassLoader());
-    counters = in.readParcelable(CounterModel.class.getClassLoader());
-    shortcut = in.readString();
-    name = in.readString();
-    user = in.readParcelable(UserModel.class.getClassLoader());
-    moderateMedia = in.readInt() == 1;
-    moderateComments = in.readInt() == 1;
-    createdAt = in.readString();
-    updatedAt = in.readString();
-    description = in.readString();
-    parentId = in.readString();
-    imagesCount = in.readString();
-    asset = in.readParcelable(AssetModel.class.getClassLoader());
-  }
+	public AlbumModel(Parcel in) {
+		this();
+		id = in.readString();
+		links = in.readParcelable(LinkModel.class.getClassLoader());
+		counters = in.readParcelable(CounterModel.class.getClassLoader());
+		shortcut = in.readString();
+		name = in.readString();
+		user = in.readParcelable(UserModel.class.getClassLoader());
+		moderateMedia = in.readInt() == 1;
+		moderateComments = in.readInt() == 1;
+		createdAt = in.readString();
+		updatedAt = in.readString();
+		description = in.readString();
+		parentId = in.readString();
+		imagesCount = in.readInt();
+		asset = in.readParcelable(AssetModel.class.getClassLoader());
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#describeContents()
-   */
-  @Override
-  public int describeContents() {
-    return 0;
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#describeContents()
+	 */
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-   */
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(id);
-    dest.writeParcelable(links, flags);
-    dest.writeParcelable(counters, flags);
-    dest.writeString(shortcut);
-    dest.writeString(name);
-    dest.writeParcelable(user, flags);
-    dest.writeInt(moderateMedia ? 1 : 0);
-    dest.writeInt(moderateComments ? 1 : 0);
-    dest.writeString(createdAt);
-    dest.writeString(updatedAt);
-    dest.writeString(description);
-    dest.writeString(parentId);
-    dest.writeString(imagesCount);
-    dest.writeParcelable(asset, flags);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+	 */
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
+		dest.writeParcelable(links, flags);
+		dest.writeParcelable(counters, flags);
+		dest.writeString(shortcut);
+		dest.writeString(name);
+		dest.writeParcelable(user, flags);
+		dest.writeInt(moderateMedia ? 1 : 0);
+		dest.writeInt(moderateComments ? 1 : 0);
+		dest.writeString(createdAt);
+		dest.writeString(updatedAt);
+		dest.writeString(description);
+		dest.writeString(parentId);
+		dest.writeInt(imagesCount);
+		dest.writeParcelable(asset, flags);
+	}
 
-  public static final Parcelable.Creator<AlbumModel> CREATOR = new Parcelable.Creator<AlbumModel>() {
+	public static final Parcelable.Creator<AlbumModel> CREATOR = new Parcelable.Creator<AlbumModel>() {
 
-    @Override
-    public AlbumModel createFromParcel(Parcel in) {
-      return new AlbumModel(in);
-    }
+		@Override
+		public AlbumModel createFromParcel(Parcel in) {
+			return new AlbumModel(in);
+		}
 
-    @Override
-    public AlbumModel[] newArray(int size) {
-      return new AlbumModel[size];
-    }
+		@Override
+		public AlbumModel[] newArray(int size) {
+			return new AlbumModel[size];
+		}
 
-  };
+	};
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("AlbumModel [id=");
-    builder.append(id);
-    builder.append(", links=");
-    builder.append(links);
-    builder.append(", counters=");
-    builder.append(counters);
-    builder.append(", shortcut=");
-    builder.append(shortcut);
-    builder.append(", name=");
-    builder.append(name);
-    builder.append(", user=");
-    builder.append(user);
-    builder.append(", moderateMedia=");
-    builder.append(moderateMedia);
-    builder.append(", moderateComments=");
-    builder.append(moderateComments);
-    builder.append(", createdAt=");
-    builder.append(createdAt);
-    builder.append(", updatedAt=");
-    builder.append(updatedAt);
-    builder.append(", description=");
-    builder.append(description);
-    builder.append(", parentId=");
-    builder.append(parentId);
-    builder.append(", imagesCount=");
-    builder.append(imagesCount);
-    builder.append(", asset=");
-    builder.append(asset);
-    builder.append("]");
-    return builder.toString();
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("AlbumModel [id=");
+		builder.append(id);
+		builder.append(", links=");
+		builder.append(links);
+		builder.append(", counters=");
+		builder.append(counters);
+		builder.append(", shortcut=");
+		builder.append(shortcut);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", moderateMedia=");
+		builder.append(moderateMedia);
+		builder.append(", moderateComments=");
+		builder.append(moderateComments);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", updatedAt=");
+		builder.append(updatedAt);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", parentId=");
+		builder.append(parentId);
+		builder.append(", imagesCount=");
+		builder.append(imagesCount);
+		builder.append(", asset=");
+		builder.append(asset);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }
