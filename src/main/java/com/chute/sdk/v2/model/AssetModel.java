@@ -26,6 +26,7 @@
 package com.chute.sdk.v2.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -124,7 +125,7 @@ public class AssetModel implements Parcelable {
 	 * Asset tags.
 	 */
 	@JsonProperty("tags")
-	private ArrayList<String> tags;
+	private List<String> tags;
 
 	/**
 	 * Time and date of creating the asset.
@@ -319,7 +320,7 @@ public class AssetModel implements Parcelable {
 		this.hearts = hearts;
 	}
 
-	public ArrayList<String> getTags() {
+	public List<String> getTags() {
 		return tags;
 	}
 
