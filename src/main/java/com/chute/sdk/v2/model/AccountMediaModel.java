@@ -40,170 +40,193 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class AccountMediaModel implements Parcelable, AccountMedia {
 
-  @SuppressWarnings("unused")
-  private static final String TAG = AccountMediaModel.class.getSimpleName();
+	@SuppressWarnings("unused")
+	private static final String TAG = AccountMediaModel.class.getSimpleName();
 
-  /**
-   * The unique identifier of the media item.
-   */
-  @JsonProperty("id")
-  private String id;
+	/**
+	 * The unique identifier of the media item.
+	 */
+	@JsonProperty("id")
+	private String id;
 
-  /**
-   * Item name or caption.
-   */
-  @JsonProperty("caption")
-  private String caption;
+	/**
+	 * Item name or caption.
+	 */
+	@JsonProperty("caption")
+	private String caption;
 
-  /**
-   * Item dimensions
-   */
-  @JsonProperty("dimensions")
-  private String dimensions;
+	/**
+	 * Item dimensions
+	 */
+	@JsonProperty("dimensions")
+	private String dimensions;
 
-  /**
-   * The URL that shows the location of the media item.
-   */
-  @JsonProperty("image_url")
-  private String imageUrl;
+	/**
+	 * The URL that shows the location of the image item.
+	 */
+	@JsonProperty("image_url")
+	private String imageUrl;
 
-  /**
-   * The URL that shows the location of the item thumbnail.
-   */
-  @JsonProperty("thumbnail")
-  private String thumbnail;
+	/**
+	 * The URL that shows the location of the video item.
+	 */
+	@JsonProperty("video_url")
+	private String videoUrl;
 
-  /**
-   * Default non-args constructor.
-   */
-  public AccountMediaModel() {
-    super();
-  }
+	/**
+	 * The URL that shows the location of the item thumbnail.
+	 */
+	@JsonProperty("thumbnail")
+	private String thumbnail;
 
-  /**
-   * Getter and setter methods.
-   */
-  public String getId() {
-    return id;
-  }
+	/**
+	 * Default non-args constructor.
+	 */
+	public AccountMediaModel() {
+		super();
+	}
 
-  public void setId(String id) {
-    this.id = id;
-  }
+	/**
+	 * Getter and setter methods.
+	 */
+	public String getId() {
+		return id;
+	}
 
-  public String getThumbnail() {
-    return thumbnail;
-  }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-  public void setThumbnail(String thumbnail) {
-    this.thumbnail = thumbnail;
-  }
+	public String getThumbnail() {
+		return thumbnail;
+	}
 
-  public String getDimensions() {
-    return dimensions;
-  }
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 
-  public void setDimensions(String dimensions) {
-    this.dimensions = dimensions;
-  }
+	public String getDimensions() {
+		return dimensions;
+	}
 
-  public String getCaption() {
-    return caption;
-  }
+	public void setDimensions(String dimensions) {
+		this.dimensions = dimensions;
+	}
 
-  public void setCaption(String caption) {
-    this.caption = caption;
-  }
+	public String getCaption() {
+		return caption;
+	}
 
-  public String getImageUrl() {
-    return imageUrl;
-  }
+	public void setCaption(String caption) {
+		this.caption = caption;
+	}
 
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
-  }
+	public String getImageUrl() {
+		return imageUrl;
+	}
 
-  public AccountMediaModel(Parcel in) {
-    id = in.readString();
-    caption = in.readString();
-    dimensions = in.readString();
-    imageUrl = in.readString();
-    thumbnail = in.readString();
-  }
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#describeContents()
-   */
-  @Override
-  public int describeContents() {
-    return 0;
-  }
+	public String getvideoUrl() {
+		return videoUrl;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-   */
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(id);
-    dest.writeString(caption);
-    dest.writeString(dimensions);
-    dest.writeString(imageUrl);
-    dest.writeString(thumbnail);
-  }
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
+	}
 
-  public static final Parcelable.Creator<AccountMediaModel> CREATOR = new Parcelable.Creator<AccountMediaModel>() {
+	public AccountMediaModel(Parcel in) {
+		id = in.readString();
+		caption = in.readString();
+		dimensions = in.readString();
+		imageUrl = in.readString();
+		videoUrl = in.readString();
+		thumbnail = in.readString();
+	}
 
-    @Override
-    public AccountMediaModel createFromParcel(Parcel in) {
-      return new AccountMediaModel(in);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#describeContents()
+	 */
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-    @Override
-    public AccountMediaModel[] newArray(int size) {
-      return new AccountMediaModel[size];
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+	 */
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
+		dest.writeString(caption);
+		dest.writeString(dimensions);
+		dest.writeString(imageUrl);
+		dest.writeString(videoUrl);
+		dest.writeString(thumbnail);
+	}
 
-  };
+	public static final Parcelable.Creator<AccountMediaModel> CREATOR = new Parcelable.Creator<AccountMediaModel>() {
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("AccountMediaModel [id=");
-    builder.append(id);
-    builder.append(", caption=");
-    builder.append(caption);
-    builder.append(", dimensions=");
-    builder.append(dimensions);
-    builder.append(", imageUrl=");
-    builder.append(imageUrl);
-    builder.append(", thumbnail=");
-    builder.append(thumbnail);
-    builder.append("]");
-    return builder.toString();
-  }
+		@Override
+		public AccountMediaModel createFromParcel(Parcel in) {
+			return new AccountMediaModel(in);
+		}
 
-  /*
-   * (non-Javadoc)
-   * @see com.chute.sdk.v2.model.interfaces.AccountMedia#getViewType()
-   */
-  @Override
-  public AccountMediaType getViewType() {
-    return AccountMediaType.FILE;
-  }
+		@Override
+		public AccountMediaModel[] newArray(int size) {
+			return new AccountMediaModel[size];
+		}
 
-  /*
-   * (non-Javadoc)
-   * @see com.chute.sdk.v2.model.interfaces.AccountMedia#getName()
-   */
-  @Override
-  public String getName() {
-    return getCaption();
-  }
+	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.chute.sdk.v2.model.interfaces.AccountMedia#getViewType()
+	 */
+	@Override
+	public AccountMediaType getViewType() {
+		return AccountMediaType.FILE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("AccountMediaModel [id=");
+		builder.append(id);
+		builder.append(", caption=");
+		builder.append(caption);
+		builder.append(", dimensions=");
+		builder.append(dimensions);
+		builder.append(", imageUrl=");
+		builder.append(imageUrl);
+		builder.append(", videoUrl=");
+		builder.append(videoUrl);
+		builder.append(", thumbnail=");
+		builder.append(thumbnail);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.chute.sdk.v2.model.interfaces.AccountMedia#getName()
+	 */
+	@Override
+	public String getName() {
+		return getCaption();
+	}
 
 }
