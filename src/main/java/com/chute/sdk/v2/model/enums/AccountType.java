@@ -36,7 +36,7 @@ public enum AccountType {
 	FACEBOOK("facebook"), CHUTE("chute"), TWITTER("twitter"), FOURSQUARE(
 			"foursquare"), PICASA("google"), FLICKR("flickr"), INSTAGRAM(
 			"instagram"), DROPBOX("dropbox"), GOOGLE("google"), GOOGLEDRIVE(
-			"google"), SKYDRIVE("microsoft_account"), YOUTUBE("youtube");
+			"google"), SKYDRIVE("microsoft_account"), YOUTUBE("google");
 
 	private final String loginMethod;
 

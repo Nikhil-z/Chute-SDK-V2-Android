@@ -129,7 +129,7 @@ public class AccountMediaModel implements Parcelable, AccountMedia {
 		this.imageUrl = imageUrl;
 	}
 
-	public String getvideoUrl() {
+	public String getVideoUrl() {
 		return videoUrl;
 	}
 
