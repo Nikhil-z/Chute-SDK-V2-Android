@@ -77,6 +77,9 @@ public class AssetModel implements Parcelable {
 	@JsonProperty("url")
 	private String url;
 
+	@JsonProperty("video_url")
+	private String videoUrl;
+
 	/**
 	 * Asset type.
 	 * <p>
@@ -264,6 +267,14 @@ public class AssetModel implements Parcelable {
 		this.url = url;
 	}
 
+	public String getVideoUrl() {
+		return videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -351,6 +362,7 @@ public class AssetModel implements Parcelable {
 		links = in.readParcelable(LinkModel.class.getClassLoader());
 		thumbnail = in.readString();
 		url = in.readString();
+		videoUrl = in.readString();
 		type = in.readString();
 		caption = in.readString();
 		dimensions = in.readParcelable(DimensionsModel.class.getClassLoader());
@@ -390,6 +402,7 @@ public class AssetModel implements Parcelable {
 		dest.writeParcelable(links, flags);
 		dest.writeString(thumbnail);
 		dest.writeString(url);
+		dest.writeString(videoUrl);
 		dest.writeString(type);
 		dest.writeString(caption);
 		dest.writeParcelable(dimensions, flags);
@@ -450,6 +463,8 @@ public class AssetModel implements Parcelable {
 		builder.append(thumbnail);
 		builder.append(", url=");
 		builder.append(url);
+		builder.append(", videoUrl=");
+		builder.append(videoUrl);
 		builder.append(", type=");
 		builder.append(type);
 		builder.append(", caption=");
