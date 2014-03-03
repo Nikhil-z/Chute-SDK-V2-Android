@@ -35,6 +35,7 @@ public class AuthenticationFactory {
 
 	public static final String EXTRA_ACCOUNT_TYPE = "account_type";
 	public static final String EXTRA_COOKIE_ACCOUNTS = "cookie_accounts";
+	public static final String EXTRA_ALL_COOKIES = "all_cookies";
 	public static final String EXTRA_RETAIN_SESSION = "retain_session";
 
 	public static final int AUTHENTICATION_REQUEST_CODE = 123;
@@ -113,6 +114,7 @@ public class AuthenticationFactory {
 		if (options != null) {
 			intent.putExtra(EXTRA_COOKIE_ACCOUNTS,
 					options.clearCookiesForAccount);
+			intent.putExtra(EXTRA_ALL_COOKIES, options.clearAllCookies);
 			intent.putExtra(EXTRA_RETAIN_SESSION, options.shouldRetainSession);
 		}
 		activity.startActivityForResult(intent, AUTHENTICATION_REQUEST_CODE);

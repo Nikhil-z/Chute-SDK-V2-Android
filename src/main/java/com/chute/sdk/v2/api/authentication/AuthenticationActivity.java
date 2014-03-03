@@ -43,7 +43,6 @@ import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.webkit.WebViewDatabase;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -72,6 +71,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 	private String loadWebViewUrl;
 	private AccountType accountType;
 	private boolean shouldClearCookiesForAccount;
+	private boolean shouldClearAllCookies;
 	private CookieManager cookieManager;
 
 	/** Called when the activity is first created. */
@@ -89,6 +89,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 				accountType, shouldRetainSession);
 		shouldClearCookiesForAccount = getIntent().getExtras().getBoolean(
 				AuthenticationFactory.EXTRA_COOKIE_ACCOUNTS);
+		shouldClearAllCookies = getIntent().getExtras().getBoolean(AuthenticationFactory.EXTRA_ALL_COOKIES);
 
 		webViewAuthentication = new WebView(this);
 		webViewAuthentication.setLayoutParams(new LayoutParams(
@@ -102,13 +103,8 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		cookieManager = CookieManager.getInstance();
 
 		final WebSettings mWebSettings = webViewAuthentication.getSettings();
-		if (TokenAuthenticationProvider.getInstance().isTokenValid() == false) {
-			webViewAuthentication.clearCache(true);
-			mWebSettings.setSavePassword(false);
-			mWebSettings.setSaveFormData(false);
-			this.getBaseContext().deleteDatabase("webview.db");
-			this.getBaseContext().deleteDatabase("webviewCache.db");
-			cookieManager.removeAllCookie();
+		if (TokenAuthenticationProvider.getInstance().isTokenValid() == false || shouldClearAllCookies == true) {
+			clearAllCookies(mWebSettings);
 		}
 
 		if (shouldClearCookiesForAccount == true) {
@@ -276,6 +272,15 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 
 		}
 
+	}
+	
+	private void clearAllCookies(WebSettings mWebSettings) {
+		webViewAuthentication.clearCache(true);
+		mWebSettings.setSavePassword(false);
+		mWebSettings.setSaveFormData(false);
+		this.getBaseContext().deleteDatabase("webview.db");
+		this.getBaseContext().deleteDatabase("webviewCache.db");
+		cookieManager.removeAllCookie();
 	}
 
 }
