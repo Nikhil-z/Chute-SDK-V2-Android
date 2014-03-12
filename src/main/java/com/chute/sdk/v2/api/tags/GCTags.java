@@ -26,6 +26,7 @@
 package com.chute.sdk.v2.api.tags;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 
@@ -102,7 +103,7 @@ public class GCTags {
    */
   public static HttpRequest update(final Context context,
       final AlbumModel album, final AssetModel asset,
-      final ArrayList<String> tags,
+      final List<String> tags,
       final HttpCallback<ListResponseModel<String>> callback) {
     return new TagsReplaceRequest(context, album, asset, tags, callback);
   }
@@ -129,7 +130,7 @@ public class GCTags {
    */
   public static HttpRequest create(final Context context,
       final AlbumModel album, final AssetModel asset,
-      final ArrayList<String> tags,
+      final List<String> tags,
       final HttpCallback<ListResponseModel<String>> callback) {
     return new TagsAddRequest(context, album, asset, tags, callback);
   }
@@ -154,7 +155,7 @@ public class GCTags {
    */
   public static HttpRequest delete(final Context context,
       final AlbumModel album, final AssetModel asset,
-      final ArrayList<String> tags,
+      final List<String> tags,
       final HttpCallback<ListResponseModel<String>> callback) {
     return new TagsDeleteRequest(context, album, asset, tags, callback);
   }

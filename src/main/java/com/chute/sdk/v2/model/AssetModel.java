@@ -442,7 +442,7 @@ public class AssetModel implements Parcelable {
 		String result = null;
 		FilterProvider filter = new SimpleFilterProvider().addFilter(
 				"assetModelFilter", SimpleBeanPropertyFilter
-						.filterOutAllExcept("caption", "votes", "hearts"));
+						.filterOutAllExcept("caption", "votes", "hearts", "tags"));
 		try {
 			result = JsonUtil.getMapper().writer(filter)
 					.writeValueAsString(this);
