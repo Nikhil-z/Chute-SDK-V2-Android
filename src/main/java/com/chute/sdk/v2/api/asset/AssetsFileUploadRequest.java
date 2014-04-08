@@ -59,7 +59,7 @@ public class AssetsFileUploadRequest extends
 
   public AssetsFileUploadRequest(Context context, UploadProgressListener uploadListener,
       AlbumModel album,
-      String filePath, HttpCallback<ListResponseModel<AssetModel>> callback) {
+      String filePath, String clientId, HttpCallback<ListResponseModel<AssetModel>> callback) {
     super(context, RequestMethod.POST, new ListResponseParser<AssetModel>(
         AssetModel.class), callback);
     this.album = album;
@@ -70,6 +70,9 @@ public class AssetsFileUploadRequest extends
     }
     if (filePath == null) {
       throw new NullPointerException("File path cannot be null");
+    }
+    if (clientId != null) {
+    	addParam("client_id", clientId);
     }
     
     MultipartEntity multipartEntity = null;
