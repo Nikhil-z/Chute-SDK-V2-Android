@@ -208,21 +208,14 @@ public class GCAssets {
 	 * @param callback
 	 *            Instance of {@link HttpCallback} interface. If successful, the
 	 *            callback returns {@link ListResponseModel<AssetModel>}.
-	 * @return {@link AssetsFileUploadRequest}.
+	 * @return {@link AssetsQQFileUploadRequest}.
 	 */
 	public static HttpRequest upload(final Context context,
 			final UploadProgressListener uploadListener,
 			final AlbumModel album, final String filePath,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return upload(context, uploadListener, album, filePath, null, callback);
-	}
-
-	public static HttpRequest upload(final Context context,
-			final UploadProgressListener uploadListener,
-			final AlbumModel album, final String filePath, String clientId,
-			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AssetsFileUploadRequest(context, uploadListener, album,
-				filePath, clientId, callback);
+		return new AssetsFileUploadRequest(context, filePath, album,
+				uploadListener, callback);
 	}
 
 	/**

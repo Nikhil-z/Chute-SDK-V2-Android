@@ -29,7 +29,7 @@ package com.chute.sdk.v2.utils;
 public class RestConstants {
 
   public static String BASE_URL = "https://api.getchute.com/v2";
-  public static String BASE_UPLOAD_URL = "http://upload.getchute.com";
+  public static String BASE_UPLOAD_URL = "https://upload.getchute.com";
   public static String BASE_AUTH_URL = "http://getchute.com/v2/oauth/%s/authorize";
   public static final String URL_AUTHENTICATION_TOKEN = BASE_URL + "/oauth/token";
 
@@ -129,8 +129,10 @@ public class RestConstants {
   public static final String URL_UPLOAD_TOKEN = BASE_URL + "/uploads";
   public static final String URL_UPLOAD_COMPLETE = BASE_URL
       + "/uploads/%s/complete";
-  public static final String URL_UPLOAD_ONE_STEP = BASE_UPLOAD_URL
+  public static final String URL_UPLOAD_FILE = BASE_UPLOAD_URL
       + "/v2/albums/%s/assets/upload";
+  public static final String URL_UPLOAD_QQFILE = BASE_UPLOAD_URL
+	      + "/v2/upload";
 
   // ACCOUNTS
   public static final String BASE_ACCOUNT_URL = "http://accounts.getchute.com";
