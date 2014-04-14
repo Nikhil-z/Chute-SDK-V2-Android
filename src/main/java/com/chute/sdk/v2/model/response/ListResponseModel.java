@@ -37,72 +37,112 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * {@link ResponseStatusModel} and data object.
  * 
  * @param <T>
- *          The response received can be of any kind.
+ *            The response received can be of any kind.
  */
 public class ListResponseModel<T> {
 
-  public static final String TAG = ListResponseModel.class.getSimpleName();
+	public static final String TAG = ListResponseModel.class.getSimpleName();
 
-  /**
-   * Data object
-   */
-  @JsonProperty("data")
-  private List<T> data;
+	/**
+	 * Data object
+	 */
+	@JsonProperty("data")
+	private List<T> data;
 
-  /**
-   * Pagination
-   */
-  @JsonProperty("pagination")
-  private PaginationModel pagination;
+	/**
+	 * Pagination
+	 */
+	@JsonProperty("pagination")
+	private PaginationModel pagination;
 
-  /**
-   * Response status
-   */
-  @JsonProperty("response")
-  private ResponseStatusModel response;
+	/**
+	 * Response status
+	 */
+	@JsonProperty("response")
+	private ResponseStatusModel response;
 
-  /**
-   * Getters and setters
-   */
-  public PaginationModel getPagination() {
-    return pagination;
-  }
+	/**
+	 * Getters and setters
+	 */
+	public PaginationModel getPagination() {
+		return pagination;
+	}
 
-  public void setPagination(PaginationModel pagination) {
-    this.pagination = pagination;
-  }
+	public void setPagination(PaginationModel pagination) {
+		this.pagination = pagination;
+	}
 
-  public ResponseStatusModel getResponse() {
-    return response;
-  }
+	public ResponseStatusModel getResponse() {
+		return response;
+	}
 
-  public void setResponse(ResponseStatusModel response) {
-    this.response = response;
-  }
+	public void setResponse(ResponseStatusModel response) {
+		this.response = response;
+	}
 
-  public List<T> getData() {
-    return data;
-  }
+	public List<T> getData() {
+		return data;
+	}
 
-  public void setData(List<T> data) {
-    this.data = data;
-  }
+	public void setData(List<T> data) {
+		this.data = data;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("ListResponseModel [data=");
-    builder.append(data);
-    builder.append(", pagination=");
-    builder.append(pagination);
-    builder.append(", response=");
-    builder.append(response);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((data == null) ? 0 : data.hashCode());
+		result = prime * result
+				+ ((pagination == null) ? 0 : pagination.hashCode());
+		result = prime * result
+				+ ((response == null) ? 0 : response.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ListResponseModel other = (ListResponseModel) obj;
+		if (data == null) {
+			if (other.data != null)
+				return false;
+		} else if (!data.equals(other.data))
+			return false;
+		if (pagination == null) {
+			if (other.pagination != null)
+				return false;
+		} else if (!pagination.equals(other.pagination))
+			return false;
+		if (response == null) {
+			if (other.response != null)
+				return false;
+		} else if (!response.equals(other.response))
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ListResponseModel [data=");
+		builder.append(data);
+		builder.append(", pagination=");
+		builder.append(pagination);
+		builder.append(", response=");
+		builder.append(response);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

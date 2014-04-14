@@ -37,113 +37,144 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CounterModel implements Parcelable {
 
-  /**
-   * Number of photos.
-   */
-  @JsonProperty("photos")
-  private long photos;
+	/**
+	 * Number of photos.
+	 */
+	@JsonProperty("photos")
+	private long photos;
 
-  /**
-   * Number of videos.
-   */
-  @JsonProperty("videos")
-  private long videos;
+	/**
+	 * Number of videos.
+	 */
+	@JsonProperty("videos")
+	private long videos;
 
-  /**
-   * Number of inbox items.
-   */
-  @JsonProperty("inbox")
-  private long inbox;
+	/**
+	 * Number of inbox items.
+	 */
+	@JsonProperty("inbox")
+	private long inbox;
 
-  /**
-   * Default non-args constructor.
-   */
-  public CounterModel() {
-  }
+	/**
+	 * Default non-args constructor.
+	 */
+	public CounterModel() {
+	}
 
-  /**
-   * Getters and setters.
-   */
-  public long getPhotos() {
-    return photos;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public long getPhotos() {
+		return photos;
+	}
 
-  public void setPhotos(long photos) {
-    this.photos = photos;
-  }
+	public void setPhotos(long photos) {
+		this.photos = photos;
+	}
 
-  public long getVideos() {
-    return videos;
-  }
+	public long getVideos() {
+		return videos;
+	}
 
-  public void setVideos(long videos) {
-    this.videos = videos;
-  }
+	public void setVideos(long videos) {
+		this.videos = videos;
+	}
 
-  public long getInbox() {
-    return inbox;
-  }
+	public long getInbox() {
+		return inbox;
+	}
 
-  public void setInbox(long inbox) {
-    this.inbox = inbox;
-  }
+	public void setInbox(long inbox) {
+		this.inbox = inbox;
+	}
 
-  public CounterModel(Parcel in) {
-    this();
-    photos = in.readLong();
-    videos = in.readLong();
-    inbox = in.readLong();
-  }
+	public CounterModel(Parcel in) {
+		this();
+		photos = in.readLong();
+		videos = in.readLong();
+		inbox = in.readLong();
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#describeContents()
-   */
-  @Override
-  public int describeContents() {
-    return 0;
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#describeContents()
+	 */
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-   */
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeLong(photos);
-    dest.writeLong(videos);
-    dest.writeLong(inbox);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+	 */
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeLong(photos);
+		dest.writeLong(videos);
+		dest.writeLong(inbox);
+	}
 
-  public static final Parcelable.Creator<CounterModel> CREATOR = new Parcelable.Creator<CounterModel>() {
+	public static final Parcelable.Creator<CounterModel> CREATOR = new Parcelable.Creator<CounterModel>() {
 
-    @Override
-    public CounterModel createFromParcel(Parcel in) {
-      return new CounterModel(in);
-    }
+		@Override
+		public CounterModel createFromParcel(Parcel in) {
+			return new CounterModel(in);
+		}
 
-    @Override
-    public CounterModel[] newArray(int size) {
-      return new CounterModel[size];
-    }
+		@Override
+		public CounterModel[] newArray(int size) {
+			return new CounterModel[size];
+		}
 
-  };
+	};
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("CounterModel [photos=");
-    builder.append(photos);
-    builder.append(", videos=");
-    builder.append(videos);
-    builder.append(", inbox=");
-    builder.append(inbox);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (inbox ^ (inbox >>> 32));
+		result = prime * result + (int) (photos ^ (photos >>> 32));
+		result = prime * result + (int) (videos ^ (videos >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CounterModel other = (CounterModel) obj;
+		if (inbox != other.inbox)
+			return false;
+		if (photos != other.photos)
+			return false;
+		if (videos != other.videos)
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CounterModel [photos=");
+		builder.append(photos);
+		builder.append(", videos=");
+		builder.append(videos);
+		builder.append(", inbox=");
+		builder.append(inbox);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

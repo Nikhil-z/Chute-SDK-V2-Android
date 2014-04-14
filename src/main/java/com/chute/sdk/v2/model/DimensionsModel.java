@@ -37,97 +37,131 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class DimensionsModel implements Parcelable {
 
-  public static final String TAG = DimensionsModel.class.getSimpleName();
+	public static final String TAG = DimensionsModel.class.getSimpleName();
 
-  /**
-   * Width of the asset.
-   */
-  @JsonProperty("width")
-  private String width;
+	/**
+	 * Width of the asset.
+	 */
+	@JsonProperty("width")
+	private String width;
 
-  /**
-   * Asset height.
-   */
-  @JsonProperty("height")
-  private String height;
+	/**
+	 * Asset height.
+	 */
+	@JsonProperty("height")
+	private String height;
 
-  /**
-   * Default non-args constructor.
-   */
-  public DimensionsModel() {
-  }
+	/**
+	 * Default non-args constructor.
+	 */
+	public DimensionsModel() {
+	}
 
-  /**
-   * Getters and setters.
-   */
-  public String getWidth() {
-    return width;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public String getWidth() {
+		return width;
+	}
 
-  public void setWidth(String width) {
-    this.width = width;
-  }
+	public void setWidth(String width) {
+		this.width = width;
+	}
 
-  public String getHeight() {
-    return height;
-  }
+	public String getHeight() {
+		return height;
+	}
 
-  public void setHeight(String height) {
-    this.height = height;
-  }
+	public void setHeight(String height) {
+		this.height = height;
+	}
 
-  public DimensionsModel(Parcel in) {
-    this();
-    width = in.readString();
-    height = in.readString();
-  }
+	public DimensionsModel(Parcel in) {
+		this();
+		width = in.readString();
+		height = in.readString();
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#describeContents()
-   */
-  @Override
-  public int describeContents() {
-    return 0;
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#describeContents()
+	 */
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-   */
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(width);
-    dest.writeString(height);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+	 */
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(width);
+		dest.writeString(height);
+	}
 
-  public static final Parcelable.Creator<DimensionsModel> CREATOR = new Parcelable.Creator<DimensionsModel>() {
+	public static final Parcelable.Creator<DimensionsModel> CREATOR = new Parcelable.Creator<DimensionsModel>() {
 
-    @Override
-    public DimensionsModel createFromParcel(Parcel in) {
-      return new DimensionsModel(in);
-    }
+		@Override
+		public DimensionsModel createFromParcel(Parcel in) {
+			return new DimensionsModel(in);
+		}
 
-    @Override
-    public DimensionsModel[] newArray(int size) {
-      return new DimensionsModel[size];
-    }
+		@Override
+		public DimensionsModel[] newArray(int size) {
+			return new DimensionsModel[size];
+		}
 
-  };
+	};
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("DimensionsModel [width=");
-    builder.append(width);
-    builder.append(", height=");
-    builder.append(height);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((height == null) ? 0 : height.hashCode());
+		result = prime * result + ((width == null) ? 0 : width.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DimensionsModel other = (DimensionsModel) obj;
+		if (height == null) {
+			if (other.height != null)
+				return false;
+		} else if (!height.equals(other.height))
+			return false;
+		if (width == null) {
+			if (other.width != null)
+				return false;
+		} else if (!width.equals(other.width))
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DimensionsModel [width=");
+		builder.append(width);
+		builder.append(", height=");
+		builder.append(height);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

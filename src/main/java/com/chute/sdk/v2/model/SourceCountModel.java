@@ -34,52 +34,78 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SourceCountModel {
 
-  public static final String TAG = SourceCountModel.class.getSimpleName();
+	public static final String TAG = SourceCountModel.class.getSimpleName();
 
-  /**
-   * Number of uploaded assets.
-   */
-  @JsonProperty("uploads")
-  private int uploads;
+	/**
+	 * Number of uploaded assets.
+	 */
+	@JsonProperty("uploads")
+	private int uploads;
 
-  /**
-   * Number of imported assets.
-   */
-  @JsonProperty("imports")
-  private int imports;
+	/**
+	 * Number of imported assets.
+	 */
+	@JsonProperty("imports")
+	private int imports;
 
-  /**
-   * Getters and setters.
-   */
-  public int getUploads() {
-    return uploads;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public int getUploads() {
+		return uploads;
+	}
 
-  public void setUploads(int uploads) {
-    this.uploads = uploads;
-  }
+	public void setUploads(int uploads) {
+		this.uploads = uploads;
+	}
 
-  public int getImports() {
-    return imports;
-  }
+	public int getImports() {
+		return imports;
+	}
 
-  public void setImports(int imports) {
-    this.imports = imports;
-  }
+	public void setImports(int imports) {
+		this.imports = imports;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("SourceCountModel [uploads=");
-    builder.append(uploads);
-    builder.append(", imports=");
-    builder.append(imports);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + imports;
+		result = prime * result + uploads;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SourceCountModel other = (SourceCountModel) obj;
+		if (imports != other.imports)
+			return false;
+		if (uploads != other.uploads)
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("SourceCountModel [uploads=");
+		builder.append(uploads);
+		builder.append(", imports=");
+		builder.append(imports);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

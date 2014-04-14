@@ -34,52 +34,78 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UserCountModel {
 
-  public static final String TAG = UserCountModel.class.getSimpleName();
+	public static final String TAG = UserCountModel.class.getSimpleName();
 
-  /**
-   * Number of uploaded assets.
-   */
-  @JsonProperty("via_upload")
-  private int viaUpload;
+	/**
+	 * Number of uploaded assets.
+	 */
+	@JsonProperty("via_upload")
+	private int viaUpload;
 
-  /**
-   * Number of imported assets.
-   */
-  @JsonProperty("via_import")
-  private int viaImport;
+	/**
+	 * Number of imported assets.
+	 */
+	@JsonProperty("via_import")
+	private int viaImport;
 
-  /**
-   * Getters and setters.
-   */
-  public int getViaUpload() {
-    return viaUpload;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public int getViaUpload() {
+		return viaUpload;
+	}
 
-  public void setViaUpload(int viaUpload) {
-    this.viaUpload = viaUpload;
-  }
+	public void setViaUpload(int viaUpload) {
+		this.viaUpload = viaUpload;
+	}
 
-  public int getViaImport() {
-    return viaImport;
-  }
+	public int getViaImport() {
+		return viaImport;
+	}
 
-  public void setViaImport(int viaImport) {
-    this.viaImport = viaImport;
-  }
+	public void setViaImport(int viaImport) {
+		this.viaImport = viaImport;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("UserCountModel [viaUpload=");
-    builder.append(viaUpload);
-    builder.append(", viaImport=");
-    builder.append(viaImport);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + viaImport;
+		result = prime * result + viaUpload;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserCountModel other = (UserCountModel) obj;
+		if (viaImport != other.viaImport)
+			return false;
+		if (viaUpload != other.viaUpload)
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("UserCountModel [viaUpload=");
+		builder.append(viaUpload);
+		builder.append(", viaImport=");
+		builder.append(viaImport);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

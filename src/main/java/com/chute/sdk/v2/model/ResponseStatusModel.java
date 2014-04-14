@@ -36,116 +36,167 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ResponseStatusModel {
 
-  public static final String TAG = ResponseStatusModel.class.getSimpleName();
+	public static final String TAG = ResponseStatusModel.class.getSimpleName();
 
-  /**
-   * Response title.
-   */
-  @JsonProperty("title")
-  private String title;
+	/**
+	 * Response title.
+	 */
+	@JsonProperty("title")
+	private String title;
 
-  /**
-   * Error message.
-   */
-  @JsonProperty("error")
-  private String error;
+	/**
+	 * Error message.
+	 */
+	@JsonProperty("error")
+	private String error;
 
-  /**
-   * Protocol version.
-   */
-  @JsonProperty("version")
-  private int version;
+	/**
+	 * Protocol version.
+	 */
+	@JsonProperty("version")
+	private int version;
 
-  /**
-   * Error code.
-   */
-  @JsonProperty("code")
-  private int code;
+	/**
+	 * Error code.
+	 */
+	@JsonProperty("code")
+	private int code;
 
-  /**
-   * Href info.
-   */
-  @JsonProperty("href")
-  private String href;
+	/**
+	 * Href info.
+	 */
+	@JsonProperty("href")
+	private String href;
 
-  /**
-   * API calls limits.
-   */
-  @JsonProperty("api_limits")
-  private ApiLimitsModel apiLimits;
+	/**
+	 * API calls limits.
+	 */
+	@JsonProperty("api_limits")
+	private ApiLimitsModel apiLimits;
 
-  /**
-   * Getters and setters.
-   */
-  public String getError() {
-    return error;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public String getError() {
+		return error;
+	}
 
-  public String getTitle() {
-    return title;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-  public void setError(String error) {
-    this.error = error;
-  }
+	public void setError(String error) {
+		this.error = error;
+	}
 
-  public int getVersion() {
-    return version;
-  }
+	public int getVersion() {
+		return version;
+	}
 
-  public void setVersion(int version) {
-    this.version = version;
-  }
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
-  public int getCode() {
-    return code;
-  }
+	public int getCode() {
+		return code;
+	}
 
-  public void setCode(int code) {
-    this.code = code;
-  }
+	public void setCode(int code) {
+		this.code = code;
+	}
 
-  public String getHref() {
-    return href;
-  }
+	public String getHref() {
+		return href;
+	}
 
-  public void setHref(String href) {
-    this.href = href;
-  }
+	public void setHref(String href) {
+		this.href = href;
+	}
 
-  public ApiLimitsModel getApiLimits() {
-    return apiLimits;
-  }
+	public ApiLimitsModel getApiLimits() {
+		return apiLimits;
+	}
 
-  public void setApiLimits(ApiLimitsModel apiLimits) {
-    this.apiLimits = apiLimits;
-  }
+	public void setApiLimits(ApiLimitsModel apiLimits) {
+		this.apiLimits = apiLimits;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("ResponseStatusModel [title=");
-    builder.append(title);
-    builder.append(", error=");
-    builder.append(error);
-    builder.append(", version=");
-    builder.append(version);
-    builder.append(", code=");
-    builder.append(code);
-    builder.append(", href=");
-    builder.append(href);
-    builder.append(", apiLimits=");
-    builder.append(apiLimits);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((apiLimits == null) ? 0 : apiLimits.hashCode());
+		result = prime * result + code;
+		result = prime * result + ((error == null) ? 0 : error.hashCode());
+		result = prime * result + ((href == null) ? 0 : href.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + version;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ResponseStatusModel other = (ResponseStatusModel) obj;
+		if (apiLimits == null) {
+			if (other.apiLimits != null)
+				return false;
+		} else if (!apiLimits.equals(other.apiLimits))
+			return false;
+		if (code != other.code)
+			return false;
+		if (error == null) {
+			if (other.error != null)
+				return false;
+		} else if (!error.equals(other.error))
+			return false;
+		if (href == null) {
+			if (other.href != null)
+				return false;
+		} else if (!href.equals(other.href))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ResponseStatusModel [title=");
+		builder.append(title);
+		builder.append(", error=");
+		builder.append(error);
+		builder.append(", version=");
+		builder.append(version);
+		builder.append(", code=");
+		builder.append(code);
+		builder.append(", href=");
+		builder.append(href);
+		builder.append(", apiLimits=");
+		builder.append(apiLimits);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

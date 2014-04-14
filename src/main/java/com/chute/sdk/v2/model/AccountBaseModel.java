@@ -38,54 +38,86 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class AccountBaseModel {
 
-  /**
-   * List of media items.
-   * <p>
-   * Besides media items this list can also contain albums.
-   */
-  @JsonProperty("files")
-  private List<AccountMediaModel> files;
+	/**
+	 * List of media items.
+	 * <p>
+	 * Besides media items this list can also contain albums.
+	 */
+	@JsonProperty("files")
+	private List<AccountMediaModel> files;
 
-  /**
-   * List of albums
-   * <p>
-   * This list can also contain media items.
-   */
-  @JsonProperty("folders")
-  private List<AccountAlbumModel> folders;
+	/**
+	 * List of albums
+	 * <p>
+	 * This list can also contain media items.
+	 */
+	@JsonProperty("folders")
+	private List<AccountAlbumModel> folders;
 
-  /**
-   * Getters and setters.
-   */
-  public List<AccountMediaModel> getFiles() {
-    return files;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public List<AccountMediaModel> getFiles() {
+		return files;
+	}
 
-  public void setFiles(List<AccountMediaModel> files) {
-    this.files = files;
-  }
+	public void setFiles(List<AccountMediaModel> files) {
+		this.files = files;
+	}
 
-  public List<AccountAlbumModel> getFolders() {
-    return folders;
-  }
+	public List<AccountAlbumModel> getFolders() {
+		return folders;
+	}
 
-  public void setFolders(List<AccountAlbumModel> folders) {
-    this.folders = folders;
-  }
+	public void setFolders(List<AccountAlbumModel> folders) {
+		this.folders = folders;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("AccountBaseModel [files=");
-    builder.append(files);
-    builder.append(", folders=");
-    builder.append(folders);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((files == null) ? 0 : files.hashCode());
+		result = prime * result + ((folders == null) ? 0 : folders.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountBaseModel other = (AccountBaseModel) obj;
+		if (files == null) {
+			if (other.files != null)
+				return false;
+		} else if (!files.equals(other.files))
+			return false;
+		if (folders == null) {
+			if (other.folders != null)
+				return false;
+		} else if (!folders.equals(other.folders))
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("AccountBaseModel [files=");
+		builder.append(files);
+		builder.append(", folders=");
+		builder.append(folders);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

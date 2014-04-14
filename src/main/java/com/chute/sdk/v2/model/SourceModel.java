@@ -37,186 +37,255 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SourceModel implements Parcelable {
 
-  public static final String TAG = SourceModel.class.getSimpleName();
+	public static final String TAG = SourceModel.class.getSimpleName();
 
-  /**
-   * Asset source.
-   */
-  @JsonProperty("source")
-  private String source;
+	/**
+	 * Asset source.
+	 */
+	@JsonProperty("source")
+	private String source;
 
-  /**
-   * Source ID.
-   */
-  @JsonProperty("source_id")
-  private String sourceId;
+	/**
+	 * Source ID.
+	 */
+	@JsonProperty("source_id")
+	private String sourceId;
 
-  /**
-   * Source URL.
-   */
-  @JsonProperty("source_url")
-  private String sourceUrl;
+	/**
+	 * Source URL.
+	 */
+	@JsonProperty("source_url")
+	private String sourceUrl;
 
-  /**
-   * Source service.
-   */
-  @JsonProperty("service")
-  private String service;
+	/**
+	 * Source service.
+	 */
+	@JsonProperty("service")
+	private String service;
 
-  /**
-   * Import ID.
-   */
-  @JsonProperty("import_id")
-  private String importId;
+	/**
+	 * Import ID.
+	 */
+	@JsonProperty("import_id")
+	private String importId;
 
-  /**
-   * Import URL.
-   */
-  @JsonProperty("import_url")
-  private String importUrl;
+	/**
+	 * Import URL.
+	 */
+	@JsonProperty("import_url")
+	private String importUrl;
 
-  /**
-   * Original URL.
-   */
-  @JsonProperty("original_url")
-  private String originalUrl;
+	/**
+	 * Original URL.
+	 */
+	@JsonProperty("original_url")
+	private String originalUrl;
 
-  /**
-   * Default non-args constructor.
-   */
-  public SourceModel() {
-  }
+	/**
+	 * Default non-args constructor.
+	 */
+	public SourceModel() {
+	}
 
-  /**
-   * Getters and setters.
-   */
-  public String getSource() {
-    return source;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public String getSource() {
+		return source;
+	}
 
-  public void setSource(String source) {
-    this.source = source;
-  }
+	public void setSource(String source) {
+		this.source = source;
+	}
 
-  public String getSourceId() {
-    return sourceId;
-  }
+	public String getSourceId() {
+		return sourceId;
+	}
 
-  public void setSourceId(String sourceId) {
-    this.sourceId = sourceId;
-  }
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
+	}
 
-  public String getSourceUrl() {
-    return sourceUrl;
-  }
+	public String getSourceUrl() {
+		return sourceUrl;
+	}
 
-  public void setSourceUrl(String sourceUrl) {
-    this.sourceUrl = sourceUrl;
-  }
+	public void setSourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+	}
 
-  public String getService() {
-    return service;
-  }
+	public String getService() {
+		return service;
+	}
 
-  public void setService(String service) {
-    this.service = service;
-  }
+	public void setService(String service) {
+		this.service = service;
+	}
 
-  public String getImportId() {
-    return importId;
-  }
+	public String getImportId() {
+		return importId;
+	}
 
-  public void setImportId(String importId) {
-    this.importId = importId;
-  }
+	public void setImportId(String importId) {
+		this.importId = importId;
+	}
 
-  public String getImportUrl() {
-    return importUrl;
-  }
+	public String getImportUrl() {
+		return importUrl;
+	}
 
-  public void setImportUrl(String importUrl) {
-    this.importUrl = importUrl;
-  }
+	public void setImportUrl(String importUrl) {
+		this.importUrl = importUrl;
+	}
 
-  public String getOriginalUrl() {
-    return originalUrl;
-  }
+	public String getOriginalUrl() {
+		return originalUrl;
+	}
 
-  public void setOriginalUrl(String originalUrl) {
-    this.originalUrl = originalUrl;
-  }
+	public void setOriginalUrl(String originalUrl) {
+		this.originalUrl = originalUrl;
+	}
 
-  public SourceModel(Parcel in) {
-    source = in.readString();
-    sourceId = in.readString();
-    sourceUrl = in.readString();
-    service = in.readString();
-    importId = in.readString();
-    importUrl = in.readString();
-    originalUrl = in.readString();
-  }
+	public SourceModel(Parcel in) {
+		source = in.readString();
+		sourceId = in.readString();
+		sourceUrl = in.readString();
+		service = in.readString();
+		importId = in.readString();
+		importUrl = in.readString();
+		originalUrl = in.readString();
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#describeContents()
-   */
-  @Override
-  public int describeContents() {
-    return 0;
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#describeContents()
+	 */
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-   */
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(source);
-    dest.writeString(sourceId);
-    dest.writeString(sourceUrl);
-    dest.writeString(service);
-    dest.writeString(importId);
-    dest.writeString(importUrl);
-    dest.writeString(originalUrl);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+	 */
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(source);
+		dest.writeString(sourceId);
+		dest.writeString(sourceUrl);
+		dest.writeString(service);
+		dest.writeString(importId);
+		dest.writeString(importUrl);
+		dest.writeString(originalUrl);
+	}
 
-  public static final Parcelable.Creator<SourceModel> CREATOR = new Parcelable.Creator<SourceModel>() {
+	public static final Parcelable.Creator<SourceModel> CREATOR = new Parcelable.Creator<SourceModel>() {
 
-    @Override
-    public SourceModel createFromParcel(Parcel in) {
-      return new SourceModel(in);
-    }
+		@Override
+		public SourceModel createFromParcel(Parcel in) {
+			return new SourceModel(in);
+		}
 
-    @Override
-    public SourceModel[] newArray(int size) {
-      return new SourceModel[size];
-    }
+		@Override
+		public SourceModel[] newArray(int size) {
+			return new SourceModel[size];
+		}
 
-  };
+	};
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("SourceModel [source=");
-    builder.append(source);
-    builder.append(", sourceId=");
-    builder.append(sourceId);
-    builder.append(", sourceUrl=");
-    builder.append(sourceUrl);
-    builder.append(", service=");
-    builder.append(service);
-    builder.append(", importId=");
-    builder.append(importId);
-    builder.append(", importUrl=");
-    builder.append(importUrl);
-    builder.append(", originalUrl=");
-    builder.append(originalUrl);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((importId == null) ? 0 : importId.hashCode());
+		result = prime * result
+				+ ((importUrl == null) ? 0 : importUrl.hashCode());
+		result = prime * result
+				+ ((originalUrl == null) ? 0 : originalUrl.hashCode());
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
+		result = prime * result + ((source == null) ? 0 : source.hashCode());
+		result = prime * result
+				+ ((sourceId == null) ? 0 : sourceId.hashCode());
+		result = prime * result
+				+ ((sourceUrl == null) ? 0 : sourceUrl.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SourceModel other = (SourceModel) obj;
+		if (importId == null) {
+			if (other.importId != null)
+				return false;
+		} else if (!importId.equals(other.importId))
+			return false;
+		if (importUrl == null) {
+			if (other.importUrl != null)
+				return false;
+		} else if (!importUrl.equals(other.importUrl))
+			return false;
+		if (originalUrl == null) {
+			if (other.originalUrl != null)
+				return false;
+		} else if (!originalUrl.equals(other.originalUrl))
+			return false;
+		if (service == null) {
+			if (other.service != null)
+				return false;
+		} else if (!service.equals(other.service))
+			return false;
+		if (source == null) {
+			if (other.source != null)
+				return false;
+		} else if (!source.equals(other.source))
+			return false;
+		if (sourceId == null) {
+			if (other.sourceId != null)
+				return false;
+		} else if (!sourceId.equals(other.sourceId))
+			return false;
+		if (sourceUrl == null) {
+			if (other.sourceUrl != null)
+				return false;
+		} else if (!sourceUrl.equals(other.sourceUrl))
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("SourceModel [source=");
+		builder.append(source);
+		builder.append(", sourceId=");
+		builder.append(sourceId);
+		builder.append(", sourceUrl=");
+		builder.append(sourceUrl);
+		builder.append(", service=");
+		builder.append(service);
+		builder.append(", importId=");
+		builder.append(importId);
+		builder.append(", importUrl=");
+		builder.append(importUrl);
+		builder.append(", originalUrl=");
+		builder.append(originalUrl);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

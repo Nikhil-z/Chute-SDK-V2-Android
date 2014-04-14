@@ -36,96 +36,132 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class GeoLocationModel implements Parcelable {
 
-  public static final String TAG = GeoLocationModel.class.getSimpleName();
+	public static final String TAG = GeoLocationModel.class.getSimpleName();
 
-  /**
-   * GPS latitude.
-   */
-  @JsonProperty("latitude")
-  private String latitude;
+	/**
+	 * GPS latitude.
+	 */
+	@JsonProperty("latitude")
+	private String latitude;
 
-  /**
-   * GPS longitude.
-   */
-  @JsonProperty("longitude")
-  private String longitude;
+	/**
+	 * GPS longitude.
+	 */
+	@JsonProperty("longitude")
+	private String longitude;
 
-  /**
-   * Default non-args constructor.
-   */
-  public GeoLocationModel() {
-  }
+	/**
+	 * Default non-args constructor.
+	 */
+	public GeoLocationModel() {
+	}
 
-  /**
-   * Getters and setters.
-   */
-  public String getLatitude() {
-    return latitude;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public String getLatitude() {
+		return latitude;
+	}
 
-  public void setLatitude(String latitude) {
-    this.latitude = latitude;
-  }
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
 
-  public String getLongitude() {
-    return longitude;
-  }
+	public String getLongitude() {
+		return longitude;
+	}
 
-  public void setLongitude(String longitude) {
-    this.longitude = longitude;
-  }
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
 
-  public GeoLocationModel(Parcel in) {
-    latitude = in.readString();
-    longitude = in.readString();
-  }
+	public GeoLocationModel(Parcel in) {
+		latitude = in.readString();
+		longitude = in.readString();
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#describeContents()
-   */
-  @Override
-  public int describeContents() {
-    return 0;
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#describeContents()
+	 */
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
-   */
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(latitude);
-    dest.writeString(longitude);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
+	 */
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(latitude);
+		dest.writeString(longitude);
+	}
 
-  public static final Parcelable.Creator<GeoLocationModel> CREATOR = new Parcelable.Creator<GeoLocationModel>() {
+	public static final Parcelable.Creator<GeoLocationModel> CREATOR = new Parcelable.Creator<GeoLocationModel>() {
 
-    @Override
-    public GeoLocationModel createFromParcel(Parcel in) {
-      return new GeoLocationModel(in);
-    }
+		@Override
+		public GeoLocationModel createFromParcel(Parcel in) {
+			return new GeoLocationModel(in);
+		}
 
-    @Override
-    public GeoLocationModel[] newArray(int size) {
-      return new GeoLocationModel[size];
-    }
+		@Override
+		public GeoLocationModel[] newArray(int size) {
+			return new GeoLocationModel[size];
+		}
 
-  };
+	};
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("GeoLocationModel [latitude=");
-    builder.append(latitude);
-    builder.append(", longitude=");
-    builder.append(longitude);
-    builder.append("]");
-    return builder.toString();
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result
+				+ ((longitude == null) ? 0 : longitude.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GeoLocationModel other = (GeoLocationModel) obj;
+		if (latitude == null) {
+			if (other.latitude != null)
+				return false;
+		} else if (!latitude.equals(other.latitude))
+			return false;
+		if (longitude == null) {
+			if (other.longitude != null)
+				return false;
+		} else if (!longitude.equals(other.longitude))
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("GeoLocationModel [latitude=");
+		builder.append(latitude);
+		builder.append(", longitude=");
+		builder.append(longitude);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

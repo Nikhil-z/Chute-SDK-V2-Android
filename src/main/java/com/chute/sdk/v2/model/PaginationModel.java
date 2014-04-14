@@ -39,142 +39,199 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class PaginationModel {
 
-  /**
-   * Number of total response pages.
-   */
-  @JsonProperty("total_pages")
-  private long totalPages;
+	/**
+	 * Number of total response pages.
+	 */
+	@JsonProperty("total_pages")
+	private long totalPages;
 
-  /**
-   * The current page of the response.
-   */
-  @JsonProperty("current_page")
-  private long currentPage;
+	/**
+	 * The current page of the response.
+	 */
+	@JsonProperty("current_page")
+	private long currentPage;
 
-  /**
-   * The next page of the response.
-   */
-  @JsonProperty("next_page")
-  private String nextPage;
+	/**
+	 * The next page of the response.
+	 */
+	@JsonProperty("next_page")
+	private String nextPage;
 
-  /**
-   * The previous page of the response.
-   */
-  @JsonProperty("previous_page")
-  private String previousPage;
+	/**
+	 * The previous page of the response.
+	 */
+	@JsonProperty("previous_page")
+	private String previousPage;
 
-  /**
-   * The first page of the response.
-   */
-  @JsonProperty("first_page")
-  private String firstPage;
+	/**
+	 * The first page of the response.
+	 */
+	@JsonProperty("first_page")
+	private String firstPage;
 
-  /**
-   * The last page of the response.
-   */
-  @JsonProperty("last_page")
-  private String lastPage;
+	/**
+	 * The last page of the response.
+	 */
+	@JsonProperty("last_page")
+	private String lastPage;
 
-  /**
-   * Number of responses per page.
-   */
-  @JsonProperty("per_page")
-  private int perPage = 30;
+	/**
+	 * Number of responses per page.
+	 */
+	@JsonProperty("per_page")
+	private int perPage = 30;
 
-  /**
-   * Getters and setters.
-   */
-  public long getTotalPages() {
-    return totalPages;
-  }
+	/**
+	 * Getters and setters.
+	 */
+	public long getTotalPages() {
+		return totalPages;
+	}
 
-  public void setTotalPages(long totalPages) {
-    this.totalPages = totalPages;
-  }
+	public void setTotalPages(long totalPages) {
+		this.totalPages = totalPages;
+	}
 
-  public long getCurrentPage() {
-    return currentPage;
-  }
+	public long getCurrentPage() {
+		return currentPage;
+	}
 
-  public void setCurrentPage(long currentPage) {
-    this.currentPage = currentPage;
-  }
+	public void setCurrentPage(long currentPage) {
+		this.currentPage = currentPage;
+	}
 
-  public String getNextPage() {
-    return nextPage;
-  }
+	public String getNextPage() {
+		return nextPage;
+	}
 
-  public void setNextPage(String nextPage) {
-    this.nextPage = nextPage;
-  }
+	public void setNextPage(String nextPage) {
+		this.nextPage = nextPage;
+	}
 
-  public boolean hasNextPage() {
-    return TextUtils.isEmpty(nextPage) == false;
-  }
-  
-  public String getPreviousPage() {
-    return previousPage;
-  }
+	public boolean hasNextPage() {
+		return TextUtils.isEmpty(nextPage) == false;
+	}
 
-  public void setPreviousPage(String previousPage) {
-    this.previousPage = previousPage;
-  }
+	public String getPreviousPage() {
+		return previousPage;
+	}
 
-  public boolean hasPreviousPage() {
-    return TextUtils.isEmpty(previousPage) == false;
-  }
+	public void setPreviousPage(String previousPage) {
+		this.previousPage = previousPage;
+	}
 
-  public String getFirstPage() {
-    return firstPage;
-  }
+	public boolean hasPreviousPage() {
+		return TextUtils.isEmpty(previousPage) == false;
+	}
 
-  public void setFirstPage(String firstPage) {
-    this.firstPage = firstPage;
-  }
+	public String getFirstPage() {
+		return firstPage;
+	}
 
-  public String getLastPage() {
-    return lastPage;
-  }
+	public void setFirstPage(String firstPage) {
+		this.firstPage = firstPage;
+	}
 
-  public void setLastPage(String lastPage) {
-    this.lastPage = lastPage;
-  }
+	public String getLastPage() {
+		return lastPage;
+	}
 
-  public int getPerPage() {
-    return perPage;
-  }
+	public void setLastPage(String lastPage) {
+		this.lastPage = lastPage;
+	}
 
-  public String getPerPageAsString() {
-    return String.valueOf(perPage);
-  }
+	public int getPerPage() {
+		return perPage;
+	}
 
-  public void setPerPage(int perPage) {
-    this.perPage = perPage;
-  }
+	public String getPerPageAsString() {
+		return String.valueOf(perPage);
+	}
 
-  /*
-   * (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("PaginationModel [totalPages=");
-    builder.append(totalPages);
-    builder.append(", currentPage=");
-    builder.append(currentPage);
-    builder.append(", nextPage=");
-    builder.append(nextPage);
-    builder.append(", previousPage=");
-    builder.append(previousPage);
-    builder.append(", firstPage=");
-    builder.append(firstPage);
-    builder.append(", lastPage=");
-    builder.append(lastPage);
-    builder.append(", perPage=");
-    builder.append(perPage);
-    builder.append("]");
-    return builder.toString();
-  }
+	public void setPerPage(int perPage) {
+		this.perPage = perPage;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (currentPage ^ (currentPage >>> 32));
+		result = prime * result
+				+ ((firstPage == null) ? 0 : firstPage.hashCode());
+		result = prime * result
+				+ ((lastPage == null) ? 0 : lastPage.hashCode());
+		result = prime * result
+				+ ((nextPage == null) ? 0 : nextPage.hashCode());
+		result = prime * result + perPage;
+		result = prime * result
+				+ ((previousPage == null) ? 0 : previousPage.hashCode());
+		result = prime * result + (int) (totalPages ^ (totalPages >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PaginationModel other = (PaginationModel) obj;
+		if (currentPage != other.currentPage)
+			return false;
+		if (firstPage == null) {
+			if (other.firstPage != null)
+				return false;
+		} else if (!firstPage.equals(other.firstPage))
+			return false;
+		if (lastPage == null) {
+			if (other.lastPage != null)
+				return false;
+		} else if (!lastPage.equals(other.lastPage))
+			return false;
+		if (nextPage == null) {
+			if (other.nextPage != null)
+				return false;
+		} else if (!nextPage.equals(other.nextPage))
+			return false;
+		if (perPage != other.perPage)
+			return false;
+		if (previousPage == null) {
+			if (other.previousPage != null)
+				return false;
+		} else if (!previousPage.equals(other.previousPage))
+			return false;
+		if (totalPages != other.totalPages)
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PaginationModel [totalPages=");
+		builder.append(totalPages);
+		builder.append(", currentPage=");
+		builder.append(currentPage);
+		builder.append(", nextPage=");
+		builder.append(nextPage);
+		builder.append(", previousPage=");
+		builder.append(previousPage);
+		builder.append(", firstPage=");
+		builder.append(firstPage);
+		builder.append(", lastPage=");
+		builder.append(lastPage);
+		builder.append(", perPage=");
+		builder.append(perPage);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

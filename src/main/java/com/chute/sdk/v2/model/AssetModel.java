@@ -442,7 +442,8 @@ public class AssetModel implements Parcelable {
 		String result = null;
 		FilterProvider filter = new SimpleFilterProvider().addFilter(
 				"assetModelFilter", SimpleBeanPropertyFilter
-						.filterOutAllExcept("caption", "votes", "hearts", "tags"));
+						.filterOutAllExcept("caption", "votes", "hearts",
+								"tags"));
 		try {
 			result = JsonUtil.getMapper().writer(filter)
 					.writeValueAsString(this);
@@ -450,6 +451,151 @@ public class AssetModel implements Parcelable {
 			ALog.d("", e);
 		}
 		return result;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((caption == null) ? 0 : caption.hashCode());
+		result = prime * result
+				+ ((chuteAssetId == null) ? 0 : chuteAssetId.hashCode());
+		result = prime * result
+				+ ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result
+				+ ((dimensions == null) ? 0 : dimensions.hashCode());
+		result = prime * result + hearts;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isPortrait ? 1231 : 1237);
+		result = prime * result + ((links == null) ? 0 : links.hashCode());
+		result = prime * result
+				+ ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
+		result = prime * result
+				+ ((shortcut == null) ? 0 : shortcut.hashCode());
+		result = prime * result + ((source == null) ? 0 : source.hashCode());
+		result = prime * result + ((tags == null) ? 0 : tags.hashCode());
+		result = prime * result
+				+ ((thumbnail == null) ? 0 : thumbnail.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result
+				+ ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result
+				+ ((username == null) ? 0 : username.hashCode());
+		result = prime * result
+				+ ((videoUrl == null) ? 0 : videoUrl.hashCode());
+		result = prime * result + votes;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AssetModel other = (AssetModel) obj;
+		if (caption == null) {
+			if (other.caption != null)
+				return false;
+		} else if (!caption.equals(other.caption))
+			return false;
+		if (chuteAssetId == null) {
+			if (other.chuteAssetId != null)
+				return false;
+		} else if (!chuteAssetId.equals(other.chuteAssetId))
+			return false;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (dimensions == null) {
+			if (other.dimensions != null)
+				return false;
+		} else if (!dimensions.equals(other.dimensions))
+			return false;
+		if (hearts != other.hearts)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (isPortrait != other.isPortrait)
+			return false;
+		if (links == null) {
+			if (other.links != null)
+				return false;
+		} else if (!links.equals(other.links))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (service == null) {
+			if (other.service != null)
+				return false;
+		} else if (!service.equals(other.service))
+			return false;
+		if (shortcut == null) {
+			if (other.shortcut != null)
+				return false;
+		} else if (!shortcut.equals(other.shortcut))
+			return false;
+		if (source == null) {
+			if (other.source != null)
+				return false;
+		} else if (!source.equals(other.source))
+			return false;
+		if (tags == null) {
+			if (other.tags != null)
+				return false;
+		} else if (!tags.equals(other.tags))
+			return false;
+		if (thumbnail == null) {
+			if (other.thumbnail != null)
+				return false;
+		} else if (!thumbnail.equals(other.thumbnail))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		if (videoUrl == null) {
+			if (other.videoUrl != null)
+				return false;
+		} else if (!videoUrl.equals(other.videoUrl))
+			return false;
+		if (votes != other.votes)
+			return false;
+		return true;
 	}
 
 	@Override

@@ -195,6 +195,65 @@ public class AccountMediaModel implements Parcelable, AccountMedia {
 		return AccountMediaType.FILE;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((caption == null) ? 0 : caption.hashCode());
+		result = prime * result
+				+ ((dimensions == null) ? 0 : dimensions.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((imageUrl == null) ? 0 : imageUrl.hashCode());
+		result = prime * result
+				+ ((thumbnail == null) ? 0 : thumbnail.hashCode());
+		result = prime * result
+				+ ((videoUrl == null) ? 0 : videoUrl.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountMediaModel other = (AccountMediaModel) obj;
+		if (caption == null) {
+			if (other.caption != null)
+				return false;
+		} else if (!caption.equals(other.caption))
+			return false;
+		if (dimensions == null) {
+			if (other.dimensions != null)
+				return false;
+		} else if (!dimensions.equals(other.dimensions))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (imageUrl == null) {
+			if (other.imageUrl != null)
+				return false;
+		} else if (!imageUrl.equals(other.imageUrl))
+			return false;
+		if (thumbnail == null) {
+			if (other.thumbnail != null)
+				return false;
+		} else if (!thumbnail.equals(other.thumbnail))
+			return false;
+		if (videoUrl == null) {
+			if (other.videoUrl != null)
+				return false;
+		} else if (!videoUrl.equals(other.videoUrl))
+			return false;
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

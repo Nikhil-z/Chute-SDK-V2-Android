@@ -341,6 +341,106 @@ public class AlbumModel implements Parcelable {
 
 	};
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((asset == null) ? 0 : asset.hashCode());
+		result = prime * result
+				+ ((counters == null) ? 0 : counters.hashCode());
+		result = prime * result
+				+ ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + imagesCount;
+		result = prime * result + ((links == null) ? 0 : links.hashCode());
+		result = prime * result + (moderateComments ? 1231 : 1237);
+		result = prime * result + (moderateMedia ? 1231 : 1237);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((parentId == null) ? 0 : parentId.hashCode());
+		result = prime * result
+				+ ((shortcut == null) ? 0 : shortcut.hashCode());
+		result = prime * result
+				+ ((updatedAt == null) ? 0 : updatedAt.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AlbumModel other = (AlbumModel) obj;
+		if (asset == null) {
+			if (other.asset != null)
+				return false;
+		} else if (!asset.equals(other.asset))
+			return false;
+		if (counters == null) {
+			if (other.counters != null)
+				return false;
+		} else if (!counters.equals(other.counters))
+			return false;
+		if (createdAt == null) {
+			if (other.createdAt != null)
+				return false;
+		} else if (!createdAt.equals(other.createdAt))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (imagesCount != other.imagesCount)
+			return false;
+		if (links == null) {
+			if (other.links != null)
+				return false;
+		} else if (!links.equals(other.links))
+			return false;
+		if (moderateComments != other.moderateComments)
+			return false;
+		if (moderateMedia != other.moderateMedia)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (parentId == null) {
+			if (other.parentId != null)
+				return false;
+		} else if (!parentId.equals(other.parentId))
+			return false;
+		if (shortcut == null) {
+			if (other.shortcut != null)
+				return false;
+		} else if (!shortcut.equals(other.shortcut))
+			return false;
+		if (updatedAt == null) {
+			if (other.updatedAt != null)
+				return false;
+		} else if (!updatedAt.equals(other.updatedAt))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
