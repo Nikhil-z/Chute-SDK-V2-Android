@@ -75,6 +75,9 @@ public class ParcelModel implements Parcelable {
 	@JsonProperty("shortcut")
 	private String shortcut;
 
+	@JsonProperty("store")
+	private StoreModel store;
+
 	/**
 	 * Default non-args constructor.
 	 */
@@ -124,12 +127,21 @@ public class ParcelModel implements Parcelable {
 		this.shortcut = shortcut;
 	}
 
+	public StoreModel getStore() {
+		return store;
+	}
+
+	public void setStore(StoreModel store) {
+		this.store = store;
+	}
+
 	public ParcelModel(Parcel in) {
 		id = in.readString();
 		links = in.readParcelable(LinkModel.class.getClassLoader());
 		createdAt = in.readString();
 		updatedAt = in.readString();
 		shortcut = in.readString();
+		store = in.readParcelable(StoreModel.class.getClassLoader());
 	}
 
 	/*
@@ -154,6 +166,7 @@ public class ParcelModel implements Parcelable {
 		dest.writeString(createdAt);
 		dest.writeString(updatedAt);
 		dest.writeString(shortcut);
+		dest.writeParcelable(store, flags);
 	}
 
 	public static final Parcelable.Creator<ParcelModel> CREATOR = new Parcelable.Creator<ParcelModel>() {
@@ -180,6 +193,7 @@ public class ParcelModel implements Parcelable {
 		result = prime * result + ((links == null) ? 0 : links.hashCode());
 		result = prime * result
 				+ ((shortcut == null) ? 0 : shortcut.hashCode());
+		result = prime * result + ((store == null) ? 0 : store.hashCode());
 		result = prime * result
 				+ ((updatedAt == null) ? 0 : updatedAt.hashCode());
 		return result;
@@ -214,6 +228,11 @@ public class ParcelModel implements Parcelable {
 				return false;
 		} else if (!shortcut.equals(other.shortcut))
 			return false;
+		if (store == null) {
+			if (other.store != null)
+				return false;
+		} else if (!store.equals(other.store))
+			return false;
 		if (updatedAt == null) {
 			if (other.updatedAt != null)
 				return false;
@@ -222,11 +241,6 @@ public class ParcelModel implements Parcelable {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -240,6 +254,8 @@ public class ParcelModel implements Parcelable {
 		builder.append(updatedAt);
 		builder.append(", shortcut=");
 		builder.append(shortcut);
+		builder.append(", store=");
+		builder.append(store);
 		builder.append("]");
 		return builder.toString();
 	}
