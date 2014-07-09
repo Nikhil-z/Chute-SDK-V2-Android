@@ -11,11 +11,13 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.tobedevoured.modelcitizen.CreateModelException;
+import org.json.JSONException;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 public class DimensionsModelTest extends TestCase {
 
 	public void testDimensionsModel() throws JsonProcessingException,
-			CreateModelException {
+      CreateModelException, JSONException {
 		DimensionsModel model = FactoryManager.getModelFactory().createModel(
 				DimensionsModel.class);
 		FilterProvider filterProvider = new SimpleFilterProvider().addFilter(
@@ -24,8 +26,7 @@ public class DimensionsModelTest extends TestCase {
 		String result = JsonUtil.getMapper().writer(filterProvider)
 				.writeValueAsString(model);
 		String expected = TestUtil.readResourceAsString("model/DimensionsModel.json");
-		assertEquals(expected, result);
-
+    JSONAssert.assertEquals(expected, result, false);
 	}
 
 }

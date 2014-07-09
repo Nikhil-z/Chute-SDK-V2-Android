@@ -11,11 +11,13 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.tobedevoured.modelcitizen.CreateModelException;
+import org.json.JSONException;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 public class AssetUpdateRequestTest extends TestCase {
 
 	public void testObjectSerializeToPostBodyString()
-			throws JsonProcessingException, CreateModelException {
+      throws JsonProcessingException, CreateModelException, JSONException {
 		AssetModel asset = FactoryManager.getModelFactory().createModel(
 				AssetModel.class);
 		FilterProvider filter = new SimpleFilterProvider().addFilter(
@@ -25,6 +27,6 @@ public class AssetUpdateRequestTest extends TestCase {
 				.writeValueAsString(asset);
 		String expected = TestUtil
 				.readResourceAsString("request/AssetUpdate.json");
-		assertEquals(expected, result);
+    JSONAssert.assertEquals(expected, result, false);
 	}
 }

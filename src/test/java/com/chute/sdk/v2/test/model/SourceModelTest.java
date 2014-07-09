@@ -11,11 +11,13 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.tobedevoured.modelcitizen.CreateModelException;
+import org.json.JSONException;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 public class SourceModelTest extends TestCase {
 
 	public void testSourceModel() throws JsonProcessingException,
-			CreateModelException {
+      CreateModelException, JSONException {
 		SourceModel model = FactoryManager.getModelFactory().createModel(
 				SourceModel.class);
 		FilterProvider filterProvider = new SimpleFilterProvider().addFilter(
@@ -26,7 +28,7 @@ public class SourceModelTest extends TestCase {
 		String result = JsonUtil.getMapper().writer(filterProvider)
 				.writeValueAsString(model);
 		String expected = TestUtil.readResourceAsString("model/SourceModel.json");
-		assertEquals(expected, result);
+    JSONAssert.assertEquals(expected, result, false);
 
 	}
 
