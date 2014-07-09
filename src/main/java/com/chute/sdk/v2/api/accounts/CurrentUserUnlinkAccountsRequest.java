@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.accounts;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AccountModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
@@ -42,9 +40,9 @@ public class CurrentUserUnlinkAccountsRequest extends
   public static final String TAG = CurrentUserUnlinkAccountsRequest.class.getSimpleName();
   private final String accountId;
 
-  public CurrentUserUnlinkAccountsRequest(final Context context, final String accountId,
+  public CurrentUserUnlinkAccountsRequest(final String accountId,
       final HttpCallback<ListResponseModel<AccountModel>> callback) {
-    super(context, RequestMethod.DELETE, new ListResponseParser<AccountModel>(
+    super(RequestMethod.DELETE, new ListResponseParser<AccountModel>(
         AccountModel.class), callback);
     this.accountId = accountId;
     if (TextUtils.isEmpty(accountId)) {

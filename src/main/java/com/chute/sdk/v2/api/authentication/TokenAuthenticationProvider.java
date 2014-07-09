@@ -52,10 +52,6 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
    * <p>
    * <b> Dont forget to set the password on first init </b>
    * 
-   * @param context
-   *          it is only used into the first time init of the singleton, its
-   *          reference is stored so the singleton is alive during the
-   *          application lifecycle.
    * @return
    */
   public static synchronized TokenAuthenticationProvider getInstance() {
@@ -105,7 +101,6 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
    * 
    * @param apiKey
    *          the token acquired from chute auth
-   * @param context
    * @return if the save was successful
    */
   private boolean saveApiKey(final String apiKey) {

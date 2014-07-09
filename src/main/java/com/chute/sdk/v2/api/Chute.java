@@ -26,13 +26,12 @@
 package com.chute.sdk.v2.api;
 
 import android.content.Context;
-
+import com.araneaapps.android.libs.asyncrunners.models.AsyncRunners;
 import com.chute.sdk.v2.api.authentication.AuthConstants;
 import com.chute.sdk.v2.api.authentication.AuthenticationFactory;
 import com.chute.sdk.v2.api.authentication.TokenAuthenticationProvider;
 import com.chute.sdk.v2.utils.PreferenceUtil;
-import com.dg.libs.rest.HttpRequestStore;
-import com.dg.libs.rest.client.BaseRestClient;
+import com.dg.libs.rest.RestClientConfiguration;
 
 public class Chute {
 
@@ -53,20 +52,21 @@ public class Chute {
    *          The application context.
    * @param constants
    *          Needs to contain both the Client ID and Secret of your Chute app.
-   * @param Token
+   * @param token
    *          can be included if the app shouldn't have user specific
    *          authentication to chute or any of the other services.
    */
   public static void init(Context context, AuthConstants constants, String token) {
-    HttpRequestStore.init(context);
+    AsyncRunners.init(context);
     PreferenceUtil.init(context);
     TokenAuthenticationProvider.init(context);
     if (token != null) {
       TokenAuthenticationProvider.getInstance().setToken(token);
     }
     AuthenticationFactory.getInstance().setAuthConstants(constants);
-    BaseRestClient
-        .setDefaultAuthenticationProvider(TokenAuthenticationProvider
-            .getInstance());
+    RestClientConfiguration.init(context, new RestClientConfiguration.
+        ConfigurationBuilder().
+        setAuthenticationProvider(TokenAuthenticationProvider.getInstance()).
+        create());
   }
 }

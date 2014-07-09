@@ -25,14 +25,7 @@
 //
 package com.chute.sdk.v2.api.search;
 
-import java.util.HashMap;
-import java.util.Iterator;
-
-import org.json.JSONArray;
-
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -41,6 +34,10 @@ import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import org.json.JSONArray;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class SearchExifRequest extends
     ParameterHttpRequestImpl<ListResponseModel<AssetModel>> {
@@ -49,10 +46,10 @@ public class SearchExifRequest extends
   private AlbumModel album;
   private HashMap<String, String> exif;
 
-  public SearchExifRequest(Context context, AlbumModel album,
+  public SearchExifRequest(AlbumModel album,
       HashMap<String, String> exif,
       HttpCallback<ListResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
+    super(RequestMethod.GET, new ListResponseParser<AssetModel>(
         AssetModel.class), callback);
     this.album = album;
     this.exif = exif;

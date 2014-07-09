@@ -25,12 +25,8 @@
 //
 package com.chute.sdk.v2.api.album;
 
-import java.util.ArrayList;
-
-import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.RestConstants;
@@ -40,6 +36,8 @@ import com.dg.libs.rest.parsers.NoResponseParser;
 import com.dg.libs.rest.requests.StringBodyHttpRequestImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.util.ArrayList;
+
 public class AlbumsRemoveAssetsRequest extends StringBodyHttpRequestImpl<Void> {
 
   public static final String TAG = AlbumsRemoveAssetsRequest.class
@@ -47,9 +45,9 @@ public class AlbumsRemoveAssetsRequest extends StringBodyHttpRequestImpl<Void> {
   private final AlbumModel album;
   private final ArrayList<String> assetIds;
 
-  public AlbumsRemoveAssetsRequest(Context context, AlbumModel album,
+  public AlbumsRemoveAssetsRequest(AlbumModel album,
       ArrayList<String> assetIds, HttpCallback<Void> callback) {
-    super(context, RequestMethod.POST, new NoResponseParser(), callback);
+    super(RequestMethod.POST, new NoResponseParser(), callback);
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");
     }

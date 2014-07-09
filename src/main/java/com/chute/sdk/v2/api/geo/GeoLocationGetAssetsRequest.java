@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.geo;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.GeoLocationModel;
@@ -47,10 +45,10 @@ public class GeoLocationGetAssetsRequest extends
   public String longitude;
   public String radius;
 
-  public GeoLocationGetAssetsRequest(Context context, AssetModel asset,
+  public GeoLocationGetAssetsRequest(AssetModel asset,
       String latitude, String longitude, String radius,
       HttpCallback<ListResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
+    super(RequestMethod.GET, new ListResponseParser<AssetModel>(
         GeoLocationModel.class), callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");

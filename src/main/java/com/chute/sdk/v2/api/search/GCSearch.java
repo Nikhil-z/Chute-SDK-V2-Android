@@ -25,17 +25,15 @@
 //
 package com.chute.sdk.v2.api.search;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import android.content.Context;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.GeoLocationModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * {@link GCSearch} class is a helper class that performs various search actions
@@ -55,14 +53,11 @@ public class GCSearch {
    */
   public GCSearch() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   /**
    * Gets a list of all assets with a specific EXIF info attached.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          The search will include assets belonging to this album only.
    * @param exif
@@ -72,17 +67,15 @@ public class GCSearch {
    *          callback returns {@link ListResponseModel<AssetModel>}.
    * @return {@link SearchExifRequest}.
    */
-  public static HttpRequest exif(final Context context,
+  public static HttpRequest exif(
       final AlbumModel album, final HashMap<String, String> exif,
       final HttpCallback<ListResponseModel<AssetModel>> callback) {
-    return new SearchExifRequest(context, album, exif, callback);
+    return new SearchExifRequest(album, exif, callback);
   }
 
   /**
    * Performs a search for all assets in a radius around a specific GeoLocation.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          The search will include assets belonging to this album only.
    * @param geoLocation
@@ -94,19 +87,17 @@ public class GCSearch {
    *          callback returns {@link ListResponseModel<AssetModel>}.
    * @return {@link SearchLocationRequest}.
    */
-  public static HttpRequest location(final Context context,
+  public static HttpRequest location(
       final AlbumModel album, final GeoLocationModel geoLocation,
       final int radius,
       final HttpCallback<ListResponseModel<AssetModel>> callback) {
-    return new SearchLocationRequest(context, album, geoLocation, radius,
+    return new SearchLocationRequest(album, geoLocation, radius,
         callback);
   }
 
   /**
    * Lists all assets containing specific tags.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          The search will include assets belonging to this album only.
    * @param tags
@@ -114,12 +105,12 @@ public class GCSearch {
    * @param callback
    *          Instance of {@link HttpCallback} interface. If successful, the
    *          callback returns {@link ListResponseModel<AssetModel>}.
-   * @return {@link SearchUserRequest}.
+   * @return {@link com.chute.sdk.v2.api.search.SearchTagsRequest}.
    */
-  public static HttpRequest tags(final Context context,
+  public static HttpRequest tags(
       final AlbumModel album, final ArrayList<String> tags,
       final HttpCallback<ListResponseModel<AssetModel>> callback) {
-    return new SearchTagsRequest(context, album, tags, callback);
+    return new SearchTagsRequest(album, tags, callback);
   }
 
 }

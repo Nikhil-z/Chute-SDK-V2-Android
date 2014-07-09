@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.hearts;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -45,9 +43,9 @@ public class HeartGetRequest extends
   private AlbumModel album;
   private AssetModel asset;
 
-  public HeartGetRequest(Context context, AlbumModel album, AssetModel asset,
+  public HeartGetRequest(AlbumModel album, AssetModel asset,
       HttpCallback<ResponseModel<HeartModel>> callback) {
-    super(context, RequestMethod.GET, new ResponseParser<HeartModel>(
+    super(RequestMethod.GET, new ResponseParser<HeartModel>(
         HeartModel.class), callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");

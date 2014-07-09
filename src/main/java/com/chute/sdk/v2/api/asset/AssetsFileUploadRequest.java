@@ -25,8 +25,6 @@
 //
 package com.chute.sdk.v2.api.asset;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.api.upload.BaseUploadRequest;
 import com.chute.sdk.v2.api.upload.UploadProgressListener;
 import com.chute.sdk.v2.model.AlbumModel;
@@ -39,10 +37,10 @@ public class AssetsFileUploadRequest extends BaseUploadRequest {
 
 	private AlbumModel album;
 
-	public AssetsFileUploadRequest(Context context, String filePath,
+	public AssetsFileUploadRequest(String filePath,
 			AlbumModel album, UploadProgressListener uploadListener,
 			HttpCallback<ListResponseModel<AssetModel>> callback) {
-		super(context, filePath, uploadListener, callback);
+		super(filePath, uploadListener, callback);
 		this.album = album;
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");

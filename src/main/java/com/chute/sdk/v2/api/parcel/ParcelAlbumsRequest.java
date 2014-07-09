@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.parcel;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.ParcelModel;
@@ -43,9 +41,9 @@ public class ParcelAlbumsRequest extends
   public static final String TAG = ParcelAlbumsRequest.class.getSimpleName();
   private AlbumModel album;
 
-  public ParcelAlbumsRequest(Context context, AlbumModel album,
+  public ParcelAlbumsRequest(AlbumModel album,
       HttpCallback<ListResponseModel<ParcelModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<ParcelModel>(
+    super(RequestMethod.GET, new ListResponseParser<ParcelModel>(
         ParcelModel.class), callback);
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");

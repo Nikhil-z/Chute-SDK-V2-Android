@@ -35,7 +35,7 @@ public abstract class HttpCallbackImpl<T> implements HttpCallback<T> {
   public static final String TAG = HttpCallbackImpl.class.getSimpleName();
 
   @Override
-  public abstract void onSuccess(T responseData);
+  public abstract void onSuccess(T responseData, ResponseStatus status);
 
   /**
    * This method is always triggered when an error occurs.

@@ -25,9 +25,7 @@
 // 
 package com.chute.sdk.v2.api.flags;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -45,9 +43,9 @@ public class FlagRequest extends
   private AssetModel asset;
   private AlbumModel album;
 
-  public FlagRequest(Context context, AlbumModel album, AssetModel asset,
+  public FlagRequest(AlbumModel album, AssetModel asset,
       HttpCallback<ResponseModel<FlagModel>> callback) {
-    super(context, RequestMethod.POST, new ResponseParser<FlagModel>(
+    super(RequestMethod.POST, new ResponseParser<FlagModel>(
         FlagModel.class), callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");

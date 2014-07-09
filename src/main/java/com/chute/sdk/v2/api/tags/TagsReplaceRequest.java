@@ -25,12 +25,8 @@
 // 
 package com.chute.sdk.v2.api.tags;
 
-import java.util.List;
-
-import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
@@ -42,6 +38,8 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.util.List;
+
 public class TagsReplaceRequest extends
 		BaseStringBodyHttpRequest<ListResponseModel<String>> {
 
@@ -50,10 +48,10 @@ public class TagsReplaceRequest extends
 	private AlbumModel album;
 	private List<String> tags;
 
-	public TagsReplaceRequest(Context context, AlbumModel album,
+	public TagsReplaceRequest(AlbumModel album,
 			AssetModel asset, List<String> tags,
 			HttpCallback<ListResponseModel<String>> callback) {
-		super(context, RequestMethod.PUT, new ListResponseParser<String>(
+		super(RequestMethod.PUT, new ListResponseParser<String>(
 				String.class), callback);
 		if (asset == null || TextUtils.isEmpty(asset.getId())) {
 			throw new IllegalArgumentException("Need to provide asset ID");

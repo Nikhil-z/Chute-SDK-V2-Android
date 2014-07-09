@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.user;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.UserModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
@@ -42,9 +40,9 @@ public class UsersGetRequest extends
   public static final String TAG = UsersGetRequest.class.getSimpleName();
   private UserModel user;
 
-  public UsersGetRequest(Context context, UserModel user,
+  public UsersGetRequest(UserModel user,
       HttpCallback<ResponseModel<UserModel>> callback) {
-    super(context, RequestMethod.GET, new ResponseParser<UserModel>(
+    super(RequestMethod.GET, new ResponseParser<UserModel>(
         UserModel.class), callback);
     if (user == null || TextUtils.isEmpty(user.getId())) {
       throw new IllegalArgumentException("Need to provide user ID");

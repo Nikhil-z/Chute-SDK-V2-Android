@@ -25,8 +25,6 @@
 // 
 package com.chute.sdk.v2.api.geo;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.GeoLocationModel;
@@ -49,8 +47,6 @@ public class GCGeoLocation {
    * <p>
    * Coordinates will be presented as decimal degrees in the response.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album holding the asset with geo-location info.
    * @param asset
@@ -60,17 +56,15 @@ public class GCGeoLocation {
    *          callback returns {@link ResponseModel<GeoLocationModel>}.
    * @return {@link GeoLocationGetRequest}.
    */
-  public static HttpRequest get(final Context context,
+  public static HttpRequest get(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<GeoLocationModel>> callback) {
-    return new GeoLocationGetRequest(context, album, asset, callback);
+    return new GeoLocationGetRequest(album, asset, callback);
   }
 
   /**
    * Gets a list of assets within a specified radius around a GPS location.
    * 
-   * @param context
-   *          The application context.
    * @param asset
    *          Asset containing geo-location info.
    * @param latitude
@@ -84,11 +78,11 @@ public class GCGeoLocation {
    *          callback returns {@link ListResponseModel<AssetModel>}.
    * @return {@link GeoLocationGetAssetsRequest}.
    */
-  public static HttpRequest assets(final Context context,
+  public static HttpRequest assets(
       final AssetModel asset, final String latitude,
       final String longitude, final String radius,
       final HttpCallback<ListResponseModel<AssetModel>> callback) {
-    return new GeoLocationGetAssetsRequest(context, asset, latitude,
+    return new GeoLocationGetAssetsRequest(asset, latitude,
         longitude, radius, callback);
   }
 }

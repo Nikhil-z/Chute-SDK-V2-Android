@@ -25,11 +25,7 @@
 //
 package com.chute.sdk.v2.api.tags;
 
-import java.util.List;
-
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -39,6 +35,8 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
+import java.util.List;
+
 public class TagsDeleteRequest extends
 		ParameterHttpRequestImpl<ListResponseModel<String>> {
 
@@ -47,10 +45,10 @@ public class TagsDeleteRequest extends
 	private AlbumModel album;
 	private List<String> tags;
 
-	public TagsDeleteRequest(Context context, AlbumModel album,
+	public TagsDeleteRequest(AlbumModel album,
 			AssetModel asset, List<String> tags,
 			HttpCallback<ListResponseModel<String>> callback) {
-		super(context, RequestMethod.DELETE, new ListResponseParser<String>(
+		super(RequestMethod.DELETE, new ListResponseParser<String>(
 				String.class), callback);
 		if (asset == null || TextUtils.isEmpty(asset.getId())) {
 			throw new IllegalArgumentException("Need to provide asset ID");

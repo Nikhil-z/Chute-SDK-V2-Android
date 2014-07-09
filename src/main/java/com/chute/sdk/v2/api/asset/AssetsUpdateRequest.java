@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.asset;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
@@ -44,9 +42,9 @@ public class AssetsUpdateRequest extends
   private AssetModel asset;
   private AlbumModel album;
 
-  public AssetsUpdateRequest(Context context, AlbumModel album,
+  public AssetsUpdateRequest(AlbumModel album,
       AssetModel asset, HttpCallback<ResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.PUT, new ResponseParser<AssetModel>(
+    super(RequestMethod.PUT, new ResponseParser<AssetModel>(
         AssetModel.class), callback);
     this.asset = asset;
     this.album = album;

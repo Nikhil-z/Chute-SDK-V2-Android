@@ -25,8 +25,6 @@
 // 
 package com.chute.sdk.v2.api.comment;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.CommentModel;
@@ -60,8 +58,6 @@ public class GCComments {
   /**
    * Pulls a complete list of all comments associated with an asset in an album.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing assets with comments.
    * @param asset
@@ -71,18 +67,16 @@ public class GCComments {
    *          callback returns {@link ListResponseModel<CommentModel>}.
    * @return {@link CommentsListRequest}.
    */
-  public static HttpRequest list(final Context context,
+  public static HttpRequest list(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ListResponseModel<CommentModel>> callback) {
-    return new CommentsListRequest(context, album, asset, callback);
+    return new CommentsListRequest(album, asset, callback);
 
   }
 
   /**
    * Creates new comments for an asset in a specific album.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing asset the comment belongs to.
    * @param asset
@@ -92,19 +86,17 @@ public class GCComments {
    *          callback returns {@link ResponseModel<CommentModel>}.
    * @return {@link CommentsCreateRequest}.
    */
-  public static HttpRequest create(final Context context,
+  public static HttpRequest create(
       final AlbumModel album, final AssetModel asset,
       final CommentModel comment,
       final HttpCallback<ResponseModel<CommentModel>> callback) {
-    return new CommentsCreateRequest(context, album, asset, comment,
+    return new CommentsCreateRequest(album, asset, comment,
         callback);
   }
 
   /**
    * Deletes comments from an asset by using its ID.
    * 
-   * @param context
-   *          The application context.
    * @param comment
    *          The comment to be deleted.
    * @param callback
@@ -112,9 +104,9 @@ public class GCComments {
    *          callback returns {@link ResponseModel<CommentModel>}.
    * @return {@link CommentsDeleteRequest}.
    */
-  public static HttpRequest delete(final Context context,
+  public static HttpRequest delete(
       final CommentModel comment,
       final HttpCallback<ResponseModel<CommentModel>> callback) {
-    return new CommentsDeleteRequest(context, comment, callback);
+    return new CommentsDeleteRequest(comment, callback);
   }
 }

@@ -39,8 +39,7 @@ public interface UploadProgressListener {
 
   /**
    * This method is triggered when the upload is started.
-   * @param assetsFileUploadRequest 
-   * 
+   *
    * @param file
    *          The file that is currently uploading.
    */

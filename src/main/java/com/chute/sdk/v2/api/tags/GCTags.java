@@ -25,16 +25,13 @@
 //
 package com.chute.sdk.v2.api.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.content.Context;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
+
+import java.util.List;
 
 /**
  * Tags are meta information placed on an asset. This kind of metadata helps
@@ -66,8 +63,6 @@ public class GCTags {
    * Pulls a complete list of all tags associated with an asset in a specific
    * album.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          The album containing the asset with tags that are about to be
    *          listed.
@@ -75,20 +70,18 @@ public class GCTags {
    *          Asset containing the specific tags.
    * @param callback
    *          Instance of {@link HttpCallback} interface. If successful, the
-   *          callback returns {@link ResponseModel<AssetModel>}.
+   *          callback returns {@link com.chute.sdk.v2.model.response.ListResponseModel<AssetModel>}.
    * @return {@link TagsListRequest}.
    */
-  public static HttpRequest list(final Context context,
+  public static HttpRequest list(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ListResponseModel<String>> callback) {
-    return new TagsListRequest(context, album, asset, callback);
+    return new TagsListRequest(album, asset, callback);
   }
 
   /**
    * Replaces all existing tags within an asset with a new set of tags.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          The album containing the asset with tags that are about to be
    *          updated.
@@ -98,14 +91,14 @@ public class GCTags {
    *          List of new tags.
    * @param callback
    *          Instance of {@link HttpCallback} interface. If successful, the
-   *          callback returns {@link ResponseModel<AssetModel>}.
+   *          callback returns {@link com.chute.sdk.v2.model.response.ListResponseModel<AssetModel>}.
    * @return - {@link TagsReplaceRequest}.
    */
-  public static HttpRequest update(final Context context,
+  public static HttpRequest update(
       final AlbumModel album, final AssetModel asset,
       final List<String> tags,
       final HttpCallback<ListResponseModel<String>> callback) {
-    return new TagsReplaceRequest(context, album, asset, tags, callback);
+    return new TagsReplaceRequest(album, asset, tags, callback);
   }
 
   /**
@@ -115,8 +108,6 @@ public class GCTags {
    * <p>
    * Tags added will apply only to a specific asset in an album.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          The album containing asset that will hold the newly created tags.
    * @param asset
@@ -128,11 +119,11 @@ public class GCTags {
    *          callback returns {@link ListResponseModel<String>}.
    * @return {@link TagsAddRequest}.
    */
-  public static HttpRequest create(final Context context,
+  public static HttpRequest create(
       final AlbumModel album, final AssetModel asset,
       final List<String> tags,
       final HttpCallback<ListResponseModel<String>> callback) {
-    return new TagsAddRequest(context, album, asset, tags, callback);
+    return new TagsAddRequest(album, asset, tags, callback);
   }
 
   /**
@@ -140,8 +131,6 @@ public class GCTags {
    * <p>
    * This request will modify the existing tag array attached to an asset.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing the asset whose tags are about to be deleted.
    * @param asset
@@ -153,11 +142,11 @@ public class GCTags {
    *          callback returns {@link ListResponseModel<String>}.
    * @return {@link TagsDeleteRequest}.
    */
-  public static HttpRequest delete(final Context context,
+  public static HttpRequest delete(
       final AlbumModel album, final AssetModel asset,
       final List<String> tags,
       final HttpCallback<ListResponseModel<String>> callback) {
-    return new TagsDeleteRequest(context, album, asset, tags, callback);
+    return new TagsDeleteRequest(album, asset, tags, callback);
   }
 
 }

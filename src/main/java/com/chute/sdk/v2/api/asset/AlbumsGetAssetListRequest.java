@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.asset;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -45,10 +43,10 @@ public class AlbumsGetAssetListRequest extends
       .getSimpleName();
   final AlbumModel album;
 
-  public AlbumsGetAssetListRequest(Context context, AlbumModel album,
+  public AlbumsGetAssetListRequest(AlbumModel album,
       PaginationModel pagination,
       HttpCallback<ListResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
+    super(RequestMethod.GET, new ListResponseParser<AssetModel>(
         AssetModel.class), callback);
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");

@@ -25,9 +25,7 @@
 // 
 package com.chute.sdk.v2.api.tags;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -44,9 +42,9 @@ public class TagsListRequest extends
   private AssetModel asset;
   private AlbumModel album;
 
-  public TagsListRequest(Context context, AlbumModel album, AssetModel asset,
+  public TagsListRequest(AlbumModel album, AssetModel asset,
       HttpCallback<ListResponseModel<String>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<String>(
+    super(RequestMethod.GET, new ListResponseParser<String>(
         String.class), callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");

@@ -25,12 +25,7 @@
 //
 package com.chute.sdk.v2.api.album;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
@@ -40,6 +35,8 @@ import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AlbumsUpdateRequest extends
     BaseStringBodyHttpRequest<ResponseModel<AlbumModel>> {
@@ -48,9 +45,9 @@ public class AlbumsUpdateRequest extends
   private AlbumModel album;
   private AssetModel asset;
 
-  public AlbumsUpdateRequest(Context context, AlbumModel album, AssetModel asset,
+  public AlbumsUpdateRequest(AlbumModel album, AssetModel asset,
       HttpCallback<ResponseModel<AlbumModel>> callback) {
-    super(context, RequestMethod.PUT, new ResponseParser<AlbumModel>(
+    super(RequestMethod.PUT, new ResponseParser<AlbumModel>(
         AlbumModel.class), callback);
     if (TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException(

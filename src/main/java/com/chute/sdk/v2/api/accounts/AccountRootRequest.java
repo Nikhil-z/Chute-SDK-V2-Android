@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.accounts;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AccountBaseModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
@@ -43,9 +41,9 @@ public class AccountRootRequest extends
   private final String accountShortcut;
   private final String accountName;
 
-  public AccountRootRequest(Context context, String accountName, String accountShortcut,
+  public AccountRootRequest(String accountName, String accountShortcut,
       HttpCallback<ResponseModel<AccountBaseModel>> callback) {
-    super(context, RequestMethod.GET, new ResponseParser<AccountBaseModel>(
+    super(RequestMethod.GET, new ResponseParser<AccountBaseModel>(
         AccountBaseModel.class), callback);
     if (TextUtils.isEmpty(accountShortcut)) {
       throw new NullPointerException("Need to provide account shortcut");

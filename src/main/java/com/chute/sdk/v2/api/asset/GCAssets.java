@@ -25,10 +25,6 @@
 // 
 package com.chute.sdk.v2.api.asset;
 
-import java.util.HashMap;
-
-import android.content.Context;
-
 import com.chute.sdk.v2.api.base.PageRequest;
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.api.upload.UploadProgressListener;
@@ -40,6 +36,8 @@ import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+
+import java.util.HashMap;
 
 /**
  * The {@link GCAssets} class is a helper class that consists static methods
@@ -72,8 +70,6 @@ public class GCAssets {
 	 * <p>
 	 * Empty if there are no available exif parameters.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param asset
 	 *            Asset containing exif data to be retrieved.
 	 * @param callback
@@ -81,17 +77,15 @@ public class GCAssets {
 	 *            callback returns {@link ResponseModel<AssetModel>}.
 	 * @return {@link AssetsExifRequest}.
 	 */
-	public static HttpRequest exif(final Context context,
+	public static HttpRequest exif(
 			final AssetModel asset,
 			final HttpCallback<ResponseModel<HashMap<String, String>>> callback) {
-		return new AssetsExifRequest(context, asset, callback);
+		return new AssetsExifRequest(asset, callback);
 	}
 
 	/**
 	 * Deletes an asset using its ID.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param asset
 	 *            The asset to be removed.
 	 * @param callback
@@ -99,17 +93,15 @@ public class GCAssets {
 	 *            callback returns {@link ResponseModel<AssetModel>}.
 	 * @return {@link AssetsDeleteRequest}.
 	 */
-	public static HttpRequest delete(final Context context,
+	public static HttpRequest delete(
 			final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AssetsDeleteRequest(context, album, asset, callback);
+		return new AssetsDeleteRequest(album, asset, callback);
 	}
 
 	/**
 	 * Updates the caption (description text) on an asset.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param asset
 	 *            The asset to be updated.
 	 * @param callback
@@ -117,17 +109,15 @@ public class GCAssets {
 	 *            callback returns {@link ResponseModel<AssetModel>}.
 	 * @return {@link AssetsUpdateRequest}.
 	 */
-	public static HttpRequest update(final Context context,
+	public static HttpRequest update(
 			final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AssetsUpdateRequest(context, album, asset, callback);
+		return new AssetsUpdateRequest(album, asset, callback);
 	}
 
 	/**
 	 * Gets a specific asset from a given album.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param album
 	 *            Album whose asset is demanded.
 	 * @param asset
@@ -137,17 +127,15 @@ public class GCAssets {
 	 *            callback returns {@link ResponseModel<AssetModel>}.
 	 * @return {@link AlbumsGetAssetRequest}.
 	 */
-	public static HttpRequest get(final Context context,
+	public static HttpRequest get(
 			final AlbumModel album, final AssetModel asset,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AlbumsGetAssetRequest(context, album, asset, callback);
+		return new AlbumsGetAssetRequest(album, asset, callback);
 	}
 
 	/**
 	 * Gets a list of assets from a specific album.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param album
 	 *            The album whose assets are being retrieved.
 	 * @param pagination
@@ -158,17 +146,17 @@ public class GCAssets {
 	 *            callback returns {@link ListResponseModel<AssetModel>}.
 	 * @return {@link AlbumsGetAssetListRequest}.
 	 */
-	public static HttpRequest list(final Context context,
+	public static HttpRequest list(
 			final AlbumModel album, PaginationModel pagination,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AlbumsGetAssetListRequest(context, album, pagination,
+		return new AlbumsGetAssetListRequest(album, pagination,
 				callback);
 	}
 
-	public static HttpRequest getNextPageOfAssets(final Context context,
+	public static HttpRequest getNextPageOfAssets(
 			PaginationModel model,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new PageRequest<ListResponseModel<AssetModel>>(context,
+		return new PageRequest<ListResponseModel<AssetModel>>(
 				RequestMethod.GET, model.getNextPage(),
 				new ListResponseParser<AssetModel>(AssetModel.class), callback);
 	}
@@ -176,17 +164,16 @@ public class GCAssets {
 	/**
 	 * Overloaded method
 	 * 
-	 * @see #list(Context, AlbumModel, PaginationModel, HttpCallback)
+	 * @see #list(AlbumModel, PaginationModel, HttpCallback)
 	 * 
-	 * @param context
 	 * @param album
 	 * @param callback
 	 * @return
 	 */
-	public static HttpRequest list(final Context context,
+	public static HttpRequest list(
 			final AlbumModel album,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AlbumsGetAssetListRequest(context, album,
+		return new AlbumsGetAssetListRequest(album,
 				new PaginationModel(), callback);
 	}
 
@@ -196,8 +183,6 @@ public class GCAssets {
 	 * The upload creates a file out of asset's path and returns the uploaded
 	 * {@link AssetModel}.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param uploadListener
 	 *            Instance of {@link UploadProgressListener} used for tracking
 	 *            the upload progress
@@ -208,21 +193,19 @@ public class GCAssets {
 	 * @param callback
 	 *            Instance of {@link HttpCallback} interface. If successful, the
 	 *            callback returns {@link ListResponseModel<AssetModel>}.
-	 * @return {@link AssetsQQFileUploadRequest}.
+	 * @return {@link AssetsFileUploadRequest}.
 	 */
-	public static HttpRequest upload(final Context context,
+	public static HttpRequest upload(
 			final UploadProgressListener uploadListener,
 			final AlbumModel album, final String filePath,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
-		return new AssetsFileUploadRequest(context, filePath, album,
+		return new AssetsFileUploadRequest(filePath, album,
 				uploadListener, callback);
 	}
 
 	/**
 	 * Moves the specified asset from one album to another.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param album
 	 *            Album holding the asset to be moved.
 	 * @param asset
@@ -234,18 +217,16 @@ public class GCAssets {
 	 *            callback returns {@link ResponseModel<AssetModel>}.
 	 * @return {@link AssetsMoveRequest}
 	 */
-	public static HttpRequest move(final Context context,
+	public static HttpRequest move(
 			final AlbumModel album, final AssetModel asset,
 			final AlbumModel newAlbum,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AssetsMoveRequest(context, album, asset, newAlbum, callback);
+		return new AssetsMoveRequest(album, asset, newAlbum, callback);
 	}
 
 	/**
 	 * Copies the specified asset from one album to another.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param album
 	 *            Album holding the asset to be copied.
 	 * @param asset
@@ -257,11 +238,11 @@ public class GCAssets {
 	 *            callback returns {@link ResponseModel<AssetModel>}.
 	 * @return {@link AssetsCopyRequest}
 	 */
-	public static HttpRequest copy(final Context context,
+	public static HttpRequest copy(
 			final AlbumModel album, final AssetModel asset,
 			final AlbumModel newAlbum,
 			final HttpCallback<ResponseModel<AssetModel>> callback) {
-		return new AssetsCopyRequest(context, album, asset, newAlbum, callback);
+		return new AssetsCopyRequest(album, asset, newAlbum, callback);
 	}
 
 }

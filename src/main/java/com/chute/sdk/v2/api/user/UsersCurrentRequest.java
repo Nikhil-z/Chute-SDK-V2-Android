@@ -25,8 +25,6 @@
 //
 package com.chute.sdk.v2.api.user;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.UserModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
@@ -40,9 +38,9 @@ public class UsersCurrentRequest extends
 
   public static final String TAG = UsersCurrentRequest.class.getSimpleName();
 
-  public UsersCurrentRequest(Context context,
+  public UsersCurrentRequest(
       HttpCallback<ResponseModel<UserModel>> callback) {
-    super(context, RequestMethod.GET, new ResponseParser<UserModel>(
+    super(RequestMethod.GET, new ResponseParser<UserModel>(
         UserModel.class), callback);
   }
 

@@ -25,7 +25,6 @@
 //
 package com.chute.sdk.v2.api.accounts;
 
-import android.content.Context;
 
 import com.chute.sdk.v2.model.AccountBaseModel;
 import com.chute.sdk.v2.model.AccountModel;
@@ -49,28 +48,24 @@ public class GCAccounts {
   /**
    * Method used for getting all accounts for the currently authenticated user.
    * <p>
-   * Returns list of accounts using context and given callback.
+   * Returns list of accounts using given callback.
    * 
-   * @param context
-   *          The application context.
    * @param callback
    *          Instance of {@link GCHttpCallback} interface. Returns
    *          {@link ListResponseModel} containing list of accounts.
    * @return Instance of {@link CurrentUserAccountsRequest}, class that
    *         implements {@link GCHttpRequest}.
    */
-  public static HttpRequest allUserAccounts(final Context context,
+  public static HttpRequest allUserAccounts(
       final HttpCallback<ListResponseModel<AccountModel>> callback) {
-    return new CurrentUserAccountsRequest(context, callback);
+    return new CurrentUserAccountsRequest(callback);
   }
 
   /**
    * Unlinks all accounts for the currently authenticated user.
    * <p>
-   * Returns list of accounts using context and given callback.
+   * Returns list of accounts using given callback.
    * 
-   * @param context
-   *          The application context.
    * @param accountId
    *          {@link AccountModel} ID
    * @param callback
@@ -79,17 +74,15 @@ public class GCAccounts {
    * @return Instance of {@link CurrentUserAccountsRequest}, class that
    *         implements {@link GCHttpRequest}.
    */
-  public static HttpRequest unlinkUserAccounts(final Context context,
+  public static HttpRequest unlinkUserAccounts(
       final String accountId,
       final HttpCallback<ListResponseModel<AccountModel>> callback) {
-    return new CurrentUserUnlinkAccountsRequest(context, accountId, callback);
+    return new CurrentUserUnlinkAccountsRequest(accountId, callback);
   }
 
   /**
    * Gets list of albums and media items for a specific account.
    * 
-   * @param context
-   *          Application context.
    * @param accountName
    *          Account name.
    *          <p>
@@ -103,17 +96,15 @@ public class GCAccounts {
    * @return Instance of {@link AccountRootRequest}, class that implements
    *         {@link GCHttpRequest}.
    */
-  public static HttpRequest accountRoot(final Context context, final String accountName,
+  public static HttpRequest accountRoot(final String accountName,
       final String accountId,
       final HttpCallback<ResponseModel<AccountBaseModel>> callback) {
-    return new AccountRootRequest(context, accountName, accountId, callback);
+    return new AccountRootRequest(accountName, accountId, callback);
   }
 
   /**
    * Returns all immediate subfolders and items of the parent folder.
    * 
-   * @param context
-   *          Application context.
    * @param accountName
    *          Account name.
    *          <p>
@@ -129,9 +120,8 @@ public class GCAccounts {
    * @return Instance of {@link AccountSingleRequest}, class that implements
    *         {@link GCHttpRequest}.
    */
-  public static HttpRequest accountSingle(final Context context,
-      final String accountName, final String accountId,
+  public static HttpRequest accountSingle(final String accountName, final String accountId,
       final String folderId, final HttpCallback<ResponseModel<AccountBaseModel>> callback) {
-    return new AccountSingleRequest(context, accountName, accountId, folderId, callback);
+    return new AccountSingleRequest(accountName, accountId, folderId, callback);
   }
 }

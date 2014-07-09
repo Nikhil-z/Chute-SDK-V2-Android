@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.comment;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -45,10 +43,10 @@ public class CommentsListRequest extends
   private final AlbumModel album;
   private final AssetModel asset;
 
-  public CommentsListRequest(Context context, AlbumModel album,
+  public CommentsListRequest(AlbumModel album,
       AssetModel asset,
       HttpCallback<ListResponseModel<CommentModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<CommentModel>(
+    super(RequestMethod.GET, new ListResponseParser<CommentModel>(
         CommentModel.class), callback);
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");

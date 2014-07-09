@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.votes;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -44,9 +42,9 @@ public class UnvoteRequest extends
   private AlbumModel album;
   private AssetModel asset;
 
-  public UnvoteRequest(Context context, AlbumModel album, AssetModel asset,
+  public UnvoteRequest(AlbumModel album, AssetModel asset,
       HttpCallback<ResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.DELETE, new ResponseParser<AssetModel>(
+    super(RequestMethod.DELETE, new ResponseParser<AssetModel>(
         AssetModel.class), callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");

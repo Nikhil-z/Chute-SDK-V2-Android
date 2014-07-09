@@ -25,8 +25,6 @@
 // 
 package com.chute.sdk.v2.api.user;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.model.UserModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
@@ -54,8 +52,6 @@ public class GCUsers {
 	 * <p>
 	 * Returns full user info as a response.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param user
 	 *            The {@link UserModel} containing the information to be
 	 *            retrieved.
@@ -64,9 +60,9 @@ public class GCUsers {
 	 *            callback returns {@link ResponseModel<UserModel>}.
 	 * @return {@link UsersGetRequest}.
 	 */
-	public static HttpRequest get(final Context context, final UserModel user,
+	public static HttpRequest get(final UserModel user,
 			final HttpCallback<ResponseModel<UserModel>> callback) {
-		return new UsersGetRequest(context, user, callback);
+		return new UsersGetRequest(user, callback);
 	}
 
 	/**
@@ -75,23 +71,19 @@ public class GCUsers {
 	 * <p>
 	 * Returns full user info as a response.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param callback
 	 *            Instance of {@link HttpCallback} interface. If successful, the
 	 *            callback returns {@link ResponseModel<UserModel>}.
 	 * @return {@link UsersCurrentRequest}.
 	 */
-	public static HttpRequest me(final Context context,
+	public static HttpRequest me(
 			final HttpCallback<ResponseModel<UserModel>> callback) {
-		return new UsersCurrentRequest(context, callback);
+		return new UsersCurrentRequest(callback);
 	}
 
 	/**
 	 * Updates user name, title and company.
 	 * 
-	 * @param context
-	 *            The application context.
 	 * @param user
 	 *            The user to be updated.
 	 * @param callback
@@ -99,10 +91,10 @@ public class GCUsers {
 	 *            callback returns {@link ResponseModel<UserModel>}.
 	 * @return {@link UsersUpdateRequest}
 	 */
-	public static HttpRequest update(final Context context,
+	public static HttpRequest update(
 			final UserModel user,
 			final HttpCallback<ResponseModel<UserModel>> callback) {
-		return new UsersUpdateRequest(context, user, callback);
+		return new UsersUpdateRequest(user, callback);
 	}
 
 }

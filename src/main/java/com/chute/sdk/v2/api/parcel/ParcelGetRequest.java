@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.parcel;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.ParcelModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
@@ -42,9 +40,9 @@ public class ParcelGetRequest extends
   public static final String TAG = ParcelGetRequest.class.getSimpleName();
   private ParcelModel parcel;
 
-  public ParcelGetRequest(Context context, ParcelModel parcel,
+  public ParcelGetRequest(ParcelModel parcel,
       HttpCallback<ResponseModel<ParcelModel>> callback) {
-    super(context, RequestMethod.GET, new ResponseParser<ParcelModel>(
+    super(RequestMethod.GET, new ResponseParser<ParcelModel>(
         ParcelModel.class), callback);
     if (parcel == null || TextUtils.isEmpty(parcel.getId())) {
       throw new IllegalArgumentException("Need to provide parcel ID");

@@ -25,8 +25,6 @@
 // 
 package com.chute.sdk.v2.api.hearts;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.HeartModel;
@@ -52,7 +50,6 @@ public class GCHearts {
    */
   public GCHearts() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   /**
@@ -60,8 +57,6 @@ public class GCHearts {
    * <p>
    * The heart will be marked for the current user executing the requests.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album that holds the hearted asset.
    * @param asset
@@ -71,17 +66,15 @@ public class GCHearts {
    *          callback returns {@link ResponseModel<HeartModel>}.
    * @return {@link HeartRequest}.
    */
-  public static HttpRequest heart(final Context context,
+  public static HttpRequest heart(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<HeartModel>> callback) {
-    return new HeartRequest(context, album, asset, callback);
+    return new HeartRequest(album, asset, callback);
   }
 
   /**
    * Gets a number of all hearts associated with an asset in a specific album.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          -Album that holds the hearted asset.
    * @param asset
@@ -91,10 +84,10 @@ public class GCHearts {
    *          callback returns {@link ResponseModel<HeartModel>}.
    * @return {@link HeartGetRequest}.
    */
-  public static HttpRequest get(final Context context,
+  public static HttpRequest get(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<HeartModel>> callback) {
-    return new HeartGetRequest(context, album, asset, callback);
+    return new HeartGetRequest(album, asset, callback);
   }
 
   /**
@@ -102,8 +95,6 @@ public class GCHearts {
    * <p>
    * The heart will be marked for the current user executing the requests.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing the hearted asset.
    * @param asset
@@ -113,9 +104,9 @@ public class GCHearts {
    *          callback returns {@link ResponseModel<HeartModel>}.
    * @return {@link UnheartRequest}.
    */
-  public static HttpRequest unheart(final Context context,
+  public static HttpRequest unheart(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<HeartModel>> callback) {
-    return new UnheartRequest(context, album, asset, callback);
+    return new UnheartRequest(album, asset, callback);
   }
 }

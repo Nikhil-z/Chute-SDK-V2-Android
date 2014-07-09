@@ -25,8 +25,6 @@
 //
 package com.chute.sdk.v2.api.votes;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.VoteModel;
@@ -48,7 +46,6 @@ public class GCVotes {
    */
   public GCVotes() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   /**
@@ -56,8 +53,6 @@ public class GCVotes {
    * <p>
    * The vote will be marked for the current user making the request.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing the voted asset.
    * @param asset
@@ -67,17 +62,15 @@ public class GCVotes {
    *          callback returns {@link ResponseModel<AssetModel>}.
    * @return {@link VoteRequest}.
    */
-  public static HttpRequest vote(final Context context,
+  public static HttpRequest vote(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<VoteModel>> callback) {
-    return new VoteRequest(context, album, asset, callback);
+    return new VoteRequest(album, asset, callback);
   }
 
   /**
    * Gets number of votes for a specific asset within an album.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing the voted asset.
    * @param asset
@@ -87,10 +80,10 @@ public class GCVotes {
    *          callback returns {@link ResponseModel<AssetModel>}.
    * @return {@link VotesGetRequest}.
    */
-  public static HttpRequest get(final Context context,
+  public static HttpRequest get(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<VoteModel>> callback) {
-    return new VotesGetRequest(context, album, asset, callback);
+    return new VotesGetRequest(album, asset, callback);
   }
 
   /**
@@ -98,8 +91,6 @@ public class GCVotes {
    * <p>
    * The vote will be marked for the current user making the requests.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing asset whose vote is going to be deleted.
    * @param asset
@@ -109,9 +100,9 @@ public class GCVotes {
    *          callback returns {@link ResponseModel<AssetModel>}.
    * @return {@link UnvoteRequest}.
    */
-  public static HttpRequest unvote(final Context context,
+  public static HttpRequest unvote(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<AssetModel>> callback) {
-    return new UnvoteRequest(context, album, asset, callback);
+    return new UnvoteRequest(album, asset, callback);
   }
 }

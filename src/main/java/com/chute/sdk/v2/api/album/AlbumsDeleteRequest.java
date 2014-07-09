@@ -25,9 +25,7 @@
 // 
 package com.chute.sdk.v2.api.album;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
@@ -43,9 +41,9 @@ public class AlbumsDeleteRequest extends
   private static final String TAG = AlbumsDeleteRequest.class.getSimpleName();
   private final AlbumModel album;
 
-  public AlbumsDeleteRequest(Context context, AlbumModel album,
+  public AlbumsDeleteRequest(AlbumModel album,
       HttpCallback<ResponseModel<AlbumModel>> callback) {
-    super(context, RequestMethod.DELETE, new ResponseParser<AlbumModel>(
+    super(RequestMethod.DELETE, new ResponseParser<AlbumModel>(
         AlbumModel.class), callback);
     if (TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");

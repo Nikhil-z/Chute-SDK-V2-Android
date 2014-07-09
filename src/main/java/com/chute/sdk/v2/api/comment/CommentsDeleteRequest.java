@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.comment;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.CommentModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
@@ -43,9 +41,9 @@ public class CommentsDeleteRequest extends
       .getSimpleName();
   private final CommentModel comment;
 
-  public CommentsDeleteRequest(Context context, CommentModel comment,
+  public CommentsDeleteRequest(CommentModel comment,
       HttpCallback<ResponseModel<CommentModel>> callback) {
-    super(context, RequestMethod.DELETE, new ResponseParser<CommentModel>(
+    super(RequestMethod.DELETE, new ResponseParser<CommentModel>(
         CommentModel.class), callback);
     if (comment == null || TextUtils.isEmpty(comment.getId())) {
       throw new IllegalArgumentException("Need to provide comment ID");

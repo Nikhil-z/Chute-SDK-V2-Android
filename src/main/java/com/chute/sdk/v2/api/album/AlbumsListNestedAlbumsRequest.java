@@ -25,9 +25,7 @@
 // 
 package com.chute.sdk.v2.api.album;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
@@ -43,9 +41,9 @@ public class AlbumsListNestedAlbumsRequest extends
   private static final String TAG = AlbumsListNestedAlbumsRequest.class.getSimpleName();
   private final AlbumModel album;
 
-  public AlbumsListNestedAlbumsRequest(Context context, AlbumModel album,
+  public AlbumsListNestedAlbumsRequest(AlbumModel album,
       HttpCallback<ListResponseModel<AlbumModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<AlbumModel>(
+    super(RequestMethod.GET, new ListResponseParser<AlbumModel>(
         AlbumModel.class), callback);
     if (album == null || TextUtils.isEmpty(album.getName())) {
       throw new IllegalArgumentException("Need to provide the album ID");

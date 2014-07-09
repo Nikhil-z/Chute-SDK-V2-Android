@@ -95,17 +95,10 @@ public class AuthenticationFactory {
 	 * 
 	 * <pre>
 	 * <b> For errors use the following constants as a result code: </b>
-	 * Use {@link GCAuthenticationActivity#CODE_HTTP_EXCEPTION}} - For connection problems.
-	 * Use {@link GCAuthenticationActivity#CODE_HTTP_ERROR}} - For server issues. See logcat for detailed error.
-	 * Use {@link GCAuthenticationActivity#CODE_PARSER_EXCEPTION}} - For result parsing errors. See logcat for details.
 	 * </pre>
 	 * 
 	 * @param activity
 	 * @param accountType
-	 * @param scope
-	 * @param redirectUri
-	 * @param clientId
-	 * @param clientSecret
 	 */
 	public void startAuthenticationActivity(Activity activity,
 			AccountType accountType, AuthenticationOptions options) {

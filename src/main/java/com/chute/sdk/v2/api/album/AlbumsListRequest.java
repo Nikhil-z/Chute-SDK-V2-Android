@@ -25,8 +25,6 @@
 // 
 package com.chute.sdk.v2.api.album;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.PaginationModel;
@@ -42,10 +40,10 @@ public class AlbumsListRequest extends
   @SuppressWarnings("unused")
   private static final String TAG = AlbumsListRequest.class.getSimpleName();
 
-  public AlbumsListRequest(Context context, boolean includeCoverAsset,
+  public AlbumsListRequest(boolean includeCoverAsset,
       PaginationModel paginationModel,
       HttpCallback<ListResponseModel<AlbumModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<AlbumModel>(
+    super(RequestMethod.GET, new ListResponseParser<AlbumModel>(
         AlbumModel.class), callback);
     addParam("per_page", paginationModel.getPerPageAsString());
     if (includeCoverAsset == true) {

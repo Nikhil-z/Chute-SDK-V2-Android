@@ -25,8 +25,6 @@
 //
 package com.chute.sdk.v2.api.parcel;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.ParcelModel;
@@ -50,8 +48,6 @@ public class GCParcel {
   /**
    * Gets parcel info.
    * 
-   * @param context
-   *          The application context.
    * @param parcel
    *          The parcel to be retrieved.
    * @param callback
@@ -59,18 +55,16 @@ public class GCParcel {
    *          callback returns {@link ResponseModel<ParcelModel>}.
    * @return {@link ParcelGetRequest}.
    */
-  public static HttpRequest get(final Context context,
+  public static HttpRequest get(
       final ParcelModel parcel,
       final HttpCallback<ResponseModel<ParcelModel>> callback) {
-    return new ParcelGetRequest(context, parcel, callback);
+    return new ParcelGetRequest(parcel, callback);
   }
 
   /**
    * Returns a complete list of all parcels in an album.
    * 
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing parcels.
    * @param callback
@@ -78,17 +72,15 @@ public class GCParcel {
    *          callback returns {@link ListResponseModel<ParcelModel>}.
    * @return {@link ParcelAlbumsRequest}.
    */
-  public static HttpRequest albums(final Context context,
+  public static HttpRequest albums(
       final AlbumModel album,
       final HttpCallback<ListResponseModel<ParcelModel>> callback) {
-    return new ParcelAlbumsRequest(context, album, callback);
+    return new ParcelAlbumsRequest(album, callback);
   }
 
   /**
    * Pulls a list of all assets in a specific parcel.
    * 
-   * @param context
-   *          The application context.
    * @param parcel
    *          Parcel containing list of assets.
    * @param callback
@@ -96,9 +88,9 @@ public class GCParcel {
    *          callback returns {@link ListResponseModel<ParcelModel>}.
    * @return {@link ParcelAssetsRequest}.
    */
-  public static HttpRequest assets(final Context context,
+  public static HttpRequest assets(
       final ParcelModel parcel,
       final HttpCallback<ListResponseModel<AssetModel>> callback) {
-    return new ParcelAssetsRequest(context, parcel, callback);
+    return new ParcelAssetsRequest(parcel, callback);
   }
 }

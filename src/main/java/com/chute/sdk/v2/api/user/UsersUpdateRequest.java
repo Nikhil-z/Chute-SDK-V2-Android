@@ -25,12 +25,7 @@
 //
 package com.chute.sdk.v2.api.user;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
 import com.chute.sdk.v2.api.parsers.ResponseParser;
@@ -39,6 +34,8 @@ import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class UsersUpdateRequest extends
 		BaseStringBodyHttpRequest<ResponseModel<UserModel>> {
@@ -46,9 +43,9 @@ public class UsersUpdateRequest extends
 	public static final String TAG = UsersUpdateRequest.class.getSimpleName();
 	private UserModel user;
 
-	public UsersUpdateRequest(Context context, UserModel user,
+	public UsersUpdateRequest(UserModel user,
 			HttpCallback<ResponseModel<UserModel>> callback) {
-		super(context, RequestMethod.PUT, new ResponseParser<UserModel>(
+		super(RequestMethod.PUT, new ResponseParser<UserModel>(
 				UserModel.class), callback);
 		if (user == null || TextUtils.isEmpty(user.getId())) {
 			throw new IllegalArgumentException(

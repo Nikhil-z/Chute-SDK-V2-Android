@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.search;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -44,10 +42,10 @@ public class SearchLocationRequest extends
   public static final String TAG = SearchLocationRequest.class
       .getSimpleName();
 
-  public SearchLocationRequest(Context context, AlbumModel album,
+  public SearchLocationRequest(AlbumModel album,
       GeoLocationModel geoLocation, int radius,
       HttpCallback<ListResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
+    super(RequestMethod.GET, new ListResponseParser<AssetModel>(
         AssetModel.class), callback);
     if (geoLocation == null || TextUtils.isEmpty(geoLocation.getLatitude())
         || TextUtils.isEmpty(geoLocation.getLongitude())) {

@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.parcel;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.ParcelModel;
@@ -43,9 +41,9 @@ public class ParcelAssetsRequest extends
   public static final String TAG = ParcelAssetsRequest.class.getSimpleName();
   private ParcelModel parcel;
 
-  public ParcelAssetsRequest(Context context, ParcelModel parcel,
+  public ParcelAssetsRequest(ParcelModel parcel,
       HttpCallback<ListResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.GET, new ListResponseParser<AssetModel>(
+    super(RequestMethod.GET, new ListResponseParser<AssetModel>(
         AssetModel.class), callback);
     if (parcel == null || TextUtils.isEmpty(parcel.getId())) {
       throw new IllegalArgumentException("Need to provide parcel ID");

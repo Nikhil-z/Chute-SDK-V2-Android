@@ -25,9 +25,7 @@
 //
 package com.chute.sdk.v2.api.asset;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -46,10 +44,10 @@ public class AssetsCopyRequest extends
   final AssetModel asset;
   final AlbumModel newAlbum;
 
-  public AssetsCopyRequest(Context context, AlbumModel album, AssetModel asset,
+  public AssetsCopyRequest(AlbumModel album, AssetModel asset,
       AlbumModel newAlbum,
       HttpCallback<ResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.POST, new ResponseParser<AssetModel>(
+    super(RequestMethod.POST, new ResponseParser<AssetModel>(
         AssetModel.class), callback);
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException(

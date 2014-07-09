@@ -25,8 +25,6 @@
 // 
 package com.chute.sdk.v2.api.flags;
 
-import android.content.Context;
-
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.FlagModel;
@@ -61,8 +59,6 @@ public class GCFlags {
    * <p>
    * The asset will be marked for the current user executing the requests.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album containing the flagged asset
    * @param asset
@@ -72,18 +68,16 @@ public class GCFlags {
    *          callback returns {@link ResponseModel<FlagModel>}.
    * @return {@link FlagGetRequest}.
    */
-  public static HttpRequest flag(final Context context,
+  public static HttpRequest flag(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<FlagModel>> callback) {
-    return new FlagRequest(context, album, asset, callback);
+    return new FlagRequest(album, asset, callback);
   }
 
   /**
    * Pulls a complete count of all flags associated with an asset in a specific
    * album.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album that holds the flagged asset.
    * @param asset
@@ -93,17 +87,15 @@ public class GCFlags {
    *          callback returns {@link ResponseModel<FlagModel>}.
    * @return {@link FlagGetRequest}.
    */
-  public static HttpRequest get(final Context context,
+  public static HttpRequest get(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<FlagModel>> callback) {
-    return new FlagGetRequest(context, album, asset, callback);
+    return new FlagGetRequest(album, asset, callback);
   }
 
   /**
    * Removes flag from an asset in a specific album.
    * 
-   * @param context
-   *          The application context.
    * @param album
    *          Album holding the flagged asset.
    * @param asset
@@ -113,10 +105,10 @@ public class GCFlags {
    *          callback returns {@link ResponseModel<FlagModel>}.
    * @return {@link UnflagRequest}.
    */
-  public static HttpRequest unflag(final Context context,
+  public static HttpRequest unflag(
       final AlbumModel album, final AssetModel asset,
       final HttpCallback<ResponseModel<FlagModel>> callback) {
-    return new UnflagRequest(context, album, asset, callback);
+    return new UnflagRequest(album, asset, callback);
 
   }
 }

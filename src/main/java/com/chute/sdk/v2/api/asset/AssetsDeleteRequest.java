@@ -25,9 +25,7 @@
 // 
 package com.chute.sdk.v2.api.asset;
 
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -45,9 +43,9 @@ public class AssetsDeleteRequest extends
   private final AssetModel asset;
   private final AlbumModel album;
 
-  public AssetsDeleteRequest(Context context, AlbumModel album,
+  public AssetsDeleteRequest(AlbumModel album,
       AssetModel asset, HttpCallback<ResponseModel<AssetModel>> callback) {
-    super(context, RequestMethod.DELETE, new ResponseParser<AssetModel>(
+    super(RequestMethod.DELETE, new ResponseParser<AssetModel>(
         AssetModel.class), callback);
     this.album = album;
     this.asset = asset;

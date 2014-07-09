@@ -25,11 +25,7 @@
 //
 package com.chute.sdk.v2.api.asset;
 
-import java.util.HashMap;
-
-import android.content.Context;
 import android.text.TextUtils;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
@@ -38,15 +34,17 @@ import com.dg.libs.rest.callbacks.HttpCallback;
 import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
 import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
 
+import java.util.HashMap;
+
 public class AssetsExifRequest extends
     ParameterHttpRequestImpl<ResponseModel<HashMap<String, String>>> {
 
   public static final String TAG = AssetsExifRequest.class.getSimpleName();
   private AssetModel asset;
 
-  public AssetsExifRequest(Context context, AssetModel asset,
+  public AssetsExifRequest(AssetModel asset,
       HttpCallback<ResponseModel<HashMap<String, String>>> callback) {
-    super(context, RequestMethod.GET,
+    super(RequestMethod.GET,
         new ResponseParser<HashMap<String, String>>(HashMap.class),
         callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {

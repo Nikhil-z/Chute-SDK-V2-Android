@@ -145,7 +145,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 		}
 
 		@Override
-		public void onSuccess(final String responseData) {
+		public void onSuccess(final String responseData, ResponseStatus responseStatus) {
 			TokenAuthenticationProvider tokenProvider = TokenAuthenticationProvider
 					.getInstance();
 			String token = null;
@@ -215,7 +215,7 @@ public class AuthenticationActivity extends AccountAuthenticatorActivity {
 					view.stopLoading();
 
 					new AuthenticationTokenRequest<String>(
-							getApplicationContext(), AuthenticationFactory
+							AuthenticationFactory
 									.getInstance().getAuthConstants(), code,
 							new AuthenticationResponseParser(),
 							new AuthenticationCodeCallback()).executeAsync();
