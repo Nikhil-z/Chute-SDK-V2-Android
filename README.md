@@ -17,6 +17,10 @@ Or use the jar with dependencies from target in your regular non-maven projects.
 
 # Changelog
 
+## 2.3.2
+
+  - Removed image loader from the API
+
 ## 2.2.0
 
 	- Migrated Auth code to V2 of API
