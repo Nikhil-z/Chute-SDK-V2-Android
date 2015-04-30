@@ -26,6 +26,7 @@
 package com.chute.sdk.v2.api.asset;
 
 import android.text.TextUtils;
+
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -33,34 +34,28 @@ import com.chute.sdk.v2.model.PaginationModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 public class AlbumsGetAssetListRequest extends
-    ParameterHttpRequestImpl<ListResponseModel<AssetModel>> {
+  RestClientRequest<ListResponseModel<AssetModel>> {
 
   public static final String TAG = AlbumsGetAssetListRequest.class
       .getSimpleName();
-  final AlbumModel album;
 
   public AlbumsGetAssetListRequest(AlbumModel album,
       PaginationModel pagination,
       HttpCallback<ListResponseModel<AssetModel>> callback) {
-    super(RequestMethod.GET, new ListResponseParser<AssetModel>(
-        AssetModel.class), callback);
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");
     }
-    this.album = album;
+    setRequestMethod(RequestMethod.GET);
+    setCallback(callback);
+    setParser(new ListResponseParser<AssetModel>(AssetModel.class));
+    setUrl(String.format(RestConstants.URL_ALBUMS_GET_ALL_ASSETS, album.getId()));
     if(pagination!=null){
-      addParam("per_page", pagination.getPerPageAsString());
+      addQueryParam("per_page", pagination.getPerPageAsString());
     }
-  }
-
-  @Override
-  protected String getUrl() {
-      return String.format(RestConstants.URL_ALBUMS_GET_ALL_ASSETS,
-          album.getId());
   }
 
 }

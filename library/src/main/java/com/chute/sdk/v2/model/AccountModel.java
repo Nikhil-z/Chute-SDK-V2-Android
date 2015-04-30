@@ -27,8 +27,8 @@ package com.chute.sdk.v2.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -322,7 +322,7 @@ public class AccountModel implements Parcelable {
     try {
       return JsonUtil.getMapper().writeValueAsString(this);
     } catch (JsonProcessingException e) {
-      ALog.e(e);
+      Log.e(TAG, e.getMessage(), e);
     }
     return "";
   }
@@ -338,7 +338,7 @@ public class AccountModel implements Parcelable {
     try {
       return JsonUtil.getMapper().readValue(json, AccountModel.class);
     } catch (Exception e) {
-      ALog.e(e);
+      Log.e(TAG, e.getMessage(), e);
     }
     return null;
   }

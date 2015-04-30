@@ -26,7 +26,7 @@
 package com.chute.sdk.v2.api;
 
 import android.content.Context;
-import com.araneaapps.android.libs.asyncrunners.models.AsyncRunners;
+
 import com.chute.sdk.v2.api.authentication.AuthConstants;
 import com.chute.sdk.v2.api.authentication.AuthenticationFactory;
 import com.chute.sdk.v2.api.authentication.TokenAuthenticationProvider;
@@ -57,7 +57,6 @@ public class Chute {
    *          authentication to chute or any of the other services.
    */
   public static void init(Context context, AuthConstants constants, String token) {
-    AsyncRunners.init(context);
     PreferenceUtil.init(context);
     TokenAuthenticationProvider.init(context);
     if (token != null) {
