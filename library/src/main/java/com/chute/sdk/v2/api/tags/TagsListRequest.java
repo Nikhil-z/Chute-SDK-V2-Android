@@ -26,40 +26,33 @@
 package com.chute.sdk.v2.api.tags;
 
 import android.text.TextUtils;
+
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 public class TagsListRequest extends
-    ParameterHttpRequestImpl<ListResponseModel<String>> {
+    RestClientRequest<ListResponseModel<String>> {
 
   public static final String TAG = TagsListRequest.class.getSimpleName();
-  private AssetModel asset;
-  private AlbumModel album;
 
   public TagsListRequest(AlbumModel album, AssetModel asset,
       HttpCallback<ListResponseModel<String>> callback) {
-    super(RequestMethod.GET, new ListResponseParser<String>(
-        String.class), callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");
     }
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");
     }
-    this.asset = asset;
-    this.album = album;
-  }
-
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
-        asset.getId());
+    setParser(new ListResponseParser<String>(String.class));
+    setCallback(callback);
+    setUrl(String.format(RestConstants.URL_ASSETS_TAGS, album.getId(), asset.getId()));
+    setRequestMethod(RequestMethod.GET);
   }
 
 }

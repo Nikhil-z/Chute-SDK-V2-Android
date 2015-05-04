@@ -30,15 +30,16 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.PreferenceUtil;
 import com.dg.libs.rest.authentication.AuthenticationProvider;
-import com.dg.libs.rest.client.BaseRestClient;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 public class TokenAuthenticationProvider implements AuthenticationProvider {
 
   private static final String TOKEN_KEY = "api_key";
+  private static final String TAG = TokenAuthenticationProvider.class.getSimpleName();
 
   private static TokenAuthenticationProvider account;
   private final Context context;
@@ -79,7 +80,6 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
   public void setToken(String token) {
     this.token = token;
     saveApiKey(token);
-    ALog.d(token);
   }
 
   public boolean isTokenValid() {
@@ -124,13 +124,11 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
   }
 
   @Override
-  public void authenticateRequest(BaseRestClient client) {
+  public void authenticateRequest(RestClientRequest client) {
     if (TextUtils.isEmpty(token)) {
-      ALog.e("you still don't have a token, you can only use the calls that don't need auth like this.");
+      Log.e(TAG,"you still don't have a token, you can only use the calls that don't need auth like this.");
       return;
     }
     client.addHeader("Authorization", "Bearer " + token);
-
   }
-
 }

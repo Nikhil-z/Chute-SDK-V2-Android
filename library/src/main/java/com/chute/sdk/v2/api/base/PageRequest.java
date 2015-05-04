@@ -13,6 +13,7 @@ public class PageRequest<T> extends RestClientRequest<T> {
     setRequestMethod(requestMethod);
     setUrl(url);
     setCallback(callback);
+    setParser(parser);
   }
 
   public static final String TAG = PageRequest.class.getSimpleName();

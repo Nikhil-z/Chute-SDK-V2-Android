@@ -95,8 +95,8 @@
     <orderEntry type="library" exported="" scope="TEST" name="jsonassert-1.2.3" level="project" />
     <orderEntry type="library" exported="" name="commons-io-2.4" level="project" />
     <orderEntry type="library" exported="" name="android-async-runners-1.0.4" level="project" />
-    <orderEntry type="library" exported="" name="okhttp-2.3.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.1" level="project" />
+    <orderEntry type="library" exported="" name="okhttp-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="android-rest-additions-2.7.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="modelcitizen-0.3.2" level="project" />

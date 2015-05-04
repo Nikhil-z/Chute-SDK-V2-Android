@@ -26,6 +26,7 @@
 package com.chute.sdk.v2.api.geo;
 
 import android.text.TextUtils;
+
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
@@ -33,11 +34,11 @@ import com.chute.sdk.v2.model.GeoLocationModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 public class GeoLocationGetRequest extends
-    ParameterHttpRequestImpl<ResponseModel<GeoLocationModel>> {
+    RestClientRequest<ResponseModel<GeoLocationModel>> {
 
   public static final String TAG = GeoLocationGetRequest.class
       .getSimpleName();
@@ -47,8 +48,6 @@ public class GeoLocationGetRequest extends
   public GeoLocationGetRequest(AlbumModel album,
       AssetModel asset,
       HttpCallback<ResponseModel<GeoLocationModel>> callback) {
-    super(RequestMethod.GET, new ResponseParser<GeoLocationModel>(
-        GeoLocationModel.class), callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");
     }
@@ -56,12 +55,12 @@ public class GeoLocationGetRequest extends
     if (asset == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");
     }
-    this.album = album;
+    setParser( new ResponseParser<GeoLocationModel>(
+      GeoLocationModel.class));
+    setCallback(callback);
+    setUrl(String.format(RestConstants.URL_ASSETS_GEO_LOCATION,
+      album.getId(), asset.getId()));
+    setRequestMethod(RequestMethod.GET);
   }
 
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_ASSETS_GEO_LOCATION,
-        album.getId(), asset.getId());
-  }
 }

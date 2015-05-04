@@ -26,52 +26,50 @@
 package com.chute.sdk.v2.api.user;
 
 import android.text.TextUtils;
-import com.araneaapps.android.libs.logger.ALog;
-import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
+import android.util.Log;
+
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.UserModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
+import com.chute.sdk.v2.utils.MediaTypes;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
+import com.squareup.okhttp.RequestBody;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UsersUpdateRequest extends
-		BaseStringBodyHttpRequest<ResponseModel<UserModel>> {
+  RestClientRequest<ResponseModel<UserModel>> {
 
-	public static final String TAG = UsersUpdateRequest.class.getSimpleName();
-	private UserModel user;
+  public static final String TAG = UsersUpdateRequest.class.getSimpleName();
 
-	public UsersUpdateRequest(UserModel user,
-			HttpCallback<ResponseModel<UserModel>> callback) {
-		super(RequestMethod.PUT, new ResponseParser<UserModel>(
-				UserModel.class), callback);
-		if (user == null || TextUtils.isEmpty(user.getId())) {
-			throw new IllegalArgumentException(
-					"Need to provide user ID for editing");
-		}
-		this.user = user;
-	}
+  public UsersUpdateRequest(UserModel user,
+                            HttpCallback<ResponseModel<UserModel>> callback) {
+    if (user == null || TextUtils.isEmpty(user.getId())) {
+      throw new IllegalArgumentException(
+        "Need to provide user ID for editing");
+    }
+    setParser(new ResponseParser<UserModel>(UserModel.class));
+    setCallback(callback);
+    setUrl(String.format(RestConstants.URL_USERS_UPDATE, user.getId()));
+    setRequestMethod(RequestMethod.PUT, RequestBody.create(MediaTypes.JSON, bodyContents(user)));
+  }
 
-	@Override
-	public String bodyContents() {
-		JSONObject jsonUser = new JSONObject();
-		JSONObject jsonProfile = new JSONObject();
-		try {
-			jsonUser.putOpt("name", user.getName());
-			jsonProfile.putOpt("title", user.getProfile().getTitle());
-			jsonProfile.putOpt("company", user.getProfile().getCompany());
-			jsonUser.putOpt("profile", jsonProfile);
-		} catch (JSONException e) {
-			ALog.e("JSONException: " + e.getMessage());
-		}
-		return jsonUser.toString();
-	}
-
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_USERS_UPDATE, user.getId());
-	}
+  public String bodyContents(UserModel user) {
+    JSONObject jsonUser = new JSONObject();
+    JSONObject jsonProfile = new JSONObject();
+    try {
+      jsonUser.putOpt("name", user.getName());
+      jsonProfile.putOpt("title", user.getProfile().getTitle());
+      jsonProfile.putOpt("company", user.getProfile().getCompany());
+      jsonUser.putOpt("profile", jsonProfile);
+    } catch (JSONException e) {
+      Log.e(TAG, "JSONException: " + e.getMessage(), e);
+    }
+    return jsonUser.toString();
+  }
 
 }

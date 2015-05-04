@@ -26,45 +26,39 @@
 package com.chute.sdk.v2.api.asset;
 
 import android.text.TextUtils;
-import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
+
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
+import com.chute.sdk.v2.utils.MediaTypes;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
+import com.squareup.okhttp.RequestBody;
 
 public class AssetsUpdateRequest extends
-    BaseStringBodyHttpRequest<ResponseModel<AssetModel>> {
+  RestClientRequest<ResponseModel<AssetModel>> {
 
   public static final String TAG = AssetsUpdateRequest.class.getSimpleName();
-  private AssetModel asset;
-  private AlbumModel album;
 
   public AssetsUpdateRequest(AlbumModel album,
       AssetModel asset, HttpCallback<ResponseModel<AssetModel>> callback) {
-    super(RequestMethod.PUT, new ResponseParser<AssetModel>(
-        AssetModel.class), callback);
-    this.asset = asset;
-    this.album = album;
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");
     }
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");
     }
+    setRequestMethod(RequestMethod.PUT, RequestBody.create(MediaTypes.JSON, bodyContents(asset)));
+    setUrl(String.format(RestConstants.URL_ASSETS_UPDATE, album.getId(),
+      asset.getId()));
+    setParser(new ResponseParser<AssetModel>(AssetModel.class));
+    setCallback(callback);
   }
 
-  @Override
-  public String bodyContents() {
-    return this.asset.serializeAsset();
+  public String bodyContents(AssetModel asset) {
+    return asset.serializeAsset();
   }
-
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_ASSETS_UPDATE, album.getId(),
-        asset.getId());
-  }
-
 }

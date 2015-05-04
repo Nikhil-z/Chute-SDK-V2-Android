@@ -35,7 +35,7 @@ import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.dg.libs.rest.HttpRequest;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.client.RequestMethod;
 
 import java.util.HashMap;
 
@@ -157,7 +157,7 @@ public class GCAssets {
 			PaginationModel model,
 			final HttpCallback<ListResponseModel<AssetModel>> callback) {
 		return new PageRequest<ListResponseModel<AssetModel>>(
-				RequestMethod.GET, model.getNextPage(),
+			RequestMethod.GET, model.getNextPage(),
 				new ListResponseParser<AssetModel>(AssetModel.class), callback);
 	}
 

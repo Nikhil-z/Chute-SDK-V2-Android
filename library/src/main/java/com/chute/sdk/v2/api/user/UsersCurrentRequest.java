@@ -30,23 +30,20 @@ import com.chute.sdk.v2.model.UserModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 public class UsersCurrentRequest extends
-    ParameterHttpRequestImpl<ResponseModel<UserModel>> {
+    RestClientRequest<ResponseModel<UserModel>> {
 
   public static final String TAG = UsersCurrentRequest.class.getSimpleName();
 
   public UsersCurrentRequest(
       HttpCallback<ResponseModel<UserModel>> callback) {
-    super(RequestMethod.GET, new ResponseParser<UserModel>(
-        UserModel.class), callback);
-  }
-
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_USERS_GET_CURRENT);
+    setParser(new ResponseParser<UserModel>(UserModel.class));
+    setCallback(callback);
+    setUrl(String.format(RestConstants.URL_USERS_GET_CURRENT));
+    setRequestMethod(RequestMethod.GET);
   }
 
 }

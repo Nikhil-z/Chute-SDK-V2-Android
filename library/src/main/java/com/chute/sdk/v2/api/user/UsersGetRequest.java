@@ -26,33 +26,29 @@
 package com.chute.sdk.v2.api.user;
 
 import android.text.TextUtils;
+
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.UserModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 public class UsersGetRequest extends
-    ParameterHttpRequestImpl<ResponseModel<UserModel>> {
+    RestClientRequest<ResponseModel<UserModel>> {
 
   public static final String TAG = UsersGetRequest.class.getSimpleName();
-  private UserModel user;
 
   public UsersGetRequest(UserModel user,
       HttpCallback<ResponseModel<UserModel>> callback) {
-    super(RequestMethod.GET, new ResponseParser<UserModel>(
-        UserModel.class), callback);
     if (user == null || TextUtils.isEmpty(user.getId())) {
       throw new IllegalArgumentException("Need to provide user ID");
     }
-    this.user = user;
-  }
-
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_USERS_GET, user.getId());
+    setParser(new ResponseParser<UserModel>(UserModel.class));
+    setCallback(callback);
+    setUrl(String.format(RestConstants.URL_USERS_GET, user.getId()));
+    setRequestMethod(RequestMethod.GET);
   }
 
 }

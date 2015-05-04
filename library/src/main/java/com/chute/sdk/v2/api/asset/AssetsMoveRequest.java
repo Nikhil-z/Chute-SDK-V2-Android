@@ -26,29 +26,25 @@
 package com.chute.sdk.v2.api.asset;
 
 import android.text.TextUtils;
+
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 public class AssetsMoveRequest extends
-    ParameterHttpRequestImpl<ResponseModel<AssetModel>> {
+  RestClientRequest<ResponseModel<AssetModel>> {
 
   public static final String TAG = AssetsMoveRequest.class
       .getSimpleName();
-  final AlbumModel album;
-  final AlbumModel newAlbum;
-  final AssetModel asset;
 
   public AssetsMoveRequest(AlbumModel album, AssetModel asset,
       AlbumModel newAlbum,
       HttpCallback<ResponseModel<AssetModel>> callback) {
-    super(RequestMethod.POST, new ResponseParser<AssetModel>(
-        AssetModel.class), callback);
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException(
           "Need to provide album ID for moving the asset to another album");
@@ -60,15 +56,12 @@ public class AssetsMoveRequest extends
       throw new IllegalArgumentException(
           "Need to provide album ID of the album you wish to move the asset to");
     }
-    this.album = album;
-    this.asset = asset;
-    this.newAlbum = newAlbum;
-  }
-
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_ASSETS_MOVE,
-        album.getId(), asset.getId(), newAlbum.getId());
+    setRequestMethod(RequestMethod.POST);
+    setParser(new ResponseParser<AssetModel>(
+      AssetModel.class));
+    setCallback(callback);
+    setUrl(String.format(RestConstants.URL_ASSETS_MOVE,
+      album.getId(), asset.getId(), newAlbum.getId()));
   }
 
 }

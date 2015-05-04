@@ -27,8 +27,8 @@ package com.chute.sdk.v2.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -48,6 +48,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 @JsonFilter("albumModelFilter")
 public class AlbumModel implements Parcelable {
 
+	private static final String TAG = AlbumModel.class.getSimpleName();
 	/**
 	 * Unique identifier.
 	 */
@@ -271,7 +272,7 @@ public class AlbumModel implements Parcelable {
 			result = JsonUtil.getMapper().writer(filters)
 					.writeValueAsString(this);
 		} catch (JsonProcessingException e) {
-			ALog.d("", e);
+			Log.d(TAG, e.getMessage(), e);
 		}
 		return result;
 	}

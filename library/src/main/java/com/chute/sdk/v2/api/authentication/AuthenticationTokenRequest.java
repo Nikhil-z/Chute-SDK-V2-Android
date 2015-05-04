@@ -25,30 +25,28 @@
 // 
 package com.chute.sdk.v2.api.authentication;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.client.RequestMethod;
 import com.dg.libs.rest.parsers.HttpResponseParser;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.requests.RestClientRequest;
 
-public class AuthenticationTokenRequest<T> extends ParameterHttpRequestImpl<T> {
+public class AuthenticationTokenRequest<T> extends RestClientRequest<T> {
 	@SuppressWarnings("unused")
 	private static final String TAG = AuthenticationTokenRequest.class.getSimpleName();
 
 	public AuthenticationTokenRequest(AuthConstants authConstants,
 			String code, HttpResponseParser<T> parser, HttpCallback<T> callback) {
-		super(RequestMethod.POST, parser, callback);
-		ALog.d(code);
-		addParam("code", code);
-		addParam("client_id", authConstants.clientId);
-		addParam("client_secret", authConstants.clientSecret);
-		addParam("grant_type", "authorization_code");
-		addParam("redirect_uri", AuthConstants.CALLBACK_URL);
+		setParser(parser);
+		setUrl(RestConstants.URL_AUTHENTICATION_TOKEN);
+		setRequestMethod(RequestMethod.POST);
+		setCallback(callback);
+
+		addQueryParam("code", code);
+		addQueryParam("client_id", authConstants.clientId);
+		addQueryParam("client_secret", authConstants.clientSecret);
+		addQueryParam("grant_type", "authorization_code");
+		addQueryParam("redirect_uri", AuthConstants.CALLBACK_URL);
 	}
 
-	@Override
-	protected String getUrl() {
-		return RestConstants.URL_AUTHENTICATION_TOKEN;
-	}
 }

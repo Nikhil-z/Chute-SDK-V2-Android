@@ -26,34 +26,31 @@
 package com.chute.sdk.v2.api.parcel;
 
 import android.text.TextUtils;
+
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.ParcelModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 public class ParcelAlbumsRequest extends
-    ParameterHttpRequestImpl<ListResponseModel<ParcelModel>> {
+    RestClientRequest<ListResponseModel<ParcelModel>> {
 
   public static final String TAG = ParcelAlbumsRequest.class.getSimpleName();
-  private AlbumModel album;
 
   public ParcelAlbumsRequest(AlbumModel album,
       HttpCallback<ListResponseModel<ParcelModel>> callback) {
-    super(RequestMethod.GET, new ListResponseParser<ParcelModel>(
-        ParcelModel.class), callback);
     if (album == null || TextUtils.isEmpty(album.getId())) {
       throw new IllegalArgumentException("Need to provide album ID");
     }
-    this.album = album;
+    setParser(new ListResponseParser<ParcelModel>(ParcelModel.class));
+    setCallback(callback);
+    setUrl(String.format(RestConstants.URL_PARCELS_ALBUMS, album.getId()));
+    setRequestMethod(RequestMethod.GET);
   }
 
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_PARCELS_ALBUMS, album.getId());
-  }
 
 }

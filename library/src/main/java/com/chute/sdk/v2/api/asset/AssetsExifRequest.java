@@ -26,36 +26,32 @@
 package com.chute.sdk.v2.api.asset;
 
 import android.text.TextUtils;
+
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 import java.util.HashMap;
 
 public class AssetsExifRequest extends
-    ParameterHttpRequestImpl<ResponseModel<HashMap<String, String>>> {
+  RestClientRequest<ResponseModel<HashMap<String, String>>> {
 
   public static final String TAG = AssetsExifRequest.class.getSimpleName();
-  private AssetModel asset;
 
   public AssetsExifRequest(AssetModel asset,
       HttpCallback<ResponseModel<HashMap<String, String>>> callback) {
-    super(RequestMethod.GET,
-        new ResponseParser<HashMap<String, String>>(HashMap.class),
-        callback);
     if (asset == null || TextUtils.isEmpty(asset.getId())) {
       throw new IllegalArgumentException("Need to provide asset ID");
     }
-    this.asset = asset;
+    setRequestMethod(RequestMethod.GET);
+    setUrl(String.format(RestConstants.URL_ASSETS_EXIF, asset.getId()));
+    setCallback(callback);
+    setParser(new ResponseParser<HashMap<String, String>>(HashMap.class));
   }
 
-  @Override
-  protected String getUrl() {
-    return String.format(RestConstants.URL_ASSETS_EXIF, asset.getId());
-  }
 
 }

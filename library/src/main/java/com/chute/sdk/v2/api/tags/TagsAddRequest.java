@@ -27,31 +27,29 @@ package com.chute.sdk.v2.api.tags;
 
 import android.text.TextUtils;
 import android.util.Log;
-import com.chute.sdk.v2.api.base.BaseStringBodyHttpRequest;
+
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.JsonUtil;
+import com.chute.sdk.v2.utils.MediaTypes;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.squareup.okhttp.RequestBody;
 
 import java.util.List;
 
 public class TagsAddRequest extends
-		BaseStringBodyHttpRequest<ListResponseModel<String>> {
+	RestClientRequest<ListResponseModel<String>> {
 
 	public static final String TAG = TagsAddRequest.class.getSimpleName();
-	private AssetModel asset;
-	private AlbumModel album;
-	private List<String> tags;
 
 	public TagsAddRequest(AlbumModel album, AssetModel asset,
 			List<String> tags, HttpCallback<ListResponseModel<String>> callback) {
-		super(RequestMethod.POST, new ListResponseParser<String>(
-				String.class), callback);
 		if (asset == null || TextUtils.isEmpty(asset.getId())) {
 			throw new IllegalArgumentException("Need to provide asset ID");
 		}
@@ -62,13 +60,13 @@ public class TagsAddRequest extends
 			throw new IllegalArgumentException(
 					"Need to provide tags for updating the asset");
 		}
-		this.asset = asset;
-		this.album = album;
-		this.tags = tags;
+		setParser(new ListResponseParser<String>(String.class));
+		setCallback(callback);
+		setUrl(String.format(RestConstants.URL_ASSETS_TAGS, album.getId(), asset.getId()));
+		setRequestMethod(RequestMethod.POST, RequestBody.create(MediaTypes.JSON, bodyContents(tags)));
 	}
 
-	@Override
-	public String bodyContents() {
+	public String bodyContents(List<String> tags) {
 		try {
 			return JsonUtil.getMapper().writer().withRootName("tags")
 					.writeValueAsString(tags);
@@ -76,12 +74,6 @@ public class TagsAddRequest extends
 			Log.e(TAG, "", e);
 		}
 		return null;
-	}
-
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
-				asset.getId());
 	}
 
 }

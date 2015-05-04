@@ -26,30 +26,26 @@
 package com.chute.sdk.v2.api.tags;
 
 import android.text.TextUtils;
+
 import com.chute.sdk.v2.api.parsers.ListResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.AssetModel;
 import com.chute.sdk.v2.model.response.ListResponseModel;
 import com.chute.sdk.v2.utils.RestConstants;
 import com.dg.libs.rest.callbacks.HttpCallback;
-import com.dg.libs.rest.client.BaseRestClient.RequestMethod;
-import com.dg.libs.rest.requests.ParameterHttpRequestImpl;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
 import java.util.List;
 
 public class TagsDeleteRequest extends
-		ParameterHttpRequestImpl<ListResponseModel<String>> {
+		RestClientRequest<ListResponseModel<String>> {
 
 	public static final String TAG = TagsDeleteRequest.class.getSimpleName();
-	private AssetModel asset;
-	private AlbumModel album;
-	private List<String> tags;
 
 	public TagsDeleteRequest(AlbumModel album,
 			AssetModel asset, List<String> tags,
 			HttpCallback<ListResponseModel<String>> callback) {
-		super(RequestMethod.DELETE, new ListResponseParser<String>(
-				String.class), callback);
 		if (asset == null || TextUtils.isEmpty(asset.getId())) {
 			throw new IllegalArgumentException("Need to provide asset ID");
 		}
@@ -60,16 +56,11 @@ public class TagsDeleteRequest extends
 			throw new IllegalArgumentException(
 					"Need to provide tags for updating the asset");
 		}
-		this.asset = asset;
-		this.album = album;
-		this.tags = tags;
-	}
-
-
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
-				asset.getId(), TextUtils.join(",", tags));
+		setParser(new ListResponseParser<String>(String.class));
+		setCallback(callback);
+		setUrl(String.format(RestConstants.URL_ASSETS_TAGS, album.getId(),
+			asset.getId(), TextUtils.join(",", tags)));
+		setRequestMethod(RequestMethod.DELETE);
 	}
 
 }
