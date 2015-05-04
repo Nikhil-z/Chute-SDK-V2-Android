@@ -1,11 +1,11 @@
 package com.chute.sdk.v2.test.api.album;
 
-import junit.framework.TestCase;
-
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tobedevoured.modelcitizen.CreateModelException;
+
+import junit.framework.TestCase;
 
 public class AlbumImportRequestTest extends TestCase {
 

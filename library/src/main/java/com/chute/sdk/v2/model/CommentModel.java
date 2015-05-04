@@ -27,8 +27,8 @@ package com.chute.sdk.v2.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
-import com.araneaapps.android.libs.logger.ALog;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -234,7 +234,7 @@ public class CommentModel implements Parcelable {
 			result = JsonUtil.getMapper().writer(filters)
 					.writeValueAsString(this);
 		} catch (JsonProcessingException e) {
-			ALog.d("", e);
+			Log.d(TAG,"", e);
 		}
 		return result;
 	}

@@ -1,11 +1,11 @@
 package com.chute.sdk.v2.test.parsers.albums;
 
-import junit.framework.TestCase;
-
 import com.chute.sdk.v2.api.parsers.ResponseParser;
 import com.chute.sdk.v2.model.AlbumModel;
 import com.chute.sdk.v2.model.response.ResponseModel;
 import com.chute.sdk.v2.utils.TestUtil;
+
+import junit.framework.TestCase;
 
 public class AlbumCreateParserTest extends TestCase {
 

@@ -1,7 +1,5 @@
 package com.chute.sdk.v2.test.model;
 
-import junit.framework.TestCase;
-
 import com.chute.sdk.v2.model.DimensionsModel;
 import com.chute.sdk.v2.test.factories.FactoryManager;
 import com.chute.sdk.v2.utils.JsonUtil;
@@ -11,6 +9,9 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.tobedevoured.modelcitizen.CreateModelException;
+
+import junit.framework.TestCase;
+
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 

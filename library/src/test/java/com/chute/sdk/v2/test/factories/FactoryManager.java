@@ -9,7 +9,7 @@ public class FactoryManager {
 	private static ModelFactory modelFactory = new ModelFactory();
 	static {
 		try {
-			modelFactory.setRegisterBlueprintsByPackage( "com.chute.sdk.v2.test.factories.models" );
+			modelFactory.setRegisterBlueprintsByPackage("com.chute.sdk.v2.test.factories.models");
 		} catch (RegisterBlueprintException e) {
 		}
 	}

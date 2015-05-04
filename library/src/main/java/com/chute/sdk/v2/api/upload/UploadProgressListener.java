@@ -27,8 +27,6 @@ package com.chute.sdk.v2.api.upload;
 
 import java.io.File;
 
-import com.chute.sdk.v2.api.asset.AssetsFileUploadRequest;
-
 /**
  * <b> IMPORTANT!! Runs the updates in the thread that executed the request.</b>
  * 
@@ -43,7 +41,7 @@ public interface UploadProgressListener {
    * @param file
    *          The file that is currently uploading.
    */
-  public void onUploadStarted(File file);
+   void onUploadStarted(File file);
 
   /**
    * @param total
@@ -51,7 +49,7 @@ public interface UploadProgressListener {
    * @param current
    *          Amount of data uploaded.
    */
-  public void onProgress(long total, long current);
+  void onProgress(long total, long current);
 
   /**
    * This method is triggered when the upload has finished.
@@ -61,5 +59,5 @@ public interface UploadProgressListener {
    * @param file
    *          The uploaded file.
    */
-  public void onUploadFinished(File file);
+  void onUploadFinished(File file);
 }

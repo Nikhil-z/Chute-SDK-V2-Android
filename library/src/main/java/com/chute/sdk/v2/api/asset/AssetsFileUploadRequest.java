@@ -45,12 +45,7 @@ public class AssetsFileUploadRequest extends BaseUploadRequest {
 		if (album == null) {
 			throw new NullPointerException("Album cannot be null");
 		}
-
-	}
-
-	@Override
-	protected String getUrl() {
-		return String.format(RestConstants.URL_UPLOAD_FILE, album.getId());
+		setUrl(String.format(RestConstants.URL_UPLOAD_FILE, album.getId()));
 	}
 
 	@Override

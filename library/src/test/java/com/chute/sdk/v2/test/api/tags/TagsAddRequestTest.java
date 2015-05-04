@@ -1,10 +1,11 @@
 package com.chute.sdk.v2.test.api.tags;
 
-import junit.framework.TestCase;
-
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import junit.framework.TestCase;
+
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 
