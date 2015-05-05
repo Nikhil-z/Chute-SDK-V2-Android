@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Tags are meta information placed on an asset. This kind of metadata helps
  * describe an item and allows it to be displayed by browsing or searching. Tags
- * are generally chosen informally and personally by the item’s creator or by
+ * are generally chosen informally and personally by the items creator or by
  * its viewer, depending on the client implementation.
  * <p>
  * The API enables using the following methods for manipulating with tags:
