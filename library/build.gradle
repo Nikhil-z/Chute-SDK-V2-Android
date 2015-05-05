@@ -15,7 +15,9 @@ android {
       }
     }
   }
-
+  testOptions {
+    unitTests.returnDefaultValues = true
+  }
 
 }
 
@@ -27,13 +29,12 @@ task copyTestResources(type: Copy) {
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
+
   compile 'com.aranea-apps.android.libs:android-rest:2.9.0'
   compile 'com.aranea-apps.android.libs:android-rest-additions:2.9.0'
-  testCompile 'org.slf4j:slf4j-api:1.7.12'
-  testCompile 'com.tobedevoured:modelcitizen:0.3.2'
+
+  testCompile files('libs/core-0.8.2.jar')
   testCompile 'junit:junit:4.9'
-  testCompile 'org.skyscreamer:jsonassert:1.2.3'
 }
 
 apply from: '../gradle-mvn-push.gradle'

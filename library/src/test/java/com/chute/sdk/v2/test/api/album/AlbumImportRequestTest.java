@@ -3,14 +3,12 @@ package com.chute.sdk.v2.test.api.album;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.tobedevoured.modelcitizen.CreateModelException;
 
 import junit.framework.TestCase;
 
 public class AlbumImportRequestTest extends TestCase {
 
-	public void testObjectSerializeToPostBodyString()
-			throws JsonProcessingException, CreateModelException {
+	public void testObjectSerializeToPostBodyString() throws JsonProcessingException {
 		String[] urls = new String[] { "http://www.getchute.com",
 				"http://www.google.com", "http://www.android.com" };
 		String result = null;

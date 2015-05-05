@@ -1,18 +1,14 @@
 package com.chute.sdk.v2.test.factories.models;
 
 import com.chute.sdk.v2.model.AssetModel;
-import com.tobedevoured.modelcitizen.annotation.Blueprint;
-import com.tobedevoured.modelcitizen.annotation.Default;
 
-@Blueprint(AssetModel.class)
 public class AssetBlueprint {
 
-	@Default
-	String caption = "sunset";
-
-	@Default
-	int votes = 0;
-
-	@Default
-	int hearts = 0;
+	public static AssetModel create() {
+		AssetModel model = new AssetModel();
+		model.setCaption("sunset");
+		model.setVotes(0);
+		model.setHearts(0);
+		return model;
+	}
 }

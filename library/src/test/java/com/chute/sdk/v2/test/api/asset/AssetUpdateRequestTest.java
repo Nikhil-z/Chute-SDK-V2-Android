@@ -1,25 +1,24 @@
 package com.chute.sdk.v2.test.api.asset;
 
-import junit.framework.TestCase;
-
 import com.chute.sdk.v2.model.AssetModel;
-import com.chute.sdk.v2.test.factories.FactoryManager;
+import com.chute.sdk.v2.test.factories.models.AssetBlueprint;
+import com.chute.sdk.v2.test.utils.JsonTestUtil;
 import com.chute.sdk.v2.utils.JsonUtil;
 import com.chute.sdk.v2.utils.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import com.tobedevoured.modelcitizen.CreateModelException;
+
+import junit.framework.TestCase;
+
 import org.json.JSONException;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 public class AssetUpdateRequestTest extends TestCase {
 
 	public void testObjectSerializeToPostBodyString()
-      throws JsonProcessingException, CreateModelException, JSONException {
-		AssetModel asset = FactoryManager.getModelFactory().createModel(
-				AssetModel.class);
+      throws JsonProcessingException, JSONException {
+		AssetModel asset = AssetBlueprint.create();
 		FilterProvider filter = new SimpleFilterProvider().addFilter(
 				"assetModelFilter", SimpleBeanPropertyFilter
 						.filterOutAllExcept("caption", "votes", "hearts"));
@@ -27,6 +26,6 @@ public class AssetUpdateRequestTest extends TestCase {
 				.writeValueAsString(asset);
 		String expected = TestUtil
 				.readResourceAsString("request/AssetUpdate.json");
-    JSONAssert.assertEquals(expected, result, false);
+		assertTrue(JsonTestUtil.compare(expected, result));
 	}
 }
