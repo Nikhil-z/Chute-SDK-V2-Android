@@ -17,6 +17,10 @@ Or use the jar with dependencies from target in your regular non-maven projects.
 
 # Changelog
 
+## 2.4.0
+
+  - Major update to the core libraries. The API's should be exactly the same as before as the end user of this SDK sees them. Its possible that some things will break.
+
 ## 2.3.2
 
   - Removed image loader from the API
