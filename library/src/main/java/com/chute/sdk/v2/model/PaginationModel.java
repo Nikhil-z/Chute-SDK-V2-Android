@@ -39,6 +39,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class PaginationModel {
 
+	public static final int DEFAULT_PER_PAGE = 50;
+
 	/**
 	 * Number of total response pages.
 	 */
@@ -79,7 +81,7 @@ public class PaginationModel {
 	 * Number of responses per page.
 	 */
 	@JsonProperty("per_page")
-	private int perPage = 30;
+	private int perPage = DEFAULT_PER_PAGE;
 
 	/**
 	 * Getters and setters.

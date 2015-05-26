@@ -45,7 +45,7 @@ public class CurrentUserAccountsRequest extends
     setRequestMethod(RequestMethod.GET);
     setParser(new CurrentAccountsUserResponseParser());
     setCallback(callback);
-    setUrl(RestConstants.URL_ACCOUNTS);
+    setUrl(RestConstants.URL_USER_ACCOUNTS);
   }
 
   private static class CurrentAccountsUserResponseParser extends

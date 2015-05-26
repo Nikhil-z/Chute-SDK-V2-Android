@@ -22,59 +22,28 @@
 //  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
-// 
-package com.chute.sdk.v2.utils;
+//
+package com.chute.sdk.v2.api.accounts;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import com.chute.sdk.v2.api.parsers.ResponseParser;
+import com.chute.sdk.v2.model.UserAccount;
+import com.chute.sdk.v2.model.response.ResponseModel;
+import com.chute.sdk.v2.utils.RestConstants;
+import com.dg.libs.rest.callbacks.HttpCallback;
+import com.dg.libs.rest.client.RequestMethod;
+import com.dg.libs.rest.requests.RestClientRequest;
 
-public class DateUtil {
+public class UserAccountRequest extends
+  RestClientRequest<ResponseModel<UserAccount>> {
 
-  /** The date format in ISO. */
-  public static String FORMAT_DATE_ISO = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+  public static final String TAG = UserAccountRequest.class.getSimpleName();
 
-  /**
-   * Takes in an ISO date string of the following format:
-   * yyyy-mm-ddThh:mm:ss.ms+HoMo
-   * 
-   * @param isoDateString
-   *          the ISO date string
-   * @return the date
-   * @throws Exception
-   *           the exception
-   */
-  public static Date fromISODateString(String isoDateString) throws Exception {
-    DateFormat f = new SimpleDateFormat(FORMAT_DATE_ISO);
-    f.setTimeZone(TimeZone.getTimeZone("Zulu"));
-    return f.parse(isoDateString);
+  public UserAccountRequest(String accountId,
+                            HttpCallback<ResponseModel<UserAccount>> callback) {
+    setRequestMethod(RequestMethod.GET);
+    setParser(new ResponseParser<UserAccount>(UserAccount.class));
+    setCallback(callback);
+    setUrl(String.format(RestConstants.URL_ACCOUNTS_MEMBER, accountId));
   }
 
-  /**
-   * Render date
-   * 
-   * @param date
-   *          the date obj
-   * @param format
-   *          - if not specified, will use FORMAT_DATE_ISO
-   * @param tz
-   *          - tz to set to, if not specified uses local timezone
-   * @return the ISO-formatted date string
-   */
-  public static String toISOString(Date date, String format, TimeZone tz) {
-    if (format == null) {
-      format = FORMAT_DATE_ISO;
-    }
-    if (tz == null) {
-      tz = TimeZone.getTimeZone("Zulu");
-    }
-    DateFormat f = new SimpleDateFormat(format);
-    f.setTimeZone(tz);
-    return f.format(date);
-  }
-
-  public static String toISOString(Date date) {
-    return toISOString(date, FORMAT_DATE_ISO, null);
-  }
 }

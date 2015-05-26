@@ -136,7 +136,8 @@ public class RestConstants {
 
   // ACCOUNTS
   public static final String BASE_ACCOUNT_URL = "http://accounts.getchute.com";
-  public static final String URL_ACCOUNTS = BASE_URL + "/me/accounts";
+  public static final String URL_USER_ACCOUNTS = BASE_URL + "/me/accounts";
+  public static final String URL_ACCOUNTS_MEMBER = BASE_URL + "/accounts/%s";
   public static final String URL_UNLINK_ACCOUNTS = BASE_URL + "/me/accounts/%s";
 
   public static final String URL_ACCOUNT_ALBUMS = BASE_ACCOUNT_URL
